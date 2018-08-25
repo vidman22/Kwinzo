@@ -1,0 +1,61 @@
+.Carousel {
+	display: inline-block;
+	clear: both;
+	width: 95%;
+}
+
+.Content {
+	display: inline-block;
+	width: 87%;
+	border: 1px solid #ccc;
+	box-shadow: 1px 2px 3px #ccc;
+	border-radius: 4px;
+	padding: 15px 0 15px 0;
+	text-align: center;
+	font-family: 'Helvetica', sans-serif;
+	font-weight: bolder;
+	font-size: 28px;
+	margin-bottom: 12px;
+}
+
+.Previous, .Next{
+	background-color: none;
+	background: none;
+	color: grey;
+	
+	background: white;
+}
+
+.Previous .Next:hover {
+	color: black;
+}
+.CarouselSentence {
+	font-family: 'Open Sans', sans-serif;
+	margin: auto;
+}
+.CarouselSentence p {
+	margin: 8px auto 0 auto;
+	font-size: 14px;
+	color: #ccc;
+}
+
+@media screen and (max-width: 640px) {
+
+.Sentence {
+	display: inline-block;
+	width: 
+}
+
+.Previous {
+	display: inline-block;
+	border-radius: 50%;
+	float: left;
+}
+.Next{
+	display: inline-block;
+	border-radius: 50%;
+	float: right;
+}
+	
+
+}

@@ -1,0 +1,64 @@
+.InputAltWrapper {
+  width:50%;
+  clear: both;
+  margin: 18px 0 9px 5%;
+}
+
+.InputAlt {
+  display: inline-block;
+  float: left;
+  width: 95%;
+  margin-bottom: 10px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none;
+  height:22px;
+  line-height:20px;
+  font-size:20px;
+  border-bottom:solid 2px #ccc;
+  transition:all .23s ease-in
+
+}
+
+.InputAltWrapper p{
+  display: block;
+  color: red;
+}
+
+.InputAlt:focus{
+	outline: none;
+}
+.RemoveAlt {
+	display: inline-block;
+	float: left;
+	margin-left: -2rem;
+}
+
+.RemoveAlt:hover {
+  display: initial;
+}
+
+@media screen and (max-width: 640px) {
+
+  .InputAltWrapper {
+    margin: 18px 0 9px 0;
+  }
+
+  .AltAddWrapper {
+    margin: 0 0 0 0;
+  }
+
+  .InputAlt {
+    width: 100%;
+    margin: 0 0 2px 0;
+    font-size: 20px;
+    height:25px;
+    line-height:20px;
+  }
+  .RemoveAlt {
+    display: inline-block;
+    float: left;
+    margin: 0 -22px 0 0;
+  }
+}

@@ -1,0 +1,28 @@
+/*.largeSVG {
+	display: none;
+	float: left;
+}*/
+/*
+.smallSVG {
+	display: block;
+}
+*/
+
+.gameSVG{
+	display: block;
+}
+
+.GamePlay h2{
+	font-family: Open Sans, sans-serif;
+}
+
+
+/*@media screen and (max-width: 640px) {
+	.largeSVG {
+		display: none;
+	}
+
+	.smallSVG {
+		display: block;
+	}
+}*/

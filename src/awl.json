@@ -1,0 +1,2886 @@
+{
+	"AWL" : {
+		"sublist-1": [
+			{
+				"headword": "analyse",
+				"sentence": "The new data will have to be analyzed before we come to any conclusions.",
+				"a": "analyzed",
+				"b": "evident/analyse",
+				"c": "analysed"
+			},{
+				"headword": "approach",
+				"sentence": "The best way to approach this problem is from an understanding of the underlying principles.",
+				"a": "approach",
+				"b": "approach/establish"
+			},{
+				"headword": "area",
+				"sentence": "The latest area of research is in the effects of behavior on DNA.",
+				"a": "area",
+				"b": "data/area"
+			},{
+				"headword": "assess",
+				"sentence": "After an assessment of the situation, we realized there was no easy option.",
+				"a": "assessment",
+				"b": "assess/assume"
+			},{
+				"headword": "assume",
+				"sentence": "The assumption is that no one will be on time today after the party last night.",
+				"a": "assumption",
+				"b": "establish/assume"
+			},{
+				"headword": "authority",
+				"sentence": "We would like all new procedures to be authorized before being implemented.",
+				"a": "authorized",
+				"b": "contract/authority"
+			},{
+				"headword": "concept",
+				"sentence": "What a novel concept! I have never thought of that before.",
+				"a": "concept",
+				"b": "concept/area"
+			},{
+				"headword": "consist",
+				"sentence": "The key to success is not getting lucky but consistently getting lucky.",
+				"a": "consistently",
+				"b": "economy/consist"
+			},{
+				"headword": "constitute",
+				"sentence": "Non-native English speakers constitute the greatest proportion of English speakers overall.",
+				"a": "constitute",
+				"b": "occur/constitute"
+			},{
+				"headword": "context",
+				"sentence": "Without any contextual clues, I can't figure out the meaning of the word.",
+				"a": "contextual",
+				"b": "context/factor",
+				"c": "context"
+			},{
+				"headword": "contract",
+				"sentence": "Gary was required to sign the contract before receiving any payments.",
+				"a": "contract",
+				"b": "contract/formula"
+			},{
+				"headword": "create",
+				"sentence": "Being behind schedule can only create more difficulties.",
+				"a": "create",
+				"b": "create/estimate"
+			},{
+				"headword": "data",
+				"sentence": "After years of research, scientists had gathered enough data to publish their findings.",
+				"a": "data",
+				"b": "method/data"
+			},{
+				"headword": "define",
+				"sentence": "The way he jumped over the hurdle was the definition of grace and athleticism.",
+				"a": "definition",
+				"b": "function/define"
+			},{
+				"headword": "derive",
+				"sentence": "While most plastics are derived from petroleum, some come from renewable sources.",
+				"a": "derived",
+				"b": "derive/source"
+			},{
+				"headword": "distribute",
+				"sentence": "The distribution of wages to the workers left some with more than others.",
+				"a": "distribution",
+				"b": "income/distribute"
+			},{
+				"headword":"economy",
+				"sentence": "The president's economic policy left many in poverty.",
+				"a": "economic",
+				"b": "section/economy"
+			},{
+				"headword":"environment",
+				"sentence": "Changes in the environment have left many worried about the future of our planet.",
+				"a": "environment",
+				"b": "environment/issue"
+			},{
+				"headword":"establish",
+				"sentence": "Ever since off-shore banks were established, we've lost track of billions of dollars.",
+				"a": "established",
+				"b": "constitute/establish"
+			},{
+				"headword":"estimate",
+				"sentence": "We can estimate your mortgage after you enter in the information.",
+				"a": "estimate",
+				"b": "estimate/define"
+			},{
+				"headword":"evident",
+				"sentence": "There was no evidence left at the crime scene to indict the neighbor.",
+				"a": "evidence",
+				"b": "data/evident"
+			},{
+				"headword":"export",
+				"sentence": "China will continue to export most of its goods overseas.",
+				"a": "export",
+				"b": "export/source"
+			},{
+				"headword":"factor",
+				"sentence": "There were several factors contributing to low-employment rates and poverty.",
+				"a": "factors",
+				"b": "policy/factor"
+			},{
+				"headword":"finance",
+				"sentence": "The president's financial reforms were key to securing a second term.",
+				"a": "financial",
+				"b": "principle/finance"
+			},{
+				"headword":"formula",
+				"sentence": "The only proven formula for success is hard work and intelligence.",
+				"a": "formula",
+				"b": "concept/formula"
+			},{
+				"headword":"function",
+				"sentence": "The function of the ramp was to assist the disabled.",
+				"a": "functional",
+				"b": "function/approach"
+			},{
+				"headword":"identify",
+				"sentence": "The suspect was identified by the scar he had on his face.",
+				"a": "identified",
+				"b": "identify/individual"
+			},{
+				"headword":"income",
+				"sentence": "In an attempt to raise the average income, the representatives lowered taxes.",
+				"a": "income",
+				"b": "labour/income"
+			},{
+				"headword":"indicate",
+				"sentence": "The lower temperatures indicate that winter is just around the corner.",
+				"a": "indicate",
+				"b": "vary/indicate"
+			},{
+				"headword":"individual",
+				"sentence": "We will address your individual needs as we go around the room.",
+				"a": "individual",
+				"b": "environment/individual"
+			},{
+				"headword":"interpret",
+				"sentence": "The religious leader had the only correct interpretation of the text.",
+				"a": "interpretation",
+				"b": "interpret/identify"
+			},{
+				"headword":"involve",
+				"sentence": "He didn't know calling customers was involved.",
+				"a": "involved",
+				"b": "process/invovle"
+			},{
+				"headword":"issue",
+				"sentence": "Two of the show's guests debated the complex issues that were at hand.",
+				"a": "issues",
+				"b": "occur/issue"
+			},{
+				"headword":"labour/labor",
+				"sentence": "Digging the trench was very labour intensive and many had sore backs the next day.",
+				"a": "labour",
+				"b": "data/labour",
+				"c": "labor"
+			},{
+				"headword":"legal",
+				"sentence": "It's never a good a sign when someone asks how legal the process is.",
+				"a": "legal",
+				"b": "legal/finance"
+			},{
+				"headword":"legislate",
+				"sentence": "The business plan didn't take into account the new legislation passed by Congress.",
+				"a": "legislation",
+				"b": "period/legislate"
+			},{
+				"headword":"major",
+				"sentence": "The company was unable to recover after the major setback in the Fall.",
+				"a": "major",
+				"b": "major/similar"
+			},{
+				"headword":"method",
+				"sentence": "His tried and true method left nothing to chance.",
+				"a": "method",
+				"b": "specific/method"
+			},{
+				"headword":"occur",
+				"sentence": "We had no idea of what was about to occur next.",
+				"a": "occur",
+				"b": "response/occur"
+			},{
+				"headword":"percent",
+				"sentence": "A large percent of the work put into the project went to waste.",
+				"a": "percent",
+				"b": "percent/section",
+				"c": "percentage"
+			},{
+				"headword":"period",
+				"sentence": "Over a period of five days, the young puppy wandered through the forest.",
+				"a": "period",
+				"b": "individual/period"
+			},{
+				"headword":"policy",
+				"sentence": "No policy could fix the homeless population problem of the city.",
+				"a": "policy",
+				"b": "factor/policy"
+			},{
+				"headword":"principle",
+				"sentence": "Benjamin Franklin lived by the principle that a penny saved is a penny earned.",
+				"a": "principle",
+				"b": "policy/principle"
+			},{
+				"headword":"proceed",
+				"sentence": "The procedure to apply involves filling out the sections of your education and work history.",
+				"a": "procedure",
+				"b": "formula/proceed"
+			},{
+				"headword":"process",
+				"sentence": "The application process takes over three weeks.",
+				"a": "process",
+				"b": "process/assess"
+			},{
+				"headword":"require",
+				"sentence": "The amount of effort required to climb to the top of Everest is astronomical.",
+				"a": "required",
+				"b": "create/require"
+			},{
+				"headword":"research",
+				"sentence": "The university decided to cut off all funds towards the research on bonobos.",
+				"a": "research",
+				"b": "theory/research"
+			},{
+				"headword":"respond",
+				"sentence": "Despite not having her best performance, the response from the crowd was enthusiastic.",
+				"a": "response",
+				"b": "response/principle"
+			},{
+				"headword":"role",
+				"sentence": "I wouldn't mind having a different role to play than Hamlet's.",
+				"a": "role",
+				"b": "principle/role"
+			},{
+				"headword":"section",
+				"sentence": "A whole section of house will be set aside for meditation.",
+				"a": "section",
+				"b": "section/percent"
+			},{
+				"headword":"sector",
+				"sentence": "The financial sector of the city is located downtown.",
+				"a": "sector",
+				"b": "role/sector"
+			},{
+				"headword":"significant",
+				"sentence": "The reseacher had no idea how significant his finding would be.",
+				"a": "significant",
+				"b": "theory/significant"
+			},{
+				"headword":"similar",
+				"sentence": "I evenutally found a job quite similar to my dad's first.",
+				"a": "similar",
+				"b": "major/similar"
+			},{
+				"headword":"source",
+				"sentence": "Having exhausted all ideas, George looked for a new source of inspiration.",
+				"a": "source",
+				"b": "source/issue"
+			},{
+				"headword":"specific",
+				"sentence": "I want you to be more specific about what happened by providing more detail.",
+				"a": "specific",
+				"b": "significant/specific"
+			},{
+				"headword":"structure",
+				"sentence": "The structure of the building is inspired by a local species of tree.",
+				"a": "structure",
+				"b": "area/structure"
+			},{
+				"headword":"theory",
+				"sentence": "He didn't have the empirical evidence to back up his brilliant sounding theory.",
+				"a": "theory",
+				"b": "research/theory"
+			},{
+				"headword":"vary",
+				"sentence": "The team focused on the variables of wind resistance and rolling friction to optimize the car's performance.",
+				"a": "variables",
+				"b": "vary/theory"
+			}
+		],
+		"sublist-2": [
+			{
+				"headword":"achieve",
+				"sentence": "Those who work the hardest will achieve the better scores.",
+				"a": "achieve",
+				"b": "achieve/secure"
+			},{
+				"headword":"acquire",
+				"sentence": "The acquisition of our startup by a big-name business in early 2007 was the beginning of our troubles.",
+				"a": "acquisition",
+				"b": "acquire/evaluate"
+			},{
+				"headword":"affect",
+				"sentence": "We can only hope that the head injury will not affect his ability to play or study.",
+				"a": "affect",
+				"b": "regulate/affect"
+			},{
+				"headword":"administration",
+				"sentence": "In order to obtain the permit you'll have to ask administration in the next building.",
+				"a": "administration",
+				"b": "administration/community"
+			},{
+				"headword":"appropriate",
+				"sentence": "We struggled to find the appropriate word to describe the situation we were in.",
+				"a": "appropriate",
+				"b": "final/appropriate"
+			},{
+				"headword":"aspect",
+				"sentence": "The young rider has yet to master certain aspects of the sport.",
+				"a": "aspects",
+				"b": "region/aspect"
+			},{
+				"headword":"assist",
+				"sentence": "Ask the flight attendant for assistance if the need arises.",
+				"a": "assistance",
+				"b": "assist/credit"
+			},{
+				"headword":"category",
+				"sentence": "The naming of the different categories of species is called binomial nomenclature.",
+				"a": "categories",
+				"b": "chapter/category"
+			},{
+				"headword":"chapter",
+				"sentence": "You only need to read a chapter a day to finish the book by the end of the week.",
+				"a": "chapter",
+				"b": "text/chapter"
+			},{
+				"headword":"commission",
+				"sentence": "The city council seeks to commission the construction of the bike paths throughout the city.",
+				"a": "commission",
+				"b": "invest/commission"
+			},{
+				"headword":"community",
+				"sentence": "The community of believers lived in the Siberian forest for a century and a half.",
+				"a": "community",
+				"b": "commission/community"
+			},{
+				"headword":"complex",
+				"sentence": "The formula required a complex series of steps that takes over 24 hours to complete.",
+				"a": "complex",
+				"b": "normal/complex"
+			},{
+				"headword":"compute",
+				"sentence": "The invention of the computer allowed for humans to maximize their brain power.",
+				"a": "computer",
+				"b": "compute/item"
+			},{
+				"headword":"conclude",
+				"sentence": "An essay without a conclusion leaves the reader wanting more.",
+				"a": "conclusion",
+				"b": "conclude/chapter"
+			},{
+				"headword":"conduct",
+				"sentence": "Our boss was upset with our inappropriate conduct during the meeting.",
+				"a": "conduct",
+				"b": "focus/conduct"
+			},{
+				"headword":"consequent",
+				"sentence": "Unforseen consequences are a part of completing any project.",
+				"a": "consequences",
+				"b": "feature/consequent"
+			},{
+				"headword":"construct",
+				"sentence": "The bridge's construction went $200,000 overbudget.",
+				"a": "construction",
+				"b": "commission/construct"
+			},{
+				"headword":"consume",
+				"sentence": "The supplier's task is to make sure the consumer never has to wait more than a day.",
+				"a": "consumer",
+				"b": "obtain/consume"
+			},{
+				"headword":"credit",
+				"sentence": "To the company's credit, they never failed to pay their employees.",
+				"a": "credit",
+				"b": "tradition/credit"
+			},{
+				"headword":"culture",
+				"sentence": "You might have difficulty adjusting to the cultural differences of the host country.",
+				"a": "cultural",
+				"b": "appropriate/culture",
+				"c": "culture"
+			},{
+				"headword":"design",
+				"sentence": "The user is not supposed to even notice the design of the product.",
+				"a": "design",
+				"b": "design/item"
+			},{
+				"headword":"distinct",
+				"sentence": "The major distinction between the rich and the poor is etiquette.",
+				"a": "distinction",
+				"b": "distinct/conduct"
+			},{
+				"headword":"element",
+				"sentence": "The piece of music had elements of both baroque and romantic music.",
+				"a": "elements",
+				"b": "item/element"
+			},{
+				"headword":"equate",
+				"sentence": "Einstein worked out the equation of energy to mass.",
+				"a": "equation",
+				"b": "compute/equate"
+			},{
+				"headword":"evluate",
+				"sentence": "After the evaluation of the house we discovered the foundation was weak.",
+				"a": "evaluation",
+				"b": "evaluate/secure"
+			},{
+				"headword":"feature",
+				"sentence": "The primary features on this device are instant communication and global connectivity.",
+				"a": "features",
+				"b": "aspect/feature"
+			},{
+				"headword":"final",
+				"sentence": "The final stop leaves us on the outskirts of town.",
+				"a": "final",
+				"b": "final/region"
+			},{
+				"headword":"focus",
+				"sentence": "The main focus is to impove upon the skills that we already have developed.",
+				"a": "focus",
+				"b": "item/focus"
+			},{
+				"headword":"impact",
+				"sentence": "Hearing the story had a major impact on my outlook in life.",
+				"a": "impact",
+				"b": "impact/strategy"
+			},{
+				"headword":"injure",
+				"sentence": "The soldier sustained an injury on service of duty.",
+				"a": "injury",
+				"b": "credit/injure"
+			},{
+				"headword":"institute",
+				"sentence": "The school will have to institute a new rule after the ketchup and mustard incident.",
+				"a": "institute",
+				"b": "injure/institute"
+			},{
+				"headword":"invest",
+				"sentence": "Chris's late investement in the firm gave him the smallest portion of shares.",
+				"a": "investement",
+				"b": "invest/participate"
+			},{
+				"headword":"item",
+				"sentence": "The items on the agenda today include introductions, negotiations, and a lunch.",
+				"a": "items",
+				"b": "item/site"
+			},{
+				"headword":"journal",
+				"sentence": "If you could journal your travels in a blog, we would definitely read it.",
+				"a": "journal",
+				"b": "obtain/journal"
+			},{
+				"headword":"maintain",
+				"sentence": "The older building will require more maintenance, but our overhead will be less in the end.",
+				"a": "maintenance",
+				"b": "regulate/maintain"
+			},{
+				"headword":"normal",
+				"sentence": "Although many consider having a cell-phone to be normal, it is a relatively new invention.",
+				"a": "normal",
+				"b": "normal/relevant"
+			},{
+				"headword":"obtain",
+				"sentence": "This specific engine part can only be obtained through our online department store.",
+				"a": "obtained",
+				"b": "transfer/obtain"
+			},{
+				"headword":"participate",
+				"sentence": "Class participation is the only way to pass this course.",
+				"a": "participation",
+				"b": "invest/participate"
+			},{
+				"headword":"perceive",
+				"sentence": "He is often perceived to be kinder than he actually is.",
+				"a": "perceived",
+				"b": "feature/perceive"
+			},{
+				"headword":"positive",
+				"sentence": "Everybody prefers a positive coworker over one who complains.",
+				"a": "positive",
+				"b": "focus/positive"
+			},{
+				"headword":"potential",
+				"sentence": "The actor gave hints of his potential from a very young age.",
+				"a": "potential",
+				"b": "impact/potential"
+			},{
+				"headword":"previous",
+				"sentence": "Our boss is quick to remind us of our previous mistakes.",
+				"a": "previous",
+				"b": "injure/previous"
+			},{
+				"headword":"primary",
+				"sentence": "Our primary goal is to achieve personal satisfaction with our work.",
+				"a": "primary",
+				"b": "focus/primary"
+			},{
+				"headword":"purchase",
+				"sentence": "If you experience any difficulties, return your purchase within 30 days.",
+				"a": "purchase",
+				"b": "purchase/element"
+			},{
+				"headword":"range",
+				"sentence": "The levels range from beginner to advanced.",
+				"a": "range",
+				"b": "select/range"
+			},{
+				"headword":"region",
+				"sentence": "The surveyor pointed out the most troublesome region on the plot of land.",
+				"a": "region",
+				"b": "resource/region"
+			},{
+				"headword":"regulate",
+				"sentence": "Stricter regulations were placed on the stock market after the crash.",
+				"a": "regulations",
+				"b": "regulate/consequent"
+			},{
+				"headword":"relevant",
+				"sentence": "Even though he always tried to make his comments relevant to the discussion, they seldom were.",
+				"a": "relevant",
+				"b": "select/relevant"
+			},{
+				"headword":"reside",
+				"sentence": "The resident of this unit is seldom home.",
+				"a": "resident",
+				"b": "maintain/reside"
+			},{
+				"headword":"resource",
+				"sentence": "Our most precious natural resources are oil and gold.",
+				"a": "resources",
+				"b": "resource/element"
+			},{
+				"headword":"restrict",
+				"sentence": "Access to the Vatican archives has long been restricted to the public.",
+				"a": "restricted",
+				"b": "obtain/restrict"
+			},{
+				"headword":"secure",
+				"sentence": "An upgrade in security was needed after the recent robbery.",
+				"a": "security",
+				"b": "achieve/secure"
+			},{
+				"headword":"seek",
+				"sentence": "Scientists have long sought for a cure for cancer.",
+				"a": "sought",
+				"b": "focus/seek"
+			},{
+				"headword":"select",
+				"sentence": "In every environment, nature will select the fittest to survive.",
+				"a": "select",
+				"b": "perceive/select"
+			},{
+				"headword":"site",
+				"sentence": "The construction site had been temporarily closed due to bad weather.",
+				"a": "site",
+				"b": "design/site"
+			},{
+				"headword":"strategy",
+				"sentence": "Business strategies focus on reaching wider markets with more specialized products.",
+				"a": "strategies",
+				"b": "strategy/institute"
+			},{
+				"headword":"survey",
+				"sentence": "The government agency had an ongoing survey of citizens' overall well-being.",
+				"a": "achieves",
+				"b": "achieve/secure"
+			},{
+				"headword":"text",
+				"sentence": "After the student took a closer look at the text, the grammatical errors became apparent.",
+				"a": "text",
+				"b": "site/text"
+			},{
+				"headword":"tradition",
+				"sentence": "The traditional headdress is worn only on special occasions.",
+				"a": "traditional",
+				"b": "normal/traditional"
+			},{
+				"headword":"transfer",
+				"sentence": "All over the world people will need to transfer their skills across jobs.",
+				"a": "transfer",
+				"b": "achieve/transfer"
+			}
+		],
+		"sublist-3" : [
+			{
+				"headword":"alternative",
+				"sentence": "We've yet to find the perfect alternative to fossil fuels.",
+				"a": "alternative",
+				"b": "link/alternative"
+			},{
+				"headword":"circumstance",
+				"sentence": "Under different circumstances we would have appealed the charges, but they stand as they are.",
+				"a": "circumstances",
+				"b": "criteria/circumstance"
+			},{
+				"headword":"comment",
+				"sentence": "Unwelcomed comments about the quality of the production were relayed to the director.",
+				"a": "comments",
+				"b": "comment/document"
+			},{
+				"headword":"compensate",
+				"sentence": "Take these coupons as compensation for the long delays.",
+				"a": "compensation",
+				"b": "demonstrate/compensate"
+			},{
+				"headword":"component",
+				"sentence": "Automobile components were largely universal during production in the 90's.",
+				"a": "components",
+				"b": "component/link"
+			},{
+				"headword":"consent",
+				"sentence": "We will have to obtain the actor's consent to shoot such a dangerous scene.",
+				"a": "consent",
+				"b": "consent/register"
+			},{
+				"headword":"considerable",
+				"sentence": "The army sustained considerable loses in the final battle of the war.",
+				"a": "considerable",
+				"b": "emphasis/considerable"
+			},{
+				"headword":"constant",
+				"sentence": "Apply constant pressure to the wound to reduce blood loss.",
+				"a": "constant",
+				"b": "initial/constant"
+			},{
+				"headword":"constrain",
+				"sentence": "Due to financial constraints, we never were able to vacation in Hawaii.",
+				"a": "constraints",
+				"b": "constrain/exclude"
+			},{
+				"headword":"contribute",
+				"sentence": "If you can't donate money, we accept other forms of contribution to our campaign.",
+				"a": "contribution",
+				"b": "contribute/demonstrate"
+			},{
+				"headword":"convene",
+				"sentence": "Our city hosts the medical convention downtown every summer.",
+				"a": "convention",
+				"b": "convene/circumstance"
+			},{
+				"headword":"coordinate",
+				"sentence": "Despite the poor coordination between the local and state government the campaign went smoothly.",
+				"a": "coordination",
+				"b": "coordinate/fund"
+			},{
+				"headword":"core",
+				"sentence": "The core of the matter relolved around who would get the largest portion of the winnings.",
+				"a": "core",
+				"b": "emphasis/core"
+			},{
+				"headword":"corporate",
+				"sentence": "The liberal candidate has been trying to raise corporate taxes his whole political career.",
+				"a": "corporate",
+				"b": "alternative/corporate"
+			},{
+				"headword":"correspond",
+				"sentence": "Each debator presented their corresponding arguments on the topic.",
+				"a": "corresponding",
+				"b": "exclude/correspond"
+			},{
+				"headword":"criteria",
+				"sentence": "Our manager always made sure we met the criteria that the client had specified.",
+				"a": "criteria",
+				"b": "circumstance/criteria"
+			},{
+				"headword":"deduce",
+				"sentence": "With his immense power of deduction, Sherlock Holmes solved many crimes.",
+				"a": "deduction",
+				"b": "deduce/illustrate"
+			},{
+				"headword":"demonstrate",
+				"sentence": "Having good credentials doesn't always demonstrate competence.",
+				"a": "demonstrate",
+				"b": "demonstrate/compensate"
+			},{
+				"headword":"document",
+				"sentence": "The detective was careful to document all items at the scene of the crime.",
+				"a": "document",
+				"b": "ensure/document"
+			},{
+				"headword":"dominate",
+				"sentence": "The professor's vast intellect would dominate every conversation.",
+				"a": "dominate",
+				"b": "remove/dominate"
+			},{
+				"headword":"emphasis",
+				"sentence": "When writing a persuasive essay the emphasis should be on convincing the reader of your thesis.",
+				"a": "emphasis",
+				"b": "emphasis/imply"
+			},{
+				"headword":"ensure",
+				"sentence": "In order to ensure safety, the seatbelt must be worn at all times.",
+				"a": "ensure",
+				"b": "justify/ensure"
+			},{
+				"headword":"exclude",
+				"sentence": "We made sure no one was excluded during the morning activities.",
+				"a": "excluded",
+				"b": "normal/traditional"
+			},{
+				"headword":"tradition",
+				"sentence": "The traditional headdress is worn only on special occasions.",
+				"a": "traditional",
+				"b": "interact/exclude"
+			},{
+				"headword":"framework",
+				"sentence": "The underlying framework of our company's operations is competence begets quantity.",
+				"a": "framework",
+				"b": "technique/framework"
+			},{
+				"headword":"fund",
+				"sentence": "Most startup companies will tell you it's a lack of funds which caused their failure.",
+				"a": "funds",
+				"b": "volume/fund"
+			},{
+				"headword":"illustrate",
+				"sentence": "The problem was beautifully illustrated when the immigrant worker mistook the boss's praise for criticism.",
+				"a": "illustrated",
+				"b": "maximise/illustrate"
+			},{
+				"headword":"immigrate",
+				"sentence": "The president's new immigration policy has increased arrests at the border.",
+				"a": "immigration",
+				"b": "immigrate/philosophy"
+			},{
+				"headword":"imply",
+				"sentence": "The way the teacher said it implies that he is not at all happy with the test results.",
+				"a": "implies",
+				"b": "constrain/imply"
+			},{
+				"headword":"initial",
+				"sentence": "The initial results of the experiment were very promising.",
+				"a": "initial",
+				"b": "outcome/initial"
+			},{
+				"headword":"instance",
+				"sentence": "The first instance of trouble will spell the end of our little operation.",
+				"a": "instance",
+				"b": "react/instance"
+			},{
+				"headword":"interact",
+				"sentence": "Sheryl had such an awkward interaction with the store manager that she promised never to return.",
+				"a": "interaction",
+				"b": "interact/convene"
+			},{
+				"headword":"justify",
+				"sentence": "The child's justification for taking the candy was that that he was hungry.",
+				"a": "justification",
+				"b": "compensate/justify"
+			},{
+				"headword":"layer",
+				"sentence": "The police discovered the final layer to the case when they found out the suspect's motive.",
+				"a": "layer",
+				"b": "scheme/layer"
+			},{
+				"headword":"link",
+				"sentence": "Archeologists have just discovered the missing link between reptiles and birds.",
+				"a": "link",
+				"b": "partner/link"
+			},{
+				"headword":"locate",
+				"sentence": "Send me your location and I'll pick you up as soon as I can.",
+				"a": "location",
+				"b": "locate/physical"
+			},{
+				"headword":"maximise/maximize",
+				"sentence": "We are expecting maximum profits with our new marketing scheme.",
+				"a": "maximum",
+				"b": "normal/traditional"
+			},{
+				"headword":"minor",
+				"sentence": "There are fewer minorities in lesser developed countries.",
+				"a": "minorities",
+				"b": "minor/volume"
+			},{
+				"headword":"negate",
+				"sentence": "All the positive outcomes outweigh the negative ones.",
+				"a": "negative",
+				"b": "justify/negate"
+			},{
+				"headword":"outcome",
+				"sentence": "There is no way to predict all the possible outcomes of an event like this.",
+				"a": "outcomes",
+				"b": "outcome/react"
+			},{
+				"headword":"partner",
+				"sentence": "The newfound partnership between the tribes enabled them to achieve more than they did separately.",
+				"a": "partnership",
+				"b": "partner/sequence"
+			},{
+				"headword":"philosophy",
+				"sentence": "The philosophy of the policy was that everyone had a right to speak their mind.",
+				"a": "philosophy",
+				"b": "emphasis/philosophy"
+			},{
+				"headword":"physical",
+				"sentence": "The best way to increase confidence is physical exercise.",
+				"a": "physical",
+				"b": "specific/physical"
+			},{
+				"headword":"proportion",
+				"sentence": "Your return will be in proportion to how much you invested.",
+				"a": "proportion",
+				"b": "proportion/contribute"
+			},{
+				"headword":"publish",
+				"sentence": "Her first novel was published only after her manuscript had been rejected countless times.",
+				"a": "published",
+				"b": "publish/register"
+			},{
+				"headword":"react",
+				"sentence": "The stunt evoked such a powerful reaction from the crowd that many couldn't speak for days.",
+				"a": "reaction",
+				"b": "component/react"
+			},{
+				"headword":"register",
+				"sentence": "Because the student hadn't been properly registered, the professor wouldn't let him sit in on the class.",
+				"a": "registered",
+				"b": "register/compensate"
+			},{
+				"headword":"rely",
+				"sentence": "Because of our reliance on smart phone technology, no one is willing to leave the home without one.",
+				"a": "reliancy",
+				"b": "rely/link"
+			},{
+				"headword":"remove",
+				"sentence": "All road hazards must be removed before the race starts.",
+				"a": "removed",
+				"b": "remove/constrain"
+			},{
+				"headword":"scheme",
+				"sentence": "His get-rich-quick scheme relied on the gullibility of the crowd.",
+				"a": "scheme",
+				"b": "task/scheme"
+			},{
+				"headword":"sequence",
+				"sentence": "The plot of the novel had an interesting sequence of events that ended in the coronation of the main character.",
+				"a": "sequence",
+				"b": "instance/sequence"
+			},{
+				"headword":"sex",
+				"sentence": "The sex of character didn't have any effect on the reception of the movie.",
+				"a": "sex",
+				"b": "physical/sex"
+			},{
+				"headword":"shift",
+				"sentence": "We will need to shift the emphasis of the play from a serious one to a more lighthearted one.",
+				"a": "shift",
+				"b": "justify/shift"
+			},{
+				"headword":"specify",
+				"sentence": "The demands specified by the client meant that no one was allowed to speak of the project to anyone.",
+				"a": "specified",
+				"b": "remove/specify"
+			},{
+				"headword":"sufficient",
+				"sentence": "The evidence was sufficient to send the suspect to prison for life.",
+				"a": "sufficient",
+				"b": "sufficient/ensure"
+			},{
+				"headword":"task",
+				"sentence": "Our main task will be to maintain friendly relations with our neighbors.",
+				"a": "task",
+				"b": "scheme/task"
+			},{
+				"headword":"technical",
+				"sentence": "He wasn't prepared for how technical the interview questions would be.",
+				"a": "technical",
+				"b": "minor/technical"
+			},{
+				"headword":"technology",
+				"sentence": "Advances in technology enable us to work less and produce more.",
+				"a": "technology",
+				"b": "technology/circumstance"
+			},{
+				"headword":"valid",
+				"sentence": "After close scrutiny the validity of the documents came into question.",
+				"a": "validity",
+				"b": "publish/valid"
+			},{
+				"headword":"volume",
+				"sentence": "The sheer volume of responses was enough to demonstrate the public's outrage.",
+				"a": "volume",
+				"b": "immigrate/volume"
+			}
+		],
+		"sublist-4": [
+			{
+				"headword":"access",
+				"sentence": "With this pass you will be given full access to the faciliites.",
+				"a": "access",
+				"b": "grant/access"
+			},{
+				"headword":"adequate",
+				"sentence": "An adequate response will include both reasons and examples.",
+				"a": "adequate",
+				"b": "adequate/obvious"
+			},{
+				"headword":"annual",
+				"sentence": "The annual tradition in our family is to make a snowman on Christmas Eve.",
+				"a": "annual",
+				"b": "goal/annual"
+			},{
+				"headword":"apparent",
+				"sentence": "It soon became apparent that the taxi driver had no intention to arrive on time.",
+				"a": "apparent",
+				"b": "implicate/apparent"
+			},{
+				"headword":"approximate",
+				"sentence": "The number of fans at the game was approximated to be over 70,000.",
+				"a": "approximated",
+				"b": "debate/approximate"
+			},{
+				"headword":"attitude",
+				"sentence": "The differing attitudes of Switzerland and the UK meant there would be no headway in the negotiations.",
+				"a": "attitudes",
+				"b": "option/attitude"
+			},{
+				"headword":"attribute",
+				"sentence": "The rising temperatures around the world is attributed to man-made carbon dioxide emissions.",
+				"a": "attributed",
+				"b": "investigate/attribute"
+			},{
+				"headword":"civil",
+				"sentence": "The decided to settle in civil court rather than criminal.",
+				"a": "civil",
+				"b": "domestic/civil"
+			},{
+				"headword":"code",
+				"sentence": "The unspoken code of conduct was to let the weaker player go first.",
+				"a": "code",
+				"b": "parameter/code"
+			},{
+				"headword":"commit",
+				"sentence": "His supervisors never doubted his commitment to the cause.",
+				"a": "commitment",
+				"b": "commit/job"
+			},{
+				"headword":"communicate",
+				"sentence": "The communication between the two parties had become strained due to a small misunderstanding.",
+				"a": "communication",
+				"b": "communication/resolve"
+			},{
+				"headword":"concentrate",
+				"sentence": "The skill of concentration has to improved in an ever more distracting world.",
+				"a": "concentration",
+				"b": "stress/concentrate"
+			},{
+				"headword":"confer",
+				"sentence": "The two professors had met at an anthropology conference and have been friends ever since.",
+				"a": "conference",
+				"b": "confer/phase"
+			},{
+				"headword":"contrast",
+				"sentence": "The contrast between the two styles of play was like night and day.",
+				"a": "contrast",
+				"b": "attitude/contrast"
+			},{
+				"headword":"cycle",
+				"sentence": "According to Buddha, only through enlightenment can we overcome the cycle of death and rebirth.",
+				"a": "cycle",
+				"b": "cycle/hypothesis"
+			},{
+				"headword":"debate",
+				"sentence": "Opening a new subway system has been the subject of much debate over the past few years.",
+				"a": "debate",
+				"b": "undertake/debate"
+			},{
+				"headword":"despite",
+				"sentence": "He scored three goals despite his injured foot.",
+				"a": "despite",
+				"b": "despite/prior"
+			},{
+				"headword":"dimension",
+				"sentence": "The author added many dimensions to the novel by changing time frames and adding multiple plot twists.",
+				"a": "dimensions",
+				"b": "parameter/dimension"
+			},{
+				"headword":"domestic",
+				"sentence": "My mother has only flown on domestic flights and never internationally.",
+				"a": "domestic",
+				"b": "internal/domestic"
+			},{
+				"headword":"emerge",
+				"sentence": "The politician emerged out of obscurity to reach great levels of power.",
+				"a": "emerged",
+				"b": "promote/emerge"
+			},{
+				"headword":"adequate",
+				"sentence": "An adequate response will include both reasons and examples.",
+				"a": "adequate",
+				"b": "adequate/obvious"
+			},{
+				"headword":"adequate",
+				"sentence": "An adequate response will include both reasons and examples.",
+				"a": "adequate",
+				"b": "adequate/obvious"
+			},{
+				"headword":"adequate",
+				"sentence": "An adequate response will include both reasons and examples.",
+				"a": "adequate",
+				"b": "adequate/obvious"
+			},{
+				"headword":"error",
+				"sentence": "The most easily avoided error is not proofreading after writing.",
+				"a": "error",
+				"b": "attribute/error"
+			},{
+				"headword":"ethnic",
+				"sentence": "Tensions rose between the ethnic communities of Mesoamerica.",
+				"a": "ethnic",
+				"b": "civil/ethnic"
+			},{
+				"headword":"goal",
+				"sentence": "One of our goals is to be the first to reach the summit.",
+				"a": "goals",
+				"b": "output/goal"
+			},{
+				"headword":"grant",
+				"sentence": "The generosity of grandparents is often taken for granted by their grandchildren.",
+				"a": "granted",
+				"b": "obvious/grant"
+			},{
+				"headword":"hence",
+				"sentence": "It rained while we were out, hence the wet clothes.",
+				"a": "hence",
+				"b": "predict/hence"
+			},{
+				"headword":"hypothesis",
+				"sentence": "An adequate hypothesis will be one that can be empirically tested.",
+				"a": "hypothesis",
+				"b": "hypothesis/code"
+			},{
+				"headword":"implement",
+				"sentence": "The new system has yet to be implemented by the higher-ups.",
+				"a": "implemented",
+				"b": "impose/implement"
+			},{
+				"headword":"implicate",
+				"sentence": "The profound implications of the black hole theory have yet to be fully grasped.",
+				"a": "implications",
+				"b": "implicate/sum"
+			},{
+				"headword":"impose",
+				"sentence": "King George III's tax imposed on the colonies was enough to start the American Revolution.",
+				"a": "imposed",
+				"b": "confer/impose"
+			},{
+				"headword":"integrate",
+				"sentence": "Quantum physics relies heavily on the integration of mathematics and physics.",
+				"a": "integration",
+				"b": "emerge/integrate"
+			},{
+				"headword":"internal",
+				"sentence": "The Ministy of Defense's internal audit revealed more than they'd like to admit.",
+				"a": "internal",
+				"b": "domestic/internal"
+			},{
+				"headword":"investigate",
+				"sentence": "The police conducted a thorough investigation but turned up nothing.",
+				"a": "investigation",
+				"b": "undertake/investigate"
+			},{
+				"headword":"job",
+				"sentence": "Sleeping on the job is frowned upon, especially if you're a security guard.",
+				"a": "job",
+				"b": "professional/job"
+			},{
+				"headword":"label",
+				"sentence": "The governing body decided a label of GMO would be required for foods genetically modified.",
+				"a": "label",
+				"b": "label/code"
+			},{
+				"headword":"mechanism",
+				"sentence": "The exact mechanism of action of a placebo is yet to be discovered.",
+				"a": "mechanism",
+				"b": "regime/mechanism"
+			},{
+				"headword":"obvious",
+				"sentence": "The obvious choice will be to substitute the old chip with an new one.",
+				"a": "obvious",
+				"b": "overall/obvious"
+			},{
+				"headword":"occupy",
+				"sentence": "Car accidents are some of the many occupational hazards for police officers.",
+				"a": "occupational",
+				"b": "occupy/summary"
+			},{
+				"headword":"option",
+				"sentence": "We only have one option remaining and that's to find a new employee.",
+				"a": "option",
+				"b": "grant/option"
+			},{
+				"headword":"output",
+				"sentence": "The economic output of the small country has tripled in the past two years.",
+				"a": "output",
+				"b": "sum/output"
+			},{
+				"headword":"overall",
+				"sentence": "The overall point leader was revealed after the final competition.",
+				"a": "overall",
+				"b": "goal/overall"
+			},{
+				"headword":"parallel",
+				"sentence": "The numbered streets all run parallel with each other.",
+				"a": "parallel",
+				"b": "parallel/principal"
+			},{
+				"headword":"parameter",
+				"sentence": "The legal parameters prohibit the birth-mother from seeing her son.",
+				"a": "parameters",
+				"b": "regime/parameter"
+			},{
+				"headword":"phase",
+				"sentence": "The final phase of the process involves freezing the substance.",
+				"a": "phase",
+				"b": "phase/summary"
+			},{
+				"headword":"predict",
+				"sentence": "No one could've predicted the outcome of the elections.",
+				"a": "predicted",
+				"b": "accessed/predict"
+			},{
+				"headword":"principal",
+				"sentence": "The principal flaw in the design was the lack of directional flow.",
+				"a": "principal",
+				"b": "adequate/principal"
+			},{
+				"headword":"prior",
+				"sentence": "Nathan had never seen an alligator prior to going to Florida.",
+				"a": "prior",
+				"b": "hence/prior"
+			},{
+				"headword":"professional",
+				"sentence": "After failing for the third time, he decided to seek professional help.",
+				"a": "professional",
+				"b": "subsequent/professional"
+			},{
+				"headword":"project",
+				"sentence": "The class requires a final project which comprises 40% of your grade.",
+				"a": "project",
+				"b": "project/undertake"
+			},{
+				"headword":"promote",
+				"sentence": "Celebrities often promote various products to earn extra money.",
+				"a": "promote",
+				"b": "implicate/promote"
+			},{
+				"headword":"regime",
+				"sentence": "The totalitarian regime didn't allow for any criticism of its supreme leader.",
+				"a": "regime",
+				"b": "regime/phase"
+			},{
+				"headword":"resolve",
+				"sentence": "The council didn't come to a resolution until after they'd heard all sides of the issue.",
+				"a": "resolution",
+				"b": "output/resolve"
+			},{
+				"headword":"retain",
+				"sentence": "The teacher made sure the students retained as much information as possible.",
+				"a": "retained",
+				"b": "predict/retain"
+			},{
+				"headword":"series",
+				"sentence": "After a series of failed attempts she finally reached the top of Everest.",
+				"a": "series",
+				"b": "phase/series"
+			},{
+				"headword":"statistic",
+				"sentence": "An analysis of the statistics revealed that the elderly suffered most from lonliness.",
+				"a": "statistics",
+				"b": "statistics/sum"
+			},{
+				"headword":"status",
+				"sentence": "An expensive watch is a highly visible status symbol.",
+				"a": "status",
+				"b": "obvious/status"
+			},{
+				"headword":"stress",
+				"sentence": "The best stress management is doing something you love after work.",
+				"a": "stress",
+				"b": "stress/job"
+			},{
+				"headword":"subsequent",
+				"sentence": "We are finished with the first page. All subsequent items on the list will be reviewed tomorrow.",
+				"a": "subsequent",
+				"b": "parallel/subsequent"
+			},{
+				"headword":"sum",
+				"sentence": "The sum of all the employee working hours numbered in the thousands.",
+				"a": "sum",
+				"b": "summary/sum"
+			},{
+				"headword":"summary",
+				"sentence": "It was diffuclt to bring a summary of all that had happened over the day.",
+				"a": "summary",
+				"b": "summary/contrast"
+			},{
+				"headword":"undertake",
+				"sentence": "The construction of the bridge was undertaken by several private contractors.",
+				"a": "adequate",
+				"b": "adequate/obvious"
+			}
+		],
+		"sublist-5" : [
+			{
+				"headword":"academy",
+				"sentence":"Studying the Academic Word List is the fastest way to become proficient in English.",
+				"a": "academic",
+				"b": "fundemental/academy"
+			},{
+				"headword":"adjust",
+				"sentence": "After today's loss, our team will make the necessary adjustments for the next game.",
+				"a": "adjustments",
+				"b": "adjust/enforce"
+			},{
+				"headword":"alter",
+				"sentence": "Hopefully the new management won't alter our operating system too much.",
+				"a": "alter",
+				"b": "alter/evolve"
+			},{
+				"headword":"amend",
+				"sentence": "Various amendments have been made to the contract to better accomodate your client's needs.",
+				"a": "amendments",
+				"b": "amend/version"
+			},{
+				"headword":"aware",
+				"sentence": "We can only hope you are aware of the potential hazards on this cross-country trip.",
+				"a": "aware",
+				"b": "discrete/aware"
+			},{
+				"headword":"capacity",
+				"sentence": "The carrying capacity of a Boeing 747 is around 150 tons.",
+				"a": "capacity",
+				"b": "capacity/target"
+			},{
+				"headword":"challenge",
+				"sentence": "Our biggest challenge will be to keep this a secret.",
+				"a": "challenge",
+				"b": "conflict/challenge"
+			},{
+				"headword":"clause",
+				"sentence": "A clause will be added to the contract that will allow for family members to be present.",
+				"a": "clause",
+				"b": "clause/draft"
+			},{
+				"headword":"compound",
+				"sentence": "Fertilizer is composed of various compounds found in all life forms.",
+				"a": "compounds",
+				"b": "compound/entity"
+			},{
+				"headword": "conflict",
+				"sentence": "The plot of the novel revolved around the conflict between a father and his son.",
+				"a": "conflict",
+				"b": "conflict/challenge"
+			},{
+				"headword":"consult",
+				"sentence": "Before undergoing a long legal battle, we should have a consultation with a local firm.",
+				"a": "consultation",
+				"b": "network/consult"
+			},{
+				"headword":"contact",
+				"sentence": "What book would you bring if you had no human contact on a desert island?",
+				"a": "contact",
+				"b": "welfare/contact"
+			},{
+				"headword":"decline",
+				"sentence": "The sharp decline in sales revenue left the company bankrupt.",
+				"a": "decline",
+				"b": "decline/expose"
+			},{
+				"headword":"discrete",
+				"sentence": "It's up to the user's discretion to view the explicit content.",
+				"a": "discretion",
+				"b": "discrete/perspective"
+			},{
+				"headword":"draft",
+				"sentence": "A quick draft of the building will be drawn up before we start making blueprints.",
+				"a": "draft",
+				"b": "draft/objective"
+			},{
+				"headword":"enable",
+				"sentence": "The new platform will enable small businesses to reach a wider market.",
+				"a": "enable",
+				"b": "expand/enable"
+			},{
+				"headword":"energy",
+				"sentence": "Spliting an atom releases an incredible amount of energy into its surroundings.",
+				"a": "energy",
+				"b": "contact/energy"
+			},{
+				"headword":"enforce",
+				"sentence": "Due to its lack of enforcement, no one took the anti-smoking rule seriously.",
+				"a": "enforcement",
+				"b": "aware/enforce"
+			},{
+				"headword":"challenge",
+				"sentence": "Our biggest challenge will be to keep this a secret.",
+				"a": "challenge",
+				"b": "conflict/challenge"
+			},{
+				"headword":"entity",
+				"sentence": "Private for-profit entities aren't regulated the same way as public ones.",
+				"a": "entities",
+				"b": "entity/network"
+			},{
+				"headword":"equivalent",
+				"sentence": "Four thousand dollars 100 years ago is the equivalent of 100,000 dollars today.",
+				"a": "equivalent",
+				"b": "substitute/equivalent"
+			},{
+				"headword":"evlove",
+				"sentence": "While evolution is a incremental process of change, revolution is an rapid process.",
+				"a": "evolution",
+				"b": "expand/evolve"
+			},{
+				"headword":"expand",
+				"sentence": "Psychologist often facilitate the expansion of a person's psyche by pushing their client to new areas.",
+				"a": "expansion",
+				"b": "psychology/expand"
+			},{
+				"headword":"expose",
+				"sentence": "The fighter wanted a little media exposure as possible before the big fight.",
+				"a": "exposure",
+				"b": "expose/orient"
+			},{
+				"headword":"external",
+				"sentence": "In order to preserve the documents they must be protected from all external influences.",
+				"a": "external",
+				"b": "logic/external"
+			},{
+				"headword":"facilitate",
+				"sentence": "The physical therapist will facilitate your recovery by providing exercises you can do.",
+				"a": "facilitate",
+				"b": "transit/facilitate"
+			},{
+				"headword":"fundemental",
+				"sentence": "The fundemental difference between Hinduism and Buddhism is the belief in a soul.",
+				"a": "fundemental",
+				"b": "style/fundemental"
+			},{
+				"headword":"generate",
+				"sentence": "His controversial question generated a lot of discussion throughout the conference.",
+				"a": "generated",
+				"b": "prime/generate"
+			},{
+				"headword":"generation",
+				"sentence": "The generation that grew up during the Depression and fought in World War II is called the Greatest.",
+				"a": "generation",
+				"b": "generation/trend"
+			},{
+				"headword":"image",
+				"sentence": "His face bore the image of defeat.",
+				"a": "image",
+				"b": "psychology/image"
+			},{
+				"headword":"liberal",
+				"sentence": "The candidate was known for her more liberal immigration policies that would allow for more immigrants.",
+				"a": "liberal",
+				"b": "stable/liberal"
+			},{
+				"headword":"licence",
+				"sentence": "You will need a government licence to build on this land.",
+				"a": "licence",
+				"b": "licence/welfare",
+				"c": "license"
+			},{
+				"headword":"logic",
+				"sentence": "There seemed to be no logic to his strange defence.",
+				"a": "logic",
+				"b": "ratio/logic"
+			},{
+				"headword":"margin",
+				"sentence": "The small fluctuations in the stock market made marginal gains possible for investors.",
+				"a": "marginal",
+				"b": "revenue/margin"
+			},{
+				"headword":"medical",
+				"sentence": "Growing up on an island meant having to travel by plane to receive good medical treatment.",
+				"a": "medical",
+				"b": "target/medical"
+			},{
+				"headword":"mental",
+				"sentence": "Sudoku provided the right mental challenge for the precocious child.",
+				"a": "mental",
+				"b": "precise/mental"
+			},{
+				"headword":"modify",
+				"sentence": "The dress will have to be modified to suit you better.",
+				"a": "modified",
+				"b": "pursue/modify"
+			},{
+				"headword":"monitor",
+				"sentence": "Continuous monitoring of the students is necessary to prevent cheating.",
+				"a": "monitoring",
+				"b": "monitor/sustain"
+			},{
+				"headword":"network",
+				"sentence": "The spy exposed a large undergound network of tunnels used to smuggle contraband.",
+				"a": "network",
+				"b": "network/entity"
+			},{
+				"headword":"notion",
+				"sentence": "He had no notion of proper etiquette and was continuously commiting faux pas.",
+				"a": "notion",
+				"b": "notion/style"
+			},{
+				"headword":"objective",
+				"sentence": "The main objective has always been to make sure everyone has a good time.",
+				"a": "objective",
+				"b": "conflict/objective"
+			},{
+				"headword":"orient",
+				"sentence": "Humans cannot find their way around a city without proper orientation from visual cues.",
+				"a": "orientation",
+				"b": "facilitate/orient"
+			},{
+				"headword":"perspective",
+				"sentence": "With her unique background, Sarah was always able to bring a new perspective to the issue.",
+				"a": "perspective",
+				"b": "version/perspective"
+			},{
+				"headword":"precise",
+				"sentence": "The metric system is often more precise than the Imperial system except when measuring temperature.",
+				"a": "precise",
+				"b": "logic/precise"
+			},{
+				"headword":"prime",
+				"sentence": "Many of the great artists died in the prime of their careers.",
+				"a": "prime",
+				"b": "evolution/prime"
+			},{
+				"headword":"psychology",
+				"sentence": "A change in psychology is often needed to overcome addictive behaviours.",
+				"a": "psychology",
+				"b": "perspective/psychology"
+			},{
+				"headword":"pursue",
+				"sentence": "The doctor's speech inspired Steve to pursue a career in medicine.",
+				"a": "pursue",
+				"b": "pursue/expand"
+			},{
+				"headword":"ratio",
+				"sentence": "A good story will have the right ratio of character development and plot.",
+				"a": "ratio",
+				"b": "substitute/ratio"
+			},{
+				"headword":"revenue",
+				"sentence": "The government believed that tax cuts would increase revenue for both the private and public sector.",
+				"a": "revenue",
+				"b": "revenue/capacity"
+			},{
+				"headword":"stable",
+				"sentence": "Joyce sought financial stability after losing a small fortune in poor investments.",
+				"a": "stability",
+				"b": "alter/stable"
+			},{
+				"headword":"style",
+				"sentence": "The game was a contrast of styles, as Brazil was fast and offensive whereas Spain was methodical and defensive.",
+				"a": "styles",
+				"b": "trend/style"
+			},{
+				"headword":"substitute",
+				"sentence": "The substitution of Art class for Music was necessary due to the lack of competent staff.",
+				"a": "substitution",
+				"b": "academy/substitute"
+			},{
+				"headword":"sustain",
+				"sentence": "In an effort to be more sustainable we will go completely paperless.",
+				"a": "sustainable",
+				"b": "equivalent/sustain"
+			},{
+				"headword":"modify",
+				"sentence": "The dress will have to be modified to suit you better.",
+				"a": "modified",
+				"b": "pursue/modify"
+			},{
+				"headword":"symbol",
+				"sentence": "The exchange of country flags was a nice symbolic gesture of mutual respect.",
+				"a": "symbolic",
+				"b": "symbol/prime"
+			},{
+				"headword":"target",
+				"sentence": "A quarter of a million dollars was the target goal for the sales department.",
+				"a": "target",
+				"b": "stable/target"
+			},{
+				"headword":"transit",
+				"sentence": "The rapid transition from the industrial age to the technological age allowed for some countries to skip the former.",
+				"a": "transition",
+				"b": "alter/transit"
+			},{
+				"headword":"trend",
+				"sentence": "It has become a trend to wear only handmade clothes.",
+				"a": "trend",
+				"b": "target/trend"
+			},{
+				"headword":"version",
+				"sentence": "The latest version enables users worldwide to communicate in real time.",
+				"a": "version",
+				"b": "notion/version"
+			},{
+				"headword":"welfare",
+				"sentence": "A mother is primarily concrerned about the welfare of her children.",
+				"a": "welfare",
+				"b": "energy/welfare"
+			},{
+				"headword":"whereas",
+				"sentence": "Children often speak whatever is on their minds, whereas adults have to be more careful.",
+				"a": "whereas",
+				"b": "whereas/aware"
+			}
+		],
+		"sublist-6": [
+			{
+				"headword":"abstract",
+				"sentence": "The philosopher preferred abstract theories to concrete experiments.",
+				"a": "abstract",
+				"b": "abstract/expert"
+			},{
+				"headword":"accurate",
+				"sentence": "It's much better to be accurate than just precise.",
+				"a": "accurate",
+				"b": "diverse/accurate"
+			},{
+				"headword":"acknowledge",
+				"sentence": "Our hard work was never acknowledged by the CEO, and we grew discouraged.",
+				"a": "acknowledged",
+				"b": "display/acknowledge"
+			},{
+				"headword":"aggregate",
+				"sentence": "The aggregate age of doubles tennis players was well over one hundred.",
+				"a": "aggregate",
+				"b": "input/aggregate"
+			},{
+				"headword":"allocate",
+				"sentence": "The misproper allocation of funds invoked a federal investigation into the charity.",
+				"a": "allocation",
+				"b": "allocate/inhibit"
+			},{
+				"headword":"assign",
+				"sentence": "Homework will be assigned every day besides Friday.",
+				"a": "assigned",
+				"b": "assign/trace"
+			},{
+				"headword":"attach",
+				"sentence": "You will find a course schedule attached to the syllabus.",
+				"a": "attached",
+				"b": "attach/bond"
+			},{
+				"headword":"author",
+				"sentence": "The author of this novel lived in Siberia for a decade where he did most of his writing.",
+				"a": "accurate",
+				"b": "author/edit"
+			},{
+				"headword":"bond",
+				"sentence": "The bond between a mother and child is one of the strongest family relationships.",
+				"a": "bond",
+				"b": "bond/attach"
+			},{
+				"headword":"brief",
+				"sentence": "The meeting was so brief that many hardly had time to settle in.",
+				"a": "brief",
+				"b": "intelligent/brief"
+			},{
+				"headword":"capable",
+				"sentence": "No one knew what the killer whale was capable of when it was provoked.",
+				"a": "capable",
+				"b": "utilise/capable"
+			},{
+				"headword":"cite",
+				"sentence": "Three sources were cited by the lecturer that showed sitting is unhealthy.",
+				"a": "cited",
+				"b": "cite/reveal"
+			},{
+				"headword":"cooperate",
+				"sentence": "The suspect was not being cooperative with the questioning from the investigator.",
+				"a": "cooperative",
+				"b": "flexible/cooperate"
+			},{
+				"headword":"discriminate",
+				"sentence": "Due to his cosmetic abnormalities he faced discrimination from those who didn't know him.",
+				"a": "discrimination",
+				"b": "presume/discriminate"
+			},{
+				"headword":"display",
+				"sentence": "The peacock will display its full tail feathers to a potential mate.",
+				"a": "display",
+				"b": "display/acknowledge"
+			},{
+				"headword":"diversity",
+				"sentence": "In an effort to raise campus diversity the university gave out more scolarships to low-income families.",
+				"a": "diversity",
+				"b": "diverse/scope"
+			},{
+				"headword":"domain",
+				"sentence": "The documents were put into the public domain only after the transparency bill was signed.",
+				"a": "domain",
+				"b": "domain/index"
+			},{
+				"headword":"edit",
+				"sentence": "The latest edition of Scientific American features and article on quantum computing.",
+				"a": "edition",
+				"b": "assign/edition"
+			},{
+				"headword":"enhance",
+				"sentence": "Personal computers have enhanced productity by orders of magnitude.",
+				"a": "enhanced",
+				"b": "exceed/enhance"
+			},{
+				"headword":"estate",
+				"sentence": "The billionaire's private estate overlooked the ocean from the Malibu cliffs.",
+				"a": "estate",
+				"b": "estate/ministry"
+			},{
+				"headword":"exceed",
+				"sentence": "Sales of the competitor's product may exceed our own if we don't change our marketing strategy.",
+				"a": "exceed",
+				"b": "underlie/exceed"
+			},{
+				"headword":"expert",
+				"sentence": "Her expert karate skills helped her stave off her attacker.",
+				"a": "expert",
+				"b": "enhance/expert"
+			},{
+				"headword":"explicit",
+				"sentence": "To avoid miscommunication it's important to be as explicit as possible about what you want.",
+				"a": "explicit",
+				"b": "explicit/diverse"
+			},{
+				"headword":"federal",
+				"sentence": "An increase in federal taxes leads to an increase in government spending on all levels.",
+				"a": "federal",
+				"b": "fee/federal"
+			},{
+				"headword":"fee",
+				"sentence": "The legal fees are paid for only in the event of a successful trial.",
+				"a": "fees",
+				"b": "fee/subsidy"
+			},{
+				"headword":"flexible",
+				"sentence": "The gymnast's flexibility allowed her to virtually fold in half backwards.",
+				"a": "flexibility",
+				"b": "flexible/capability"
+			},{
+				"headword":"furthermore",
+				"sentence": "My client never entered the building, furthermore he had no knowledge of where it was located.",
+				"a": "furthermore",
+				"b": "furthermore/nevertheless"
+			},{
+				"headword":"gender",
+				"sentence": "Some parents opt not to know the gender of their child before birth.",
+				"a": "gender",
+				"b": "diverse/gender"
+			},{
+				"headword":"ignorant",
+				"sentence": "His small frame made him easily ignored by others.",
+				"a": "ignored",
+				"b": "presume/ignorant"
+			},{
+				"headword":"incentive",
+				"sentence": "Our boss increased the commission as an incentive for the salespeople.",
+				"a": "incentive",
+				"b": "incentive/motivation"
+			},{
+				"headword":"incidence",
+				"sentence": "For the past 50 years we have seen a rise in the incidence of cancer.",
+				"a": "incidence",
+				"b": "incidence/trace"
+			},{
+				"headword":"incorporate",
+				"sentence": "We have recently incorporated more alternative medicine into our holistic healing approach.",
+				"a": "incorporated",
+				"b": "recover/incorporate"
+			},{
+				"headword":"index",
+				"sentence": "The index of items available makes it easy to find what you are looking for.",
+				"a": "index",
+				"b": "scope/index"
+			},{
+				"headword":"inhibit",
+				"sentence": "Alcohol has long been noted for its removal of inhibition from the consumer.",
+				"a": "inhibition",
+				"b": "inhibition/flexible"
+			},{
+				"headword":"initiate",
+				"sentence": "Multiple statewide initiatives to reduce drunk driving were led by mothers.",
+				"a": "initiatives",
+				"b": "display/initiate"
+			},{
+				"headword":"input",
+				"sentence": "Customer input has more weight in the digital age.",
+				"a": "input",
+				"b": "input/domain"
+			},{
+				"headword":"instruct",
+				"sentence": "The instructions on how to build the toy were printed on the box.",
+				"a": "instructions",
+				"b": "transform/instruct"
+			},{
+				"headword":"intelligent",
+				"sentence": "Exceedingly more importance is placed on intelligence as it is a prerequisite for success.",
+				"a": "intelligence",
+				"b": "gender/intelligent"
+			},{
+				"headword":"interval",
+				"sentence": "The final interval should be done at maximum effort.",
+				"a": "interval",
+				"b": "interval/recover"
+			},{
+				"headword":"lecture",
+				"sentence": "At the end of the three hour lecture, there wasn't a student awake.",
+				"a": "lecture",
+				"b": "display/lecture"
+			},{
+				"headword":"migrate",
+				"sentence": "The annual migration of birds south means we will have more summer bird watching.",
+				"a": "migration",
+				"b": "migrate/incidence"
+			},{
+				"headword":"minimum",
+				"sentence": "If you only try to get the minimum grade, in all liklihood, you will not pass.",
+				"a": "minimum",
+				"b": "underlie/minimum"
+			},{
+				"headword":"ministry",
+				"sentence": "The Ministry of Defense requested an increase in funds.",
+				"a": "Ministry",
+				"b": "ministry/federal"
+			},{
+				"headword":"motive",
+				"sentence": "The primary motivation to write books is often money.",
+				"a": "motivation",
+				"b": "domain/motive"
+			},{
+				"headword":"neutral",
+				"sentence": "The lawyers deliberated long and hard to form a neutral jury or at least and equally biased one.",
+				"a": "neutral",
+				"b": "rational/neutral"
+			},{
+				"headword":"nevertheless",
+				"sentence": "He hired a coach to help him with his golf swing, nevertheless he fell back into old habits.",
+				"a": "nevertheless",
+				"b": "furthermore/nevertheless"
+			},{
+				"headword":"overseas",
+				"sentence": "His job required a lot of overseas travel.",
+				"a": "overseas",
+				"b": "overseas/initiate"
+			},{
+				"headword":"precede",
+				"sentence": "The present changes will not recover what was lost in the preceding decade.",
+				"a": "preceding",
+				"b": "precede/brief"
+			},{
+				"headword":"presume",
+				"sentence": "It's the height of presumption to think that I'm unintelligent because I'm not educated.",
+				"a": "presumption",
+				"b": "abstract/presume"
+			},{
+				"headword":"rational",
+				"sentence": "The child was not capable of making a rational decision after his comfort toy was taken away.",
+				"a": "rational",
+				"b": "neutral/rational"
+			},{
+				"headword":"recover",
+				"sentence": "The economic recovery will take many years, but it will happen.",
+				"a": "recovery",
+				"b": "recovery/cooperate"
+			},{
+				"headword":"reveal",
+				"sentence": "Only after much prompting was it revealed that she had no idea how to play the piano.",
+				"a": "revealed",
+				"b": "display/reveal"
+			},{
+				"headword":"scope",
+				"sentence": "The scope of the project was so large that multiple countries had to sign off on it.",
+				"a": "scope",
+				"b": "scope/aggregate"
+			},{
+				"headword":"subsidy",
+				"sentence": "The startup later became a subsidiary of a multinational.",
+				"a": "subsidiary",
+				"b": "subsidy/attach"
+			},{
+				"headword":"tape",
+				"sentence": "The moon landing tapes were lost in the giant NASA archives.",
+				"a": "tapes",
+				"b": "tape/index"
+			},{
+				"headword":"trace",
+				"sentence": "It's virutally impossible to trace this call back to its source.",
+				"a": "trace",
+				"b": "trace/utilise"
+			},{
+				"headword":"transform",
+				"sentence": "During the makeover her hair underwent the most radical transformation.",
+				"a": "transformation",
+				"b": "transform/edit"
+			},{
+				"headword":"transport",
+				"sentence": "In the future we will use drones to transport packages.",
+				"a": "transport",
+				"b": "utilise/transport"
+			},{
+				"headword":"underlie",
+				"sentence": "The underlying problems run much deeper than the scope of our domain.",
+				"a": "underlying",
+				"b": "underlie/intitiate"
+			},{
+				"headword":"utilise",
+				"sentence": "There ended up being very little utility in hiriing many minimum wage jobs over a few skilled jobs.",
+				"a": "utility",
+				"b": "expert/utility"
+			}
+		],
+		"sublist-7": [
+			{
+				"headword":"adapt",
+				"sentence": "The film adaptation of the story wasn't as popular as the book.",
+				"a": "adaptation",
+				"b": "adapt/convert"
+			},{
+				"headword":"adult",
+				"sentence": "The adults of the community allow the children to play unsupervised.",
+				"a": "adults",
+				"b": "foundation/adult"
+			},{
+				"headword":"advocate",
+				"sentence": "The organization was founded to advocate for the rights of refugees.",
+				"a": "advocate",
+				"b": "advocate/guarantee"
+			},{
+				"headword":"aid",
+				"sentence": "Government aid and relief can be requested in times of emergency.",
+				"a": "aid",
+				"b": "file/aid"
+			},{
+				"headword":"channel",
+				"sentence": "Twitter is many people's primary channel of information",
+				"a": "channel",
+				"b": "equip/channel"
+			},{
+				"headword":"chemical",
+				"sentence": "The unique chemical makeup of the paint is completely non-toxic.",
+				"a": "chemical",
+				"b": "chemical/indentical"
+			},{
+				"headword":"classic",
+				"sentence": "Many prefer to listen to classical music while studying.",
+				"a": "classical",
+				"b": "classic/grade"
+			},{
+				"headword":"comprehensive",
+				"sentence": "The test is comprehensive, meaning it will cover everything from the beginning.",
+				"a": "comprehensive",
+				"b": "ultimate/comprehensive"
+			},{
+				"headword":"comprise",
+				"sentence": "The final exam will comprise 30% of your grade.",
+				"a": "comprise",
+				"b": "insert/comprise"
+			},{
+				"headword":"confirm",
+				"sentence": "We have yet to confirm whether the VIP will show up.",
+				"a": "confirm",
+				"b": "infer/confirm"
+			},{
+				"headword":"contrary",
+				"sentence": "Contrary to popular belief penguins aren't found in the north pole.",
+				"a": "contrary",
+				"b": "contrary/indentical"
+			},{
+				"headword":"convert",
+				"sentence": "This van will be converted into a recreational vehicle.",
+				"a": "converted",
+				"b": "insert/convert"
+			},{
+				"headword":"couple",
+				"sentence": "It'll only take a couple of seconds for the process to finish.",
+				"a": "couple",
+				"b": "couple/sole"
+			},{
+				"headword":"decade",
+				"sentence": "It's been decades since our last major war between to developed nations.",
+				"a": "decades",
+				"b": "couple/decade"
+			},{
+				"headword":"definite",
+				"sentence": "I can't promise that there will be any definite outcome by tomorrow.",
+				"a": "definite",
+				"b": "sole/definite"
+			},{
+				"headword":"deny",
+				"sentence": "If we accuse him of taking the cookies he will only deny it as usual.",
+				"a": "deny",
+				"b": "submit/deny"
+			},{
+				"headword":"differentiate",
+				"sentence": "There is greater genetic differentiation between plants and fungi than fungi and humans.",
+				"a": "differentiation",
+				"b": "differentiate/hierarchy"
+			},{
+				"headword":"dispose",
+				"sentence": "If you have any extra car at your disposal, could I use it?",
+				"a": "disposal",
+				"b": "mode/disposal"
+			},{
+				"headword":"dynamic",
+				"sentence": "Ours is a dynamic training program that will constantly adjust to your progress.",
+				"a": "dynamic",
+				"b": "innovate/dynamic"
+			},{
+				"headword":"eliminate",
+				"sentence": "We will have to eliminate the misleading options.",
+				"a": "eliminate",
+				"b": "convert/eliminate"
+			},{
+				"headword":"empirical",
+				"sentence": "It was difficult to find empirical evidence for a flat Earth.",
+				"a": "empirical",
+				"b": "classic/empirical"
+			},{
+				"headword":"equip",
+				"sentence": "The team will be provided with equipment by a local club.",
+				"a": "equipment",
+				"b": "equip/aid"
+			},{
+				"headword":"extract",
+				"sentence": "The lab technician will extract the DNA from the cell for testing.",
+				"a": "extract",
+				"b": "extract/channel"
+			},{
+				"headword":"file",
+				"sentence": "I'll check if we have that on file before we go further.",
+				"a": "file",
+				"b": "mode/file"
+			},{
+				"headword":"finite",
+				"sentence": "Even though it seems never ending, there's a finite amount of possibilities.",
+				"a": "finite",
+				"b": "phenomenon/finite"
+			},{
+				"headword":"foundation",
+				"sentence": "The foundation of our beliefs is that all humans are created equal.",
+				"a": "foundation",
+				"b": "ideology/foundation"
+			},{
+				"headword":"globe",
+				"sentence": "It will take a global initiative to combat hunger.",
+				"a": "global",
+				"b": "globe/comprehensive"
+			},{
+				"headword":"grade",
+				"sentence": "We will grade the responses on a scale of one to five.",
+				"a": "grade",
+				"b": "confirm/grade"
+			},{
+				"headword":"guarantee",
+				"sentence": "Saftey is not a guarantee in this line of work.",
+				"a": "guarantee",
+				"b": "survive/guarantee"
+			},{
+				"headword":"hierarchy",
+				"sentence": "Our workplace is so hierarchical that we have the title of assistant to the regional manager.",
+				"a": "hierarchical",
+				"b": "hierarchy/unique"
+			},{
+				"headword":"identical",
+				"sentence": "They came to school the first day with identical red shoes.",
+				"a": "identical",
+				"b": "contrary/indentical"
+			},{
+				"headword":"ideology",
+				"sentence": "Conversations about a person's ideology are often tricky to navigate.",
+				"a": "ideology",
+				"b": "paradigm/ideology"
+			},{
+				"headword":"infer",
+				"sentence": "So much could be inferred from the way she walked into the room after the interview.",
+				"a": "inferred",
+				"b": "advocate/infer"
+			},{
+				"headword":"innovate",
+				"sentence": "The latest innovation in bike technology has been disk brakes.",
+				"a": "innovation",
+				"b": "innovate/release"
+			},{
+				"headword":"insert",
+				"sentence": "You will need to insert you card into the machine.",
+				"a": "insert",
+				"b": "insert/submit"
+			},{
+				"headword":"intervene",
+				"sentence": "Early intervention won't let the situation get out of hand.",
+				"a": "intervention",
+				"b": "isolate/intervene"
+			},{
+				"headword":"isolate",
+				"sentence": "One of the most psychologically challenging punishments is isolation.",
+				"a": "isolation",
+				"b": "survive/isolate"
+			},{
+				"headword":"media",
+				"sentence": "The media presence gave the court case even more gravitas.",
+				"a": "media",
+				"b": "globe/media"
+			},{
+				"headword":"mode",
+				"sentence": "Our primary mode of delivery is by truck.",
+				"a": "mode",
+				"b": "mode/transmit"
+			},{
+				"headword":"paradigm",
+				"sentence": "Ebay broke the paradigm of buying and selling in brick and mortar shops.",
+				"a": "paradigm",
+				"b": "topc/paradigm"
+			},{
+				"headword":"phenomenon",
+				"sentence": "Seeing lightning strike the volcano is a powerful natural phenomenon.",
+				"a": "phenomenon",
+				"b": "couple/phenomenon"
+			},{
+				"headword":"priority",
+				"sentence": "The disabled and pregnant women should be given priority seating.",
+				"a": "priority",
+				"b": "aid/priority"
+			},{
+				"headword":"prohibit",
+				"sentence": "The fact that drugs are prohibited doesn't stop many from still using them.",
+				"a": "prohibited",
+				"b": "visible/prohibit"
+			},{
+				"headword":"publication",
+				"sentence": "After the publication of his first novel, he celebrated with a drink.",
+				"a": "publication",
+				"b": "simulate/publication"
+			},{
+				"headword":"quote",
+				"sentence": "The author failed to cite this quotation in his book.",
+				"a": "quotation",
+				"b": "quote/media"
+			},{
+				"headword":"release",
+				"sentence": "The release of the iPhone in 2007 transformed the industry.",
+				"a": "release",
+				"b": "unique/release"
+			},{
+				"headword":"reverse",
+				"sentence": "If we could reverse the process maybe we could figure out how they made such improvements.",
+				"a": "reverse",
+				"b": "intervene/reverse"
+			},{
+				"headword":"simulate",
+				"sentence": "The simulation of the accident revealed that the driver hadn't actually braked but sped up.",
+				"a": "simulation",
+				"b": "simulate/phenomenon"
+			},{
+				"headword":"sole",
+				"sentence": "Victory lies solely in the hands of the prepared.",
+				"a": "solely",
+				"b": "sole/foundation"
+			},{
+				"headword":"somewhat",
+				"sentence": "She was somewhat offended that he had forgotten her name.",
+				"a": "somewhat",
+				"b": "contrary/somewhat"
+			},{
+				"headword":"submit",
+				"sentence": "All papers should be submitted though the online channel.",
+				"a": "submitted",
+				"b": "submit/transmit"
+			},{
+				"headword":"successor",
+				"sentence": "The successive replies only got worse and worse.",
+				"a": "successive",
+				"b": "guarantee/successor"
+			},{
+				"headword":"survive",
+				"sentence": "City life is often more about whether you can survive than thrive.",
+				"a": "survive",
+				"b": "isolate/survive"
+			},{
+				"headword":"thesis",
+				"sentence": "The overarching thesis of his paper was that technology leads to greater physical comfort but more mental distress.",
+				"a": "thesis",
+				"b": "thesis/priority"
+			},{
+				"headword":"topic",
+				"sentence": "The next topic for discussion will be nutrition.",
+				"a": "topic",
+				"b": "thesis/topic"
+			},{
+				"headword":"transmit",
+				"sentence": "Washing your hands prevents the transimission of germs.",
+				"a": "transimission",
+				"b": "transmit/submit"
+			},{
+				"headword":"ultimate",
+				"sentence": "We ultimately haven't been able to identify the cause of the disease.",
+				"a": "ultimately",
+				"b": "ulitmate/sole"
+			},{
+				"headword":"unique",
+				"sentence": "This is a unique situation that will require more time to figure out.",
+				"a": "unique",
+				"b": "classic/unique"
+			},{
+				"headword":"visible",
+				"sentence": "Changes won't be visible until a few weeks later.",
+				"a": "visible",
+				"b": "visible/voluntary"
+			},{
+				"headword":"voluntary",
+				"sentence": "This assignment is voluntary and will not be graded.",
+				"a": "voluntary",
+				"b": "comprehensive/voluntary"
+			}
+		],
+		"sublist-8": [
+			{
+				"headword":"abandon",
+				"sentence": "If this doesn't fix the problem we will have to abandon the project altogether.",
+				"a": "abandon",
+				"b": "abandon/chart"
+			},{
+				"headword":"accompany",
+				"sentence": "Children must be accompanied by a guardian.",
+				"a": "accompanied",
+				"b": "accompany/reinforce"
+			},{
+				"headword":"accumulate",
+				"sentence": "The accumulation of stress over years of work is what damages health.",
+				"a": "accumulation",
+				"b": "detect/accumulate"
+			},{
+				"headword":"ambiguous",
+				"sentence": "He never said 'yes' or 'no' but always gave an ambiguous answer.",
+				"a": "ambiguous",
+				"b": "ambiguous/deviate"
+			},{
+				"headword":"append",
+				"sentence": "You can search the appendix in the back of the magazine for the citations",
+				"a": "appendix",
+				"b": "append/chart"
+			},{
+				"headword":"appreciate",
+				"sentence": "As a manager it's important to show appreciation for your subordinates' work.",
+				"a": "appreciation",
+				"b": "appreciate/uniform"
+			},{
+				"headword":"arbitrary",
+				"sentence": "The grading system is quite arbitrary and everyone got a wide range of results.",
+				"a": "arbitrary",
+				"b": "deviate/abitrary"
+			},{
+				"headword":"automate",
+				"sentence": "Having had many years of experience he automatically knew what the issue was.",
+				"a": "automatically",
+				"b": "automate/random"
+			},{
+				"headword":"bias",
+				"sentence": "The judge had a clear bias towards the defendant because of her resemblance to his daughter.",
+				"a": "bias",
+				"b": "implicit/bias"
+			},{
+				"headword":"chart",
+				"sentence": "It's important to chart your progress on a graph.",
+				"a": "chart",
+				"b": "chart/detect"
+			},{
+				"headword":"clarify",
+				"sentence": "Even with the teacher's explanation there was no more clarity.",
+				"a": "clarity",
+				"b": "clarify/denote"
+			},{
+				"headword":"commodity",
+				"sentence": "Oil is the largest global commodity.",
+				"a": "commodity",
+				"b": "currency/commodity"
+			},{
+				"headword":"complement",
+				"sentence": "The chocolate will complement the red wine nicely.",
+				"a": "complement",
+				"b": "complement/appreciate"
+			},{
+				"headword":"conform",
+				"sentence": "It is quite natural to dislike societal conformity as a teenager.",
+				"a": "conformity",
+				"b": "drama/conformity"
+			},{
+				"headword":"contemporary",
+				"sentence": "Although he probably didn't know it, Confucious was a contemporary of Buddha.",
+				"a": "contemporary",
+				"b": "practitioner/contemporary"
+			},{
+				"headword":"contradict",
+				"sentence":"I've always said that an honest lawyer is a contradiction in terms.",
+				"a": "contradiction",
+				"b": "contradict/displace"
+			},{
+				"headword":"crucial",
+				"sentence": "It's crucial that he learn to play appropriately with other children.",
+				"a": "crucial",
+				"b": "widespread/crucial"
+			},{
+				"headword":"currency",
+				"sentence": "The inflation of the currency caused widespread panic.",
+				"a": "currency",
+				"b": "commodity/currency"
+			},{
+				"headword":"deviate",
+				"sentence": "The deviation in the course of the plane triggered a warning back on base.",
+				"a": "deviation",
+				"b": "deviate/offset"
+			},{
+				"headword":"displace",
+				"sentence": "Hip displacement is a common injury among the elderly.",
+				"a": "displacement",
+				"b": "displace/fluctuate"
+			},{
+				"headword":"drama",
+				"sentence": "Her dramatic cries touched the audience.",
+				"a": "dramatic",
+				"b": "bias/drama"
+			},{
+				"headword":"eventual",
+				"sentence": "We will eventually see the end of using cash.",
+				"a": "eventually",
+				"b": "random/eventual"
+			},{
+				"headword":"exhibit",
+				"sentence": "The deer will exhibit a desire to fight by pawing at the ground.",
+				"a": "exhibit",
+				"b": "exhibit/tense"
+			},{
+				"headword":"exploit",
+				"sentence": "Stalin was less concerned about the exploitation of workers and more concerned about power.",
+				"a": "exploitation",
+				"b": "exploit/manipulate"
+			},{
+				"headword":"fluctuate",
+				"sentence": "The fluctuations of the gauge indicated the unstable pressure.",
+				"a": "fluctuations",
+				"b": "fluctuate/deviate"
+			},{
+				"headword":"guideline",
+				"sentence": "Use these instructions as guidelines rather than rules.",
+				"a": "guidelines",
+				"b": "chart/guideline"
+			},{
+				"headword":"hightlight",
+				"sentence": "The highlighted text in the passage denotes the important information.",
+				"a": "highlighted",
+				"b": "highlight/plus"
+			},{
+				"headword":"implicit",
+				"sentence": "The desire to get better is implicit in every therapy session.",
+				"a": "implicit",
+				"b": "implicit/schedule"
+			},{
+				"headword":"induce",
+				"sentence": "Nausea can be induced by the sight of blood.",
+				"a": "induced",
+				"b": "induce/restore"
+			},{
+				"headword":"inevitable",
+				"sentence": "With this growth we will inevitably have to find a bigger building.",
+				"a": "inevitably",
+				"b": "inevitable/arbitrary"
+			},{
+				"headword":"infrastructure",
+				"sentence": "The city's infrastructure, including the subway system, got a much-needed overhaul.",
+				"a": "infrastructure",
+				"b": "infrastructure/restore"
+			},{
+				"headword":"inspect",
+				"sentence": "The automobile passed the inspection with flying colours.",
+				"a": "inspection",
+				"b": "inspect/prospect"
+			},{
+				"headword":"intense",
+				"sentence": "The trainer will increase the intensity of the workouts over time.",
+				"a": "intensity",
+				"b": "intense/tense"
+			},{
+				"headword":"manipulate",
+				"sentence": "The corrupt politician's manipulation and coercion tactics were e.posed by a journalist/",
+				"a": "manipulation",
+				"b": "manipulate/visual"
+			},{
+				"headword":"minimise",
+				"sentence": "The risks were minimised by doing a reconnaissance mission/",
+				"a": "minimised",
+				"b": "bias/minimise",
+				"c": "minimized"
+			},{
+				"headword":"nuclear",
+				"sentence": "An agreement to stop nuclear testing above ground was made in 1963.",
+				"a": "nuclear",
+				"b": "infrastructure/nuclear"
+			},{
+				"headword":"offset",
+				"sentence": "Much of the costs were offset by family donations.",
+				"a": "offset",
+				"b": "offset/plus"
+			},{
+				"headword":"paragraph",
+				"sentence": "The final paragraph of the essay should be your conclusion.",
+				"a": "paragraph",
+				"b": "revise"
+			},{
+				"headword":"plus",
+				"sentence": "Getting home on time will be a big plus.",
+				"a": "plus",
+				"b": "plus/guideline"
+			},{
+				"headword":"practitioner",
+				"sentence": "The martial arts practitioners were no match for the trained soldier.",
+				"a": "practitioners",
+				"b": "practitioner/theme"
+			},{
+				"headword":"prospect",
+				"sentence": "My old friend approached me with a business prospect that sounded too good to be true.",
+				"a": "prospect",
+				"b": "highlight/prospect"
+			},{
+				"headword":"radical",
+				"sentence": "The radical ideology of the sect stated that all squirrels were actually evil bunnies.",
+				"a": "radical",
+				"b": "drama/radical"
+			},{
+				"headword":"random",
+				"sentence": "The machine will shoot out tennis balls at random intervals and speeds.",
+				"a": "random",
+				"b": "random/eventual"
+			},{
+				"headword":"reinforce",
+				"sentence": "It's vital that new material be reinforced with repetition at home.",
+				"a": "reinforced",
+				"b": "reinforce/accumulate"
+			},{
+				"headword":"restore",
+				"sentence": "The museum will have to restore a half dozen paintings after the sprinkler incident.",
+				"a": "restore",
+				"b": "revise/restore"
+			},{
+				"headword":"revise",
+				"sentence": "Please submit your paper to the teacher for revision before the final submission..",
+				"a": "revision",
+				"b": "inspect/revise"
+			},{
+				"headword":"schedule",
+				"sentence": "The recruits were given a very demanding schedule for 30 days.",
+				"a": "schedule",
+				"b": "theme/schedule"
+			},{
+				"headword":"tense",
+				"sentence": "The heated debate created a lot of tension in the room.",
+				"a": "tension",
+				"b": "tense/intense"
+			},{
+				"headword":"terminate",
+				"sentence": "The employee's unceremonious termination was grounds for a lawsuit.",
+				"a": "termination",
+				"b": "exhibit/terminate"
+			},{
+				"headword":"theme",
+				"sentence": "A major theme of the series is that good doesn't always triumph over evil.",
+				"a": "theme",
+				"b": "bias/theme"
+			},{
+				"headword":"thereby",
+				"sentence": "He never worked a day in his life, thereby never appreciating the fruit of one's labours.",
+				"a": "thereby",
+				"b": "plus/thereby"
+			},{
+				"headword":"uniform",
+				"sentence": "The uniform rows of army cadets would make any dictator proud.",
+				"a": "uniform",
+				"b": "uniform/conform"
+			},{
+				"headword":"vehicle",
+				"sentence": "A utility vehicle helped take the massive football player off the field.",
+				"a": "vehicle",
+				"b": "reinforce/vehicle"
+			},{
+				"headword":"via",
+				"sentence": "He is best reached via email.",
+				"a": "via",
+				"b": "via/thereby"
+			},{
+				"headword":"virtual",
+				"sentence": "After the explosion there was virtually nothing over two meters still standing.",
+				"a": "virtually",
+				"b": "virtual/inevitable"
+			},{
+				"headword":"visual",
+				"sentence": "Men tend to be more visual creatures and will fall for a beautiful face.",
+				"a": "visual",
+				"b": "prospect/visual"
+			},{
+				"headword":"widespread",
+				"sentence": "The widespread use of cell-phones has lowered our attention spans.",
+				"a": "widespread",
+				"b": "offset/widespread"
+			}
+		],
+		"sublist-9":[
+			{
+				"headword":"accommodate",
+				"sentence": "Student accommodation costs almost as much as the studies.",
+				"a": "accommodation",
+				"b": "relax/accommodate"
+			},{
+				"headword":"analogy",
+				"sentence": "DNA in our body is analogous to instructions to build a machine.",
+				"a": "analogous",
+				"b": "compatible/analogy"
+			},{
+				"headword":"anticipate",
+				"sentence": "The anticipated quarterly earnings will run into the millions.",
+				"a": "anticipated",
+				"b": "anticipate/concurrent"
+			},{
+				"headword":"assure",
+				"sentence": "When he said no one had been seriously hurt, it didn't give us any assurance that we'd be safe.",
+				"a": "assurance",
+				"b": "assure/insight"
+			},{
+				"headword":"attain",
+				"sentence": "Even though we have already attained to such great heights, we want more.",
+				"a": "attained",
+				"b": "attain/route"
+			},{
+				"headword":"behalf",
+				"sentence": "I'd like to thank everyone on behalf of me and my family for the lovely ceremony.",
+				"a": "behalf",
+				"b": "behalf/portion"
+			},{
+				"headword":"bulk",
+				"sentence": "The bulk of the effort was in getting started and it only got easier from there.",
+				"a": "bulk",
+				"b": "bulk/mature"
+			},{
+				"headword":"cease",
+				"sentence": "The moment you accept the pain is the moment when it ceases to be painful.",
+				"a": "ceases",
+				"b": "restrain/cease"
+			},{
+				"headword":"coherent",
+				"sentence": "Because the novel was written at different times of the author's life, there were some issues with its coherence.",
+				"a": "coherence",
+				"b": "rigid/coherent"
+			},{
+				"headword":"coincide",
+				"sentence": "This year the summer solstice will coincide with a solar eclipse.",
+				"a": "coincide",
+				"b": "coincide/concurrent"
+			},{
+				"headword":"commence",
+				"sentence": "Only once the games have commenced can we sit back and enjoy them.",
+				"a": "commenced",
+				"b": "commence/suspend"
+			},{
+				"headword":"compatible",
+				"sentence": "Unfortunately the two connections are incompatible and we won't be able to watch the movie.",
+				"a": "incompatible",
+				"b": "compatible/distort"
+			},{
+				"headword":"concurrent",
+				"sentence": "The three courses will be concurrent with each other.",
+				"a": "concurrent",
+				"b": "coincide/concurrent"
+			},{
+				"headword":"confine",
+				"sentence": "The dog had been confined to a space the size of dinner table.",
+				"a": "confined",
+				"b": "confine/found"
+			},{
+				"headword":"controversy",
+				"sentence": "The politician seemed unfazed by the controversy involving the construction company.",
+				"a": "controversy",
+				"b": "controversy/revolution"
+			},{
+				"headword":"converse",
+				"sentence": "Many consider computer games to be bad for your health, conversely, gamers tell of all their benefits.",
+				"a": "conversely",
+				"b": "converse/inherent"
+			},{
+				"headword":"device",
+				"sentence": "This device will enable users to access any television channel from all over the world.",
+				"a": "device",
+				"b": "device/trigger"
+			},{
+				"headword":"devote",
+				"sentence": "The military expects its entrants to be fully devoted to the cause.",
+				"a": "devoted",
+				"b": "restrain/devote"
+			},{
+				"headword":"diminish",
+				"sentence": "After a classmate commented on the stain on his shoe his confidence was a bit diminished.",
+				"a": "diminished",
+				"b": "diminish/assure"
+			},{
+				"headword":"distort",
+				"sentence": "The image had been distorted by a photo editing program.",
+				"a": "distorted",
+				"b": "distort/confine"
+			},{
+				"headword":"duration",
+				"sentence": "Phones should be silenced for the duration of the performance.",
+				"a": "duration",
+				"b": "overlap/duration"
+			},{
+				"headword":"erode",
+				"sentence": "Water erosion pushes the Niagra falls back a meter every year.",
+				"a": "erosion",
+				"b": "violate/erode"
+			},{
+				"headword":"ethic",
+				"sentence": "The character was faced with the ethical dilemma of obeying the law or doing what he felt was right.",
+				"a": "ethical",
+				"b": "ethic/mutual"
+			},{
+				"headword":"format",
+				"sentence": "The format of the conference will place the main speakers on the last day.",
+				"a": "format",
+				"b": "format/bulk"
+			},{
+				"headword":"found",
+				"sentence": "Our extablishment was founded in 1863.",
+				"a": "founded",
+				"b": "unify/found"
+			},{
+				"headword":"inherent",
+				"sentence": "The problem is in inherent in the system.",
+				"a": "inherent",
+				"b": "inherent/integral"
+			},{
+				"headword":"insight",
+				"sentence": "What new insights were gained from the lecture?",
+				"a": "insights",
+				"b": "protocol/insight"
+			},{
+				"headword":"integral",
+				"sentence": "Repetition is integral to retaining information.",
+				"a": "integral",
+				"b": "integral/inherent"
+			},{
+				"headword":"intermediate",
+				"sentence": "The intermediate level has a good range of easy and difficult questions.",
+				"a": "intermediate",
+				"b": "commence/intermediate"
+			},{
+				"headword":"manual",
+				"sentence": "Although it's often looked down upon, manual labour has many benefits.",
+				"a": "manual",
+				"b": "passive/manual"
+			},{
+				"headword":"mature",
+				"sentence": "It's takes 18 months for the cheese to mature properly.",
+				"a": "mature",
+				"b": "refine/mature"
+			},{
+				"headword":"mediate",
+				"sentence": "There had been some hiccups in the mediation between the two parties.",
+				"a": "mediation",
+				"b": "converse/mediate"
+			},{
+				"headword":"medium",
+				"sentence": "I usually go with the medium sized shirt.",
+				"a": "medium",
+				"b": "norm/medium"
+			},{
+				"headword":"military",
+				"sentence": "The country asked for military intervention from its neighbors.",
+				"a": "military",
+				"b": "controversy/military"
+			},{
+				"headword":"minimal",
+				"sentence": "The rider wanted to expend the minimal amount of effort to get over the climb.",
+				"a": "minimal",
+				"b": "minimal/compatible"
+			},{
+				"headword":"mutual",
+				"sentence": "There was clearly mutual interest between the two on their first date.",
+				"a": "mutual",
+				"b": "team/mutual"
+			},{
+				"headword":"norm",
+				"sentence": "An artist often doesn't conform to the norms that are restrictive.",
+				"a": "norms",
+				"b": "ethic/norm"
+			},{
+				"headword":"overlap",
+				"sentence": "There is much overlap between cognitive science and neuroscience.",
+				"a": "overlap",
+				"b": "overlap/duration"
+			},{
+				"headword":"passive",
+				"sentence": "His passive approach to the game paid off in the end.",
+				"a": "passive",
+				"b": "diminish/passive"
+			},{
+				"headword":"portion",
+				"sentence": "The portion you give to others will determine how much is given back to you.",
+				"a": "portion",
+				"b": "portion/bulk"
+			},{
+				"headword":"preliminary",
+				"sentence": "At the preliminary hearings it was already apparent that the defendant was guilty.",
+				"a": "preliminary",
+				"b": "preliminary/commence"
+			},{
+				"headword":"protocol",
+				"sentence": "There will be a change in protocol that will allow reports to be submitted later.",
+				"a": "protocol",
+				"b": "protocol/scenario"
+			},{
+				"headword":"qualitative",
+				"sentence": "The inspectors looked at both the qualitative and quantitative results.",
+				"a": "qualitative",
+				"b": "qualititative/sphere"
+			},{
+				"headword":"refine",
+				"sentence": "Korea will provide the engineering equipment to refine the crude oil.",
+				"a": "refine",
+				"b": "refine/distort"
+			},{
+				"headword":"relax",
+				"sentence": "He had a relaxed way about him that put people at ease.",
+				"a": "relaxed",
+				"b": "relax/subordinate"
+			},{
+				"headword":"restrain",
+				"sentence": "The prisoner won't able to run because of the restraints that are placed on his ankles.",
+				"a": "restraints",
+				"b": "confine/restraint"
+			},{
+				"headword":"revolution",
+				"sentence": "The country had a newfound feeling of freedom after the revolution.",
+				"a": "revolution",
+				"b": "revolution/controversy"
+			},{
+				"headword":"rigid",
+				"sentence": "The rigid protocols prohibited anyone from speaking to their families about the deal.",
+				"a": "rigid",
+				"b": "coherent/rigid"
+			},{
+				"headword":"route",
+				"sentence": "The fastest route to the stadium will still take over an hour.",
+				"a": "route",
+				"b": "route/duration"
+			},{
+				"headword":"scenario",
+				"sentence": "In the best case scenario our team will only have to tie to advance.",
+				"a": "scenario",
+				"b": "format/scenario"
+			},{
+				"headword":"sphere",
+				"sentence": "If you maximize your sphere of influence you will have more opportunity than you can handle.",
+				"a": "sphere",
+				"b": "sphere/military"
+			},{
+				"headword":"subordinate",
+				"sentence": "A relative clause will always be subordinate to the main clause.",
+				"a": "subordinate",
+				"b": "subordinate/medium"
+			},{
+				"headword":"supplement",
+				"sentence": "The teacher should provide supplementary materials to the students if they ask.",
+				"a": "supplementary",
+				"b": "temporary/supplement"
+			},{
+				"headword":"suspend",
+				"sentence": "The student was suspended from school for bad behaviour.",
+				"a": "suspended",
+				"b": "devote/suspend"
+			},{
+				"headword":"team",
+				"sentence": "Working together as a team creates synergistic effects.",
+				"a": "team",
+				"b": "team/format"
+			},{
+				"headword":"temporary",
+				"sentence": "This will only be a temporary substitute until we get better textbooks.",
+				"a": "temporary",
+				"b": "preliminary/temporary"
+			},{
+				"headword":"trigger",
+				"sentence": "The trigger for World War One was the assissination of Archduke Franz Ferdinand.",
+				"a": "trigger",
+				"b": "device/trigger"
+			},{
+				"headword":"unify",
+				"sentence": "A unified coalition will be needed to combat terrorism.",
+				"a": "unified",
+				"b": "rigid/unify"
+			},{
+				"headword":"violate",
+				"sentence": "The possible human rights violation is under investigation by a UN taskforce.",
+				"a": "violation",
+				"b": "violate/scenario"
+			},{
+				"headword":"vision",
+				"sentence": "The CEO has a long-term vision for his corporation that will push them be market leaders.",
+				"a": "vision",
+				"b": "protocol/vision"
+			}
+		],
+		"sublist-10": [
+			{
+				"headword":"adjacent",
+				"sentence": "The corner store is adjecent to the pharmacy.",
+				"a": "adjacent",
+				"b": "adjacent/pose"
+			},{
+				"headword":"albeit",
+				"sentence": "The presentation was fascinating, albeit a bit over my head.",
+				"a": "albeit",
+				"b": "albeit/likewise"
+			},{
+				"headword":"assemble",
+				"sentence": "After the assembly of the bike we will give it a test ride.",
+				"a": "assembly",
+				"b": "collapse/assemble"
+			},{
+				"headword":"collapse",
+				"sentence": "The collapse of the Soviet Union is often attributed to internal nationalist movements.",
+				"a": "collapse",
+				"b": "enormous/collapse"
+			},{
+				"headword":"anticipate",
+				"sentence": "The anticipated quarterly earnings will run into the millions.",
+				"a": "anticipated",
+				"b": "anticipate/concurrent"
+			},{
+				"headword":"colleague",
+				"sentence": "My former colleagues find it funny to still call me by my office nickname.",
+				"a": "colleagues",
+				"b": "collegue/pose"
+			},{
+				"headword":"compile",
+				"sentence": "The dossier had been compiled over the course of the revolutionary's life.",
+				"a": "compiled",
+				"b": "ongoing/compile"
+			},{
+				"headword":"conceive",
+				"sentence": "The idea had been conceived after a night of heavy drinking.",
+				"a": "conceived",
+				"b": "conceive/levy"
+			},{
+				"headword":"convince",
+				"sentence": "His arguments were strong but the jury wasn't convinced.",
+				"a": "convinced",
+				"b": "incline/convince"
+			},{
+				"headword":"depress",
+				"sentence": "The dog seemed to slip into depression after it was separated from its owner.",
+				"a": "depression",
+				"b": "depress/reluctance"
+			},{
+				"headword":"encounter",
+				"sentence": "The amount of tourists we encountered was inordinate for the time of year.",
+				"a": "encountered",
+				"b": "encounter/assemble"
+			},{
+				"headword":"enormous",
+				"sentence": "She had enormous obstacles to overcome to get where she is at today.",
+				"a": "enormous",
+				"b": "odd/enormous"
+			},{
+				"headword":"forthcoming",
+				"sentence": "My grandfather was never very forthcoming about his childhood experiences.",
+				"a": "forthcoming",
+				"b": "persist/forthcoming"
+			},{
+				"headword":"incline",
+				"sentence": "The player had a slight inclination to go to his right.",
+				"a": "inclination",
+				"b": "depress/incline"
+			},{
+				"headword":"integrity",
+				"sentence": "George Washington was known as a man of integrity as he always kept his word.",
+				"a": "integrity",
+				"b": "integrity/persist"
+			},{
+				"headword":"intrinsic",
+				"sentence": "The desire to be better is a wonderful intrinsic motivator.",
+				"a": "intrinsic",
+				"b": "intrinsic/adjacent"
+			},{
+				"headword":"invoke",
+				"sentence": "An old law was invoked to gain a warrant to search the druglord's estate.",
+				"a": "invoked",
+				"b": "pose/invoke"
+			},{
+				"headword":"levy",
+				"sentence": "There are plans to impose a levy on all imports.",
+				"a": "levy",
+				"b": "collapse/levy"
+			},{
+				"headword":"likewise",
+				"sentence": "I will pull out my stocks and I expect you to do likewise.",
+				"a": "likewise",
+				"b": "likewise/conceive"
+			},{
+				"headword":"nonetheless",
+				"sentence": "The CEO will take a paycut but there will have to be layoffs nonetheless.",
+				"a": "nonetheless",
+				"b": "nonetheless/albeit"
+			},{
+				"headword":"odd",
+				"sentence": "As the only boy in the family, he always felt the odd one out.",
+				"a": "odd",
+				"b": "odd/so-called"
+			},{
+				"headword":"ongoing",
+				"sentence": "The ongoing search for life in space will hopefully pay off eventually.",
+				"a": "ongoing",
+				"b": "encounter/ongoing"
+			},{
+				"headword":"panel",
+				"sentence": "The panel assembled today consists of scientits, philosophers, and politicians.",
+				"a": "panel",
+				"b": "compile/panel"
+			},{
+				"headword":"persist",
+				"sentence": "It pays off in the end to be persistent in the job search.",
+				"a": "persistent",
+				"b": "conceive/persist"
+			},{
+				"headword":"pose",
+				"sentence": "The questions posed to the panel were intriguing and well-thought-out.",
+				"a": "posed",
+				"b": "pose/convince"
+			},{
+				"headword":"reluctance",
+				"sentence": "The circus lion was reluctant to leave its cage and go into the wild.",
+				"a": "reluctant",
+				"b": "depress/reluctant"
+			},{
+				"headword":"so-called",
+				"sentence": "The new law will not raise taxes on the so-called one percent.",
+				"a": "so-called",
+				"b": "likewise/so-called"
+			},{
+				"headword":"straightforward",
+				"sentence": "Once you inverse the equation the solution is fairly straightforward.",
+				"a": "straightforward",
+				"b": "straightforward/enormous"
+			},{
+				"headword":"undergo",
+				"sentence": "The accounting department is set to undergo a change in management.",
+				"a": "undergo",
+				"b": "persist/undergo"
+			},{
+				"headword":"whereby",
+				"sentence": "The organization has followed a pyramid scheme whereby each new follower is more likely to lose money.",
+				"a": "whereby",
+				"b": "nonetheless/whereby"
+			}
+		]
+	}
+}

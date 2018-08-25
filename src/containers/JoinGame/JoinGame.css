@@ -1,0 +1,161 @@
+.login{
+    font-family: Helvetica;
+    width:100%;
+    height:100%;
+    display:block;
+    justify-content:center;
+    text-align: center;
+    margin: 100px 0 300px 0;
+    
+
+  }
+
+.login-form{
+    display:inline-block;
+    justify-content:center;
+    flex-direction:column;
+    margin-top: 10px;
+  }
+
+.login-form input{
+  justify-content: center;
+  max-width:40%;
+  margin-top: 10px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none;
+  text-align: center;
+  height:40px;
+  line-height:20px;
+  font-size:40px;
+  border-bottom:solid 2px #046A91;
+}
+.login-form input:focus{
+    border-bottom:solid 2px #EDE711;
+    outline:none
+}
+.login-form .error{
+    text-align:center;
+    margin:5px 0;
+    padding:5px 10px;
+    color:#c92c43
+  }
+
+ /*button {
+  font-weight: lighter;
+  width: 16%; 
+  height: 40px; 
+  border-radius: 10px;
+  background-color: #23D5AB;
+  font-size: 30px;
+  color: white;
+  margin: 4px;
+
+} 
+
+button:hover {
+  cursor: pointer;
+  color: black;
+  box-shadow: 0px 1px 2px 0px #ccc;
+}
+
+ button:disabled {
+
+  background-color: #d58282;
+  opacity: .7;
+  
+}
+
+button:disabled:hover {
+  cursor: auto;
+  color: white;
+}
+*/
+
+.title {
+    display: inline-block;
+    /*justify-content: space-around;*/
+    display: -webkit-flex;
+    /*-webkit-justify-content: space-around;*/
+    margin: 50px 0 0 35px;
+    
+}
+
+
+.text {
+  color: #23D5AB;
+  font-size: 65px;
+  font-weight: 650;
+  font-family: Montserrat;
+  font-weight: bold;
+  position: relative;
+  -webkit-animation: jump 2.5s ease-out infinite ;
+  animation: jump 2.5s ease-out infinite; 
+  
+}
+
+.text-w {
+    animation-delay:250ms;
+  }.text-a {
+    animation-delay:450ms;
+  }.text-i {
+    animation-delay:650ms;
+  }.text-t {
+    animation-delay:850ms;
+  }.text-i2 {
+    animation-delay:1050ms;
+  }.text-n {
+    animation-delay:1250ms;
+  }.text-g {
+    animation-delay:1450ms;
+  }.text-1 {
+    animation-delay:1650ms;
+  }.text-2 {
+    animation-delay:1850ms;
+  }.text-3 {
+    animation-delay:2050ms;
+  }
+
+@keyframes jump {
+    0% {
+            color: #23D5AB;
+            top: 0px;
+        }
+    25% {
+          top: 0px;
+    }
+    50% {  
+            
+            top: 0px;
+        }
+    75% {
+          top: 0px;
+    }
+
+    90% {
+          color: #23A6D5;
+          top: -30px;
+    }
+    100% {  
+            color: #23D5AB;
+            top: 0px;
+        }
+}
+
+@-webkit-keyframes jump {
+     0% {
+            color: #23D5AB;
+            top: 0px;
+        }
+    50% {  
+            color: #23A6D5;
+            top: -30px;
+        }
+
+    100% {  
+            color: #23D5AB;
+            top: 0px;
+        }
+}
+

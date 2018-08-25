@@ -1,0 +1,78 @@
+.LessonLinks {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  background: none;
+  border-radius: 50%;
+  position: relative;
+  margin: 30px auto 20px auto;
+}
+.spinner:after, .spinner:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.spinner-1:after {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  border: 15px solid transparent;
+  opacity: .5;
+  border-top-color: #23A6D5;
+  border-bottom-color: #23A6D5;
+  border-right-color: #23A6D5;
+  -webkit-animation: spinny 1s linear infinite;
+          animation: spinny 1s linear infinite;
+}
+
+.spinner-1:before {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  border: 15px solid transparent;
+  opacity: .8;
+  border-top-color: #FFF800;
+  border-right-color: #FFF800;
+  /*border-bottom-color: #FFF800;*/
+  
+  -webkit-animation: spinny 2s linear infinite reverse;
+          animation: spinny 2s linear infinite reverse;
+}
+
+@-webkit-keyframes spinny {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+  }
+  
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes spinny {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+  }
+ 
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .LessonLinks {
+    width: 100%;
+  }
+}

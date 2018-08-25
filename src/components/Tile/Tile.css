@@ -1,0 +1,43 @@
+.Tile {
+
+	display: inline-block;
+	width: 25%;
+	
+	margin:20px 10px 0 50px; 
+	border: 1px solid #ccc;
+	box-shadow: 1px 2px 3px #ccc;
+	border-radius: 4px;
+	padding: 16px;
+	text-align: center;
+	background: white;
+	color: black;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: lighter;
+}
+
+.Tile:hover {
+	cursor: pointer;
+	box-shadow: 2px 3px 4px #ccc;
+	color: black;
+
+}
+
+@media screen and (max-width: 1024px) {
+	.Tile {
+		width: 20%;
+		margin: 20px 10px 0 60px;
+	}
+	.Tile h2 {
+		font-size: 20px;
+
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.Tile {
+		width: 90%;
+		margin: 5px 0 0 5px;
+		clear:both;
+	}
+}
+

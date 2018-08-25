@@ -1,0 +1,12 @@
+.HintButton {
+	display: block;
+	justify-content: center;
+	background: none;
+	color: black;
+	clear: both;
+	margin: auto;
+}
+
+/*.GamePlay h3{
+	display: inline-block;
+}*/

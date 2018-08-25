@@ -1,0 +1,84 @@
+/*#d58282 disabled*/
+/*#23A6D5 blue*/
+/*#00c4c3 mixed*/
+
+.CreatedDate {
+	display: block;
+	margin: 0 0 0 90%;
+	color: #ccc;
+	font-size: 14px;
+}
+
+.CreatedDate p{
+	display: inline-block;
+	margin: 0;
+}
+
+.LessonLinkTab {
+	display: block;
+	margin: 3% auto 0 auto;
+	width: 100%;
+	border: 8px solid transparent;
+	border-left: 8px solid #00c4c3;
+	box-shadow: 1px 1px 3px 2px #ccc;
+	/*border-radius: 2px;*/
+	background: white;
+	color: black;
+	font-family: 'Open Sans', sans-serif;
+	
+}
+
+
+.LessonLinkTab:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.LessonLinkTitle {
+	margin-left: 4%;
+	display: inline-block;
+}
+
+.LessonLinkTitle h1{
+	font-size: 40px;
+	margin: 0;
+	font-weight: bold;
+}
+
+.LessonLinkAuthor {
+	display: block;
+	margin:0 0 0 5%;
+	color: #ccc;
+}
+.LessonLinkAuthor p{
+	display: inline-block;
+	font-family: Roboto, sans-serif;
+}
+
+.LessonLinkTab:hover {
+	/*border-right: 8px solid yellow; */
+	border-left: 8px solid yellow;
+}
+
+@media screen and (max-width: 640px) {
+	.LessonLinkTab {
+		width: 90%;
+		height: 
+	}
+	.LessonLinkTitle h1{
+		font-size: 30px;
+		font-weight: bold;
+		margin: 0;
+	}
+	.CreatedDate {
+	display: block;
+	margin: 0 0 0 73%;
+	color: #ccc;
+	font-size: 14px;
+}
+
+	.CreatedDate p{
+	display: inline-block;
+	margin: 0;
+}
+}

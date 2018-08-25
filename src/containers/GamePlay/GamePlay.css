@@ -1,0 +1,32 @@
+.GameHeader {
+	display: inline-block;
+	width: 100%;
+	background: linear-gradient(-45deg, #23D5AB, #23A6D5);
+	color: white;
+
+}
+
+.GameHeader h2{
+	font-family: 'Helvetica', sans-serif;
+	color: white;
+	text-align: center;
+}
+
+.GamePlay .error {
+	text-align: center;
+	color: red;
+	font-family: Helvetica, sans-serif;
+}
+
+.GamePlay .correct {
+	text-align: center;
+	color: green;
+	font-family: Helvetica, sans-serif;
+}
+
+.GamePlay .completed {
+	text-align: center;
+	color: black;
+	font-size: 36px;
+	font-family: Helvetica, sans-serif;
+}

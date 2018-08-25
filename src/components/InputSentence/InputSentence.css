@@ -1,0 +1,50 @@
+
+
+.InputSentence {
+  display: block;
+  width:90%;
+  margin: 22px auto 18px auto;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none; 
+  height:38px;
+  line-height:20px;
+  font-size:35px;
+  border-bottom:solid 2px #ccc;
+  transition:all .23s ease-in
+}
+
+
+
+.InputAnswer,
+.InputHint {
+	display: block;
+  float: left;
+  width:51%;
+  margin: 10px 0 9px 7%;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none;
+  height:22px;
+  line-height:20px;
+  font-size:20px;
+  border-bottom:solid 2px #ccc; /*#046A91;*/
+  transition:all .23s ease-in
+}
+
+.InputWrapper p{
+	display: block;
+  width: 100%;
+	float: left;
+	color: red;
+}
+
+.InputHint:focus,
+.InputSentence:focus,
+.InputAlt:focus,
+.InputAnswer:focus {
+	outline:none;
+	border-bottom:solid 2px #EDE711;
+}

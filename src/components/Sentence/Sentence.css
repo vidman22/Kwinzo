@@ -1,0 +1,77 @@
+.Sentence {
+
+	margin: auto;
+	padding: 0 0 0 2%;
+	font-family: 'Helvetica', sans-serif;
+	font-size: 25px;
+	text-align: center;
+	justify-content: center;
+	font-weight: lighter;
+	max-width: 100%
+
+}
+
+.FirstPart {
+	display: inline-block;
+}
+
+.SecondPart {
+	display: inline-block;
+}
+
+.Sentence h3 {
+	margin-top: 5px;
+	font-weight: lighter;
+	margin-bottom: 0;
+}
+
+.enter{
+	display: inline-block;
+	margin-top: 0;
+}
+
+.enter input:focus{
+		border-bottom: solid 2px #EDE711;
+		outline:none
+}
+.enter .error{
+		text-align:center;
+		margin:5px 0;
+		padding:5px 10px;
+		color:#c92c43
+}
+
+.incorrect {
+	text-align:center;
+	margin:5px 0;
+	padding:5px 10px;
+	color:#c92c43
+}
+
+.correct {
+	text-align:center;
+	margin:5px 0;
+	padding:5px 10px;
+	color:#00c4c3
+}
+
+
+/*@media screen and (max-width: 640px) {
+
+	.enter input {
+		display: block;
+	}
+
+	.enter {
+		display: block;
+	}
+
+	.firstPart {
+		float: none;
+	}
+
+	.secondPart {
+		float: none;
+	}
+
+}*/

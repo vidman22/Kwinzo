@@ -1,0 +1,33 @@
+.player {
+
+	display: inline-block;
+	width: 23%;
+	margin-left: 25px;
+}
+
+.player svg {
+	stroke: white;
+	transform: rotate(-90deg);
+	animation: all 1s ease-in forward;
+
+}
+
+.name {
+	position:absolute;
+	margin-top: -125px;
+	margin-left: 33px;
+	font-family: Open Sans, sans-serif;
+	font-size: 35px;
+	text-align: center;
+	color: white;
+}
+
+.score {
+	position:absolute;
+	margin-top: -85px;
+	margin-left: 80px;
+	font-family: Open Sans, sans-serif;
+	font-size: 18px;
+	text-align: center;
+	color: #655;
+}
