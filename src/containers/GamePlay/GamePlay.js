@@ -26,7 +26,6 @@ export default class GamePlay extends Component {
 	UNSAFE_componentWillMount() {
 		
 		let gameSentences = this.props.sentences;
-		gameSentences = this.shuffle(gameSentences);
 		
 
 		const activeSentence = gameSentences[0];
@@ -51,22 +50,22 @@ export default class GamePlay extends Component {
 	}
 
 	
-	shuffle(array) {
+	// shuffle(array) {
 		
-		let currentIndex = array.length, temporaryValue, randomIndex;
+	// 	let currentIndex = array.length, temporaryValue, randomIndex;
 
-		while (0 !== currentIndex) {
+	// 	while (0 !== currentIndex) {
 
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
+	// 		randomIndex = Math.floor(Math.random() * currentIndex);
+	// 		currentIndex -= 1;
 
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
+	// 		temporaryValue = array[currentIndex];
+	// 		array[currentIndex] = array[randomIndex];
+	// 		array[randomIndex] = temporaryValue;
+	// 	}
 
-		return array;
-	} 
+	// 	return array;
+	// } 
 	
 
 

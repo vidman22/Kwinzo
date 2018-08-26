@@ -8,15 +8,15 @@ import './GameBoard.css'
 const GameBoard = (props) => {
 	
 
-		const players = this.props.players.map((player, index) => {
+		const players = props.players.map((player, index) => {
 			return (
-				<Player key={index} name={player.playerName} score={player.score} length={this.props.length} /> 
+				<Player key={index} name={player.playerName} score={player.score} length={props.length} /> 
 
 				)
 		});
 		let teams = null;
-		if (this.props.teams) {
-			teams = this.props.teams.map((team, index) => {
+		if (props.teams) {
+			teams = props.teams.map((team, index) => {
 				return (
 					<Player key={index} name={index} score={2} length={this.props.length} />
 					)
