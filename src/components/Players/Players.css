@@ -1,0 +1,16 @@
+.WaitingPlayer {
+	border: 2px solid grey;
+	border-radius: 8px;
+	width: 33%;
+	text-align: center;
+	margin: 3px auto 3px auto;
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+.WaitingPlayer p{
+	text-align: left;
+	font-size: 18px;
+	margin: 12px 10px 12px 15px;
+
+}

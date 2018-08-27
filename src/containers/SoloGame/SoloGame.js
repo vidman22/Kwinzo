@@ -23,7 +23,7 @@ class SoloGame extends Component {
 			action: 'start',
 			activeSentence: {},
 			carousel: true,
-			answer:'',
+			value:'',
 			completed: null,
 			message:''
 		}
@@ -50,16 +50,24 @@ class SoloGame extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		let answer = this.state.answer;
-		answer = answer.toLowerCase().trim();
+		let value = this.state.value;
+		value = value.toLowerCase().trim();
 
+		const answer = this.state.activeSentence.answer.toLowerCase().trim();
+		const alts = this.state.activeSentence.alts;
 		//correct answer ===========================================
-		if (answer === this.state.activeSentence.answer) {
+		if (value === answer) {
+			console.log("correct");
 			this.correct();
-		} else if (this.state.gameSentences.alts !== 0) {
-			for ( let i =0; i < this.state.gameSentences.alts.length; i ++) {
-				if (answer === this.state.gameSentences.alts[i]){
+		} else if (alts.length !== 0 && alts !== undefined ) {
+			for ( let i =0; i < alts.length; i++) {
+				if (value === alts[i]){
 					this.correct();
+				} else {
+					this.setState({
+						message: 'incorrect'
+					});
+					setTimeout(this.wrongAnswer.bind(this), 750);
 				}
 			}
 		} else {	
@@ -98,7 +106,7 @@ class SoloGame extends Component {
 				setTimeout(() => {
 					this.setState({
 						activeSentence,
-						answer:'',
+						value:'',
 						message:'',
 						scoreIndex,
 						sentenceIndex
@@ -130,14 +138,14 @@ class SoloGame extends Component {
 		this.setState({
 			activeSentence,
 			sentenceIndex,
-			answer:'',
+			value:'',
 			message:''
 		});
 	}
 
 	handleChange = (e) => {
 
-		this.setState({ answer: e.target.value });
+		this.setState({ value : e.target.value });
 	}
 
 	back() {
@@ -178,7 +186,7 @@ class SoloGame extends Component {
 						activesentence={this.state.activeSentence} 
 						gamename={this.state.gameName}
 						handlechange={this.handleChange} 
-						answer={this.state.answer} 
+						value={this.state.value} 
 						handlesubmit={this.handleSubmit}  
 						message={this.state.message}
 						index={this.state.scoreIndex}

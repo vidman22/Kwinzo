@@ -98,22 +98,6 @@
 	color: black;
 }
 
-.Player {
-	border: 2px solid grey;
-	border-radius: 8px;
-	
-	text-align: center;
-	margin: 3px;
-	font-family: 'Open Sans', sans-serif;
-
-}
-
-.Player p{
-	font-size: 18px;
-	margin: 12px 10px 12px 0px;
-
-}
-
 
 @media screen and (max-width: 640px) {
 

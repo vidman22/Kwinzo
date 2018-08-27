@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Lesson.css';
-import Sentence from '../Sentence/Sentence';
+import Sentence from '../../components/Sentence/Sentence';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import * as actionTypes from '../../store/actionTypes';
@@ -29,7 +29,6 @@ class Lesson extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      working: true,
       values: {},
       checkedInputs: {},
       activeValue: false
@@ -69,22 +68,41 @@ class Lesson extends Component {
     const values = {...this.state.values};
     const checkedInputs = {...this.state.checkedInputs};
     const key = `checked${index}`;
-    if ( values[`value${index}`] === answer ) {
-     
-      
-      const obj = {[key]: 'correct'}
+    let value = values[`value${index}`];
+    value = value.toLowerCase().trim();
+    answer = answer.toLowerCase().trim();
+    console.log('value', value);
+    console.log('answer', answer);
+    if ( value === answer ) {
+      const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);
       this.setState({
         checkedInputs: newObj
       });
-    } if (values[`value${index}`] !== answer) {
+    } else if (alts.length !== 0 && alts !== undefined) {
+        for (let i = 0; i < alts.length; i++) {
+          if ( value === alts[i]) {
+            const obj = {[key]: 'correct'};
+            const newObj = Object.assign(checkedInputs, obj);
+            this.setState({
+              checkedInputs: newObj
+            });
+          } else {
+            const obj = {[key]: 'incorrect'}
+            const newObj = Object.assign(checkedInputs, obj);
+            this.setState({
+              checkedInputs: newObj
+            });
+          }
+        }
+      } else {
       
-      const obj = {[key]: 'incorrect'}
-      const newObj = Object.assign(checkedInputs, obj);
-      this.setState({
-        checkedInputs: newObj
-      });
-   }
+        const obj = {[key]: 'incorrect'}
+        const newObj = Object.assign(checkedInputs, obj);
+        this.setState({
+          checkedInputs: newObj
+        });
+    }
   } 
 
   handleCheckOnEnter(index, answer, alts, e) {
@@ -93,16 +111,25 @@ class Lesson extends Component {
     const values = {...this.state.values};
     const checkedInputs = {...this.state.checkedInputs};
     const key = `checked${index}`;
-    if ( values[`value${index}`] === answer ) {
+    let value = values[`value${index}`];
+    value = value.toLowerCase().trim();
+    answer = answer.toLowerCase().trim();
+    if ( value === answer ) {
       const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);
       this.setState({
         checkedInputs: newObj
       });
-    } else if (alts.length !== 0) {
+    } else if (alts.length !== 0 && alts !== undefined) {
         for (let i = 0; i < alts.length; i++) {
-          if ( values[`value${index}`] === alts[i]) {
+          if ( value === alts[i]) {
             const obj = {[key]: 'correct'};
+            const newObj = Object.assign(checkedInputs, obj);
+            this.setState({
+              checkedInputs: newObj
+            });
+          } else {
+            const obj = {[key]: 'incorrect'}
             const newObj = Object.assign(checkedInputs, obj);
             this.setState({
               checkedInputs: newObj
@@ -172,10 +199,9 @@ class Lesson extends Component {
                     </div>
       
                  </Link>
-                 <Link to={`/solo-play/${this.props.match.params.id}`}>
+                 <Link to={`/word-bank/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.lessonSet)} style={{color: 'black', textDecoration: 'none' }}>
                   <div className="WordBankGame">
                     <h2>Word Bank</h2>
-                      <p>Coming Soon</p>
                   </div>
                  </Link>
                  <Link to={`/solo-play/${this.props.match.params.id}`}>

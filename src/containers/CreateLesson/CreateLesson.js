@@ -501,10 +501,10 @@ class CreateLesson extends Component {
                           rObj['sentence'] = sntnc.sentence.value;
                           rObj['hint'] = sntnc.hint.value;
                           rObj['alts'] = alts;
-                          for (let i = 0; i < sntnc.alts.length; i++){
-                            if (sntnc.alts[i] !== ""){
-                              alts.push(sntnc.alts[i]);
-                            } 
+                          for (let i = 0; i < sntnc.alts.array.length; i++){
+                            if (sntnc.alts.array[i].value !== ""){
+                              alts.push(sntnc.alts.array[i].value);
+                            }
                           }
                       return rObj;  
                       });
@@ -619,7 +619,7 @@ class CreateLesson extends Component {
           />
           <span>{this.state.title.validation.msg}</span>
           <div className="ExampleSentence">
-          <div className="ExampleSentenceHeader">Example Sentence:</div>
+          <div className="ExampleSentenceHeader">Example Sentence</div>
           
           <div className="ExampleSentenceWrapper"><div className="FirstHalfExample">The quick brown fox</div>
           {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }

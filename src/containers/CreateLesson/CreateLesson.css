@@ -86,8 +86,17 @@
 }
 .FirstHalfExample,
 .SecondHalfExample {
+  position: absolute;
   display: inline-block;
-  margin: 2em .5em 1em .5em;
+  /*margin: 2em .5em 1em .5em;*/
+}
+
+.FirstHalfExample {
+  left: 37%;
+}
+
+.SecondHalfExample{
+  left: 52%;
 }
 .TypedTextExample {
   font-family: Roboto Mono, monospace;
@@ -260,9 +269,21 @@
   .ExampleSentenceHeader {
     margin-left: 0;
   }
-  .FirstHalfExample,
+  .ExampleSentenceWrapper {
+    width: 95%;
+    padding: 12px 0 12px 0;
+  }
+  .FirstHalfExample{
+    display: block;
+    position: relative;
+    left: 0;
+
+  }
   .SecondHalfExample {
-    margin: 8px auto 8px auto;
+    display: block;
+    position: relative;
+    left: 0;
+    /*margin: 8px auto 8px auto;*/
   }
 
   .ExampleSentence ul {
