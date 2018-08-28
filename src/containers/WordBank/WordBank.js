@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import './WordBank.css';
 import { withRouter } from 'react-router-dom';
 import Sentence from '../../components/Sentence/Sentence';
-import { Query, graphql } from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import * as actionTypes from '../../store/actionTypes';
 
 const LESSON_SET = gql`
   query LessonSet($id: String!){

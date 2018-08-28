@@ -10,3 +10,48 @@ textarea {
     font-size: 16px;
     resize: none;
 }
+
+.ToggleReadingMode {
+  width: 140px;
+  height: 80px;
+  margin: 0 0 0 80%;
+  font-size: 18px;
+  display: inline-block;
+  clear: left;
+  background: #00c4c3;
+  color: white;
+  border: none;
+  outline: none;
+}
+
+.ToggleReadingMode:hover {
+  color: black;
+  border: initial;
+}
+
+.ToggleReadingMode:disabled {
+  background: #00c4c3;
+  opacity: .5;
+  color: black;
+}
+
+.InputQuestion{
+  display: block;
+  width:90%;
+  margin: 22px auto 18px auto;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none; 
+  height:38px;
+  line-height:20px;
+  font-size:35px;
+  border-bottom:solid 2px #ccc;
+  transition:all .23s ease-in;
+  outline:none;
+}
+
+.InputQuestion:focus{
+  outline:none;
+  border-bottom:solid 2px #EDE711;
+}
