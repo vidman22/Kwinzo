@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './Lesson.css';
+import './ReadingOmissionLesson.css';
 import Sentence from '../../components/Sentence/Sentence';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
