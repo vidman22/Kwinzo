@@ -16,6 +16,8 @@ const uuidv4 = require('uuid/v4');
 
 const LessonSet = require('./models/lessonSet');
 const User = require('./models/user');
+const ReadingCompLesson = require('./models/readingCompLesson');
+const ReadingOmissionLesson = require('./models/readingOmissionLesson');
 
 
 const io = module.exports.io = require('socket.io')(server);
@@ -61,6 +63,13 @@ var root = {
 	 	lessonSets: async (args, ctx, info) => {
 	 		return await LessonSet.find();
 	 	},
+	 	readingOmissionLessons: async ( args, ctx, info) => {
+	 		return await ReadingOmissionLesson.find();
+	 	},
+	 	readingCompLessons: async (args, ctx, info) => {
+	 		console.log("comp fired", args);
+	 		return await ReadingCompLesson.find();
+	 	},
 	 	user: async ({_id}) => {
 	 		return await User.findById(_id)
 	 	},
@@ -77,6 +86,22 @@ var root = {
    			}
    			
 	 	},
+	 	createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
+			const numberOfOmissions = omissions.length;
+			const readingOmissionLesson = new ReadingOmissionLesson({title, author, authorID, text, omissions});
+			return await readingOmissionLesson.save(); 
+			if (!readingOmissionLesson) {
+				throw new Error('Error');
+			}
+		},
+		createReadingCompLesson: async ( {title, author, authorID, text, questions}, ctx, info ) => {
+			const numberOfQuestions = questions.length;
+			const readingCompLesson = new ReadingCompLesson({title, author, authorID, text, questions});
+			return await readingCompLesson.save(); 
+			if (!readingCompLesson) {
+				throw new Error('Error');
+			}
+		},
 	 	signUp: async ({ username, email, password }, ctx, inf0) => {
 
 	 		const hash = await bcrypt.hash(password, 12 );
@@ -133,7 +158,6 @@ var root = {
 	 		let user = await User.findOne({ email });
 
 	 		// token = jwt.sign({ userID }, APP_SECRET, {expiresIn: '12hr'});
-	 		console.log('auth token', token);
 
 	 		if (!user ) {
 	 			user = new User({email, username, picture, userID });

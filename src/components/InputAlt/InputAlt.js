@@ -1,13 +1,14 @@
 import React from 'react';
-
+import AutosizeInput from 'react-input-autosize';
 import './InputAlt.css';
 
 
 const InputAlt = (props) => {
 	  return (
 	  	<div className="InputAltWrapper">
-	  	 <p>{props.index}</p>
-	  		<input 
+	  	 	<p>{props.index}</p>
+	  	 	<input type="checkbox" checked={props.checked} className="answerCheck" onClick={props.oncheck} />
+	  		<input
 	  			className="InputAlt"
 	  			type="text"
 	  			value={props.altValue}

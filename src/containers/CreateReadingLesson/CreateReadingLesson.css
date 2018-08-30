@@ -8,7 +8,7 @@ textarea {
     background-color: white /*#f8f8f8;*/ ;
     font-family: Open Sans, sans-serif; 
     font-size: 16px;
-    resize: none;
+    resize: vertical;
 }
 
 .ToggleReadingMode {

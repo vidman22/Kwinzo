@@ -110,7 +110,7 @@ class CreateReadingLesson extends Component {
     		formIsValid: false,
     		formIsHalfFilledOut: false,
     		lessonFormNum: 5,
-    		readingModeVocab: false
+    		readingModeOmission: false
 		}
 	}
 
@@ -119,7 +119,7 @@ class CreateReadingLesson extends Component {
     	const lessonFormArray = [];
     	const lessonVocabForm = {...this.state.lessonVocabForm};
     	const lessonCompForm = {...this.state.lessonCompForm};
-		if (this.state.readingModeVocab) {
+		if (this.state.readingModeOmission) {
 			for (let i=0; i< this.state.lessonFormNum; i++) {
     	    	lessonFormArray.push(lessonVocabForm);
     		}
@@ -133,7 +133,7 @@ class CreateReadingLesson extends Component {
   	}
 
   	addForm = () => {
-  		if (!this.state.readingModeVocab) {
+  		if (!this.state.readingModeOmission) {
   			const lessonCompForm = this.state.lessonCompForm;
   			const lessonFormArray = [...this.state.lessonFormArray];
 
@@ -180,6 +180,7 @@ class CreateReadingLesson extends Component {
   		const updatedLessonForms = [
       		...this.state.lessonFormArray
     	];
+
     	// eslint-disable-next-line
     	const removed = updatedLessonForms.splice(index, 1);
     	
@@ -196,7 +197,7 @@ class CreateReadingLesson extends Component {
   		const lessonFormArray = [];
     	const lessonVocabForm = this.state.lessonVocabForm;
     	const lessonCompForm = this.state.lessonCompForm;
-		if (!this.state.readingModeVocab) {
+		if (!this.state.readingModeOmission) {
 			for (let i=0; i< this.state.lessonFormNum; i++) {
     	    	lessonFormArray.push(lessonVocabForm);
     		}
@@ -206,7 +207,7 @@ class CreateReadingLesson extends Component {
 			}
 		}
     	this.setState( prevState => {
-    		return { lessonFormArray, readingModeVocab: !prevState.readingModeVocab }
+    		return { lessonFormArray, readingModeOmission: !prevState.readingModeOmission }
     	});
 
   	}
@@ -252,14 +253,30 @@ class CreateReadingLesson extends Component {
   			...this.state.textarea
   		};
 
+  		const updatedValidation = {
+  			...updatedTextarea.validation
+  		}
+
   		updatedTextarea.value = e.target.value;
 
-  		this.checkFormValidity();
+  		if (updatedTextarea.value.trim() === '') {
+    	  updatedValidation.msg = 'add your text';
+    	  updatedTextarea.valid = false;
+    	} else if (updatedTextarea.value.length >= 5440) {
+    	  updatedValidation.msg = 'text is too long';
+    	  updatedTextarea.valid = false;
+    	} else {
+    	  updatedTextarea.valid = true;
+    	}
+
+    	updatedTextarea.validation = updatedValidation;
 
   		this.setState({
   			textarea: updatedTextarea,
   			formIsHalfFilledOut: true,
-  		});
+  		}, () => {
+    	  this.checkFormValidity();
+    	});
 
   	}
 
@@ -310,7 +327,7 @@ class CreateReadingLesson extends Component {
     	const updatedOptions = [
     	  ...updatedForm.options
     	];
-
+    	// eslint-disable-next-line
     	const removed = updatedOptions.splice(answerIndex, 1);
 	
     	updatedLessonForms[index] = updatedForm;
@@ -363,7 +380,7 @@ class CreateReadingLesson extends Component {
             		index = textarea.indexOf(omission, index + 1)
             	}
               updatedElement.valid = true;
-              updatedValidation.msg = `${indices.length} blocks of text will be omitted`;
+              updatedValidation.msg = `${indices.length} block(s) of text will be omitted`;
             }
         }
 
@@ -438,13 +455,13 @@ class CreateReadingLesson extends Component {
 		updatedValidation.msg = '';
 
 		if (updatedOptionForm.value.trim() === '') {
-    	  updatedValidation.msg = 'add a title';
-    	  updatedValidation.valid = false;
+    	  updatedValidation.msg = 'add an answer';
+    	  updatedOptionForm.valid = false;
     	} else if (updatedOptionForm.value.length >= 140) {
     	  updatedValidation.msg = 'answer is too long';
-    	  updatedValidation.valid = false;
+    	  updatedOptionForm.valid = false;
     	} else {
-    	  updatedValidation.valid = true;
+    	  updatedOptionForm.valid = true;
     	}
 
     	updatedOptionForm.validation = updatedValidation;
@@ -459,25 +476,99 @@ class CreateReadingLesson extends Component {
     	});
   	}
 
+  	answerChecked = (formIndex, index) => {
+  		const updatedLessonForms = [
+    	  ...this.state.lessonFormArray
+    	];
+	
+    	const updatedForm = {
+    	  ...updatedLessonForms[formIndex]
+    	};
+	
+    	const updatedOptions = [
+    	  ...updatedForm.options
+    	];
+
+    	const updatedOptionForm = {
+    		...updatedOptions[index]
+    	}
+
+    	updatedOptionForm.correct = !updatedOptionForm.correct;
+
+		updatedOptions[index] = updatedOptionForm;
+    	updatedForm.options = updatedOptions;
+    	updatedLessonForms[formIndex] = updatedForm;   	
+	
+    	this.setState({
+    	  lessonFormArray: updatedLessonForms,
+    	}, () => {
+    	  this.checkFormValidity();
+    	});
+  	}
+
   	checkFormValidity = () => {
-    	// const lessonFormArray = this.state.lessonFormArray;
-    	// let formIsValid = true;
-    	// for ( let i = 0; i < lessonFormArray.length; i++) {
-    	//   for ( let property in lessonFormArray[i] ) {
-    	    
-    	//     formIsValid = lessonFormArray[i][property].valid && formIsValid && this.state.title.valid;
-    	//   } 
-    	// }
-    	// if (formIsValid === true ){
-    	//   this.setState({ formIsValid, formIsHalfFilledOut: false });
+    	const lessonFormArray = this.state.lessonFormArray;
+    	let formIsValid = true;
+
+    	if (this.state.readingModeOmission) {
+    		for ( let i = 0; i < lessonFormArray.length; i++) {
+    		  for ( let property in lessonFormArray[i] ) {
+    		    formIsValid = lessonFormArray[i][property].valid && formIsValid && this.state.title.valid && this.state.textarea.valid;
+    		  } 
+    		}
+    	} else {
+    		for ( let i = 0; i < lessonFormArray.length; i++) {
+    			for ( let j = 0; j < lessonFormArray[i]['options'].length; j++) {
+    				formIsValid = lessonFormArray[i]['options'][j].valid && lessonFormArray[i]['question'].valid && formIsValid && this.state.title.valid && this.state.textarea.valid;
+    			}
+    		  } 
+    		}
+    	if (formIsValid === true ){
+    	  this.setState({ formIsValid, formIsHalfFilledOut: false });
     	 
-    	// } else {
-    	//   this.setState({formIsValid, formIsHalfFilledOut: true });
+    	} else {
+    	  this.setState({formIsValid, formIsHalfFilledOut: true });
     	 
-    	// }
+    	}
 
   	}
 
+  	formData() {
+  		
+  		const form = [...this.state.lessonFormArray];
+  		if (this.state.readingModeOmission){
+  			let omissions = []
+  			for ( let i = 0; i < form.length; i++) {
+  				let obj = {
+  					omission: form[i].omission.value,
+  					hint: form[i].hint.value
+  				}
+  				omissions.push(obj)
+  			}
+  			return omissions
+  		} else {
+  			const questions = form.map( element => {
+  				let rObj = {};
+  				let options = [];
+  				rObj['question'] = element.question.value;
+  				rObj['options'] = options;
+  				for ( let i = 0; i < element.options.length; i ++ ){
+  					let obj = {
+  						option: element.options[i].value,
+  						correct: element.options[i].correct
+  					}
+  					options.push(obj);
+  				}
+  				return rObj
+  			});
+  			return questions
+  		}
+  			
+  	}
+
+  	completed(data){
+  		console.log('data returned', data);
+  	}
 
 	render(){
 		console.log('state', this.state);
@@ -489,21 +580,48 @@ class CreateReadingLesson extends Component {
           		config: this.state.lessonFormArray[key]
         	});
       	}
+      	const ADD_LESSON = this.state.readingModeOmission ? ADD_OMISSION_LESSON : ADD_COMP_LESSON;
       	console.log('form array', formArray);
 
       	let form = (
+      		
       	<div>
           <Mutation
             mutation={ADD_LESSON}
             onCompleted={data => this.completed(data)}>
-              {createLessonSet => (
+              {mutation => (
                 <form 
                   onSubmit={e => {
                     e.preventDefault();
                     if (!this.props.user) {
                         this.props.togglemodal();
                       } else {
-                        
+                        const title = this.state.title.value;
+  						const text = this.state.textarea.value;
+  						const author = this.props.user.name;
+  						const authorID = this.props.user.userID;
+ 						const data = this.formData();
+  						if (this.state.readingModeOmission) {
+  							mutation({
+  								variables: {
+  									title,
+  									author,
+  									authorID,
+  									text,
+  									omissions: data
+  								}
+  							});
+  						} else {
+  							mutation({
+  								variables: {
+  									title,
+  									author,
+  									authorID,
+  									text,
+  									questions: data
+  								}
+  							});
+  						}
                       }
                   }}>
                 {formArray.map((formElement) => {
@@ -525,7 +643,7 @@ class CreateReadingLesson extends Component {
                              11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
                       </svg>
 
-                    	{this.state.readingModeVocab ? (
+                    	{this.state.readingModeOmission ? (
                     	<InputReadingVocab
   	
                     	  omissionValue={formElement.config.omission.value}
@@ -556,6 +674,10 @@ class CreateReadingLesson extends Component {
               	
                         		<InputAlt 
                         		  onclick={(e) => this.removeAnswer(formElement.id, index, e)}
+                        		  inputType='answer'
+                        		  onmouse={() => this.answerMouseOverEvent(formElement.id, index)}
+                        		  oncheck={() => this.answerChecked(formElement.id, index)}
+                        		  checked={option.correct}
                         		  altValue={option.value}
                         		  altPlaceholder='Optional answer'
                         		  altInvalid={!option.valid}
@@ -590,18 +712,8 @@ class CreateReadingLesson extends Component {
             		)
           		}
           	)}
-            <div className="AddButtonWrapper" onClick={() => this.addForm()}>
-                <svg className="AddForm" 
-                  fill="#ccc" 
-                  
-                  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="30px" height="30px">
-             
-                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
-                  0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
-                  0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
-                  0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
-                  10.66 0 0 1 10.667 10.667v21.334z"/>
-                </svg>
+            <div className="ExerciseButton" onClick={() => this.addForm()}>
+                Add
             </div>
             <button className="CreateButton" type="submit" disabled={!this.state.formIsValid}>Create</button>
             </form>
@@ -617,7 +729,7 @@ class CreateReadingLesson extends Component {
             		when={this.state.formIsHalfFilledOut}
             		message="Are you sure you want to leave?"
           		/>
-          		<button className="ToggleReadingMode" onClick={(e)=> this.toggleMode(e)}>{this.state.readingModeVocab ? 'Switch to Comprehension Mode' : 'Switch to Vocabulary Mode' }</button>
+          		<button className="ToggleReadingMode" onClick={(e)=> this.toggleMode(e)}>{this.state.readingModeOmission ? 'Switch to Comprehension Mode' : 'Switch to Vocabulary Mode' }</button>
           		<input
             		className="LessonTitleInput"
             		value={this.state.title.value}
@@ -636,24 +748,42 @@ class CreateReadingLesson extends Component {
 			)
 	}
 }
-const ADD_LESSON = gql`
-  mutation CreateLesson($title: String!, $author: String!, $authorID: String!, $sentences: [SentenceInput]) {
-    createLessonSet( title: $title, author: $author, authorID: $authorID, sentences: $sentences) {
+
+const ADD_OMISSION_LESSON = gql`
+  mutation CreateLessonMutation($title: String!, $author: String!, $authorID: String!, $text: String!, $omissions: [OmissionInput]) {
+    createReadingOmissionLesson( title: $title, author: $author, authorID: $authorID, text: $text, omissions: $omissions) {
       id
       created
       title
       author
       authorID
-      sentences {
-        sentence
+      text
+      omissions {
+        omission
         hint
-        answer
-        alts
       }
     }
   }
 `
-
+const ADD_COMP_LESSON = gql`
+  mutation CreateLessonMutation($title: String!, $author: String!, $authorID: String!, $text: String!, $questions: [QuestionInput]) {
+    createReadingCompLesson( title: $title, author: $author, authorID: $authorID, text: $text, questions: $questions) {
+      id
+      created
+      title
+      author
+      authorID
+      text
+      questions {
+        question
+        options {
+        	option
+        	correct
+        }
+      }
+    }
+  }
+`
 const mapStateToProps = state => {
   return {
     user: state.user

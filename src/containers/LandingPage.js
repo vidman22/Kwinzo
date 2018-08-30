@@ -14,6 +14,7 @@ import CreateReadingLesson from './CreateReadingLesson/CreateReadingLesson';
 import Home from '../components/Home/Home';
 import Lesson from './Lesson/Lesson';
 import Lessons from './Lessons/Lessons';
+import ReadingLesson from './ReadingLesson/ReadingLesson'
 import SoloGame from './SoloGame/SoloGame';
 import UserDropdown from '../components/UserDropdown/UserDropdown';
 import UserPage from './UserPage/UserPage';
@@ -128,6 +129,7 @@ class LandingPage extends Component {
                 <Route path="/create-lesson/exercise" render={() => <CreateLesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/login" component={Auth} />
                 <Route path="/lessons/:id" component={Lesson}/>
+                <Route path="/reading-lesson/:id" component={ReadingLesson} />
                 <Route path="/solo-play/:id" render={() => <SoloGame lesson= {this.props.lesson} /> } />
                 <Route path="/host-game/:id" render={() => <WaitingPage lesson= {this.props.lesson} /> } />
                 <Route path="/lessons" component={Lessons} />
