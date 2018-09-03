@@ -11,13 +11,13 @@ before_install:
 - sudo tar -xvzf stack.tgz -C /usr/local
 
 install:
-- docker build --tag theshowtyme/app:$TRAVIS_COMMIT .
+- docker build --tag $REPO/app:$TRAVIS_COMMIT .
 
 script:
 - docker login -u $USER -p $PASSWORD
-- docker push kwinzo/app:$TRAVIS_COMMIT
+- docker push $REPO/app:$TRAVIS_COMMIT
 
 after_success:
 - docker pull stackdepot/stack:0.1.0
 - alias stack='docker run -i --rm stackdepot/stack:0.1.0'
-- stack update --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image kwinzo/app:$TRAVIS_COMMIT app
+- stack update --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image $REPO/app:$TRAVIS_COMMIT app
