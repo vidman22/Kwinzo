@@ -84,15 +84,15 @@
 
 
 
-.LessonTitle h1 {
-  font-family: 'Open Sans';
+.LessonTitle h1{
+  font-family: 'Open Sans', sans-serif;
   border-bottom: 1px solid #ccc;
   width: 70%;
-  margin-left: 5%;
+  margin-left: 3%;
 }
 
 .LessonSentencesWrapper {
-  width: 80%;
+  width: 85%;
   padding: 3%;
   margin: auto;
   background: white;

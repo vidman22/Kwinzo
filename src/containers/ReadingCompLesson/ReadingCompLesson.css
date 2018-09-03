@@ -1,0 +1,118 @@
+.ReadingPassage{
+	display: inline-block;
+	background: white;
+	font-family: Open Sans, sans-serif;
+	vertical-align: top;
+	font-size: 16px;
+	line-height: 25px;
+	max-width: 680px;
+	margin: 0 0 0 2%;
+	padding: 3%;
+	border-radius: 3px;
+	border: 1px solid #eee;
+}
+
+.ReadingCompQuestionsWrapper {
+	display: block;
+	width: 92%;
+	margin: 12px auto 12px auto;
+	font-family: Open Sans, sans-serif;
+	background: white;
+	border: 1px solid #eee;
+}
+
+.SpeedReadingWrapper {
+	display: inline-block;
+	background: white;
+	margin: 0 0 0 20px;
+	font-family: Roboto, sans-serif;
+}
+
+.CheckLessonButton,
+.StartReadingButton{
+  	width: 120px;
+  	height: 60px;
+    margin-right: 2px;
+  	font-size: 18px;
+  	background: #00c4c3;
+    border: none;
+  	color: white;
+}
+
+.CheckLessonButton:hover,
+.StartReadingButton:hover {
+  color: black;
+  border: initial;
+}
+
+
+.CheckLessonButton:disabled,
+.StartReadingButton:disabled {
+  background: #00c4c3;
+  opacity: .5;
+  color: black;
+}
+
+.CheckLessonButton{
+  margin: 0 0 0 80%;
+}
+
+
+
+.StyleCheckLabel{
+	
+	display: block;
+	margin: 12px 0 12px 0;
+}
+
+.custom-select {
+	margin: 12px 0 12px 0;
+	display: block;
+	position: relative;
+	font-family: Roboto, sans-serif;
+}
+
+.custom-select select{
+	display: none;
+}
+
+.select-selected {
+
+}
+
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+

@@ -6,18 +6,18 @@ import './InputReadingVocab.css';
 const InputReadingVocab = (props) => {
 	  return (
 	  	<div className="InputWrapper">
-	  		<div className="InputAnswerWrapper">
+	  		<div className="InputVocabWrapper">
 	  	     <input
-	  	    	 className="InputAnswer"
+	  	    	 className="InputVocab"
 	  	    	 type="text"
 	  	    	 value={props.omissionValue}
 	  	    	 onChange={props.omissionChanged}
-	  	    	 placeholder="Answer"
+	  	    	 placeholder="Omitted Text"
 	  	     />
 	  	     <p>{props.omissionShouldValidate.msg}</p>
 	  	    </div>
 	  	    <input 
-	  	    	className="InputHint"
+	  	    	className="InputVocabHint"
 	  	    	type="text"
 	  	    	value={props.hintValue}
 	  	    	onChange={props.hintChanged}

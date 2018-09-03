@@ -1,14 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var OptionSchema = new Schema({
-	option: String,
-	correct: Boolean,
-});
-
 var QuestionSchema = new Schema({
 	question: String,
-	options: [OptionSchema],
+	correctOption: Number,
+	checkedOption: Number,
+	options: [String],
 });
 
 var readingCompLessonSchema = new Schema({

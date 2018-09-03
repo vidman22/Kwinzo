@@ -64,14 +64,14 @@ lessonQuery() {
 compLessonQuery() {
   this.setState({
     activeQuery: 'readingCompLessons',
-    activeURL: 'reading-lesson'
+    activeURL: 'reading-comp-lesson'
   });
 }
 
 omissionLessonQuery() {
   this.setState({
     activeQuery: 'readingOmissionLessons',
-    activeURL: 'reading-lesson'
+    activeURL: 'reading-omission-lesson'
   });
 }
 

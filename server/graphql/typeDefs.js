@@ -7,7 +7,9 @@ const schema = buildSchema(`
 		user(id: String! ): User
 		userLessons( authorID: String! ): [LessonSet]
 		readingCompLessons: [ReadingCompLesson]
+		readingCompLesson(id: String): ReadingCompLesson
 		readingOmissionLessons: [ReadingOmissionLesson]
+		readingOmissionLesson(id: String): ReadingOmissionLesson
 	}
 
 	type LessonSet {
@@ -71,22 +73,17 @@ const schema = buildSchema(`
 
 	type Question {
 		question: String!
-		options: [Option]
+		correctOption: Int
+		checkedOption: Int
+		options: [String]
 	}
 
-	type Option {
-		option: String!
-		correct: Boolean!
-	}
 
 	input QuestionInput {
 		question: String!
-		options: [OptionInput]
-	}
-
-	input OptionInput {
-		option: String!
-		correct: Boolean!
+		correctOption: Int
+		checkedOption: Int
+		options: [String]
 	}
 
 	type Meta {
