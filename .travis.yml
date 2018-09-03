@@ -18,5 +18,5 @@ script:
 - docker push $REPO/app:$TRAVIS_COMMIT
 
 after_success:
-- docker pull stackdepot/stack:0.1.0
-- docker run -i --rm stackdepot/stack:0.1.0 update --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image $REPO/app:$TRAVIS_COMMIT app
+- docker pull stackdepot/stack:0.2.0
+- docker run -i --rm stackdepot/stack:0.2.0 update --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image $REPO/app:$TRAVIS_COMMIT app
