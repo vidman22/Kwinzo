@@ -12,7 +12,8 @@ import io from 'socket.io-client';
 
 
 // const socketUrl = 'http://localhost:5000/';
-const socket = io('http://localhost:5000/');
+//const socket = io('http://localhost:5000/');
+const socket = io();
 
 
 class WaitingPage extends Component {
