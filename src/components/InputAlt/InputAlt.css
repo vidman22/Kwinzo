@@ -5,6 +5,7 @@
 }
 
 .InputAlt {
+
   display: inline-block;
   float: left;
   width: 95%;
@@ -24,6 +25,15 @@
 .InputAltWrapper p{
   display: block;
   color: red;
+}
+
+.InputAltWrapper input{
+  font-family: Open Sans, sans-serif;
+}
+
+.answerCheck {
+  float: left;
+  margin-top: 5px;
 }
 
 .InputAlt:focus{

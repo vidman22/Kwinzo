@@ -9,13 +9,18 @@ import Auth from './Auth/Auth';
 import AuthModal from '../components/AuthModal/AuthModal';
 import Backdrop from '../components/Backdrop/Backdrop';
 import CreateLesson from './CreateLesson/CreateLesson';
+import CreateLessonLanding from '../components/CreateLessonLanding/CreateLessonLanding';
+import CreateReadingLesson from './CreateReadingLesson/CreateReadingLesson';
 import Home from '../components/Home/Home';
-import Lesson from '../components/Lesson/Lesson';
+import Lesson from './Lesson/Lesson';
 import Lessons from './Lessons/Lessons';
+import ReadingCompLesson from './ReadingCompLesson/ReadingCompLesson';
+import ReadingOmissionLesson from './ReadingOmissionLesson/ReadingOmissionLesson';
 import SoloGame from './SoloGame/SoloGame';
 import UserDropdown from '../components/UserDropdown/UserDropdown';
 import UserPage from './UserPage/UserPage';
 import WaitingPage from './WaitingPage/WaitingPage';
+import WordBank from './WordBank/WordBank';
 
 
 class LandingPage extends Component {
@@ -120,19 +125,22 @@ class LandingPage extends Component {
                 </header>
             
                <Switch> 
-
-                
-                <Route path="/create-lesson" render={() => <CreateLesson togglemodal={() => this.toggleModal()}/> } />
+                <Route exact path="/create-lesson" render={() => <CreateLessonLanding togglemodal={() => this.toggleModal()}/> } />
+                <Route path="/create-lesson/reading" render={() => <CreateReadingLesson togglemodal={() => this.toggleModal()}/> } />
+                <Route path="/create-lesson/exercise" render={() => <CreateLesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/login" component={Auth} />
                 <Route path="/lessons/:id" component={Lesson}/>
+                <Route path="/reading-comp-lesson/:id" component={ReadingCompLesson} />
+                <Route path="/reading-omission-lesson/:id" component={ReadingOmissionLesson} />
                 <Route path="/solo-play/:id" render={() => <SoloGame lesson= {this.props.lesson} /> } />
                 <Route path="/host-game/:id" render={() => <WaitingPage lesson= {this.props.lesson} /> } />
                 <Route path="/lessons" component={Lessons} />
                 <Route path="/user/:user" component={() => <UserPage user={this.props.user} />} />
+                <Route path="/word-bank/:id" render={() => <WordBank lesson = {this.props.lesson } /> } />
                 <Route path="/" component={Home}/>
                </Switch>
                {this.state.authModal ? <AuthModal togglemodal={() => this.toggleModal()} show={this.state.authModal} /> : null}
-               {this.state.authModal ? <Backdrop close={() => this.toggleModal()} show={this.state.authModal}/> : null }
+               {this.state.authModal ? <Backdrop show={this.state.authModal}/> : null }
               </div>
             <footer className="Footer">
                     <ul>

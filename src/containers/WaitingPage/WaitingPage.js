@@ -39,7 +39,6 @@ class WaitingPage extends Component {
 
 
 	componentDidMount() {
-		console.log('props', this.props)
 		this.initSocket();
 	}
 
@@ -212,7 +211,7 @@ class WaitingPage extends Component {
 				<div>
 					<GameBoard players={this.state.players} arrayofteams={this.state.arrayOfTeams} length={this.props.lesson.sentences.length}/>
 					<Modal show={this.state.openModal} playAgain={this.playAgain.bind(this)} winner={this.state.winner} sentences={this.props.lesson.sentences} />
-					{this.state.openModal ? <Backdrop show /> : null}
+					{this.state.openModal ? <Backdrop /> : null}
 				</div>
 				)
 			break;

@@ -58,10 +58,10 @@ module.exports = function(socket) {
 				for ( let i = 0; i < users.length; i++) {
 					if (users[i].playerName === name ) {
 						message = 'try a different name';
-					} if (message ==='') {
-						
+					} else if (name.length == 0) {
+						message = 'add a name';
+					} else {
 						users.push(user);
-						message = '';
 						io.to(room).emit('UPDATED_PLAYERS', (room, users ));	
 					} 
 				break;

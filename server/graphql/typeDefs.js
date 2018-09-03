@@ -6,6 +6,8 @@ const schema = buildSchema(`
 		lessonSets: [LessonSet]
 		user(id: String! ): User
 		userLessons( authorID: String! ): [LessonSet]
+		readingCompLessons: [ReadingCompLesson]
+		readingOmissionLessons: [ReadingOmissionLesson]
 	}
 
 	type LessonSet {
@@ -27,11 +29,64 @@ const schema = buildSchema(`
 	}
 
 	type Sentence {
-		id: String
-		sentence: String
-		answer: String
-		hint: String
+		sentence: String!
+		answer: String!
+		hint: String!
 		alts: [String]
+	}
+
+	type ReadingOmissionLesson {
+		id: String!
+		created: Date
+		updated: Date
+		title: String!
+		author: String!
+		authorID: String!
+		text: String!
+		omissions: [Omission]!
+		termNumber: Int
+	}
+
+	type Omission {
+		omission: String!
+		hint: String!
+	}
+
+	input OmissionInput {
+		omission: String!
+		hint: String!
+	}
+
+	type ReadingCompLesson {
+		id: String!
+		created: Date
+		updated: Date
+		title: String!
+		author: String!
+		authorID: String!
+		text: String!
+		questions: [Question]!
+		termNumber: Int
+	}
+
+	type Question {
+		question: String!
+		options: [Option]
+	}
+
+	type Option {
+		option: String!
+		correct: Boolean!
+	}
+
+	input QuestionInput {
+		question: String!
+		options: [OptionInput]
+	}
+
+	input OptionInput {
+		option: String!
+		correct: Boolean!
 	}
 
 	type Meta {
@@ -59,6 +114,8 @@ const schema = buildSchema(`
 
 
 	type Mutation {
+		createReadingOmissionLesson(title: String!, author: String!, authorID: String!, text: String!, omissions: [OmissionInput] ): ReadingOmissionLesson
+		createReadingCompLesson(title: String!, author: String!, authorID: String!, text: String!, questions: [QuestionInput] ): ReadingCompLesson
 		createLessonSet(title: String!, author: String!, authorID: String!, sentences: [SentenceInput] ): LessonSet
 		signUp( username: String! , email: String!, password: String! ): AuthPayload
 		login( email: String!, password: String! ) : AuthPayload

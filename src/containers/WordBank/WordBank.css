@@ -1,0 +1,43 @@
+.WordBank {
+	display: inline-block;
+	float: right;
+	padding: 2%;
+	background: white;
+	width: 10%;
+	border: 1px solid #eee;
+	box-shadow: 2px 1px 2px #ccc;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.WordBankLessonTab {
+	display: inline-block;
+	width: 85%;
+}
+
+.UsedWord {
+	text-decoration: line-through;
+}
+
+@media screen and (max-width: 640px) {
+	.WordBank {
+		display: block;
+		padding: 2%;
+		float: none;
+		background: white;
+		margin: 12px auto 12px auto;
+		width: 90%;
+		box-shadow: 1px 1px 3px #ccc;
+		font-family: 'Open Sans', sans-serif;
+	}
+	.WordBankAnswer{
+		display: inline-block;
+		margin: 0 12px;
+	}
+
+	.WordBankLessonTab {
+		display: block;
+		margin: auto;
+		width: 95%;
+	}
+
+}

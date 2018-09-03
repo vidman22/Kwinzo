@@ -3,7 +3,6 @@ import InputSentence from '../../components/InputSentence/InputSentence';
 import InputAlt from '../../components/InputAlt/InputAlt';
 import {Prompt, withRouter} from 'react-router';
 
-
 import './CreateLesson.css';
 
 import { Mutation } from 'react-apollo';
@@ -82,7 +81,8 @@ class CreateLesson extends Component {
     lessonFormNum: 5,
     lessonFormArray: [],
     formIsHalfFilledOut: false,
-    showExAnswer: false
+    showExAnswer: false,
+    message: 'add alternate answer'
   }
  this.showExAnswer = this.showExAnswer.bind(this);
  this.checkFormValidity = this.checkFormValidity.bind(this);
@@ -138,8 +138,7 @@ class CreateLesson extends Component {
 
   addAlt(index, event) {
     event.preventDefault();
-    
-    const lessonForm = {
+      const lessonForm = {
       ...this.state.lessonForm
     }
 
@@ -168,7 +167,7 @@ class CreateLesson extends Component {
     const updatedAltArray = [
       ...updatedAlts.array
     ]
-
+    console.log("alt length " + updatedAltArray.length);
     if (updatedAltArray.length >= 4 ) {
       this.setState({addAltDisabled: true});
     }
@@ -185,8 +184,6 @@ class CreateLesson extends Component {
     }, () => {
       this.checkFormValidity();
     });
-
-
   };
 
   altMouseOverEvent(index) {
@@ -246,9 +243,6 @@ class CreateLesson extends Component {
     }, () => {
       this.checkFormValidity();
     });
-
-    
-
   }
 
   removeSentence(formIndex, e) {
@@ -256,7 +250,6 @@ class CreateLesson extends Component {
     const updatedLessonForms = [
       ...this.state.lessonFormArray
     ];
-
     // eslint-disable-next-line
     const removed = updatedLessonForms.splice(formIndex, 1);
     
@@ -266,7 +259,6 @@ class CreateLesson extends Component {
     }, () => {
       this.checkFormValidity();
     });
-
   }
 
 
@@ -501,10 +493,10 @@ class CreateLesson extends Component {
                           rObj['sentence'] = sntnc.sentence.value;
                           rObj['hint'] = sntnc.hint.value;
                           rObj['alts'] = alts;
-                          for (let i = 0; i < sntnc.alts.length; i++){
-                            if (sntnc.alts[i] !== ""){
-                              alts.push(sntnc.alts[i]);
-                            } 
+                          for (let i = 0; i < sntnc.alts.array.length; i++){
+                            if (sntnc.alts.array[i].value !== ""){
+                              alts.push(sntnc.alts.array[i].value);
+                            }
                           }
                       return rObj;  
                       });
@@ -563,10 +555,11 @@ class CreateLesson extends Component {
               
                         <InputAlt 
                           onclick={(e) => this.removeAlt(formElement.id, index, e)}
-                          altValue={formElement.config.alts.array[index].value}
-                          altInvalid={!formElement.config.alts.array[index].valid}
-                          altShouldValidate={formElement.config.alts.array[index].validation}
-                          altTouched={formElement.config.alts.array[index].touched}
+                          altValue={alt.value}
+                          altInvalid={!alt.valid}
+                          altPlaceholder='Alternate answer'
+                          altShouldValidate={alt.validation}
+                          altTouched={alt.touched}
                           altChanged={(event) => this.inputChangedAltHandler(event, formElement.id, index)}
                         />
                 
@@ -588,17 +581,21 @@ class CreateLesson extends Component {
                       </svg>
                     </button>
                     </div>
-              <div className={formElement.config.alts.showDiv}>Add an alternate answer</div>
+              <div className={formElement.config.alts.showDiv}>{this.state.message}</div>
             
               
             </div>
             )
           }
           )}
-            <button className="ExerciseButton" disabled={this.state.addSentenceDisabled} onClick={() => this.addSentence()}>Add</button>
-            <button className="CreateButton" type="submit" disabled={!this.state.formIsValid}>Create</button>
+            
+              <div className="ExerciseButton" disabled={this.state.addSentenceDisabled} onClick={() => this.addSentence()}>Add</div>
+              <button className="CreateButton" type="submit" disabled={!this.state.formIsValid}>Create</button>
              </form>
+
+
             )}
+            
           </Mutation>
         </div>
       );
@@ -619,7 +616,7 @@ class CreateLesson extends Component {
           />
           <span>{this.state.title.validation.msg}</span>
           <div className="ExampleSentence">
-          <div className="ExampleSentenceHeader">Example Sentence:</div>
+          <div className="ExampleSentenceHeader">Example Sentence</div>
           
           <div className="ExampleSentenceWrapper"><div className="FirstHalfExample">The quick brown fox</div>
           {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
@@ -635,9 +632,7 @@ class CreateLesson extends Component {
           </div>
           
         </div>
-          {form}
-          
-          
+          {form}     
         </div>
         
       </div>

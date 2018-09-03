@@ -19,7 +19,7 @@ export default class GamePlay extends Component {
 			
 			gameSentences:[],
 			activeSentence:'',
-			answer:'',
+			value:'',
 			error:''
 		}
 	}
@@ -45,7 +45,7 @@ export default class GamePlay extends Component {
 			this.setState({
 				gameSentences: newProps.sentences,
 				activeSentence,
-				answer: ''
+				value: ''
 			});
 		}
 	}
@@ -72,11 +72,12 @@ export default class GamePlay extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		let answer = this.state.answer;
-		answer = answer.toLowerCase().trim();
+		let value = this.state.value;
+		const answer = this.state.activeSentence.answer.toLowerCase().trim();
+		value = value.toLowerCase().trim();
 
 		
-		if (answer === this.state.activeSentence.answer) {
+		if (value === answer) {
 			
 
 			socket.emit('SUCCESS', this.props.room, this.props.name, this.state.gameSentences.length);
@@ -89,7 +90,7 @@ export default class GamePlay extends Component {
 			
 		} else if (this.state.activeSentence.alts !== 0) {
 			for (let i = 0; i < this.state.activeSentence.alts.length; i++ ) {
-				if (answer === this.state.activeSentence.alts[i]) {
+				if (value === this.state.activeSentence.alts[i]) {
 					socket.emit('SUCCESS', this.props.room, this.props.name, this.state.gameSentences.length);
 
 					this.setState({
@@ -97,6 +98,12 @@ export default class GamePlay extends Component {
 					});
 
 					setTimeout(this.correct.bind(this), 333);
+				} else {
+					socket.emit('FAILURE', this.props.room);
+					this.setState({
+						error:'wrong answer!'
+					});
+					setTimeout(this.wrongAnswer.bind(this), 1000);
 				}
 			}
 		} else {
@@ -116,7 +123,7 @@ export default class GamePlay extends Component {
 
 				this.setState({
 					activeSentence,
-					answer:'',
+					value:'',
 					correct:''
 				});
 			} else {
@@ -143,14 +150,14 @@ export default class GamePlay extends Component {
 
 		this.setState({
 			activeSentence,
-			answer:'',
+			value:'',
 			error:''
 		});
 	}
 
 	handleChange = (e) => {
 
-		this.setState({ answer: e.target.value });
+		this.setState({ value: e.target.value });
 	}
 
 	render() {
@@ -168,7 +175,7 @@ export default class GamePlay extends Component {
 						sentence={sentence.sentence}
 						correct={sentence.answer}
 						placeholder={sentence.hint}
-						value={this.state.answer}
+						value={this.state.value}
 						handlesubmit={this.handleSubmit}
 						handlechange={this.handleChange}
 					/>

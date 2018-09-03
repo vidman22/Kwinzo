@@ -15,7 +15,6 @@ export default class SoloPlay extends Component {
 		this.myRef = React.createRef();
 	}
 	componentDidMount() {
-		console.log(this.myRef.current.clientWidth);
 		this.setState({
 			width: this.myRef.current.clientWidth
 		});
@@ -58,7 +57,7 @@ export default class SoloPlay extends Component {
 						sentence={sentence.sentence}
 						correct={sentence.answer}
 						placeholder={sentence.hint}
-						value={this.props.answer}
+						value={this.props.value}
 						message={this.props.message}
 						handlesubmit={this.props.handlesubmit}
 						handlechange={this.props.handlechange}

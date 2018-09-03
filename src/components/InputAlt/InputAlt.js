@@ -1,18 +1,19 @@
 import React from 'react';
-
+import AutosizeInput from 'react-input-autosize';
 import './InputAlt.css';
 
 
 const InputAlt = (props) => {
 	  return (
 	  	<div className="InputAltWrapper">
-	  	 <p>{props.index}</p>
-	  		<input 
+	  	 	<p>{props.index}</p>
+	  	 	<input type="checkbox" checked={props.checked} className="answerCheck" onClick={props.oncheck} />
+	  		<input
 	  			className="InputAlt"
 	  			type="text"
 	  			value={props.altValue}
 	  			onChange={props.altChanged}
-	  			placeholder="Alternate answer"
+	  			placeholder={props.altPlaceholder}
 	  		/>
 	  		<svg className="RemoveAlt" fill="#eee" onClick={props.onclick} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="18px" height="18px">
                 <path d="M255 0C114.75 0 0 114.75 0 255s114.75 255 255 255 255-114.75 255-255S395.25 
