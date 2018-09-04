@@ -11,7 +11,7 @@ before_install:
 - sudo tar -xvzf stack.tgz -C /usr/local
 
 install:
-- docker build --tag $REPO/app:${TRAVIS_COMMIT:0:7} .
+- stack build --tag $REPO/app:${TRAVIS_COMMIT:0:7} .
 
 script:
 - docker login -u $USER -p $PASSWORD
@@ -19,4 +19,4 @@ script:
 
 after_success:
 - docker pull stackdepot/stack:0.2.0
-- docker run -i --rm stackdepot/stack:0.2.0 update --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image $REPO/app:${TRAVIS_COMMIT:0:7} app
+- docker run -i --rm stackdepot/stack:0.2.0 update --dont-dup --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image $REPO/app:${TRAVIS_COMMIT:0:7} app
