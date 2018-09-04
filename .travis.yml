@@ -11,7 +11,7 @@ before_install:
 - sudo tar -xvzf stack.tgz -C /usr/local
 
 install:
-- stack build --tag $REPO/app:$TRAVIS_COMMIT .
+- docker build --tag $REPO/app:$TRAVIS_COMMIT .
 
 script:
 - docker login -u $USER -p $PASSWORD
