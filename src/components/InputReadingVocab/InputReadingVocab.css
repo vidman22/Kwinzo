@@ -1,0 +1,29 @@
+.InputVocabHint,
+.InputVocab{
+	font-family: Open Sans, sans-serif;
+	display: block;
+  	width:90%;
+  	margin: 18px 0 18px 2%;
+  	border-top:none;
+  	border-left:none;
+  	border-right:none;
+  	background: none; 
+  	height:30px;
+  	line-height:20px;
+  	font-size:20px;
+  	border-bottom:solid 2px #ccc;
+  	transition:all .23s ease-in;
+  	outline: none;
+}
+.InputVocabHint:focus,
+.InputVocab:focus{
+	outline: none;
+	border-bottom:solid 2px #EDE711;
+}
+.InputVocabWrapper p{
+	color: orange;
+}
+
+.InputVocabHint{
+
+}

@@ -550,7 +550,7 @@ class CreateLesson extends Component {
 
                     />
               
-                    <div className="AltAddWrapper">{formElement.config.alts.array.map( (alt, index) => (
+                    <div className="ElementAddWrapper">{formElement.config.alts.array.map( (alt, index) => (
                       <div key={index}>
               
                         <InputAlt 
@@ -566,8 +566,8 @@ class CreateLesson extends Component {
                  
                       </div>
                     ))}
-                    <button className="AddAltButtonWrapper" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
-                      <svg className="AddAlt" 
+                    <button className="ElementAddButtonWrapper" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
+                      <svg className="ElementAdd" 
                         fill="#ccc" 
                         onMouseOver={() => this.altMouseOverEvent(formElement.id)}
                         onMouseOut={()=> this.altMouseOverEvent(formElement.id)}

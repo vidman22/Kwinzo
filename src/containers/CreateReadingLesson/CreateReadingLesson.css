@@ -1,3 +1,48 @@
+.ElementAddReadingButtonWrapper {
+  background-color: none;
+  color: none;
+  border-style: none;
+  display: block;
+  clear: both;
+  outline: none;
+}
+
+.ShowDiv{
+  position: absolute;
+  display: inline-block;
+  justify-content: center;
+  z-index: 99;
+  background: #00c4c3;
+  color: white;
+  width: 5.9em;
+  margin: 15% auto 0 3%;
+}
+
+.Element:hover {
+  cursor: pointer;
+  fill: #00c4c3;
+}
+
+.InputReadingSentenceWrapper {
+    display: inline-block;
+    width: 80%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 16px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    background: white;
+    color: black;
+}
+
+.InputReadingSentenceWrapper p{
+  float: left;
+  margin: 0 0 0 5px;
+}
+
 textarea {
     width: 80%;
     height: 60vh;

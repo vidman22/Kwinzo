@@ -1,0 +1,31 @@
+.InputOptionWrapper {
+  width:85%;
+  clear: both;
+  margin: 18px 0 9px 5%;
+}
+.optionCheck {
+  display: inline-block;
+  float: left;
+  margin-top: 10px;
+}
+
+.InputOption {
+  display: inline-block;
+  float: left;
+  width: 95%;
+  margin:10px 0 10px 15px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none;
+  height:20px;
+  line-height:20px;
+  font-size:18px;
+  border-bottom:solid 1px #ccc;
+  transition:all .23s ease-in;
+  outline: none;
+}
+
+.InputOption:focus{
+  border-bottom:solid 1px yellow;
+}

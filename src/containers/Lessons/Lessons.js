@@ -44,7 +44,6 @@ const LESSON_OMISSION_QUERY = gql`
   }
 `;
 
-
 class Lessons extends Component  {
   constructor(props){
   super(props);
@@ -64,14 +63,14 @@ lessonQuery() {
 compLessonQuery() {
   this.setState({
     activeQuery: 'readingCompLessons',
-    activeURL: 'reading-lesson'
+    activeURL: 'reading-comp-lesson'
   });
 }
 
 omissionLessonQuery() {
   this.setState({
     activeQuery: 'readingOmissionLessons',
-    activeURL: 'reading-lesson'
+    activeURL: 'reading-omission-lesson'
   });
 }
 
@@ -87,9 +86,11 @@ omissionLessonQuery() {
 
     return (
       <div>
-      <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Comprehension Lesson Button</button>
-      <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Omission Lesson Button</button>
-      <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Lesson Button</button>
+      <div className="QueryButtonWrapper">
+        <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Comprehension Lesson</button>
+        <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Text Omission Lesson</button>
+        <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Grammar Lessons</button>
+      </div>
        <Query query={LESSON_QUERY}>
   
         {({ loading, error, data}) => {
@@ -112,11 +113,8 @@ omissionLessonQuery() {
         }}
         </Query>    
       </div> 
-  
       )
   }
-   
 };
-
 
 export default Lessons;

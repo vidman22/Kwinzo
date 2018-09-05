@@ -149,7 +149,7 @@
 
 .DeleteSentence:hover,
 .RemoveAlt:hover,
-.AddAlt:hover {
+.ElementAdd:hover {
   cursor: pointer;
   fill: #00c4c3;
 }
@@ -206,7 +206,7 @@
   color: black;
 }
 
-.AltAddWrapper {
+.ElementAddWrapper {
   display: inline-block;
   clear: both;
   float: left;
@@ -214,7 +214,7 @@
   width: 100%;
 }
 
-.AddAltButtonWrapper {
+.ElementAddButtonWrapper {
   background-color: none;
   color: none;
   border-style: none;
@@ -224,7 +224,7 @@
   outline: none;
 }
 
-.AddAlt{
+.ElemenAdd{
   transition: 100ms;
   transition-timing-function: ease-in-out;
   -webkit-transition: 100ms;
@@ -239,12 +239,13 @@
   background: #00c4c3;
   color: white;
   width: 5.9em;
-  margin-left: -14%;
+  margin: 12% 0 0 -13%;
 }
 
 
 .Hide {
   display: none;
+
 }
 
 @keyframes typingEx {

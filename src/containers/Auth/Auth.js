@@ -10,7 +10,7 @@ import './Auth.css';
 import * as actions from '../../store/actions';
 
 const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($username: String!, $email: String!, $password: String!) {
+  mutation ($username: String!, $email: String!, $password: String!) {
     signUp(username: $username, email: $email, password: $password) {
         token
         expiresIn
@@ -25,7 +25,7 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
+  mutation ($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         token
         expiresIn
@@ -154,21 +154,27 @@ class Auth extends Component {
         });
     }
 
-    _oAuthMutation = async (email, username, picture, userID, token, expiresIn) => {
-        try{
-        await this.props.oAuthMutation({
+    _oAuthMutation = async (Email, Username, Picture, UserID, Token, ExpiresIn) => {
+      
+        const result = await this.props.oAuthMutation({
             variables: {
-                email,
-                username,
-                picture,
-                userID,
-                token,
-                expiresIn
+                email: Email,
+                username: Username,
+                picture: Picture,
+                userID: UserID,
+                token: Token,
+                expiresIn: ExpiresIn
             }
-        })
-        } catch (err) {
-        console.log(err);
-        }    
+        });  
+       
+        const { token, expiresIn } = result.data.oAuthSignIn;
+        const resultEmail = result.data.oAuthSignIn.user.email;
+        const resultUsername = result.data.oAuthSignIn.user.username;
+        const resultPicture = result.data.oAuthSignIn.user.picture;
+        const resultUserID = result.data.oAuthSignIn.user.userID;
+        
+        this.props.onAuth(resultEmail, resultUsername, resultPicture, resultUserID, token, expiresIn);
+
     }
 
     completed = (data) => {
@@ -200,23 +206,26 @@ class Auth extends Component {
   
 
         const responseGoogle = (response) => {
-        
-            const email = response.profileObj.email;
-            const username = response.profileObj.givenName;
-            const picture = response.profileObj.imageUrl;
-            const userID = response.profileObj.googleId;
-            const token = response.tokenId;
-            const expiresIn = response.tokenObj.expires_in;
+            console.log('google response', response);
 
-            this.props.onAuth(email, username, picture, userID, token, expiresIn);  
+            const email = response.profileObj.email,
+               username = response.profileObj.givenName,
+                picture = response.profileObj.imageUrl,
+                 userID = response.profileObj.googleId,
+                  token = response.tokenId,
+              expiresIn = response.tokenObj.expires_in;
+            console.log('google email', email);
+
+              
             this.props.togglemodal();
             this._oAuthMutation(email, username, picture, userID, token, expiresIn);
+            console.log('data from props', this.props);
 
         }
         const responseFacebook = (response) => {
             
             const token = response.accessToken;
-            this.props.onAuth( response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
+            // this.props.onAuth( response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
             this.props.togglemodal();
             this._oAuthMutation(response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
         }
@@ -330,7 +339,7 @@ class Auth extends Component {
 };
 
 const OAUTH_MUTATION = gql`
-    mutation OauthMutation( $email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
+    mutation($email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
         oAuthSignIn( email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
             token
             expiresIn
@@ -351,5 +360,5 @@ const mapDispatchToProps = dispatch => {
         onAuth:( email, name, picture, userID, token, expiresIn ) => dispatch( actions.authSuccess(email, name, picture, userID, token, expiresIn))
     };
 };
-const Container = graphql(OAUTH_MUTATION, {name: 'oAuthMutation'})(Auth);
+const Container = graphql( OAUTH_MUTATION, { name: 'oAuthMutation' })(Auth);
 export default connect( null , mapDispatchToProps )( Container );

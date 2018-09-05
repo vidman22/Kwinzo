@@ -44,10 +44,6 @@
 	float: right;
 }
 
-.BackButton {
-
-}
-
 @media screen and (max-width: 640px) {
 
 	.SoloStart {
@@ -56,10 +52,6 @@
 	.SoloWaiting {
 		margin-left: 9px;
 		width: 87%;
-	}
-
-	.BackButton {
-
 	}
 
 	.AnswersButton {

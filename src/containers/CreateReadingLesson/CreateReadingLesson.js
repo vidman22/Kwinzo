@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Prompt, withRouter } from 'react-router-dom';
 
-import InputAlt from '../../components/InputAlt/InputAlt';
+
 import InputReadingVocab from '../../components/InputReadingVocab/InputReadingVocab';
-import InputReadingComp from '../../components/InputReadingComp/InputReadingComp';
+import InputCompOption from '../../components/InputCompOption/InputCompOption';
 
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -63,6 +63,7 @@ class CreateReadingLesson extends Component {
     			  valid: false,
     			  touched: false
     			},
+          checkedOption: -1,
     			options:[{
     			  value: '',
     			  correct: false,
@@ -103,7 +104,7 @@ class CreateReadingLesson extends Component {
     			  valid: false,
     			  touched: false
     			}],
-    			showDiv: false,
+    			showDiv: 'Hide',
     			addAnswerDisabled: false
     		},
     		lessonFormArray: [],    	
@@ -155,7 +156,7 @@ class CreateReadingLesson extends Component {
   		
   	}
 
-  	altMouseOverEvent(index) {
+  	optionMouseOverEvent(index) {
     	const updatedLessonForms = [
     	  ...this.state.lessonFormArray
     	];
@@ -164,13 +165,12 @@ class CreateReadingLesson extends Component {
     	  ...updatedLessonForms[index]
     	};
 	
-    	const updatedOptions = {
-    	  ...updatedForm.options
-    	}
-
-    	updatedOptions.showDiv = !updatedOptions.showDiv;
+      if (updatedForm.showDiv === 'Hide') {
+       updatedForm.showDiv = 'ShowDiv';
+      } else {
+       updatedForm.showDiv = 'Hide'; 
+      }
     	
-    	updatedForm.options = updatedOptions;
     	updatedLessonForms[index] = updatedForm;
     	
     	this.setState({ lessonFormArray: updatedLessonForms});
@@ -303,9 +303,9 @@ class CreateReadingLesson extends Component {
     	// }
 	
     	updatedOptions.push(optionForm);
-	
+
+	    updatedForm.options = updatedOptions;  
     	updatedLessonForms[index] = updatedForm;
-    	updatedForm.options = updatedOptions;   	
 	
     	this.setState({
     	  lessonFormArray: updatedLessonForms,
@@ -465,7 +465,7 @@ class CreateReadingLesson extends Component {
     	}
 
     	updatedOptionForm.validation = updatedValidation;
-		updatedOptions[index] = updatedOptionForm;
+		  updatedOptions[index] = updatedOptionForm;
     	updatedForm.options = updatedOptions;
     	updatedLessonForms[formIndex] = updatedForm;   	
 	
@@ -476,7 +476,8 @@ class CreateReadingLesson extends Component {
     	});
   	}
 
-  	answerChecked = (formIndex, index) => {
+  	optionChecked = (formIndex, index) => {
+      console.log( formIndex, index);
   		const updatedLessonForms = [
     	  ...this.state.lessonFormArray
     	];
@@ -485,18 +486,9 @@ class CreateReadingLesson extends Component {
     	  ...updatedLessonForms[formIndex]
     	};
 	
-    	const updatedOptions = [
-    	  ...updatedForm.options
-    	];
 
-    	const updatedOptionForm = {
-    		...updatedOptions[index]
-    	}
+    	updatedForm.checkedOption = index;
 
-    	updatedOptionForm.correct = !updatedOptionForm.correct;
-
-		updatedOptions[index] = updatedOptionForm;
-    	updatedForm.options = updatedOptions;
     	updatedLessonForms[formIndex] = updatedForm;   	
 	
     	this.setState({
@@ -551,13 +543,11 @@ class CreateReadingLesson extends Component {
   				let rObj = {};
   				let options = [];
   				rObj['question'] = element.question.value;
+          rObj['checkedOption'] = -1;
   				rObj['options'] = options;
+          rObj['correctOption'] = element.checkedOption;
   				for ( let i = 0; i < element.options.length; i ++ ){
-  					let obj = {
-  						option: element.options[i].value,
-  						correct: element.options[i].correct
-  					}
-  					options.push(obj);
+  					options.push(element.options[i].value);
   				}
   				return rObj
   			});
@@ -600,7 +590,7 @@ class CreateReadingLesson extends Component {
   						const text = this.state.textarea.value;
   						const author = this.props.user.name;
   						const authorID = this.props.user.userID;
- 						const data = this.formData();
+ 						  const data = this.formData();
   						if (this.state.readingModeOmission) {
   							mutation({
   								variables: {
@@ -626,7 +616,7 @@ class CreateReadingLesson extends Component {
                   }}>
                 {formArray.map((formElement) => {
                   return (
-                    <div className="InputSentenceWrapper" key={formElement.id}>
+                    <div className="InputReadingSentenceWrapper" key={formElement.id}>
                       <p>{Number(formElement.id) + 1}</p>
                        <svg className="DeleteSentence" onClick={() => this.removeVocabInput(formElement.id)} 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -660,52 +650,51 @@ class CreateReadingLesson extends Component {
 	
                     	/> ) : (
                     	<div className="InputWrapper">
-	  						<input 
-	  							className="InputQuestion"
-	  							type="text"
-	  							value={formElement.config.question.value}
-	  							onChange={(event) => this.inputChangedHandler(event, 'question', formElement.id)}
-	  							placeholder="Question"
-	  						/>
-	  						<p>{formElement.config.question.validation.msg}</p>
-	  						
-                      		<div className="AltAddWrapper">{formElement.config.options.map((option, index) => (
-                      			<div key={index}>
-              	
-                        		<InputAlt 
-                        		  onclick={(e) => this.removeAnswer(formElement.id, index, e)}
-                        		  inputType='answer'
-                        		  onmouse={() => this.answerMouseOverEvent(formElement.id, index)}
-                        		  oncheck={() => this.answerChecked(formElement.id, index)}
-                        		  checked={option.correct}
-                        		  altValue={option.value}
-                        		  altPlaceholder='Optional answer'
-                        		  altInvalid={!option.valid}
-                        		  altShouldValidate={option.validation}
-                        		  altTouched={option.touched}
-                        		  altChanged={(event) => this.inputChangedAnswerHandler(event, formElement.id, index)}
-                        		/>
-                 	
-                      			</div>
-                    		))}
-                    		<div className="AddButtonWrapper" >
-                    		  <svg className="AddSVG" 
-                    		  	onClick={(e) => this.addAnswer(formElement.id, e)}
-                    		    fill="#ccc" 
-                    		    // onMouseOver={() => this.altMouseOverEvent(formElement.id)}
-                    		    // onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
-                    		    xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
-                   		
-                    		  <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
-                    		    0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
-                    		    0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
-                    		    0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
-                    		    10.66 0 0 1 10.667 10.667v21.334z"/>
-                    		  </svg>
-                    		</div>
-                    	</div>
-              			<div className={formElement.config.options.showDiv}>Add an Answer</div>
-              		</div>
+	  						         <input 
+	  						         	className="InputQuestion"
+	  						         	type="text"
+	  						         	value={formElement.config.question.value}
+	  						         	onChange={(event) => this.inputChangedHandler(event, 'question', formElement.id)}
+	  						         	placeholder="Question"
+	  						         />
+	  						         <p>{formElement.config.question.validation.msg}</p>
+	  						         
+                          <div className="ElementAddWrapper">{formElement.config.options.map((option, index) => (
+                              <div key={index}>
+              	         
+                                <InputCompOption
+                                  checked={formElement.config.checkedOption}
+                                  index={index}
+                                  onclick={(e) => this.removeAnswer(formElement.id, index, e)}
+                                  oncheck={() => this.optionChecked(formElement.id, index)}
+                                  optionValue={option.value}
+                                  optionPlaceholder='Option'
+                                  optionInvalid={!option.valid}
+                                  optionShouldValidate={option.validation}
+                                  optionTouched={option.touched}
+                                  optionChanged={(event) => this.inputChangedAnswerHandler(event, formElement.id, index)}
+                                />
+                           	
+                              </div>
+                          ))}
+                              <div className="ElementAddReadingButtonWrapper" >
+                                <svg className="Element" 
+                                	onClick={(e) => this.addAnswer(formElement.id, e)}
+                                  fill="#ccc" 
+                                  onMouseOver={() => this.optionMouseOverEvent(formElement.id)}
+                                  onMouseOut={()=> this.optionMouseOverEvent(formElement.id)}
+                                  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
+                             
+                                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
+                                  0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
+                                  0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
+                                  0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
+                                  10.66 0 0 1 10.667 10.667v21.334z"/>
+                                </svg>
+                              </div>
+                              	</div>
+              	         		<div className={formElement.config.showDiv}>Add an Option</div>
+              		    </div>
                     	)}
                     	
             		</div>
@@ -776,10 +765,9 @@ const ADD_COMP_LESSON = gql`
       text
       questions {
         question
-        options {
-        	option
-        	correct
-        }
+        checkedOption
+        correctOption
+        options 
       }
     }
   }

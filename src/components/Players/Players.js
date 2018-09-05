@@ -21,7 +21,7 @@ const Players = (props) => {
 				<button className="BackButton" onClick={props.back}>{"<"} Back</button>
 				<h1>{props.gamename}</h1>
 				<h2>Students go to:</h2>
-				<h1><em><strong>kwizno.win</strong></em></h1>
+				<h1><em><strong>kwizno.xyz</strong></em></h1>
 				<h2>Add the code below to play!</h2>
 				<h3>{props.room}</h3>
 				

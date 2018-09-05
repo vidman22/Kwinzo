@@ -8,15 +8,15 @@
 
   display: inline-block;
   float: left;
-  width: 95%;
-  margin-bottom: 10px;
+  width: 98%;
+  margin:0 0 10px 10px;
   border-top:none;
   border-left:none;
   border-right:none;
   background: none;
-  height:22px;
+  height:20px;
   line-height:20px;
-  font-size:20px;
+  font-size:18px;
   border-bottom:solid 2px #ccc;
   transition:all .23s ease-in
 
