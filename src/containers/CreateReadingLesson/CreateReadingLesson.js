@@ -104,7 +104,7 @@ class CreateReadingLesson extends Component {
     			  valid: false,
     			  touched: false
     			}],
-    			showDiv: false,
+    			showDiv: 'Hide',
     			addAnswerDisabled: false
     		},
     		lessonFormArray: [],    	
@@ -156,7 +156,7 @@ class CreateReadingLesson extends Component {
   		
   	}
 
-  	altMouseOverEvent(index) {
+  	optionMouseOverEvent(index) {
     	const updatedLessonForms = [
     	  ...this.state.lessonFormArray
     	];
@@ -165,13 +165,12 @@ class CreateReadingLesson extends Component {
     	  ...updatedLessonForms[index]
     	};
 	
-    	const updatedOptions = {
-    	  ...updatedForm.options
-    	}
-
-    	updatedOptions.showDiv = !updatedOptions.showDiv;
+      if (updatedForm.showDiv === 'Hide') {
+       updatedForm.showDiv = 'ShowDiv';
+      } else {
+       updatedForm.showDiv = 'Hide'; 
+      }
     	
-    	updatedForm.options = updatedOptions;
     	updatedLessonForms[index] = updatedForm;
     	
     	this.setState({ lessonFormArray: updatedLessonForms});
@@ -304,9 +303,9 @@ class CreateReadingLesson extends Component {
     	// }
 	
     	updatedOptions.push(optionForm);
-	
+
+	    updatedForm.options = updatedOptions;  
     	updatedLessonForms[index] = updatedForm;
-    	updatedForm.options = updatedOptions;   	
 	
     	this.setState({
     	  lessonFormArray: updatedLessonForms,
@@ -591,7 +590,7 @@ class CreateReadingLesson extends Component {
   						const text = this.state.textarea.value;
   						const author = this.props.user.name;
   						const authorID = this.props.user.userID;
- 						const data = this.formData();
+ 						  const data = this.formData();
   						if (this.state.readingModeOmission) {
   							mutation({
   								variables: {
@@ -617,7 +616,7 @@ class CreateReadingLesson extends Component {
                   }}>
                 {formArray.map((formElement) => {
                   return (
-                    <div className="InputSentenceWrapper" key={formElement.id}>
+                    <div className="InputReadingSentenceWrapper" key={formElement.id}>
                       <p>{Number(formElement.id) + 1}</p>
                        <svg className="DeleteSentence" onClick={() => this.removeVocabInput(formElement.id)} 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -660,14 +659,13 @@ class CreateReadingLesson extends Component {
 	  						         />
 	  						         <p>{formElement.config.question.validation.msg}</p>
 	  						         
-                          <div className="AltAddWrapper">{formElement.config.options.map((option, index) => (
+                          <div className="ElementAddWrapper">{formElement.config.options.map((option, index) => (
                               <div key={index}>
               	         
                                 <InputCompOption
                                   checked={formElement.config.checkedOption}
                                   index={index}
                                   onclick={(e) => this.removeAnswer(formElement.id, index, e)}
-                                  onmouse={() => this.answerMouseOverEvent(formElement.id, index)}
                                   oncheck={() => this.optionChecked(formElement.id, index)}
                                   optionValue={option.value}
                                   optionPlaceholder='Option'
@@ -679,12 +677,12 @@ class CreateReadingLesson extends Component {
                            	
                               </div>
                           ))}
-                              <div className="AddButtonWrapper" >
-                                <svg className="AddSVG" 
+                              <div className="ElementAddReadingButtonWrapper" >
+                                <svg className="Element" 
                                 	onClick={(e) => this.addAnswer(formElement.id, e)}
                                   fill="#ccc" 
-                                  // onMouseOver={() => this.altMouseOverEvent(formElement.id)}
-                                  // onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
+                                  onMouseOver={() => this.optionMouseOverEvent(formElement.id)}
+                                  onMouseOut={()=> this.optionMouseOverEvent(formElement.id)}
                                   xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
                              
                                 <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
@@ -695,7 +693,7 @@ class CreateReadingLesson extends Component {
                                 </svg>
                               </div>
                               	</div>
-              	         		<div className={formElement.config.options.showDiv}>Add an Answer</div>
+              	         		<div className={formElement.config.showDiv}>Add an Option</div>
               		    </div>
                     	)}
                     	

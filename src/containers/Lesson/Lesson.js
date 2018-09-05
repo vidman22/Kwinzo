@@ -30,8 +30,7 @@ class Lesson extends Component {
     super(props)
     this.state = {
       values: {},
-      checkedInputs: {},
-      activeValue: false
+      checkedInputs: {}
     }
   }
 
@@ -58,7 +57,6 @@ class Lesson extends Component {
         let obj = {[key]: value};
         const newObj = Object.assign(obj, values);
         this.setState({
-          activeValue: true,
           values: newObj
     })
    }
@@ -145,6 +143,8 @@ class Lesson extends Component {
         });
     }
   }
+
+  
 
 
 

@@ -44,6 +44,10 @@ class WordBank extends Component {
     
 }
 
+  back() {
+    this.props.history.push(`/lessons/${this.props.lesson.id}`);
+  }
+
   completed(sentences) {
     let answers = [];
     for ( let i =0; i < sentences.length; i++ ) {
@@ -224,6 +228,7 @@ updateWordBank(index) {
         
         return (
            <div className="LessonSentencesWrapper">
+            <button className="BackButton" onClick={() => this.back()}>{"<"} Back</button>
             { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="#ccc" 
@@ -242,6 +247,7 @@ updateWordBank(index) {
                     <h1>{data.lessonSet.title}</h1>
                   </div>
           <div className="WordBank">
+            
             <h2>Word Bank</h2>
             {this.state.answers.map((answer, index) => (
               <div className="WordBankAnswer" key={index}>

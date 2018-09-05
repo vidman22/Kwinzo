@@ -4,25 +4,36 @@ import './Omission.css';
 
 const Omission = (props) => {
 
+	let inputColor = 'black';
+	if ( props.message && props.message === 'correct') {
+		inputColor = '#00c4c3'
+	}	
+	if ( props.message && props.message === 'incorrect') {
+		inputColor = '#c92c43'
+	} 
+
 	return (
-		<AutosizeInput
+		<form onSubmit={props.handlesubmit}><AutosizeInput
+			className="OmissionInput"
 			value={props.value}
 			onChange={props.handlechange}
 			placeholder={props.placeholder}
 			placeholderIsMinWidth
 			inputStyle={{
-				// color: inputColor,
-				height: '35px',
-				lineHeight: '20px',
-				fontSize: '30px', 
-				marginLeft: '12px', 
-				marginRight:'12px',
+				color: inputColor,
+				display: 'inline-block',
+				height: '20px',
+				fontFamily: 'Open Sans, sans-serif',
+				lineHeight: '18px',
+				fontSize: '16px', 
+				marginLeft: '5px', 
+				marginRight:'5px',
 				background: 'none', 
 				borderTop: 'none', 
 				borderLeft: 'none', 	
 				borderRight: 'none', 
-				borderBottom:'solid 2px #046A91'}}
-		/>
+				borderBottom:'solid 1px #046A91'}}
+		/></form>
 
 		);
 }

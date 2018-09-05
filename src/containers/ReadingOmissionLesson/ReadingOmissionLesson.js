@@ -34,7 +34,7 @@ class Lesson extends Component {
       checkDisabled: true,
       checkedAnswers: {},
       questions: [],
-      omittedWordsArray: [],
+      omissions: [],
       readingSpeeds: [75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 400, 450, 500],
       readingSpeedValue: 75,
       readingSpeedRunning: false,
@@ -42,13 +42,14 @@ class Lesson extends Component {
       readingTimerSecondValue: '',
       readingStyles: [{type: 'underline', checked: false}, {type: 'color', checked: true }, {type:'highlight', checked: false}],
       speedReadingIndex: 0,
+      speedReadingArrayIndex: 0,
+      showWordBank: false,
+      shuffledOmissions: [],
       textArrays: [],
       values: {},
     }
     // eslint-disable-next-line
-    var timerVar;
-    this.onOptionCheck = this.onOptionCheck.bind(this)
-    
+    var timerVar; 
   }
 
  componentDidMount() {
@@ -58,75 +59,65 @@ class Lesson extends Component {
 
 
   inputChangedHandler(index, e) {
-    const values = {...this.state.values};
-    let value = '';
+    const updatedOmissions = [...this.state.omissions];
+    const updatedOmission = {
+      ...updatedOmissions[index]
+    };
 
-    if (values[`value${index}`] || values[`value${index}`] === "" ) {
-      
-      values[`value${index}`] = e.target.value;
+    updatedOmission.value = e.target.value;
 
-      this.setState({
-        values
-      })
-
-    } else {
-
-        const key = `value${index}`;
-        value = e.target.value;
-        let obj = {[key]: value};
-        const newObj = Object.assign(obj, values);
-        this.setState({
-          activeValue: true,
-          values: newObj
-    })
-   }
+    updatedOmissions[index] = updatedOmission;
+    this.setState({
+      omissions: updatedOmissions
+    });
   }
 
-  // handleCheck(index, answer, alts) {
-  //   const values = {...this.state.values};
-  //   const checkedInputs = {...this.state.checkedInputs};
-  //   const key = `checked${index}`;
-  //   let value = values[`value${index}`];
-  //   value = value.toLowerCase().trim();
-  //   answer = answer.toLowerCase().trim();
-    
-  //   if ( value === answer ) {
-  //     const obj = {[key]: 'correct'};
-  //     const newObj = Object.assign(checkedInputs, obj);
-  //     this.setState({
-  //       checkedInputs: newObj
-  //     });
-  //   } else if (alts.length !== 0 && alts !== undefined) {
-  //       for (let i = 0; i < alts.length; i++) {
-  //         if ( value === alts[i]) {
-  //           const obj = {[key]: 'correct'};
-  //           const newObj = Object.assign(checkedInputs, obj);
-  //           this.setState({
-  //             checkedInputs: newObj
-  //           });
-  //         } else {
-  //           const obj = {[key]: 'incorrect'}
-  //           const newObj = Object.assign(checkedInputs, obj);
-  //           this.setState({
-  //             checkedInputs: newObj
-  //           });
-  //         }
-  //       }
-  //     } else {
-      
-  //       const obj = {[key]: 'incorrect'}
-  //       const newObj = Object.assign(checkedInputs, obj);
-  //       this.setState({
-  //         checkedInputs: newObj
-  //       });
-  //   }
-  // } 
+  handleCheck(index, e) {
+    e.preventDefault();
 
-  // handleCheckOnEnter(index, answer, alts, e) {
-  //   e.preventDefault();
+    const updatedOmissions = [...this.state.omissions];
+    const updatedOmission = {
+      ...updatedOmissions[index]
+    };
 
+    if (updatedOmission.value === updatedOmission.omission) {
+      updatedOmission.msg = 'correct';
+      updatedOmission.used = true;
+    } else if (updatedOmission.value == "") {
+      updatedOmission.msg = '';
+    }else {
+      updatedOmission.msg = 'incorrect';
+    }
 
-  // }
+    updatedOmissions[index] = updatedOmission;
+
+    this.setState({
+      omissions: updatedOmissions
+    });
+  } 
+
+  handleLessonCheck(){
+    const updatedOmissions = [...this.state.omissions];
+
+    for (let i=0; i< updatedOmissions.length; i++) {
+      const updatedOmission = {
+        ...updatedOmissions[i]
+      };
+      if (updatedOmission.value === updatedOmission.omission) {
+        updatedOmission.msg = 'correct';
+        updatedOmission.used = true;
+      } else if (updatedOmission.value == "") {
+        updatedOmission.msg = '';
+      } else {
+        updatedOmission.msg = 'incorrect';
+      }
+      updatedOmissions[i] = updatedOmission;
+    }
+
+    this.setState({
+      omissions: updatedOmissions
+    });
+  }
 
   completed(data){
     let indices = [];
@@ -137,21 +128,24 @@ class Lesson extends Component {
     for (let i = 0; i< omissions.length; i ++){
       let idx = {
         index: text.indexOf(omissions[i].omission),
-        omission: omissions[i].omission
+        omission: omissions[i].omission,
+        value: '',
+        hint: omissions[i].hint
       }
       while (idx.index !== -1) {
         indices.push(idx);
         idx = {
           index: text.indexOf(omissions[i].omission, idx.index + 1),
-          omission: omissions[i].omission
+          omission: omissions[i].omission,
+          value: '',
+          msg:'',
+          used: false,
+          hint: omissions[i].hint
         }
       }
-
     }
     
     indices.sort((a,b)=> a.index - b.index);
-    console.log('indices', indices);
-    console.log('omissions', omissions);
 
     let arrayOfTextArrays = [];
     let firstIndex = 0;
@@ -164,22 +158,43 @@ class Lesson extends Component {
 
     arrayOfTextArrays = arrayOfTextArrays.map( array => {
      array = array.split(' ').map(word => {
-        let obj = {
-          word: word,
-          style: false
+        let obj;
+        if (word !== '') {
+          obj = {
+            word: word,
+            style: false
+          }
+        } else {
+          obj = {
+            word: word
+          }
         }
         return obj;
-      });
-      return array;
+      })
+      return array
     });
-
-    console.log('array of arrays', arrayOfTextArrays);
-    
+    const tempIndices = [...indices];
+    let shuffledOmissions = this.shuffle(tempIndices);
     this.setState({
       textArrays: arrayOfTextArrays,
-      omittedWordsArray: indices
+      omissions: indices,
+      shuffledOmissions
     });
 
+  }
+
+  shuffle(array) {
+  let i = 0,
+      j = 0,
+      temp = null
+
+  for ( i = array.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1))
+    temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+    return array;
   }
 
   handleSpeedChange(event) {
@@ -189,23 +204,36 @@ class Lesson extends Component {
   }
 
   startReading(){
-    const textArray = [...this.state.textArray];
-    let i = this.state.speedReadingIndex;
+    const textArrays = [...this.state.textArrays];
 
-      this.timerVar = setInterval(() => {
-        if ( i < textArray.length) {
-          textArray[i].style = true;
+    let i = this.state.speedReadingIndex;
+    let j = textArrays.length;
+    let k = this.state.speedReadingArrayIndex;
+    
+    this.timerVar = setInterval(() => {
+      if ( k < j) {
+        if ( i < textArrays[k].length) {
+          textArrays[k][i].style = true;
           if (i > 0) {
-            textArray[i-1].style = false;
+            textArrays[k][i-1].style = false;
           }
           this.setState({
-            textArray,
+            textArrays,
             speedReadingIndex: i++
           });
-        }else return;
-        ;
+        } else{
+          k++;
+          i=0;
+          this.setState({
+            speedReadingIndex: i,
+            speedReadingArrayIndex: k
+          });
+        } 
+      } else {
+        this.restartReading();
+      } 
       }, 60000/this.state.readingSpeedValue);
-  
+
       
       this.setState({
         readingSpeedRunning: true
@@ -222,19 +250,27 @@ class Lesson extends Component {
   }
 
   restartReading(){
-      const textArray = [...this.state.textArray];
-
-
+    if (this.state.speedReadingArrayIndex < this.state.textArrays.length){
+      const updatedTextArrays = [...this.state.textArrays];
+      const updatedTextArray = [
+        ...updatedTextArrays[this.state.speedReadingArrayIndex]
+      ];
+      updatedTextArray[this.state.speedReadingIndex].style = false;
+      this.setState({
+        textArrays: updatedTextArrays
+      })
+    }
+  
     clearInterval(this.timerVar);
     this.timerVar = null;
-    textArray[this.state.speedReadingIndex].style = false;
+    
     this.setState({
-        textArray,
+        
         readingSpeedRunning: false,
-        speedReadingIndex: 0
+        speedReadingIndex: 0,
+        speedReadingArrayIndex: 0
       });
-         
-      
+           
   }
 
 
@@ -252,64 +288,13 @@ class Lesson extends Component {
     })
   }
 
-  onOptionCheck(option, questionIndex, optionIndex){
-
-    const updatedQuestions = [...this.state.questions];
-
-    const updatedQuestion = {
-      ...updatedQuestions[questionIndex]
-    };
-    
-    updatedQuestion.checkedOption = optionIndex;
-
-    updatedQuestions[questionIndex] = updatedQuestion;
-    
-
-    this.setState({
-      questions: updatedQuestions,
-    }, () => {
-      this.checkValidity();
+  showWordBank(){
+    this.setState( prevState => {
+     return ({showWordBank: !prevState.showWordBank})
     });
-
-
-    
-  };
-
-  checkValidity() {
-    const questions = [...this.state.questions];
-
-
-    var checkDisabled = true;
-    for ( let i = 0; i< questions.length; i++){
-
-      if (questions[i].checkedOption === -1) {
-        console.log('checked option triggered' + questions[i].checkedOption);
-        checkDisabled = true;
-      } else checkDisabled = false;
-    }
-    console.log('check disabled ' + checkDisabled );
-    this.setState({
-      checkDisabled
-    })
   }
 
-  checkLesson(){
-    const questions = [...this.state.questions];
-
-    for ( let i = 0; i< questions.length; i++) {
-      if (questions[i].checkedOption == questions[i].correctOption) {
-        questions[i].correct = true;
-        questions[i].msg = 'correct';
-      } else {
-        questions[i].msg = 'incorrect';
-      }
-    }
-
-    this.setState({
-      questions
-    });
-
-  }
+  
 
 
   render() {
@@ -321,7 +306,7 @@ class Lesson extends Component {
               config: this.state.questions[key]
           });
         }
-
+    
     return (
       <div>
        <Query 
@@ -354,14 +339,17 @@ class Lesson extends Component {
                     />
               })
               return (
-                <div>
-                  {array}
-                  <Omission 
-                      value={this.state.values[`value${arrayIndex}`]}
-                      placeholder={'hello'}
-                      handlechange={(event)=> this.inputChangedHandler(arrayIndex, event)}
-                    />
-                </div>
+                
+                  <div key={arrayIndex} className="OmissionArray">{array}
+                    <Omission 
+                        value={this.state.omissions[arrayIndex].value}
+                        placeholder={this.state.omissions[arrayIndex].hint}
+                        message={this.state.omissions[arrayIndex].msg}
+                        handlechange={(event)=> this.inputChangedHandler(arrayIndex, event)}
+                        handlesubmit={(e) => this.handleCheck(arrayIndex, e)}
+                      />
+                  </div>
+                
                 );
             })}</div>
               <div className="SpeedReadingWrapper">
@@ -395,26 +383,25 @@ class Lesson extends Component {
                    {this.state.readingSpeeds.map((speed, index) => (<option key={index} value={speed}>{speed}</option>))}
                   </select>
               </div>
-              {/*<div className="ReadingCompQuestionsWrapper">
-                {formArray.map( (question, index) => {
-                  return (
-                    <ReadingCompQuestion
-                      key={question.id}
-                      index={index} 
-                      question={question.config.question}
-                      options={question.config.options}
-                      changed={this.onOptionCheck}
-                      checked={question.config.checkedOption}
-                      msg={question.config.msg}
-                    />
-
-                    )
-                })}
-              </div>*/}
+              {this.state.showWordBank ? (
+                <div className="OmissionWordBank">
+                  <h2>Word Bank</h2>
+                  {this.state.shuffledOmissions.map((omission, index) => (
+                    <div className="WordBankAnswer" key={index}>
+                      {omission.used ? (
+                        <div className="UsedWord"><p>{omission.omission}</p></div>
+                        ) : (
+                        <div className="UnusedWord"><p>{omission.omission}</p></div>
+                        )}
+                    </div>
+                    ))}
+                  </div>
+                ) : null}
+              <button className="WordBankButton" onClick={()=> this.showWordBank()}>{!this.state.showWordBank ? 'Show Word Bank' : 'Hide Word Bank'}</button>
               <button 
                   className="CheckLessonButton"
-                  disabled={this.state.checkDisabled}
-                  onClick={()=> this.checkLesson()}>Check
+                  // disabled={this.state.checkDisabled}
+                  onClick={()=> this.handleLessonCheck()}>Check
               </button>   
           </div>
         );

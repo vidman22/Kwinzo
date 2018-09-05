@@ -13,10 +13,11 @@ const ReadingCompQuestion = props => {
 				return (
 						<div key={index} className="ReadingCompOption">
 							<label className="QuestionCheckLabel">
-                        		<input type="radio"
-                        		  className="QuestionCheckBox" 
-                        		  checked={props.checked === index}  
-                        		  onChange={() => props.changed(option, props.index, index)}/></label>
+                        		<input 
+                        			type="radio"
+                        		 	className="QuestionCheckBox" 
+                        		 	checked={props.checked === index}  
+                        		 	onChange={() => props.changed(option, props.index, index)}/></label>
                         	<p>{option}</p>
                         </div>
                        );

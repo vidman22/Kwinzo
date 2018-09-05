@@ -178,7 +178,7 @@ class Lesson extends Component {
             textArray,
             speedReadingIndex: i++
           });
-        }else return;
+        }else this.restartReading();
         ;
       }, 60000/this.state.readingSpeedValue);
   
@@ -273,6 +273,7 @@ class Lesson extends Component {
     const questions = [...this.state.questions];
 
     for ( let i = 0; i< questions.length; i++) {
+      // eslint-disable-next-line
       if (questions[i].checkedOption == questions[i].correctOption) {
         questions[i].correct = true;
         questions[i].msg = 'correct';
@@ -337,7 +338,8 @@ class Lesson extends Component {
                   
                   {this.state.readingStyles.map( (style, index ) => {
                      return<label className="StyleCheckLabel" key={index} >{style.type}
-                        <input type="checkbox"
+                        <input 
+                          type="checkbox"
                           className="StyleCheckBox"
                           name={style.type} 
                           checked={style.checked}  
@@ -345,11 +347,11 @@ class Lesson extends Component {
                   })}
                   <div>reading speed (wpm)</div>
                   <select 
-                   disabled={this.state.readingSpeedRunning}
-                   className="custom-select"
-                   style={{width: '100px'}}
-                   value={this.state.readingSpeedValue} 
-                   onChange={(event) => this.handleSpeedChange(event)}>
+                    disabled={this.state.readingSpeedRunning}
+                    className="custom-select"
+                    style={{width: '100px'}}
+                    value={this.state.readingSpeedValue} 
+                    onChange={(event) => this.handleSpeedChange(event)}>
                    {this.state.readingSpeeds.map((speed, index) => (<option key={index} value={speed}>{speed}</option>))}
                   </select>
               </div>
