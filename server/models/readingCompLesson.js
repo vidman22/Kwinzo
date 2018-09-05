@@ -1,23 +1,25 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var OmissionSchema = new Schema({
-	omission: String,
-	hint: String,
+var QuestionSchema = new Schema({
+	question: String,
+	correctOption: Number,
+	checkedOption: Number,
+	options: [String],
 });
 
-var readingOmissionLessonSchema = new Schema({
+var readingCompLessonSchema = new Schema({
 	title: String,
 	author: String,
 	authorID: String,
 	text: String,
 	created: { type: Date, default: Date.now},
 	updated: { type: Date, default: Date.now},
-    omissions: [OmissionSchema],
+    questions: [QuestionSchema],
     termNumber: Number,
 });
 
 
 
-var ReadingOmissionLesson = mongoose.model('ReadingOmissionLesson', readingOmissionLessonSchema);
-module.exports = ReadingOmissionLesson;
+var ReadingCompLesson = mongoose.model('ReadingCompLesson', readingCompLessonSchema);
+module.exports = ReadingCompLesson;

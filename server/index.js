@@ -2,14 +2,11 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 const passport = require('passport');
+const path = require('path');
 const graphqlHTTP = require('express-graphql');
 const cors = require('cors');
 const root = require('./graphql/reducers');
 const io = module.exports.io = require('socket.io')(server);
-const SocketManager = require('./SocketManager');
-
-const io = module.exports.io = require('socket.io')(server);
-
 const SocketManager = require('./SocketManager');
 
 io.on('connection', ( socket ) => { 
