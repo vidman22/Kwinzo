@@ -13,8 +13,8 @@ var readingCompLessonSchema = new Schema({
 	author: String,
 	authorID: String,
 	text: String,
-	created: { type: Date, default: Date.now},
-	updated: { type: Date, default: Date.now},
+	created: { type: Date, default: Date.now()},
+	updated: { type: Date, default: Date.now()},
     questions: [QuestionSchema],
     termNumber: Number,
 });

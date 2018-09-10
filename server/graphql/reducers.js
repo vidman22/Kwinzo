@@ -14,6 +14,7 @@ const keys = require('../oauth/config/keys');
 const APP_SECRET = keys.app.APP_SECRET;
 
 
+
 var root = {
 		deleteLesson: async (args, ctx, info ) => {
 			const userID = getUserId(ctx.headers.authorization);
@@ -58,7 +59,7 @@ var root = {
 	 	},
 	 	createLessonSet: async ( {title, author, authorID, sentences}, ctx, info ) => {
 	 		const termNumber = sentences.length;
-	 		const lessonSet = new LessonSet({ title, author, authorID, sentences, termNumber, created: Date.now });
+	 		const lessonSet = new LessonSet({ title, author, authorID, sentences, termNumber, created: Date.now() });
 	 		return await lessonSet.save(); 
 	 		if (!lessonSet) {
       			throw new Error('Error');
@@ -66,7 +67,7 @@ var root = {
 	 	},
 	 	createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
 			const numberOfOmissions = omissions.length;
-			const readingOmissionLesson = new ReadingOmissionLesson({title, author, authorID, text, omissions, created: Date.now});
+			const readingOmissionLesson = new ReadingOmissionLesson({title, author, authorID, text, omissions, created: Date.now()});
 			return await readingOmissionLesson.save(); 
 			if (!readingOmissionLesson) {
 				throw new Error('Error');
@@ -74,7 +75,7 @@ var root = {
 		},
 		createReadingCompLesson: async ( {title, author, authorID, text, questions}, ctx, info ) => {
 			const numberOfQuestions = questions.length;
-			const readingCompLesson = new ReadingCompLesson({title, author, authorID, text, questions, created: Date.now});
+			const readingCompLesson = new ReadingCompLesson({title, author, authorID, text, questions, created: Date.now()});
 			return await readingCompLesson.save(); 
 			if (!readingCompLesson) {
 				throw new Error('Error');
@@ -84,9 +85,8 @@ var root = {
 
 	 		const hash = await bcrypt.hash(password, 12 );
 	 		const userID = uuidv4();
-	 		const user = new User({username, userID, email, picture: false, password: hash, joined: Date.now});
+	 		const user = new User({username, userID, email, picture: false, password: hash, joined: Date.now()});
 	 		
-
 	 		const existingUser = await User.findOne({ email });
 
 	 		if ( existingUser) {
@@ -105,7 +105,6 @@ var root = {
 	 		}
 	 	},
 	 	login: async ({email, password}) => {
-	 		
 	 		const user = await User.findOne({ email });
 
 	 		if (!user) {
@@ -117,7 +116,6 @@ var root = {
 	 		}
 	 		const token = jwt.sign({ userID: user.userID }, APP_SECRET, {expiresIn: '12hr'});
 	 		const expiresIn = 7200;
-
 	 		return {
     			token,
     			expiresIn,
@@ -131,7 +129,7 @@ var root = {
 	 		// token = jwt.sign({ userID }, APP_SECRET, {expiresIn: '12hr'});
 
 	 		if (!user ) {
-	 			user = new User({email, username, picture, userID, joined: Date.now });
+	 			user = new User({email, username, picture, userID, joined: Date.now() });
 	 			await user.save(); 
 	 		} return {
 	 			token,
