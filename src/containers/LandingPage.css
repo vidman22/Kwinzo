@@ -25,7 +25,7 @@ html, body {
 	position: relative;
 	z-index: 99;
 	display: inline-block;
-	height: 5em;        /*82px;*/
+	height: 5rem;        /*82px;*/
 	background: /*#23A6D5;*/ linear-gradient(-45deg, #23D5AB, #23A6D5);
 	margin-bottom: 10px;
 	font-family: 'Helvetica', sans-serif;

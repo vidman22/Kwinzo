@@ -294,6 +294,9 @@ class Lesson extends Component {
     });
   }
 
+  back() {
+    this.props.history.push('/lessons');
+  }
   
 
 
@@ -325,6 +328,7 @@ class Lesson extends Component {
         
         return (
           <div className="LessonSentencesWrapper">
+           <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
             <div className="LessonTitle">
               <h1>{data.readingOmissionLesson.title}</h1>
             </div>

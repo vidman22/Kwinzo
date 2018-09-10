@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Prompt, withRouter } from 'react-router-dom';
 
 
-import InputReadingVocab from '../../components/InputReadingVocab/InputReadingVocab';
+import InputReadingOmission from '../../components/InputReadingVocab/InputReadingVocab';
 import InputCompOption from '../../components/InputCompOption/InputCompOption';
 
 import { Mutation } from 'react-apollo';
@@ -558,7 +558,18 @@ class CreateReadingLesson extends Component {
 
   	completed(data){
   		console.log('data returned', data);
+      let urlPath;
+      if ( this.state.readingModeOmission == true) {
+        urlPath = 'reading-omission-lesson';
+      } else {
+        urlPath = 'reading-comp-lesson';
+      }
+      this.props.history.push(`/${urlPath}/${data.createLessonSet.id}`);
   	}
+    
+    back() {
+      this.props.history.push('/create-lesson');
+    }
 
 	render(){
 		console.log('state', this.state);
@@ -634,7 +645,7 @@ class CreateReadingLesson extends Component {
                       </svg>
 
                     	{this.state.readingModeOmission ? (
-                    	<InputReadingVocab
+                    	<InputReadingOmission
   	
                     	  omissionValue={formElement.config.omission.value}
                     	  omissionInvalid={!formElement.config.omission.valid}
@@ -713,12 +724,13 @@ class CreateReadingLesson extends Component {
       		
 
 		return (
-			<div className="CreateLesson">
+			<div className="CreateReadingLesson">
+        <button className="BackButton" onClick={() => this.back()}>{"<"} Back</button>
           		<Prompt
             		when={this.state.formIsHalfFilledOut}
             		message="Are you sure you want to leave?"
           		/>
-          		<button className="ToggleReadingMode" onClick={(e)=> this.toggleMode(e)}>{this.state.readingModeOmission ? 'Switch to Comprehension Mode' : 'Switch to Vocabulary Mode' }</button>
+          		<button className="ToggleReadingMode" onClick={(e)=> this.toggleMode(e)}>{this.state.readingModeOmission ? 'Switch to Comprehension Mode' : 'Switch to Omission Mode' }</button>
           		<input
             		className="LessonTitleInput"
             		value={this.state.title.value}

@@ -3,6 +3,7 @@
   clear: both;
   margin: 18px 0 9px 5%;
 }
+
 .optionCheck {
   display: inline-block;
   float: left;
@@ -28,4 +29,22 @@
 
 .InputOption:focus{
   border-bottom:solid 1px yellow;
+}
+
+@media screen and (max-width: 640px) {
+  .InputOption {
+    margin: auto;
+  }
+  .optionCheck {
+    display: inline-block;
+    float: left;
+    margin-top: 6px;
+    margin-left: -10px;
+  }
+  .InputOption {
+    height:16px;
+    line-height:16px;
+    font-size:14px;
+    margin:2px 0 2px 3px;
+  }
 }

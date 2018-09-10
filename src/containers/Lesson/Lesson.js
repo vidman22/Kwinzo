@@ -144,7 +144,9 @@ class Lesson extends Component {
     }
   }
 
-  
+  back() {
+      this.props.history.push('/lessons');
+  }
 
 
 
@@ -164,6 +166,7 @@ class Lesson extends Component {
         
         return (
            <div className="LessonSentencesWrapper">
+            <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
             { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="#ccc" 

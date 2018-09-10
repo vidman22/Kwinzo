@@ -14,7 +14,6 @@ const keys = require('../oauth/config/keys');
 const APP_SECRET = keys.app.APP_SECRET;
 
 
-
 var root = {
 		deleteLesson: async (args, ctx, info ) => {
 			const userID = getUserId(ctx.headers.authorization);

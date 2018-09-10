@@ -11,6 +11,19 @@
   color: black;
 }
 
+.BackButtonCreate {
+    display: block;
+    float: left;
+    justify-content: center;
+    font-weight: lighter;
+    width: 90px; 
+    height: 40px; 
+    border: none;
+    background-color: white;
+    font-size: 18px;
+    color: black;
+}
+
 .ExampleSentence {
   display: inline-block;
   width: 90%;
@@ -137,6 +150,7 @@
 .InputSentenceWrapper p{
   float: left;
   margin: 0 0 0 5px;
+  color: black;
 }
 
 .DeleteSentence {
@@ -157,9 +171,10 @@
 .LessonTitleInput{
   display: block;
   float: left;
+  clear: both;
   width:60%;
   margin-top: 10px;
-  margin-left: 37px;
+  margin-left: 4%;
   margin-bottom: 20px;
   border-top:none;
   border-left:none;
@@ -266,6 +281,14 @@
 }
 
 @media screen and (max-width: 640px) {
+
+   .BackButtonCreate{
+    padding: 0;
+    margin-bottom: 18px;
+    font-size: 14px;
+    width: 55px;
+    height: 18px;
+  }
 
   .ExampleSentenceHeader {
     margin-left: 0;

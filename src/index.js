@@ -14,9 +14,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AUTH_TOKEN } from './constants';
-// import { ApolloLink, split } from 'apollo-client-preset';
-// import { WebSocketLink } from 'apollo-link-ws';
-// import { getMainDefinition } from 'apollo-utilities';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -25,7 +22,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

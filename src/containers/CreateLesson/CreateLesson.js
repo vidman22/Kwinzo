@@ -456,9 +456,13 @@ class CreateLesson extends Component {
   completed = (data) => {
       this.setState({
         formIsHalfFilledOut: false
+      }, () => {
+        this.props.history.push(`/lessons/${data.createLessonSet.id}`);
       });
-      this.props.history.push(`/lessons/${data.createLessonSet.id}`);
-      
+  }
+
+  back() {
+    this.props.history.push('/create-lesson');
   }
 
   render() {
@@ -603,6 +607,7 @@ class CreateLesson extends Component {
     return (
       <div>
         <div className="CreateLesson">
+         <button className="BackButtonCreate" onClick={() => this.back()}>{"<"} Back</button>
           <Prompt
             when={this.state.formIsHalfFilledOut}
             message="Are you sure you want to leave?"

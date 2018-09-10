@@ -28,22 +28,11 @@ class LandingPage extends Component {
     super(props)
     this.state = {
       authModal: false,
-      showDrop: false
     }
   }
 
   componentDidMount() {
     this.props.onTryAutoSignup();
-  }
-
-  toggleDrop() {
-    this.setState( prevState => {
-      return { showDrop: !prevState.showDrop}
-    });
-  }
-
-  closeDrop() {
-    this.setState({ showDrop: false});
   }
 
   toggleModal() {
@@ -64,7 +53,6 @@ class LandingPage extends Component {
             <div className="Wrapper">
                 <header className="Header">
                     <NavLink 
-                        onClick={() => this.closeDrop()}
                         to={{
                         pathname: '/'
                     }}exact> <img 
@@ -77,10 +65,8 @@ class LandingPage extends Component {
                     <p>Quiz to win</p>
                       {this.props.user ?
                         <UserDropdown
-                          toggleDrop={() => this.toggleDrop()}
                           user={this.props.user}
                           picture={this.props.user.picture}
-                          showdrop={this.state.showDrop}
                           logout={() => this.logout()}
                         />
                         :
@@ -104,7 +90,6 @@ class LandingPage extends Component {
                         <nav>
                             <ul>
                              <li><NavLink 
-                              onClick={() => this.closeDrop()}
                               to={{
                                 pathname: '/create-lesson'
                              }}
@@ -112,7 +97,6 @@ class LandingPage extends Component {
                                 color:'#323232'}} id='second'>Create</NavLink></li>
 
                              <li><NavLink
-                              onClick={() => this.closeDrop()} 
                               to={{
                                 pathname: '/lessons'
                              }}

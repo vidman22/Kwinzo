@@ -2,18 +2,23 @@
 .InputVocab{
 	font-family: Open Sans, sans-serif;
 	display: block;
-  	width:90%;
-  	margin: 18px 0 18px 2%;
-  	border-top:none;
-  	border-left:none;
-  	border-right:none;
-  	background: none; 
-  	height:30px;
-  	line-height:20px;
-  	font-size:20px;
-  	border-bottom:solid 2px #ccc;
-  	transition:all .23s ease-in;
-  	outline: none;
+  width:90%;
+  margin: 18px 0 18px 2%;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none; 
+  height:26px;
+  line-height:20px;
+  font-size:20px;
+  border-bottom:solid 2px #ccc;
+  transition:all .23s ease-in;
+  outline: none;
+}
+.InputWrapper{
+  display: block;
+  margin: auto;
+  width: 96%;
 }
 .InputVocabHint:focus,
 .InputVocab:focus{
@@ -26,4 +31,15 @@
 
 .InputVocabHint{
 
+}
+
+@media screen and (max-width: 640px) {
+  .InputVocabHint,
+  .InputVocab{
+    height:18px;
+    line-height:16px;
+    font-size:14px;
+    outline: none;
+    margin: 18px 0 18px 2%;
+  }
 }

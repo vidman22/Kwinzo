@@ -149,7 +149,6 @@ class SoloGame extends Component {
 	}
 
 	back() {
-	
 		this.props.history.push(`/lessons/${this.props.lesson.id}`);
 	}
 

@@ -74,11 +74,12 @@ class Auth extends Component {
 
 
     checkValidity () {
-       const updatedForm = this.state.form;
-       let formIsValid = true;
-
-        for (let property in updatedForm ) {
-            formIsValid = updatedForm[property].valid && formIsValid;
+       const form = this.state.form;
+       let formIsValid;
+       if (this.state.isLogin) {
+        formIsValid = form.email.valid && form.password.valid;
+       } else {
+            formIsValid = form.email.valid && form.password.valid && form.username.valid;
         }
         this.setState({formIsValid});
     }
@@ -178,6 +179,7 @@ class Auth extends Component {
     }
 
     completed = (data) => {
+        console.log('data', data);
         this.props.togglemodal();
         
         let email;
@@ -203,6 +205,10 @@ class Auth extends Component {
         const username = this.state.form.username.value;
         const email = this.state.form.email.value;
         const password = this.state.form.password.value;
+        let variables;
+        if (login) {
+            variables = {variables: {email, password}}
+        } else variables = {variables: {username, email, password}}
   
 
         const responseGoogle = (response) => {
@@ -231,7 +237,8 @@ class Auth extends Component {
         }
 
 
-
+        console.log('variables', variables);
+        console.log('valid', this.state.formIsValid);
         return (
 
             <div className="Auth">
@@ -244,7 +251,8 @@ class Auth extends Component {
                     {login ? <h2>Login</h2> : <h2>Sign Up</h2>}
                     <form onSubmit={e => {
                         e.preventDefault();
-                        mutation({variables: { username, email, password} });
+                        console.log('submit fired mutation', mutation);
+                        mutation(variables);
                         }}>
                     {!login && (
                       <div>
@@ -279,7 +287,7 @@ class Auth extends Component {
                         </button>
                 </form>
                 {loading && <div className="spinner spinner-1"></div>}
-                {error && <p>Error</p>}
+                {error && <p>error</p>}
                </div>    
              )}
              </Mutation>
