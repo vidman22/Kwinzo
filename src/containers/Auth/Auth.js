@@ -179,7 +179,6 @@ class Auth extends Component {
     }
 
     completed = (data) => {
-        console.log('data', data);
         this.props.togglemodal();
         
         let email;
@@ -212,7 +211,7 @@ class Auth extends Component {
   
 
         const responseGoogle = (response) => {
-            console.log('google response', response);
+
 
             const email = response.profileObj.email,
                username = response.profileObj.givenName,
@@ -220,12 +219,10 @@ class Auth extends Component {
                  userID = response.profileObj.googleId,
                   token = response.tokenId,
               expiresIn = response.tokenObj.expires_in;
-            console.log('google email', email);
 
               
             this.props.togglemodal();
             this._oAuthMutation(email, username, picture, userID, token, expiresIn);
-            console.log('data from props', this.props);
 
         }
         const responseFacebook = (response) => {
@@ -236,9 +233,6 @@ class Auth extends Component {
             this._oAuthMutation(response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
         }
 
-
-        console.log('variables', variables);
-        console.log('valid', this.state.formIsValid);
         return (
 
             <div className="Auth">
@@ -251,7 +245,6 @@ class Auth extends Component {
                     {login ? <h2>Login</h2> : <h2>Sign Up</h2>}
                     <form onSubmit={e => {
                         e.preventDefault();
-                        console.log('submit fired mutation', mutation);
                         mutation(variables);
                         }}>
                     {!login && (
