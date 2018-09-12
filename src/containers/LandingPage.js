@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Route, Switch, withRouter } from 'react-router-dom';
+import { NavLink, Link, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import logo from "../assets/svg/kwinzo.svg";
 import './LandingPage.css';
@@ -28,6 +28,7 @@ class LandingPage extends Component {
     super(props)
     this.state = {
       authModal: false,
+      displayMenuStyle: 'NavClose',
     }
   }
 
@@ -41,6 +42,16 @@ class LandingPage extends Component {
     });
   }
 
+  toggleMenu(){
+    
+    if (this.state.displayMenuStyle === 'NavClose'){
+      this.setState({ displayMenuStyle: 'NavOpen'});
+    } else {
+      this.setState({ displayMenuStyle: 'NavClose'});
+    }
+    console.log('menu style', this.state.displayMenuStyle);
+  }
+
   logout() {
     this.props.history.push('/');
     this.props.logout();
@@ -48,6 +59,10 @@ class LandingPage extends Component {
 
 
   render() {
+      const cssClasses = [
+        "MobileNavLinks",
+        this.state.displayMenuStyle
+      ];
         return (
            <div className="Landing">
             <div className="Wrapper">
@@ -72,7 +87,7 @@ class LandingPage extends Component {
                         :
                          <svg
                           className="AuthSvg" 
-                           id="last"
+                          id="last"
                           xmlns="http://www.w3.org/2000/svg" 
                           viewBox="0 0 300 300" 
                           x="0" 
@@ -86,7 +101,9 @@ class LandingPage extends Component {
                           0-24.154 15.712-43.738 35.089-43.738s35.089 19.584 35.089 43.738c0 18.178-8.896 33.756-21.555 40.361l1.19 
                           6.349c10.019 11.658 49.802 12.418 49.802 58.488h-64.069z"/></svg> 
                         }
-
+                        
+                          
+                        
                         <nav>
                             <ul>
                              <li><NavLink 
@@ -105,7 +122,28 @@ class LandingPage extends Component {
 
                              </ul>
                         </nav>
-                              
+                        <div className="MobileWrapper">
+                          <div className={cssClasses.join(' ')}>
+                             <div className="MobileLink"><Link 
+                              to={{
+                                pathname: '/create-lesson'
+                             }}>Create</Link></div>
+
+                             <div className="MobileLink"><Link
+                              to={{
+                                pathname: '/lessons'
+                             }}>Lessons</Link></div>
+
+                            {this.props.user ? <div className="MobileLink"><Link
+                              to={{
+                                pathname: `/user/${this.props.user.userID}`
+                             }}>My Page</Link></div> : <div className="MobileLogin" onClick={()=> this.toggleModal()}>Login</div>}
+
+                            {this.props.user ? <div className="MobileLogin" onClick={() => this.logout()}>Logout</div> : null}
+                          </div>
+                          <div className="HamburgerIcon" onClick={() => this.toggleMenu()}><i className="fa fa-bars"></i></div>
+                        </div>
+
                 </header>
             
                <Switch> 

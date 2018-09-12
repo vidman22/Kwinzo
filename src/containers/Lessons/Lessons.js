@@ -96,7 +96,7 @@ omissionLessonQuery() {
         {({ loading, error, data}) => {
           if (loading) return <div className="spinner spinner-1"></div>;
           if (error) return `Error! ${error.message}`;
-          
+          console.log('data', data)
           return (
             <div className="LessonLinks">
             { this.state.activeQuery === 'lessonSets' ? <h1>Grammar Lessons</h1> : null}

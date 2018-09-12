@@ -211,26 +211,47 @@ class Auth extends Component {
   
 
         const responseGoogle = (response) => {
-
-
-            const email = response.profileObj.email,
-               username = response.profileObj.givenName,
-                picture = response.profileObj.imageUrl,
-                 userID = response.profileObj.googleId,
-                  token = response.tokenId,
+            let email,
+               username,
+                picture,
+                 userID,
+                  token,
+              expiresIn;
+           
+            if (response.profileObj) {
+             email = response.profileObj.email;
+               username = response.profileObj.givenName;
+                picture = response.profileObj.imageUrl;
+                 userID = response.profileObj.googleId;
+                  token = response.tokenId;
               expiresIn = response.tokenObj.expires_in;
+           }
 
               
             this.props.togglemodal();
             this._oAuthMutation(email, username, picture, userID, token, expiresIn);
+        
 
         }
         const responseFacebook = (response) => {
+            let email,
+               username,
+                picture,
+                 userID,
+                  token,
+              expiresIn;
             
-            const token = response.accessToken;
-            // this.props.onAuth( response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
+            if (response.accessToken) {
+                email = response.email;
+               username = response.name;
+                picture = response.picture.data.url;
+                 userID = response.id;
+                  token = response.accessToken;
+              expiresIn = response.expiresIn
+            }
+            
             this.props.togglemodal();
-            this._oAuthMutation(response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
+            this._oAuthMutation(email, username, picture, userID, token, expiresIn);
         }
 
         return (
