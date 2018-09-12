@@ -301,7 +301,7 @@ class Lesson extends Component {
 
 
   render() {
-    console.log('state', this.state);
+ 
     const formArray = [];
         for (let key in this.state.questions) {
           formArray.push({

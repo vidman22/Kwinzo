@@ -69,8 +69,6 @@ class Lesson extends Component {
     let value = values[`value${index}`];
     value = value.toLowerCase().trim();
     answer = answer.toLowerCase().trim();
-    console.log('value', value);
-    console.log('answer', answer);
     if ( value === answer ) {
       const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);

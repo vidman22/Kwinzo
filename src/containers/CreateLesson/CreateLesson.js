@@ -167,7 +167,7 @@ class CreateLesson extends Component {
     const updatedAltArray = [
       ...updatedAlts.array
     ]
-    console.log("alt length " + updatedAltArray.length);
+
     if (updatedAltArray.length >= 4 ) {
       this.setState({addAltDisabled: true});
     }

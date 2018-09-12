@@ -259,11 +259,11 @@ class Lesson extends Component {
     for ( let i = 0; i< questions.length; i++){
 
       if (questions[i].checkedOption === -1) {
-        console.log('checked option triggered' + questions[i].checkedOption);
+
         checkDisabled = true;
       } else checkDisabled = false;
     }
-    console.log('check disabled ' + checkDisabled );
+
     this.setState({
       checkDisabled
     })
@@ -294,7 +294,7 @@ class Lesson extends Component {
 
 
   render() {
-    console.log('state', this.state);
+
     const formArray = [];
         for (let key in this.state.questions) {
           formArray.push({

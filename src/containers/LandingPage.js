@@ -49,7 +49,7 @@ class LandingPage extends Component {
     } else {
       this.setState({ displayMenuStyle: 'NavClose'});
     }
-    console.log('menu style', this.state.displayMenuStyle);
+
   }
 
   logout() {

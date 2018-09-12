@@ -116,7 +116,7 @@ class CreateReadingLesson extends Component {
 	}
 
 	componentDidMount() {
-		console.log('did mount triggered');
+		
     	const lessonFormArray = [];
     	const lessonVocabForm = {...this.state.lessonVocabForm};
     	const lessonCompForm = {...this.state.lessonCompForm};
@@ -125,7 +125,7 @@ class CreateReadingLesson extends Component {
     	    	lessonFormArray.push(lessonVocabForm);
     		}
 		} else {
-		console.log('lesson comp form in did mount', lessonCompForm);
+		
 		for (let i = 0; i < this.state.lessonFormNum; i++ ) {
 			lessonFormArray.push(lessonCompForm);
 			}
@@ -245,7 +245,7 @@ class CreateReadingLesson extends Component {
 
   	submit(e){
   		e.preventDefault(e);
-  		console.log('submit triggered');
+
   	}
 
   	handleChange = (e) => {
@@ -359,7 +359,7 @@ class CreateReadingLesson extends Component {
          if (inputIdentifier === 'omission') {
             const textarea = this.state.textarea.value.toLowerCase().trim();
             const omission = event.target.value.toLowerCase().trim();
-      		console.log('text area', textarea);
+
             let index = textarea.indexOf(omission);
 
             updatedValidation.msg = '';
@@ -477,7 +477,7 @@ class CreateReadingLesson extends Component {
   	}
 
   	optionChecked = (formIndex, index) => {
-      console.log( formIndex, index);
+ 
   		const updatedLessonForms = [
     	  ...this.state.lessonFormArray
     	];
@@ -557,7 +557,7 @@ class CreateReadingLesson extends Component {
   	}
 
   	completed(data){
-  		console.log('data returned', data);
+
       let urlPath;
       if ( this.state.readingModeOmission == true) {
         urlPath = 'reading-omission-lesson';
@@ -572,7 +572,7 @@ class CreateReadingLesson extends Component {
     }
 
 	render(){
-		console.log('state', this.state);
+
 
 		const formArray = [];
       	for (let key in this.state.lessonFormArray) {
@@ -582,7 +582,7 @@ class CreateReadingLesson extends Component {
         	});
       	}
       	const ADD_LESSON = this.state.readingModeOmission ? ADD_OMISSION_LESSON : ADD_COMP_LESSON;
-      	console.log('form array', formArray);
+  
 
       	let form = (
       		

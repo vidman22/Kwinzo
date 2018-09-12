@@ -33,9 +33,9 @@ const keys = require('./keys');
 getUserId = async (Authorization) => {
 
     const token = Authorization.replace('Bearer ', '');
-    console.log('app secret' + keys.app.APP_SECRET);
+  
     const { userID } = jwt.verify(token, keys.app.APP_SECRET);
-    console.log('userID ', userID);
+
     return await User.findOne({userID});
 }
 
