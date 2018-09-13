@@ -1,6 +1,7 @@
 
 
 .InputSentence {
+  font-family: Open sans, sans-serif;
   display: block;
   width:90%;
   margin: 22px auto 18px auto;
@@ -19,7 +20,8 @@
 
 .InputAnswer,
 .InputHint {
-	display: block;
+  font-family: Open sans, sans-serif;
+  display: block;
   float: left;
   width:51%;
   margin: 10px 0 9px 7%;
@@ -35,16 +37,16 @@
 }
 
 .InputWrapper p{
-	display: block;
+  display: block;
   width: 100%;
-	float: left;
-	color: red;
+  float: left;
+  color: red;
 }
 
 .InputHint:focus,
 .InputSentence:focus,
 .InputAlt:focus,
 .InputAnswer:focus {
-	outline:none;
-	border-bottom:solid 2px #EDE711;
+  outline:none;
+  border-bottom:solid 2px #EDE711;
 }

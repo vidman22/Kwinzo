@@ -110,6 +110,7 @@ textarea {
 }
 
 .InputQuestion{
+  font-family: Open Sans, sans-serif;
   display: block;
   width:90%;
   margin: 22px auto 18px auto;
@@ -118,8 +119,8 @@ textarea {
   border-right:none;
   background: none; 
   height:30px;
-  line-height:20px;
-  font-size:28px;
+  line-height:28px;
+  font-size:26px;
   border-bottom:solid 2px #ccc;
   transition:all .23s ease-in;
   outline:none;

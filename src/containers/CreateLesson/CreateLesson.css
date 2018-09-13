@@ -39,19 +39,25 @@
   color: black;
 }
 
-
-
 .ExampleSentenceHeader {
   display: block;
+  margin: 6px 0 6px 5%;
+  text-align: left;
   float: left;
-  margin: 0 1em 0 1.75em;
+  width: 80%;
   font-size: 22px;
-  
+}
+.ExampleKey {
+  display: block;
+  margin: auto;
+  clear: both;
+  width: 100%;
 }
 .ExampleSentence ul {
   display: block;
-  clear: left;
+  width: 60%;
   float: left;
+  clear: right;
   text-align: left;
   list-style: none;
 }
@@ -63,7 +69,7 @@
 .ExampleSentence li:first-child{
   list-style: none;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 26px;
   border-bottom: 1px solid #eee;
 
 }
@@ -81,6 +87,10 @@
   border-radius: 4px;
   margin-top: 10px;
   width: 90%;
+  padding: 6px 0 6px 0;
+}
+
+.ExampleAnswerWrapper {
 }
 
 .ExampleHint {
@@ -89,7 +99,7 @@
   color: #ccc;/*#EDE711;*/
   white-space: nowrap;
   text-align: center;
-  display: inline-block;
+  display: inline;
   clear: both;
   overflow: hidden;
   margin-bottom: -3px;
@@ -100,7 +110,7 @@
 .FirstHalfExample,
 .SecondHalfExample {
   position: absolute;
-  display: inline-block;
+  display: inline;
   /*margin: 2em .5em 1em .5em;*/
 }
 
@@ -169,6 +179,7 @@
 }
 
 .LessonTitleInput{
+  font-family: Open Sans, sans-serif;
   display: block;
   float: left;
   clear: both;
@@ -225,7 +236,7 @@
   display: inline-block;
   clear: both;
   float: left;
-  margin: 0 auto 0 1em;
+  margin: 0 auto 0 .6em;
   width: 100%;
 }
 
@@ -280,7 +291,17 @@
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1380px){
+  .FirstHalfExample {
+    left: 35%;
+  }
+
+  .SecondHalfExample{
+    left: 52%;
+  }
+}
+
+@media screen and (max-width: 690px) {
 
    .BackButtonCreate{
     padding: 0;
@@ -290,9 +311,6 @@
     height: 18px;
   }
 
-  .ExampleSentenceHeader {
-    margin-left: 0;
-  }
   .ExampleSentenceWrapper {
     width: 95%;
     padding: 12px 0 12px 0;
@@ -316,6 +334,7 @@
     float: left;
     text-align: left;
     list-style: none;
+    width: 100%;
   }
 
   .CreateButton {

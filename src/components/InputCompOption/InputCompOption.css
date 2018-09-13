@@ -11,9 +11,10 @@
 }
 
 .InputOption {
+  font-family: Open Sans, sans-serif;
   display: inline-block;
   float: left;
-  width: 95%;
+  width: 92%;
   margin:10px 0 10px 15px;
   border-top:none;
   border-left:none;
@@ -29,6 +30,16 @@
 
 .InputOption:focus{
   border-bottom:solid 1px yellow;
+}
+.RemoveOption{
+  display: inline-block;
+  clear: right;
+}
+
+.RemoveOption:hover{
+
+  cursor: pointer;
+  fill: #00c4c3;
 }
 
 @media screen and (max-width: 640px) {

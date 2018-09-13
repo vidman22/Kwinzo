@@ -15,7 +15,7 @@ const InputCompOption = (props) => {
 	  			placeholder={props.optionPlaceholder}
 	  		/>
 	  		<svg 
-	  			className="RemoveAlt" 
+	  			className="RemoveOption" 
 	  			fill="#eee" 
 	  			onClick={props.onclick} 
 	  			xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" 

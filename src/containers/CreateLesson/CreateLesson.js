@@ -102,7 +102,6 @@ class CreateLesson extends Component {
       this.setState({lessonFormArray});
 
       showConst = setInterval(this.showExAnswer, 6000);
-
       
   }
 
@@ -167,7 +166,7 @@ class CreateLesson extends Component {
     const updatedAltArray = [
       ...updatedAlts.array
     ]
-
+    console.log("alt length " + updatedAltArray.length);
     if (updatedAltArray.length >= 4 ) {
       this.setState({addAltDisabled: true});
     }
@@ -448,8 +447,9 @@ class CreateLesson extends Component {
 
     updatedTitle.validation = updatedTitleValidation;
 
-    this.setState({ title: updatedTitle, formIsHalfFilledOut: !formIsValid, formIsValid });
-
+    this.setState({ title: updatedTitle }, () => {
+      this.checkFormValidity();
+    });
     
   }
 
@@ -621,20 +621,24 @@ class CreateLesson extends Component {
           />
           <span>{this.state.title.validation.msg}</span>
           <div className="ExampleSentence">
-          <div className="ExampleSentenceHeader">Example Sentence</div>
+            <div className="ExampleKey">
+              <ul>
+                <li>Example Input</li>
+                <li>Sentence: The quick brown fox jumps over the lazy dog.</li>
+                <li>Answer: jumps</li>
+                <li>Hint: jump</li> 
+              </ul>
+            </div>
+          <div className="ExampleSentenceHeader">Example Result</div>
           
           <div className="ExampleSentenceWrapper"><div className="FirstHalfExample">The quick brown fox</div>
-          {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
-          <div className="SecondHalfExample">over the lazy dog.</div></div>
-          <div className="ExampleKey">
-            <ul>
-              <li>Key</li>
-              <li>Sentence: The quick brown fox jumps over the lazy dog.</li>
-              <li>Answer: jumps</li>
-              <li>Hint: jump</li>
-              
-            </ul>
+            <div className="ExampleAnswerWrapper">
+              {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
+            
+            <div className="SecondHalfExample">over the lazy dog.</div>
+            </div>
           </div>
+          
           
         </div>
           {form}     
