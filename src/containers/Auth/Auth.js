@@ -155,10 +155,11 @@ class Auth extends Component {
         });
     }
 
-    _oAuthMutation = async (Email, Username, Picture, UserID, Token, ExpiresIn) => {
+    _oAuthMutation = async (Type, Email, Username, Picture, UserID, Token, ExpiresIn) => {
       
         const result = await this.props.oAuthMutation({
             variables: {
+                type: Type,
                 email: Email,
                 username: Username,
                 picture: Picture,
@@ -227,9 +228,8 @@ class Auth extends Component {
               expiresIn = response.tokenObj.expires_in;
            }
 
-              
             this.props.togglemodal();
-            this._oAuthMutation(email, username, picture, userID, token, expiresIn);
+            this._oAuthMutation('google', email, username, picture, userID, token, expiresIn);
         
 
         }
@@ -251,7 +251,7 @@ class Auth extends Component {
             }
             
             this.props.togglemodal();
-            this._oAuthMutation(email, username, picture, userID, token, expiresIn);
+            this._oAuthMutation('facebook', email, username, picture, userID, token, expiresIn);
         }
 
         return (
@@ -361,8 +361,8 @@ class Auth extends Component {
 };
 
 const OAUTH_MUTATION = gql`
-    mutation($email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
-        oAuthSignIn( email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
+    mutation($type: String!, $email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
+        oAuthSignIn(type: $type, email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
             token
             expiresIn
             user {

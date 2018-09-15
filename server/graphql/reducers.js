@@ -2,6 +2,7 @@ const mongoose = require('../config/mongoose');
 const db = mongoose();
 const uuidv4 = require('uuid/v4');
 const bcrypt = require('bcryptjs');
+
 const jwt = require('jsonwebtoken');
 
 const LessonSet = require('../models/lessonSet');
@@ -11,53 +12,15 @@ const ReadingOmissionLesson = require('../models/readingOmissionLesson');
 
 const { getUserId } = require('../oauth/config/utils');
 const keys = require('../oauth/config/keys');
+const confirmGoogleToken = require('../oauth/config/googleStrategy');
 const APP_SECRET = keys.app.APP_SECRET;
+const FB_SECRET = keys.facebook.AppSecret;
+const GOOGLE_SECRET = keys.google.clientSecret;
 
 
 
 var root = {
-		deleteLesson: async (args, ctx, info ) => {
-			const userID = getUserId(ctx.headers.authorization);
-
-			if (!userID) {
-				throw new Error('Not authenticated')
-			}
-			
-			return await LessonSet.deleteOne({ userID }, (err) => {
-				if (err) {
-					throw err 
-					return false
-				} else return true
-			});
-		},
-		updateLesson: async (args, ctx, info ) => {
-
-		},
-	 	lessonSet: async (args, ctx, info ) => {
-	 		return await LessonSet.findById(args.id);
-	 	},
-	 	lessonSets: async (args, ctx, info) => {
-	 		return await LessonSet.find();
-	 	},
-	 	readingOmissionLessons: async ( args, ctx, info) => {
-	 		return await ReadingOmissionLesson.find();
-	 	},
-	 	readingOmissionLesson: async ( args, ctx, info) => {
-	 		return await ReadingOmissionLesson.findById(args.id);
-	 	},
-	 	readingCompLessons: async (args, ctx, info) => {
-	 		return await ReadingCompLesson.find();
-	 	},
-	 	readingCompLesson: async (args, ctx, info) => {
-	 		return await ReadingCompLesson.findById(args.id);
-	 	},
-	 	user: async ({_id}) => {
-	 		return await User.findById(_id)
-	 	},
-	 	userLessons: async ( authorID ) => {
-	 		return await LessonSet.find(authorID);
-	 	},
-	 	createLessonSet: async ( {title, author, authorID, sentences}, ctx, info ) => {
+		createLessonSet: async ( {title, author, authorID, sentences}, ctx, info ) => {
 	 		const termNumber = sentences.length;
 	 		const lessonSet = new LessonSet({ title, author, authorID, sentences, termNumber, created: Date.now() });
 	 		return await lessonSet.save(); 
@@ -65,7 +28,7 @@ var root = {
       			throw new Error('Error');
    			}	
 	 	},
-	 	createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
+		createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
 			const numberOfOmissions = omissions.length;
 			const readingOmissionLesson = new ReadingOmissionLesson({title, author, authorID, text, omissions, created: Date.now()});
 			return await readingOmissionLesson.save(); 
@@ -81,6 +44,92 @@ var root = {
 				throw new Error('Error');
 			}
 		},
+		deleteOmissionLesson: async (args, ctx, info ) => {
+			console.log('deletecomp fired args', args);
+			return await ReadingOmissionLesson.findByIdAndDelete( args.id , (err) => {
+				if (err) {
+					throw err 
+					return false
+				} else return true
+			});
+		},
+		deleteCompLesson: async (args, ctx, info ) => {
+			console.log('deleteom fired args', args);
+			return await ReadingCompLesson.findByIdAndDelete( args.id , (err) => {
+				if (err) {
+					throw err 
+					return false
+				} else return true
+			});
+		},
+		deleteInputLesson: async (args, ctx, info ) => {
+			// const userID = getUserId(ctx.headers.authorization);
+
+			// if (!userID) {
+			// 	throw new Error('Not authenticated')
+			// }
+
+			return await LessonSet.findByIdAndDelete( args.id , (err) => {
+				if (err) {
+					throw err 
+					return false
+				} else return true
+			});
+		},
+	 	lessonSet: async (args, ctx, info ) => {
+	 		return await LessonSet.findById(args.id);
+	 	},
+	 	lessonSets: async (args, ctx, info) => {
+	 		return await LessonSet.find();
+	 	},
+	 	login: async ({email, password}) => {
+	 		const user = await User.findOne({ email });
+
+	 		if (!user) {
+	 			throw new Error('Email not found');
+	 		}
+	 		const validPassword = await bcrypt.compare(password, user.password);
+	 		if (!validPassword) {
+	 			throw new Error('Password is incorrect');
+	 		}
+	 		const token = jwt.sign({ userID: user.userID }, APP_SECRET, {expiresIn: '12hr'});
+	 		const expiresIn = 7200;
+	 		return {
+    			token,
+    			expiresIn,
+    			user
+  			}
+	 	},
+	 	oAuthSignIn: async ({ type, email, username, picture, userID, token, expiresIn}) => {
+			console.log('oauth triggered');
+	 		let user = await User.findOne({ email });
+			let checkedToken;
+			 if (type === 'google'){
+				checkedToken = await confirmGoogleToken(token);
+				console.log(checkedToken);
+			 }
+			
+	 		if (!user ) {
+	 			user = new User({email, username, picture, userID, joined: Date.now() });
+	 			await user.save(); 
+	 		} return {
+	 			token,
+	 			expiresIn,
+	 			user
+	 		}
+	 	},
+	 	readingOmissionLessons: async ( args, ctx, info) => {
+	 		return await ReadingOmissionLesson.find();
+	 	},
+	 	readingOmissionLesson: async ( args, ctx, info) => {
+	 		return await ReadingOmissionLesson.findById(args.id);
+	 	},
+	 	readingCompLessons: async (args, ctx, info) => {
+	 		return await ReadingCompLesson.find();
+	 	},
+	 	readingCompLesson: async (args, ctx, info) => {
+	 		return await ReadingCompLesson.findById(args.id);
+	 	},
 	 	signUp: async ({ username, email, password }, ctx, info) => {
 
 	 		const hash = await bcrypt.hash(password, 12 );
@@ -104,38 +153,11 @@ var root = {
   				}			
 	 		}
 	 	},
-	 	login: async ({email, password}) => {
-	 		const user = await User.findOne({ email });
-
-	 		if (!user) {
-	 			throw new Error('Email not found');
-	 		}
-	 		const validPassword = await bcrypt.compare(password, user.password);
-	 		if (!validPassword) {
-	 			throw new Error('Password is incorrect');
-	 		}
-	 		const token = jwt.sign({ userID: user.userID }, APP_SECRET, {expiresIn: '12hr'});
-	 		const expiresIn = 7200;
-	 		return {
-    			token,
-    			expiresIn,
-    			user
-  			}
+	 	user: async ({_id}) => {
+	 		return await User.findById(_id)
 	 	},
-	 	oAuthSignIn: async ({ email, username, picture, userID, token, expiresIn}) => {
-
-	 		let user = await User.findOne({ email });
-
-	 		// token = jwt.sign({ userID }, APP_SECRET, {expiresIn: '12hr'});
-
-	 		if (!user ) {
-	 			user = new User({email, username, picture, userID, joined: Date.now() });
-	 			await user.save(); 
-	 		} return {
-	 			token,
-	 			expiresIn,
-	 			user
-	 		}
+	 	userLessons: async ( authorID ) => {
+	 		return await LessonSet.find(authorID);
 	 	}
 };
 

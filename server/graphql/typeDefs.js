@@ -116,11 +116,11 @@ const schema = buildSchema(`
 		createLessonSet(title: String!, author: String!, authorID: String!, sentences: [SentenceInput] ): LessonSet
 		signUp( username: String! , email: String!, password: String! ): AuthPayload
 		login( email: String!, password: String! ) : AuthPayload
-		deleteLesson( id: String! ) : Boolean
-		oAuthSignIn(email: String!, username: String!, picture: String, userID: String!, token: String!, expiresIn: String! ): AuthPayload
+		deleteCompLesson( id: String! ) : Boolean
+		deleteInputLesson( id: String! ) : Boolean
+		deleteOmissionLesson( id: String! ) : Boolean
+		oAuthSignIn(type: String!, email: String!, username: String!, picture: String, userID: String!, token: String!, expiresIn: String! ): AuthPayload
 	}
 `);
-
-
 
 module.exports =  schema;

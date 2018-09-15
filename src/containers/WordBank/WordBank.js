@@ -37,7 +37,6 @@ class WordBank extends Component {
 
  componentDidMount() {
         window.scrollTo(0, 0);
-
         if (this.props.lesson.sentences) {
           this.completed(this.props.lesson.sentences);
         }

@@ -11,8 +11,8 @@ var readingOmissionLessonSchema = new Schema({
 	author: String,
 	authorID: String,
 	text: String,
-	created: { type: Date, default: Date.now()},
-	updated: { type: Date, default: Date.now()},
+	created: { type: Date, default: Date.now},
+	updated: { type: Date, default: Date.now},
     omissions: [OmissionSchema],
     termNumber: Number,
 });

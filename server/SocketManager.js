@@ -93,11 +93,11 @@ module.exports = function(socket) {
 
 	socket.on('START_GAME', (room, title, sentences) => {
 		io.to(room).emit('START_GAME', title, sentences);
-		
+		// console.log('sentences ', sentences);
 	});
 
 	socket.on('SUCCESS',  (room, name, length)  => {
-		
+		// console.log("peace");
 		const index = searchSessions(room);
 
 		let connectedUsers = sessions[index].connectedUsers;
@@ -128,7 +128,8 @@ module.exports = function(socket) {
 	})
 
 	socket.on('disconnect', () => {
-
+		// console.log('disconnect sessions ', sessions);
+	 //  	console.log('sessions length ' + sessions.length);
 	  	if (sessions.length != 0) {
 		for ( let i = 0; i < sessions.length; i++ ) {
 			for ( let j = 0; j < sessions[i].connectedUsers.length; j++){
@@ -148,7 +149,7 @@ module.exports = function(socket) {
 					newSessionArray[i] = newSession;
 					sessions = newSessionArray;
 
-					
+					// console.log('session ', sessions[i].connectedUsers, ' updated after disconnect');
 				}	
 			}
 	    } 
@@ -156,7 +157,7 @@ module.exports = function(socket) {
 		let newSessionArray = [...sessions];
 	  	nesSessionArray = sessions.filter((session) => sessions[i] !== sessions[i]);
 	  	sessions = newSessionArray;				
-		
+		// console.log('sessions after filter ', sessions);
 	}
 	});
 }

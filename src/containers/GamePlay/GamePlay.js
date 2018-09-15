@@ -6,7 +6,7 @@ import './GamePlay.css';
 import io from 'socket.io-client';
 
 
-const socket = io();
+const socket = io('http://localhost:5000');
 
 let index = 0;
 export default class GamePlay extends Component {

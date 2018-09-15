@@ -69,6 +69,7 @@ class Lesson extends Component {
     let value = values[`value${index}`];
     value = value.toLowerCase().trim();
     answer = answer.toLowerCase().trim();
+
     if ( value === answer ) {
       const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);
@@ -246,12 +247,13 @@ class Lesson extends Component {
         id: this.props.match.params.id
       }
     });
+    this.props.history.push('/lessons');
   };
 };
 
 const DELETE_LESSON = gql`
-  mutation DeleteLesson($id: String!){
-    deleteLesson(id: $id)
+  mutation ($id: String!){
+    deleteInputLesson(id: $id)
   }
 `
 

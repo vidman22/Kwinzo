@@ -37,7 +37,7 @@ input.InputAlt {
 }
 
 .InputAlt:focus{
-  outline: none;
+	outline: none;
 }
 
 .RemoveAlt{
