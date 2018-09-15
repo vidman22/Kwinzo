@@ -22,7 +22,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

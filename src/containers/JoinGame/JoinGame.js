@@ -7,7 +7,7 @@ import GamePlay from '../GamePlay/GamePlay';
 import './JoinGame.css';
 
 
-const socket = io('http://localhost:5000');
+const socket = io();
 
 
 export default class CreateGame extends Component {
