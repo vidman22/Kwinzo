@@ -19,4 +19,4 @@ script:
 
 after_success:
 - docker pull stackdepot/stack:0.2.0
-- docker run -i --rm stackdepot/stack:0.2.0 update --user $USER --pass $PASSWORD --host $HOST --ca "$CA" --cert "$CERT" --key "$KEY" --image $REPO/app --tag $TRAVIS_COMMIT app
+- docker run -i --rm stackdepot/stack:0.2.0 update --user $USER --pass $PASSWORD --host "$(eval echo \$${TRAVIS_BRANCH}_HOST)"  --ca "$(eval echo \$${TRAVIS_BRANCH}_CA)" --cert "$(eval echo \$${TRAVIS_BRANCH}_CERT)" --key "$(eval echo \$${TRAVIS_BRANCH}_KEY)" --image $REPO/app --tag $TRAVIS_COMMIT app
