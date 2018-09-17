@@ -6,7 +6,8 @@ html, body {
 	background: url(../assets/svg/LandingPage_Background.svg) no-repeat top left;
   	background-size: 100%;
   	background-attachment: fixed;
-  	z-index: -18;
+  	z-index: -99;
+  	transform: translateZ(0);
 	/*background-image: url(../assets/svg/LandingPage_Background.svg);*/
 }
 
@@ -25,7 +26,7 @@ html, body {
 	position: relative;
 	z-index: 99;
 	display: inline-block;
-	height: 5em;        /*82px;*/
+	height: 5rem;        /*82px;*/
 	background: /*#23A6D5;*/ linear-gradient(-45deg, #23D5AB, #23A6D5);
 	margin-bottom: 10px;
 	font-family: 'Helvetica', sans-serif;
@@ -92,7 +93,7 @@ html, body {
 }
 
 .Header a{
-	font-family: 'Open Sans', sans-serif;
+	font-family: Helvetica, sans-serif;
 	color: white;
 }
 
@@ -138,19 +139,129 @@ html, body {
 	color: #323232;
 }
 
+.HamburgerIcon {
+	display: none;
+}
+
+.MobileNavWrapper {
+	display: none;
+}
+
+.MobileNavLinks {
+	display: none;
+}
+
+
+
 @media screen and (max-width: 640px) {
-	.Header nav{
-		margin-top: 10px;
-		margin-right: 12px;
+
+	.MobileNavLinks {
+		display: block;
+		position: fixed;
+		color: white;
+		opacity: .9;
+    	z-index: 200;
+    	background-color: #555;
+    	padding: 10px;
+    	box-sizing: border-box;
+    	top: 5rem;
+    	left: 0;
+    	width: 100%;
+    	transition: all 0.1s ease-out;
 	}
 
+	.MobileLogin {
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 20px;
+		font-size: 16px;
+	}
+
+	.MobileLink{
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 10px;
+		font-size: 16px;
+	}
+
+	.MobileLink a{
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 10px;
+		font-size: 16px;
+	}
+
+	div.MobileLink:hover{
+		color: black;
+		background: #ddd;
+		cursor: pointer;
+	}
+	.MobileLogin:hover{
+		color: black;
+		background: #ddd;
+		cursor: pointer;
+	}
+
+	.HamburgerIcon {
+		background: none;
+  		display: block;
+  		position: absolute;
+  		float: right;
+		height: 40px;
+		width: 40px;
+  		right: 12px;
+  		top: .4em;
+  		color: white;
+  		font-size: 40px;
+	}
+
+	.HamburgerIcon:hover{
+		color: black;
+		cursor: pointer;
+	}
+
+	.NavOpen {
+   		animation: openNav 0.2s ease-out forwards;
+	}
+
+	.NavClose {
+    	animation: closeNav 0.5s ease-out forwards;
+	}
+
+@keyframes openNav {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+ 
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes closeNav {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-200%);
+    }
+}
+
 	.Header img {
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	float: left;
-	margin-top: 12px;
-	margin-left: 24px;
+		display: inline-block;
+		width: 50px;
+		height: 50px;
+		float: left;
+		margin-top: 12px;
+		margin-left: 24px;
 
 	}
 
@@ -162,48 +273,30 @@ html, body {
 	}
 
 	.Header ul {
+		display: none;
 		width: 100%;
 		float: left;
 		padding: 0;
 		margin: 12px 0 12px 0;
 	}
 
-	.Header li {
-		display: block;
-		text-align: center;
-		width: 25%;
-		font-size: 14px;
-		padding: 0;
-	}
 
 	.Header p{
 		display: none;
 	}
 
-	.Header #first {
-		padding-left: 0;
-
-	}
-
-	.Header #second {
-		padding-left: 9px;
-	}
-
-	.Header #last {
-		/*margin-left: 16px;*/
-		border: none;
-		margin: none;
-		padding: 0px;
+	.Header svg{
+		display: none;
 	}
 
 	.Footer {
-	padding: .5em calc(50% - 400px);
-	height: 6em;
-	width: auto;
-	margin-top: 28px;
-	border-top: 4px solid  #FFF800;
-	background: #23A6D5 /*#23D5AB*/;
-}
+		padding: .5em calc(50% - 400px);
+		height: 6em;
+		width: auto;
+		margin-top: 28px;
+		border-top: 4px solid  #FFF800;
+		background: #23A6D5 /*#23D5AB*/;
+	}
 
 .Footer ul {
 

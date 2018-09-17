@@ -1,0 +1,61 @@
+.InputOptionWrapper {
+  width:85%;
+  clear: both;
+  margin: 18px 0 9px 5%;
+}
+
+.optionCheck {
+  display: inline-block;
+  float: left;
+  margin-top: 10px;
+}
+
+.InputOption {
+  font-family: Open Sans, sans-serif;
+  display: inline-block;
+  float: left;
+  width: 92%;
+  margin:10px 0 10px 15px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background: none;
+  height:20px;
+  line-height:20px;
+  font-size:18px;
+  border-bottom:solid 1px #ccc;
+  transition:all .23s ease-in;
+  outline: none;
+}
+
+.InputOption:focus{
+  border-bottom:solid 1px yellow;
+}
+.RemoveOption{
+  display: inline-block;
+  clear: right;
+}
+
+.RemoveOption:hover{
+
+  cursor: pointer;
+  fill: #00c4c3;
+}
+
+@media screen and (max-width: 640px) {
+  .InputOption {
+    margin: auto;
+  }
+  .optionCheck {
+    display: inline-block;
+    float: left;
+    margin-top: 6px;
+    margin-left: -10px;
+  }
+  .InputOption {
+    height:16px;
+    line-height:16px;
+    font-size:14px;
+    margin:2px 0 2px 3px;
+  }
+}

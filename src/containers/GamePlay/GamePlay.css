@@ -1,15 +1,25 @@
 .GameHeader {
 	display: inline-block;
 	width: 100%;
+
 	background: linear-gradient(-45deg, #23D5AB, #23A6D5);
 	color: white;
-
 }
 
 .GameHeader h2{
 	font-family: 'Helvetica', sans-serif;
 	color: white;
 	text-align: center;
+}
+
+.GamePlayWrapper{
+	display: block;
+	width: 100%;
+	margin: 0 auto 0 auto;
+	padding-top: 30px;
+	background: white;
+	/*border: 1px solid #ccc;*/
+	box-shadow: 1px 2px 4px #ccc;
 }
 
 .GamePlay .error {

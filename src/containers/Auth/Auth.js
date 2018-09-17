@@ -10,7 +10,7 @@ import './Auth.css';
 import * as actions from '../../store/actions';
 
 const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($username: String!, $email: String!, $password: String!) {
+  mutation ($username: String!, $email: String!, $password: String!) {
     signUp(username: $username, email: $email, password: $password) {
         token
         expiresIn
@@ -25,7 +25,7 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
+  mutation ($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         token
         expiresIn
@@ -74,11 +74,12 @@ class Auth extends Component {
 
 
     checkValidity () {
-       const updatedForm = this.state.form;
-       let formIsValid = true;
-
-        for (let property in updatedForm ) {
-            formIsValid = updatedForm[property].valid && formIsValid;
+       const form = this.state.form;
+       let formIsValid;
+       if (this.state.isLogin) {
+        formIsValid = form.email.valid && form.password.valid;
+       } else {
+            formIsValid = form.email.valid && form.password.valid && form.username.valid;
         }
         this.setState({formIsValid});
     }
@@ -154,21 +155,28 @@ class Auth extends Component {
         });
     }
 
-    _oAuthMutation = async (email, username, picture, userID, token, expiresIn) => {
-        try{
-        await this.props.oAuthMutation({
+    _oAuthMutation = async (Type, Email, Username, Picture, UserID, Token, ExpiresIn) => {
+      
+        const result = await this.props.oAuthMutation({
             variables: {
-                email,
-                username,
-                picture,
-                userID,
-                token,
-                expiresIn
+                type: Type,
+                email: Email,
+                username: Username,
+                picture: Picture,
+                userID: UserID,
+                token: Token,
+                expiresIn: ExpiresIn
             }
-        })
-        } catch (err) {
-        console.log(err);
-        }    
+        });  
+       
+        const { token, expiresIn } = result.data.oAuthSignIn;
+        const resultEmail = result.data.oAuthSignIn.user.email;
+        const resultUsername = result.data.oAuthSignIn.user.username;
+        const resultPicture = result.data.oAuthSignIn.user.picture;
+        const resultUserID = result.data.oAuthSignIn.user.userID;
+        
+        this.props.onAuth(resultEmail, resultUsername, resultPicture, resultUserID, token, expiresIn);
+
     }
 
     completed = (data) => {
@@ -197,31 +205,54 @@ class Auth extends Component {
         const username = this.state.form.username.value;
         const email = this.state.form.email.value;
         const password = this.state.form.password.value;
+        let variables;
+        if (login) {
+            variables = {variables: {email, password}}
+        } else variables = {variables: {username, email, password}}
   
 
         const responseGoogle = (response) => {
-        
-            const email = response.profileObj.email;
-            const username = response.profileObj.givenName;
-            const picture = response.profileObj.imageUrl;
-            const userID = response.profileObj.googleId;
-            const token = response.tokenId;
-            const expiresIn = response.tokenObj.expires_in;
+            let email,
+               username,
+                picture,
+                 userID,
+                  token,
+              expiresIn;
+           
+            if (response.profileObj) {
+             email = response.profileObj.email;
+               username = response.profileObj.givenName;
+                picture = response.profileObj.imageUrl;
+                 userID = response.profileObj.googleId;
+                  token = response.tokenId;
+              expiresIn = response.tokenObj.expires_in;
+           }
 
-            this.props.onAuth(email, username, picture, userID, token, expiresIn);  
             this.props.togglemodal();
-            this._oAuthMutation(email, username, picture, userID, token, expiresIn);
+            this._oAuthMutation('google', email, username, picture, userID, token, expiresIn);
+        
 
         }
         const responseFacebook = (response) => {
+            let email,
+               username,
+                picture,
+                 userID,
+                  token,
+              expiresIn;
             
-            const token = response.accessToken;
-            this.props.onAuth( response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
+            if (response.accessToken) {
+                email = response.email;
+               username = response.name;
+                picture = response.picture.data.url;
+                 userID = response.id;
+                  token = response.accessToken;
+              expiresIn = response.expiresIn
+            }
+            
             this.props.togglemodal();
-            this._oAuthMutation(response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
+            this._oAuthMutation('facebook', email, username, picture, userID, token, expiresIn);
         }
-
-
 
         return (
 
@@ -235,7 +266,7 @@ class Auth extends Component {
                     {login ? <h2>Login</h2> : <h2>Sign Up</h2>}
                     <form onSubmit={e => {
                         e.preventDefault();
-                        mutation({variables: { username, email, password} });
+                        mutation(variables);
                         }}>
                     {!login && (
                       <div>
@@ -270,7 +301,7 @@ class Auth extends Component {
                         </button>
                 </form>
                 {loading && <div className="spinner spinner-1"></div>}
-                {error && <p>Error</p>}
+                {error && <p>error</p>}
                </div>    
              )}
              </Mutation>
@@ -330,8 +361,8 @@ class Auth extends Component {
 };
 
 const OAUTH_MUTATION = gql`
-    mutation OauthMutation( $email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
-        oAuthSignIn( email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
+    mutation($type: String!, $email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
+        oAuthSignIn(type: $type, email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
             token
             expiresIn
             user {
@@ -351,5 +382,5 @@ const mapDispatchToProps = dispatch => {
         onAuth:( email, name, picture, userID, token, expiresIn ) => dispatch( actions.authSuccess(email, name, picture, userID, token, expiresIn))
     };
 };
-const Container = graphql(OAUTH_MUTATION, {name: 'oAuthMutation'})(Auth);
+const Container = graphql( OAUTH_MUTATION, { name: 'oAuthMutation' })(Auth);
 export default connect( null , mapDispatchToProps )( Container );

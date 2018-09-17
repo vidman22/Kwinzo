@@ -1,0 +1,61 @@
+.OmissionArray{
+	display: inline;
+}
+
+.OmissionArray form{
+	display: inline;
+}
+/*.OmissionArray span{
+	display: inline-block;
+}*/
+
+.OmissionWordBank {
+	display: inline-block;
+	margin: 18px 0 12px 3%;
+	float: left;
+	padding: 2%;
+	background: white;
+	border: 1px solid #eee;
+	box-shadow: 2px 1px 2px #ccc;
+	font-family: 'Open Sans', sans-serif;
+}
+.OmissionWordBank h2{
+	margin: 0 5px 10px 5px;
+}
+.WordBankAnswer{
+	display: inline-block;
+	margin: 5px;
+	padding: 8px;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+}
+
+.WordBankAnswer p{
+	padding: 0px;
+	margin: 0px;
+}
+
+.WordBankButton {
+	display: block;
+	clear: both;
+	width: 120px;
+  	height: 60px;
+    margin: 12px 12px 12px 3%;
+  	font-size: 18px;
+  	background: #00c4c3;
+    border: none;
+  	color: white;
+  	outline: none;
+}
+
+.WordBankButton:hover{
+	color: black;
+  	border: initial;
+}
+
+@media screen and (max-width: 640px) {
+	.OmissionWordBank{
+		margin: 0 auto 8px auto;
+	}
+
+}

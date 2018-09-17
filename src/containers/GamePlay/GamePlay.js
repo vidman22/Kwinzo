@@ -6,7 +6,6 @@ import './GamePlay.css';
 import io from 'socket.io-client';
 
 
-//const socket = io('http://localhost:5000/');
 const socket = io();
 
 let index = 0;
@@ -169,7 +168,7 @@ export default class GamePlay extends Component {
 			  <div className="GameHeader">
 				<h2>{this.props.title}</h2>
 			  </div>
-			  			
+			  	<div className="GamePlayWrapper">
 			  		<div className="completed">{this.props.winner ? this.props.winner : null}</div>
 					<Sentence 
 						sentence={sentence.sentence}
@@ -181,7 +180,7 @@ export default class GamePlay extends Component {
 					/>
 					<div className="error">{this.state.error ? this.state.error : null}</div>
 					<div className="correct">{this.state.correct ? this.state.correct: null}</div>
-					
+				</div>
 			</div>
 			)
 	}

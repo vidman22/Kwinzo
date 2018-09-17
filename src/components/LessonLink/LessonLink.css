@@ -65,20 +65,18 @@
 		width: 90%;
 		height: 
 	}
-	.LessonLinkTitle h1{
-		font-size: 30px;
-		font-weight: bold;
-		margin: 0;
-	}
-	.CreatedDate {
-	display: block;
-	margin: 0 0 0 73%;
-	color: #ccc;
-	font-size: 14px;
-}
 
-	.CreatedDate p{
-	display: inline-block;
-	margin: 0;
-}
+	.CreatedDate {
+		display: block;
+		margin: 0 0 0 80%;
+		color: #ccc;
+		font-size: 14px;
+	}
+
+	.LessonLinkTitle h1{
+		text-align: left;
+		font-size: 20px;
+		margin: 0;
+		font-weight: bold;
+	}
 }

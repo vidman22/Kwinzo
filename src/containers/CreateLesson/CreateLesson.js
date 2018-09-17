@@ -102,7 +102,6 @@ class CreateLesson extends Component {
       this.setState({lessonFormArray});
 
       showConst = setInterval(this.showExAnswer, 6000);
-
       
   }
 
@@ -448,17 +447,22 @@ class CreateLesson extends Component {
 
     updatedTitle.validation = updatedTitleValidation;
 
-    this.setState({ title: updatedTitle, formIsHalfFilledOut: !formIsValid, formIsValid });
-
+    this.setState({ title: updatedTitle }, () => {
+      this.checkFormValidity();
+    });
     
   }
 
   completed = (data) => {
       this.setState({
         formIsHalfFilledOut: false
+      }, () => {
+        this.props.history.push(`/lessons/${data.createLessonSet.id}`);
       });
-      this.props.history.push(`/lessons/${data.createLessonSet.id}`);
-      
+  }
+
+  back() {
+    this.props.history.push('/create-lesson');
   }
 
   render() {
@@ -550,7 +554,7 @@ class CreateLesson extends Component {
 
                     />
               
-                    <div className="AltAddWrapper">{formElement.config.alts.array.map( (alt, index) => (
+                    <div className="ElementAddWrapper">{formElement.config.alts.array.map( (alt, index) => (
                       <div key={index}>
               
                         <InputAlt 
@@ -566,8 +570,8 @@ class CreateLesson extends Component {
                  
                       </div>
                     ))}
-                    <button className="AddAltButtonWrapper" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
-                      <svg className="AddAlt" 
+                    <button className="ElementAddButtonWrapper" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
+                      <svg className="ElementAdd" 
                         fill="#ccc" 
                         onMouseOver={() => this.altMouseOverEvent(formElement.id)}
                         onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
@@ -603,6 +607,7 @@ class CreateLesson extends Component {
     return (
       <div>
         <div className="CreateLesson">
+         <button className="BackButtonCreate" onClick={() => this.back()}>{"<"} Back</button>
           <Prompt
             when={this.state.formIsHalfFilledOut}
             message="Are you sure you want to leave?"
@@ -616,20 +621,24 @@ class CreateLesson extends Component {
           />
           <span>{this.state.title.validation.msg}</span>
           <div className="ExampleSentence">
-          <div className="ExampleSentenceHeader">Example Sentence</div>
+            <div className="ExampleKey">
+              <ul>
+                <li>Example Input</li>
+                <li>Sentence: The quick brown fox jumps over the lazy dog.</li>
+                <li>Answer: jumps</li>
+                <li>Hint: jump</li> 
+              </ul>
+            </div>
+          <div className="ExampleSentenceHeader">Example Result</div>
           
           <div className="ExampleSentenceWrapper"><div className="FirstHalfExample">The quick brown fox</div>
-          {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
-          <div className="SecondHalfExample">over the lazy dog.</div></div>
-          <div className="ExampleKey">
-            <ul>
-              <li>Key</li>
-              <li>Sentence: The quick brown fox jumps over the lazy dog.</li>
-              <li>Answer: jumps</li>
-              <li>Hint: jump</li>
-              
-            </ul>
+            <div className="ExampleAnswerWrapper">
+              {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
+            
+            <div className="SecondHalfExample">over the lazy dog.</div>
+            </div>
           </div>
+          
           
         </div>
           {form}     

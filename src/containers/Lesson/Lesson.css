@@ -1,4 +1,12 @@
-
+.BackButtonLesson {
+    font-weight: lighter;
+    width: 90px; 
+    height: 30px; 
+    border: none;
+    background-color: white;
+    font-size: 18px;
+    color: black;
+}
 
  .ExerciseButton {
   display: block;
@@ -84,15 +92,15 @@
 
 
 
-.LessonTitle h1 {
-  font-family: 'Open Sans';
+.LessonTitle h1{
+  font-family: 'Open Sans', sans-serif;
   border-bottom: 1px solid #ccc;
   width: 70%;
-  margin-left: 5%;
+  margin-left: 3%;
 }
 
 .LessonSentencesWrapper {
-  width: 80%;
+  width: 85%;
   padding: 3%;
   margin: auto;
   background: white;
@@ -121,6 +129,13 @@
 
 
 @media screen and (max-width: 640px) {
+
+  .BackButtonLesson{
+    padding: 0;
+    font-size: 14px;
+    width: 55px;
+    height: 18px;
+  }
 
   .HomeFlex {
     display: flex;

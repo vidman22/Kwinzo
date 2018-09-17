@@ -1,6 +1,7 @@
 
 
 .InputSentence {
+  font-family: Open sans, sans-serif;
   display: block;
   width:90%;
   margin: 22px auto 18px auto;
@@ -19,6 +20,7 @@
 
 .InputAnswer,
 .InputHint {
+  font-family: Open sans, sans-serif;
 	display: block;
   float: left;
   width:51%;

@@ -1,15 +1,70 @@
-.LessonLinks {
+/*.QueryButtonWrapper{
+    display: block;
+    margin: auto;
+    width: 50%;
+}*/
+
+.Lessons{
   display: block;
-  width: 50%;
   margin: auto;
+  width: 95%;
+  background: white;
+  padding: 2% 0 2% 0;
+  box-shadow: 0px 0px 4px #ccc;
+}
+
+.ChangeQueryButton {
+    display: block;
+    width: 180px;
+    height: 60px;
+    margin: 12px auto 12px auto;
+    vertical-align: top;
+    font-family: Open Sans, sans-serif;
+    font-size: 18px;
+    background: white;
+    box-shadow: 1px 1px 1px #eee;
+    border: 1px solid #eee;
+    color: black;
+}
+
+.ChangeQueryButton:hover{
+  color: black;
+  box-shadow: none;
+}
+
+.LessonLinks {
+  display: inline-block;
+  width: 50%;
+  margin: 0 0 0 8%;
+}
+
+.LessonLinks h1{
+  font-family: Montserrat, sans-serif;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.QueryButtonWrapper{
+  vertical-align: top;
+  font-family: Montserrat, sans-serif;
+  text-align: left;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 17%;
+  height: 100vh;
+  background: white;
+  margin-left: 20px;
+  box-shadow:0 0 9px #ccc;
 }
 
 .spinner {
-  width: 100px;
-  height: 100px;
+  width: 40px;
+  height: 50px;
   background: none;
   border-radius: 50%;
   position: relative;
+  display: block;
+  clear: both;
   margin: 30px auto 20px auto;
 }
 .spinner:after, .spinner:before {
@@ -72,7 +127,29 @@
 }
 
 @media screen and (max-width: 640px) {
+
+  .QueryButtonWrapper{
+    display: block;
+    margin: auto;
+    width: 90%;
+    height: auto;
+    padding: 3%;
+    border: none;
+    box-shadow: none;
+  }
+
+  .ChangeQueryButton{
+    display: block;
+    width: 80%;
+    height: 40px;
+    margin: 6px auto 6px auto;
+    font-size: 14px;
+    box-shadow: none;
+  }
+
   .LessonLinks {
+    display: inline-block;
     width: 100%;
+    margin: 0 0 0 0;
   }
 }

@@ -7,6 +7,7 @@ var userSchema = new Schema({
   password: String,
   picture: String,
   userID: String,
+  joined: { type: Date, default: Date.now()},
   lessonsets: {
   	type: [String]
   }

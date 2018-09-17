@@ -30,8 +30,7 @@ class Lesson extends Component {
     super(props)
     this.state = {
       values: {},
-      checkedInputs: {},
-      activeValue: false
+      checkedInputs: {}
     }
   }
 
@@ -58,7 +57,6 @@ class Lesson extends Component {
         let obj = {[key]: value};
         const newObj = Object.assign(obj, values);
         this.setState({
-          activeValue: true,
           values: newObj
     })
    }
@@ -71,8 +69,7 @@ class Lesson extends Component {
     let value = values[`value${index}`];
     value = value.toLowerCase().trim();
     answer = answer.toLowerCase().trim();
-    console.log('value', value);
-    console.log('answer', answer);
+
     if ( value === answer ) {
       const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);
@@ -146,6 +143,10 @@ class Lesson extends Component {
     }
   }
 
+  back() {
+      this.props.history.push('/lessons');
+  }
+
 
 
   render() {
@@ -164,6 +165,7 @@ class Lesson extends Component {
         
         return (
            <div className="LessonSentencesWrapper">
+            <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
             { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="#ccc" 
@@ -245,12 +247,13 @@ class Lesson extends Component {
         id: this.props.match.params.id
       }
     });
+    this.props.history.push('/lessons');
   };
 };
 
 const DELETE_LESSON = gql`
-  mutation DeleteLesson($id: String!){
-    deleteLesson(id: $id)
+  mutation ($id: String!){
+    deleteInputLesson(id: $id)
   }
 `
 

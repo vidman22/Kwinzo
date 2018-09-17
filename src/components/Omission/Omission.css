@@ -1,0 +1,4 @@
+.OmissionInput input:focus{
+	outline: none;
+	border-bottom: yellow;
+}

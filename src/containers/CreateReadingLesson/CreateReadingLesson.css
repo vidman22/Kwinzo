@@ -1,5 +1,79 @@
-textarea {
+button.BackButton{
+  border: none;
+}
+
+.CreateReadingLesson {
+  width: 90%;
+  margin: auto;
+  border: 1px solid black;
+  box-shadow: 1px 2px 3px #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  background: white;
+  color: black;
+}
+
+.CreateReadingLesson p{
+  color: orange;
+  display: block;
+  margin: 0 auto 8px auto;
+  clear: both;
+}
+
+.ElementAddReadingButtonWrapper {
+  background-color: none;
+  color: none;
+  border-style: none;
+  display: block;
+  clear: both;
+  outline: none;
+}
+
+.ShowDiv{
+  position: absolute;
+  display: inline-block;
+  justify-content: center;
+  z-index: 99;
+  background: #00c4c3;
+  color: white;
+  width: 5.9em;
+  margin: 15% auto 0 3%;
+}
+
+.Element:hover {
+  cursor: pointer;
+  fill: #00c4c3;
+}
+
+.InputReadingSentenceWrapper {
+    display: inline-block;
     width: 80%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 16px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    background: white;
+    color: black;
+}
+
+.InputReadingSentenceWrapper p{
+  float: left;
+  margin: 0 0 0 5px;
+  color: black;
+}
+
+.InputWrapper p{
+  color: orange;
+}
+
+textarea {
+    width: 87%;
     height: 60vh;
     padding: 12px 20px;
     box-sizing: border-box;
@@ -36,6 +110,7 @@ textarea {
 }
 
 .InputQuestion{
+  font-family: Open Sans, sans-serif;
   display: block;
   width:90%;
   margin: 22px auto 18px auto;
@@ -43,9 +118,9 @@ textarea {
   border-left:none;
   border-right:none;
   background: none; 
-  height:38px;
-  line-height:20px;
-  font-size:35px;
+  height:30px;
+  line-height:28px;
+  font-size:26px;
   border-bottom:solid 2px #ccc;
   transition:all .23s ease-in;
   outline:none;
@@ -54,4 +129,40 @@ textarea {
 .InputQuestion:focus{
   outline:none;
   border-bottom:solid 2px #EDE711;
+}
+
+@media screen and (max-width: 640px) {
+  .ToggleReadingMode{
+    width: 120px;
+    height: 60px;
+    margin: 0 0 0 60%;
+    font-size: 14px;
+  }
+
+  textarea {
+    width: 95%;
+  }
+
+  button.BackButton{
+    padding: 0;
+    font-size: 14px;
+    width: 55px;
+    height: 18px;
+  }
+
+  .InputQuestion{
+    margin: 18px auto 0 auto;
+    height:20px;
+    line-height:18px;
+    font-size:16px;
+  }
+
+  .CreateLesson{
+    width: 90%;
+  }
+
+  .InputReadingSentenceWrapper {
+   clear: both;
+    width: 90%;
+  }
 }

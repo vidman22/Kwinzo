@@ -11,6 +11,19 @@
   color: black;
 }
 
+.BackButtonCreate {
+    display: block;
+    float: left;
+    justify-content: center;
+    font-weight: lighter;
+    width: 90px; 
+    height: 40px; 
+    border: none;
+    background-color: white;
+    font-size: 18px;
+    color: black;
+}
+
 .ExampleSentence {
   display: inline-block;
   width: 90%;
@@ -26,19 +39,25 @@
   color: black;
 }
 
-
-
 .ExampleSentenceHeader {
   display: block;
+  margin: 6px 0 6px 5%;
+  text-align: left;
   float: left;
-  margin: 0 1em 0 1.75em;
+  width: 80%;
   font-size: 22px;
-  
+}
+.ExampleKey {
+  display: block;
+  margin: auto;
+  clear: both;
+  width: 100%;
 }
 .ExampleSentence ul {
   display: block;
-  clear: left;
+  width: 60%;
   float: left;
+  clear: right;
   text-align: left;
   list-style: none;
 }
@@ -50,7 +69,7 @@
 .ExampleSentence li:first-child{
   list-style: none;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 26px;
   border-bottom: 1px solid #eee;
 
 }
@@ -68,6 +87,10 @@
   border-radius: 4px;
   margin-top: 10px;
   width: 90%;
+  padding: 6px 0 6px 0;
+}
+
+.ExampleAnswerWrapper {
 }
 
 .ExampleHint {
@@ -76,7 +99,7 @@
   color: #ccc;/*#EDE711;*/
   white-space: nowrap;
   text-align: center;
-  display: inline-block;
+  display: inline;
   clear: both;
   overflow: hidden;
   margin-bottom: -3px;
@@ -87,7 +110,7 @@
 .FirstHalfExample,
 .SecondHalfExample {
   position: absolute;
-  display: inline-block;
+  display: inline;
   /*margin: 2em .5em 1em .5em;*/
 }
 
@@ -137,6 +160,7 @@
 .InputSentenceWrapper p{
   float: left;
   margin: 0 0 0 5px;
+  color: black;
 }
 
 .DeleteSentence {
@@ -149,17 +173,19 @@
 
 .DeleteSentence:hover,
 .RemoveAlt:hover,
-.AddAlt:hover {
+.ElementAdd:hover {
   cursor: pointer;
   fill: #00c4c3;
 }
 
 .LessonTitleInput{
+  font-family: Open Sans, sans-serif;
   display: block;
   float: left;
+  clear: both;
   width:60%;
   margin-top: 10px;
-  margin-left: 37px;
+  margin-left: 4%;
   margin-bottom: 20px;
   border-top:none;
   border-left:none;
@@ -206,15 +232,15 @@
   color: black;
 }
 
-.AltAddWrapper {
+.ElementAddWrapper {
   display: inline-block;
   clear: both;
   float: left;
-  margin: 0 auto 0 1em;
+  margin: 0 auto 0 .6em;
   width: 100%;
 }
 
-.AddAltButtonWrapper {
+.ElementAddButtonWrapper {
   background-color: none;
   color: none;
   border-style: none;
@@ -224,7 +250,7 @@
   outline: none;
 }
 
-.AddAlt{
+.ElemenAdd{
   transition: 100ms;
   transition-timing-function: ease-in-out;
   -webkit-transition: 100ms;
@@ -239,12 +265,13 @@
   background: #00c4c3;
   color: white;
   width: 5.9em;
-  margin-left: -14%;
+  margin: 12% 0 0 -13%;
 }
 
 
 .Hide {
   display: none;
+
 }
 
 @keyframes typingEx {
@@ -264,11 +291,26 @@
   }
 }
 
-@media screen and (max-width: 640px) {
-
-  .ExampleSentenceHeader {
-    margin-left: 0;
+@media screen and (max-width: 1380px){
+  .FirstHalfExample {
+    left: 35%;
   }
+
+  .SecondHalfExample{
+    left: 52%;
+  }
+}
+
+@media screen and (max-width: 690px) {
+
+   .BackButtonCreate{
+    padding: 0;
+    margin-bottom: 18px;
+    font-size: 14px;
+    width: 55px;
+    height: 18px;
+  }
+
   .ExampleSentenceWrapper {
     width: 95%;
     padding: 12px 0 12px 0;
@@ -292,6 +334,7 @@
     float: left;
     text-align: left;
     list-style: none;
+    width: 100%;
   }
 
   .CreateButton {

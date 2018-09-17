@@ -28,7 +28,6 @@ class CreateGame extends Component {
 
 	render() {
 		let authorID = this.props.match.params.user;
-    // console.log("authorID " + authorID);
 		return (
 				<div className="UserPageWrapper">
           <div className="SideBar">
