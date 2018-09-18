@@ -1,8 +1,8 @@
 .Sentence {
-
+	display: block;
 	margin: auto;
 	padding: 0 0 0 2%;
-	font-family: 'Helvetica', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 25px;
 	text-align: center;
 	justify-content: center;
@@ -25,15 +25,17 @@
 	margin-bottom: 0;
 }
 
-.enter{
+/* .enter{
 	display: inline-block;
 	margin-top: 0;
+} */
+
+.GameInput 
+input.GameInput{
+	height: 30px;
+	line-height: 30px;
 }
 
-.enter input:focus{
-		border-bottom: solid 2px #EDE711;
-		outline:none
-}
 .enter .error{
 		text-align:center;
 		margin:5px 0;
@@ -56,22 +58,10 @@
 }
 
 
-/*@media screen and (max-width: 640px) {
-
-	.enter input {
+@media screen and (max-width: 640px) {
+	.Sentence {
 		display: block;
+		margin: 25px auto 0 auto;
+		font-size: 22px;
 	}
-
-	.enter {
-		display: block;
-	}
-
-	.firstPart {
-		float: none;
-	}
-
-	.secondPart {
-		float: none;
-	}
-
-}*/
+}

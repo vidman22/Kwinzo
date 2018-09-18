@@ -9,6 +9,7 @@ const root = require('./graphql/reducers');
 const io = module.exports.io = require('socket.io')(server);
 const SocketManager = require('./SocketManager');
 
+require('dotenv').config();
 
 io.on('connection', ( socket ) => { 
 	SocketManager(socket);

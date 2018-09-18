@@ -19,20 +19,21 @@ const sentence = ( props ) => {
 	
 	return (
 		<div className="Sentence">
-			<div className="FirstPart"><h3>{s1}</h3></div><form onSubmit={props.handlesubmit} className="enter">
+			<div className="FirstPart"><h3>{s1}</h3></div><form onSubmit={props.handlesubmit}>
 						<AutosizeInput
-							
+							className="GameInput"
 							value={props.value}
 							onChange={props.handlechange}
 							placeholder={props.placeholder}
 							placeholderIsMinWidth
 							inputStyle={{
 								color: inputColor,
-								height: '35px',
-								lineHeight: '20px',
+								height: '34px',
+								lineHeight: '30px',
 								fontSize: '30px', 
 								marginLeft: '12px', 
 								marginRight:'12px',
+								outline: 'none',
 								background: 'none', 
 								borderTop: 'none', 
 								borderLeft: 'none', 
