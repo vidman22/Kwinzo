@@ -1,5 +1,5 @@
 const https = require('https');
-const keys = require('./keys');
+
 
 const confirmGoogleToken = (token) => {
 		https.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`, (res) => {
