@@ -30,8 +30,8 @@
 	margin-top: 0;
 } */
 
-.GameInput 
-input.GameInput{
+.GameInput {
+	display: inline;
 	height: 30px;
 	line-height: 30px;
 }
