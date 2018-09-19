@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InputSentence from '../../components/InputSentence/InputSentence';
 import InputAlt from '../../components/InputAlt/InputAlt';
 import {Prompt, withRouter} from 'react-router';
-import QuestionSVG from '../../components/QuestionSVG/QuestionSVG';
 import './CreateLesson.css';
 
 import { Mutation } from 'react-apollo';
