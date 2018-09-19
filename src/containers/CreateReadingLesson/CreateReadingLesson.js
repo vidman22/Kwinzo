@@ -110,7 +110,7 @@ class CreateReadingLesson extends Component {
     		lessonFormArray: [],    	
     		formIsValid: false,
     		formIsHalfFilledOut: false,
-    		lessonFormNum: 5,
+    		lessonFormNum: 1,
     		readingModeOmission: false
 		}
 	}
@@ -560,7 +560,7 @@ class CreateReadingLesson extends Component {
 
       let urlPath;
       let lessonType;
-      if ( this.state.readingModeOmission == true) {
+      if ( this.state.readingModeOmission === true) {
         urlPath = 'reading-omission-lesson';
         lessonType = 'createReadingOmissionLesson'
       } else {

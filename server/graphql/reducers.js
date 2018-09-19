@@ -3,6 +3,7 @@ const confirmGoogleToken = require('../oauth/config/googleStrategy');
 const confirmFBToken = require('../oauth/config/faceBookStrategy');
 const { getUserId } = require('../oauth/config/utils');
 const jwt = require('jsonwebtoken');
+const keys = require('../oauth/config/keys');
 const mongoose = require('../config/mongoose');
 const db = mongoose();
 const uuidv4 = require('uuid/v4');
@@ -39,7 +40,7 @@ var root = {
 			}
 		},
 		deleteOmissionLesson: async (args, ctx, info ) => {
-			console.log('deletecomp fired args', args);
+			
 			return await ReadingOmissionLesson.findByIdAndDelete( args.id , (err) => {
 				if (err) {
 					throw err 
@@ -48,7 +49,7 @@ var root = {
 			});
 		},
 		deleteCompLesson: async (args, ctx, info ) => {
-			console.log('deleteom fired args', args);
+			
 			return await ReadingCompLesson.findByIdAndDelete( args.id , (err) => {
 				if (err) {
 					throw err 
@@ -87,7 +88,7 @@ var root = {
 	 			throw new Error('Password is incorrect');
 			 }
 			
-	 		const token = jwt.sign({ userID: user.userID }, process.env.APP_SECRET, {expiresIn: '12hr'});
+	 		const token = jwt.sign({ userID: user.userID }, keys.APP_SECRET, {expiresIn: '12hr'});
 	 		const expiresIn = 7200;
 	 		return {
     			token,
@@ -96,15 +97,13 @@ var root = {
   			}
 	 	},
 	 	oAuthSignIn: async ({ type, email, username, picture, userID, token, expiresIn}) => {
-			console.log('oauth triggered');
+		
 	 		let user = await User.findOne({ email });
 			let checkedToken;
 			 if (type === 'google'){
 				checkedToken = await confirmGoogleToken(token);
-				console.log(checkedToken);
 			 } else {
 				 checkedToken = await confirmFBToken(token);
-				 console.log(checkedToken);
 			 }
 			
 	 		if (!user ) {
@@ -142,7 +141,7 @@ var root = {
 	 		} else {
 	 			await user.save();
 
-	 			const token = jwt.sign({ userID }, process.env.APP_SECRET, {expiresIn: '12hr'});
+	 			const token = jwt.sign({ userID }, keys.APP_SECRET, {expiresIn: '12hr'});
 	 			const expiresIn = 7200;
 
   				return {

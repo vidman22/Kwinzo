@@ -9,9 +9,9 @@
   border-left:none;
   border-right:none;
   background: none; 
-  height:38px;
-  line-height:20px;
-  font-size:35px;
+  height:35px;
+  line-height:35px;
+  font-size:28px;
   border-bottom:solid 2px #ccc;
   transition:all .23s ease-in
 }
@@ -22,7 +22,6 @@
 .InputHint {
   font-family: Open sans, sans-serif;
 	display: block;
-  float: left;
   width:51%;
   margin: 10px 0 9px 7%;
   border-top:none;
@@ -35,6 +34,7 @@
   border-bottom:solid 2px #ccc; /*#046A91;*/
   transition:all .23s ease-in
 }
+
 
 .InputWrapper p{
 	display: block;

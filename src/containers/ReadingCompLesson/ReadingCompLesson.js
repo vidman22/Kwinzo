@@ -339,10 +339,7 @@ class Lesson extends Component {
             <div className="LessonTitle">
               <h1>{data.readingCompLesson.title}</h1>
             </div>
-            <div className="ReadingPassage">{this.state.textArray.map( (element, index) => {
-              return <StyledWord key={index} word={element.word} shouldStyle={element.style} styles={this.state.readingStyles} styletype={'color'} />
-            })}</div>
-              <div className="SpeedReadingWrapper">
+            <div className="SpeedReadingWrapper">
                 <button 
                   className="StartReadingButton" 
                   disabled={this.state.readingSpeedRunning}
@@ -374,6 +371,10 @@ class Lesson extends Component {
                    {this.state.readingSpeeds.map((speed, index) => (<option key={index} value={speed}>{speed}</option>))}
                   </select>
               </div>
+            <div className="ReadingPassage">{this.state.textArray.map( (element, index) => {
+              return <StyledWord key={index} word={element.word} shouldStyle={element.style} styles={this.state.readingStyles} styletype={'color'} />
+            })}</div>
+              
               <div className="ReadingCompQuestionsWrapper">
                 {formArray.map( (question, index) => {
                   return (

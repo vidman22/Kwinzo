@@ -1,8 +1,12 @@
 const https = require('https');
-
+const keys = require('./keys');
 
 const confirmFBToken = (token) => {
-  https.get(`https://graph.facebook.com/oauth/client_code?access_token=${token}&client_secret=${process.env.FACEBOOK_APP_SECRET}&redirect_uri=/&client_id=${process.env.FACEBOOK_ID}`, (res) => {
+  https.get(`https://graph.facebook.com/oauth/client_code?
+  access_token=${token}
+  &client_secret=${keys.AppSecret}
+  &redirect_uri=/
+  &client_id=${keys.AppID}`, (res) => {
       const { statusCode } = res;
       const contentType = res.headers['content-type'];
       

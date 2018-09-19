@@ -7,6 +7,7 @@ import GamePlay from '../GamePlay/GamePlay';
 import './JoinGame.css';
 
 
+// const socket = io();
 const socket = io();
 
 

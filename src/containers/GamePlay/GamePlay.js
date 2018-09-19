@@ -5,8 +5,8 @@ import './GamePlay.css';
 
 import io from 'socket.io-client';
 
-
 const socket = io();
+// const socket = io();
 
 let index = 0;
 export default class GamePlay extends Component {

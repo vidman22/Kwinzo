@@ -12,7 +12,7 @@
 }
 
 .BackButtonCreate {
-    display: block;
+    display: inline-block;
     float: left;
     justify-content: center;
     font-weight: lighter;
@@ -23,6 +23,8 @@
     font-size: 18px;
     color: black;
 }
+
+
 
 .ExampleSentence {
   display: inline-block;
@@ -137,7 +139,7 @@
 }
 
 .InputSentenceWrapper {
-  display: inline-block;
+  display: block;
   width: 90%;
   margin-top: 10px;
   margin-left: auto;
@@ -154,7 +156,7 @@
   display: block;
   width: 100%;
   float: left;
-  color: red;
+  color: orange;
 }
 
 .InputSentenceWrapper p{
@@ -169,7 +171,9 @@
   z-index: 99;
 }
 
-
+.AltWrapper{
+  display: block;
+}
 
 .DeleteSentence:hover,
 .RemoveAlt:hover,
@@ -181,20 +185,16 @@
 .LessonTitleInput{
   font-family: Open Sans, sans-serif;
   display: block;
-  float: left;
-  clear: both;
   width:60%;
-  margin-top: 10px;
-  margin-left: 4%;
-  margin-bottom: 20px;
+  margin: 37px 0 25px 4%;
   border-top:none;
   border-left:none;
   border-right:none;
   background: none;
   
-  height:40px;
-  line-height:20px;
-  font-size:40px;
+  height:42px;
+  line-height:42px;
+  font-size:33px;
   border-bottom:solid 2px lightgrey;
   transition:all .23s ease-in
 }
@@ -205,7 +205,7 @@
 }
 
 .CreateSentenceButton {
-  display: inline;
+  display: block;
   margin-top: 12px;
 }
 
@@ -234,23 +234,28 @@
 
 .ElementAddWrapper {
   display: inline-block;
-  clear: both;
-  float: left;
   margin: 0 auto 0 .6em;
   width: 100%;
 }
 
 .ElementAddButtonWrapper {
+  display: block;
+  margin-left: -33%;
+}
+
+.ElementAddButton {
+  position: relative;
+  background: none;
   background-color: none;
   color: none;
   border-style: none;
-  display: block;
-  clear: both;
-  margin-left: 30%;
+  display: inline-block;  
   outline: none;
 }
 
-.ElemenAdd{
+.ElementAdd{
+  display: inline-block;
+  background: none;
   transition: 100ms;
   transition-timing-function: ease-in-out;
   -webkit-transition: 100ms;
@@ -261,12 +266,34 @@
   position: absolute;
   display: inline-block;
   justify-content: center;
-  z-index: 99;
   background: #00c4c3;
   color: white;
-  width: 5.9em;
-  margin: 12% 0 0 -13%;
+  width: 180px;
+  padding: 4px;
+  margin: 2px 0 0 8px;
 }
+
+.Show:after {
+  right: 100%; 
+  width: 0;
+  height: 0;
+  margin: -1px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  content: " ";
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-right: 10px solid  #00c4c3;
+  border-width: 15px;
+}
+
+/* .Show:before {
+	border-color: rgba(194, 225, 245, 0);
+  border-right: 10px solid  #00c4c3;
+	border-width: 18px;
+	margin-top: -36px;
+} */
 
 
 .Hide {
@@ -274,6 +301,27 @@
 
 }
 
+span.QuestionMark{
+  color: black;
+  content: "\003F";
+  display: inline-block;
+  float: right;
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 22px;
+  width: 22px;
+}
+
+span.QuestionMark:hover{
+  cursor: pointer;
+  color:  #00c4c3;
+  border: 1px solid #00c4c3;
+}
+
+.BackButtonCreate:hover{
+  cursor: pointer;
+  color: #00c4c3;
+}
 @keyframes typingEx {
   from { width: 0 }
   0% {
@@ -343,7 +391,7 @@
 
   .LessonTitleInput {
     width: 80%;
-    margin: 0 0 6px 0;
+    margin: 5px 0 6px 0;
     font-size: 30px;
     height:30px;
     line-height:30px;
@@ -357,6 +405,7 @@
     height:25px;
     line-height:20px;
   }
+  
 
   .AltAddWrapper {
     display: inline-block;
@@ -367,10 +416,7 @@
     margin-left: 25%;
   }
 
-  .InputAnswer,
-  .InputHint {
-    width: 50%;
-  }
+ 
 
   .DeleteSentence {
     margin: -3px -8px 0 0;
