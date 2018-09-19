@@ -11,7 +11,7 @@ import './WaitingPage.css'
 import io from 'socket.io-client';	
 
 const socket = io();
-// const socket = io('http:localhost:5000');
+//const socket = io('http://localhost:5000');
 
 
 class WaitingPage extends Component {

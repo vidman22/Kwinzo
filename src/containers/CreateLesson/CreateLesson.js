@@ -61,7 +61,7 @@ class CreateLesson extends Component {
         valid: true,
       },
       prompts: {
-        showDiv:'Hide',
+        showDivs: false,
         valid: true,
       },
     },
@@ -82,6 +82,7 @@ class CreateLesson extends Component {
     formIsHalfFilledOut: false,
     showExAnswer: false,
     showExample: false,
+    showDivs: false,
     message: 'add alternate answer'
   }
  this.showExAnswer = this.showExAnswer.bind(this);
@@ -446,6 +447,33 @@ class CreateLesson extends Component {
   back() {
     this.props.history.push('/create-lesson');
   }
+  
+  showHelp() {
+    const updatedLessonFormArray = [
+      ...this.state.lessonFormArray
+    ];
+    if (updatedLessonFormArray.length !== 0) {
+    
+    const updatedLessonForm = {
+      ...updatedLessonFormArray[0]
+    };
+    const updatedPrompts = {
+      ...updatedLessonForm.prompts
+    };
+    updatedPrompts.showDivs = !updatedPrompts.showDivs;
+    updatedLessonForm.prompts = updatedPrompts;
+    updatedLessonFormArray[0] = updatedLessonForm;
+
+      this.setState(prevState => {
+       return { 
+        lessonFormArray: updatedLessonFormArray,
+        showDivs: !prevState.showDivs
+       }
+      });
+    
+    console.log('lessonFormArray', this.state.lessonFormArray);
+    }
+  }
 
   render() {
      
@@ -459,7 +487,7 @@ class CreateLesson extends Component {
       if (formArray !== 0 ){
       }
       
-      
+      console.log('lessonFormArray', this.state.lessonFormArray);
       let form = (
         <div>
           <Mutation
@@ -517,7 +545,7 @@ class CreateLesson extends Component {
                       </svg>
 
                     <InputSentence 
-
+                      showPrompts={formElement.config.prompts.showDivs}
                       sentenceValue={formElement.config.sentence.value}
                       sentenceInvalid={!formElement.config.sentence.valid}
                       sentenceShouldValidate={formElement.config.sentence.validation}
@@ -559,8 +587,8 @@ class CreateLesson extends Component {
                       <button  className="ElementAddButton" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
                         <svg className="ElementAdd" 
                           fill="#ccc" 
-                          onMouseOver={() => this.altMouseOverEvent(formElement.id)}
-                          onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
+                          // onMouseOver={() => this.altMouseOverEvent(formElement.id)}
+                          // onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
                           xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
                    
                         <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
@@ -570,7 +598,7 @@ class CreateLesson extends Component {
                          10.66 0 0 1 10.667 10.667v21.334z"/>
                        </svg>
                       </button>
-                      <div className={formElement.config.prompts.showDiv}>{this.state.message}</div>
+                      {formElement.config.prompts.showDivs ? <div className="Show">{this.state.message}</div> : null}
                     </div> 
                   </div>
             </div>
@@ -593,7 +621,7 @@ class CreateLesson extends Component {
       <div>
         <div className="CreateLesson">
          <button className="BackButtonCreate" onClick={() => this.back()}>{"<"} Back</button>
-         <span className="QuestionMark">&#63;</span>
+         <span className="QuestionMark" onClick={()=> this.showHelp()}>&#63;</span>
           <Prompt
             when={this.state.formIsHalfFilledOut}
             message="Are you sure you want to leave?"
@@ -605,6 +633,7 @@ class CreateLesson extends Component {
             type="text"
             placeholder="Title"
           />
+          {this.state.showDivs ? <div className="ShowTitle">1. Add a Lesson Title</div> : null}
           <span>{this.state.title.validation.msg}</span>
           {this.state.showExample ? <div className="ExampleSentence">
             <div className="ExampleKey">
