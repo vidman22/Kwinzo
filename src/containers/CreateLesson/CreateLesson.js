@@ -545,7 +545,7 @@ class CreateLesson extends Component {
                       </svg>
 
                     <InputSentence 
-                      showPrompts={formElement.config.prompts.showDivs}
+                      showPrompts={this.state.showDivs}
                       sentenceValue={formElement.config.sentence.value}
                       sentenceInvalid={!formElement.config.sentence.valid}
                       sentenceShouldValidate={formElement.config.sentence.validation}
@@ -598,7 +598,7 @@ class CreateLesson extends Component {
                          10.66 0 0 1 10.667 10.667v21.334z"/>
                        </svg>
                       </button>
-                      {formElement.config.prompts.showDivs ? <div className="Show">{this.state.message}</div> : null}
+                      {this.state.showDivs ? <div className="Show">{this.state.message}</div> : null}
                     </div> 
                   </div>
             </div>

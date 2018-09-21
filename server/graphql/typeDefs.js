@@ -76,6 +76,7 @@ const schema = buildSchema(`
 		correctOption: Int
 		checkedOption: Int
 		options: [String]
+		highlight: String
 	}
 
 
@@ -84,6 +85,7 @@ const schema = buildSchema(`
 		correctOption: Int
 		checkedOption: Int
 		options: [String]
+		highlight: String
 	}
 
 	type Meta {

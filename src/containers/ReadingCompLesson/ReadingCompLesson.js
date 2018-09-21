@@ -20,6 +20,7 @@ const LESSON_SET = gql`
         correctOption
         question
         options
+        highlight
       }
     }
   }
@@ -145,8 +146,9 @@ class Lesson extends Component {
         checkedOption: element.checkedOption,
         correctOption: element.correctOption,
         options: element.options,
+        highlight: element.highlight,
         correct: false,
-        msg:''
+        msg:'',
       }
       return obj;
     });

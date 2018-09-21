@@ -2,6 +2,21 @@ button.BackButton{
   border: none;
 }
 
+.AddHighlight{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  position: relative;
+  background: none;
+  background-color: none;
+  border: 1px solid #ccc;
+  display: inline-block;  
+  outline: none;
+}
+.AddHighlight:hover{
+  cursor: pointer;
+  color: #00c4c3;
+}
+
 .CreateReadingLesson {
   width: 90%;
   margin: auto;
@@ -108,7 +123,7 @@ textarea {
   opacity: .5;
   color: black;
 }
-
+.InputHighlight,
 .InputQuestion{
   font-family: Open Sans, sans-serif;
   display: block;
@@ -126,10 +141,20 @@ textarea {
   outline:none;
 }
 
+.InputHighlight{
+  height:22px;
+  line-height:22px;
+  font-size:18px;
+  width: 80%;
+}
+
+.InputHighlight:focus,
 .InputQuestion:focus{
   outline:none;
   border-bottom:solid 2px #EDE711;
 }
+
+
 
 @media screen and (max-width: 640px) {
   .ToggleReadingMode{
@@ -150,6 +175,7 @@ textarea {
     height: 18px;
   }
 
+  .InputHighlight,
   .InputQuestion{
     margin: 18px auto 0 auto;
     height:20px;

@@ -7,26 +7,28 @@ import GamePlay from '../GamePlay/GamePlay';
 import './JoinGame.css';
 
 
- const socket = io();
-// const socket = io('http://localhost:5000/');
+const socket = io();
+//const socket = io('http://localhost:5000/');
 
-
+let index = 0;
 export default class CreateGame extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			name:'',
-			room:'',
-			error: null,
-			socket: null,
 			action:'code',
 			activePlayer:'',
-			players: [],
+			activeSentence:'',
+			error: null,
 			gameSentences:[],
+			correct:'',
+			name:'',
+			players: [],
+			room:'',
 			title: '',
-			winner:''
-
+			value: '',
+			winner:'',
+			wrong:'',
 		}
 	}
 	
@@ -36,10 +38,6 @@ export default class CreateGame extends Component {
 	}
 
 	initSocket = () => {
-		
-
-		this.setState({socket});
-
 
 		socket.on('WINNER', (user) => {
 			
@@ -47,7 +45,6 @@ export default class CreateGame extends Component {
 			this.setState({
 				winner: 'You won!'
 			});
-
 		} else {
 			this.setState({
 				winner: 'You lost'
@@ -60,7 +57,8 @@ export default class CreateGame extends Component {
 			this.setState({
 				title,
 				action:'game',
-				gameSentences: sentences
+				gameSentences: sentences,
+				activeSentence: sentences[0]
 			});
 		});
 
@@ -69,7 +67,6 @@ export default class CreateGame extends Component {
 	handleCodeSubmit = (e) => {
 
 		e.preventDefault();
-		const { socket } = this.state;
 		const room = this.state.room;
 		socket.emit('JOIN_ROOM', room, (res) => {
 			// if error post error, if success change action to load new input form 
@@ -99,7 +96,7 @@ export default class CreateGame extends Component {
 	}
 
 	handleSubmit = (e) => {
-		const { socket } = this.state;
+		// const { socket } = this.state;
 		e.preventDefault();
 		socket.emit('NEW_PLAYER', this.state.room, this.state.name, (res) => {
 			if ( res ) {
@@ -111,9 +108,7 @@ export default class CreateGame extends Component {
 					action: 'waiting'
 				});
 			}
-		});
-
-		
+		});		
 	}
 
 	handleChange = (e) => {
@@ -121,6 +116,119 @@ export default class CreateGame extends Component {
 		name = e.target.value
 		this.setState({ name });
 	}
+
+	// ========================================================
+
+	
+	// shuffle(array) {
+		
+	// 	let currentIndex = array.length, temporaryValue, randomIndex;
+
+	// 	while (0 !== currentIndex) {
+
+	// 		randomIndex = Math.floor(Math.random() * currentIndex);
+	// 		currentIndex -= 1;
+
+	// 		temporaryValue = array[currentIndex];
+	// 		array[currentIndex] = array[randomIndex];
+	// 		array[randomIndex] = temporaryValue;
+	// 	}
+
+	// 	return array;
+	// } 
+	
+
+
+	handleGameSubmit = (e) => {
+		e.preventDefault();
+		let value = this.state.value;
+		const answer = this.state.activeSentence.answer.toLowerCase().trim();
+		value = value.toLowerCase().trim();
+
+		
+		if (value === answer) {
+			
+
+			socket.emit('SUCCESS', this.state.room, this.state.name, this.state.gameSentences.length);
+
+			this.setState({
+				correct:'Correct!'
+			});
+
+			setTimeout(this.correct.bind(this), 333);
+			
+		} else if (this.state.activeSentence.alts !== 0) {
+			for (let i = 0; i < this.state.activeSentence.alts.length; i++ ) {
+				if (value === this.state.activeSentence.alts[i]) {
+					socket.emit('SUCCESS', this.state.room, this.state.name, this.state.gameSentences.length);
+
+					this.setState({
+						correct:'Correct!'
+					});
+
+					setTimeout(this.correct.bind(this), 333);
+				} else {
+					socket.emit('FAILURE', this.state.room);
+					this.setState({
+						wrong:'wrong answer!'
+					});
+					setTimeout(this.wrongAnswer.bind(this), 1000);
+				}
+			}
+		} else {
+			socket.emit('FAILURE', this.state.room);
+			this.setState({
+				error:'wrong answer!'
+			});
+			setTimeout(this.wrongAnswer.bind(this), 1000);	
+		}
+	}
+
+	correct() {
+
+		if (index < this.state.gameSentences.length - 1 ) {
+				index++;
+				const activeSentence = this.state.gameSentences[index];
+
+				this.setState({
+					activeSentence,
+					value:'',
+					correct:''
+				});
+			} else {
+				socket.emit('COMPLETED', this.state.room);
+				this.setState({
+					correct:'',
+				
+				})
+			}
+	}
+
+	wrongAnswer() {
+		const gameSentences = [...this.state.gameSentences];
+
+		const wrongSentence = gameSentences[index];
+
+		gameSentences.push(wrongSentence);
+		this.setState({
+			gameSentences
+		});
+
+		index++;
+		const activeSentence = this.state.gameSentences[index];
+
+		this.setState({
+			activeSentence,
+			value:'',
+			error:''
+		});
+	}
+
+	handleGameChange = (e) => {
+
+		this.setState({ value: e.target.value });
+	}
+	//================================================================
 
 	addComponent() {
 		let result;
@@ -140,10 +248,9 @@ export default class CreateGame extends Component {
 							placeholder={''}
 						/> 
 					    <div className="error">{this.state.error ? this.state.error : null}</div>
+						<button className="ExerciseButton" type="submit">Enter</button>
 					</form>
-				
-				
-				    
+    
 				</div>
 
 				)
@@ -152,9 +259,7 @@ export default class CreateGame extends Component {
 			  result = (
 			  	<div className="login">
 			  	    <form onSubmit={this.handleSubmit} className="login-form" >
-				  
 						<h2>Add a Name</h2>
-				  
 					<input
 						type="text"
 						name="name"
@@ -163,6 +268,7 @@ export default class CreateGame extends Component {
 						placeholder={'Name'}
 					/>
 					<div className="error">{this.state.error ? this.state.error : null}</div>
+					<button className="ExerciseButton" type="submit">Enter</button>
 					</form>
 				</div>
 					)
@@ -185,7 +291,16 @@ export default class CreateGame extends Component {
 			break;
 			case 'game':
 				result = (
-					<GamePlay room={this.state.room} title={this.state.title} sentences={this.state.gameSentences} name={this.state.name} winner={this.state.winner}/> 
+					<GamePlay 
+						activesentence={this.state.activeSentence}
+						correct={this.state.correct}
+						value={this.state.value}
+						handlegamechange={(e) => this.handleGameChange(e)}
+						handlegamesubmit={this.handleGameSubmit} 
+						sentences={this.state.gameSentences} 
+						title={this.state.title}
+						winner={this.state.winner}
+						wrong={this.state.wrong}/> 
 					)
 			break;
 			default:
@@ -193,8 +308,6 @@ export default class CreateGame extends Component {
 		}
 		return result;
 	}
-
-
 
 	render() {	
 		
