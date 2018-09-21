@@ -37,9 +37,9 @@ app.get('/*', function(req, res) {
 })
 
 
-app.use(cors({
-	origin: 'http://localhost:3000'
-}));
+// app.use(cors({
+// 	origin: 'http://localhost:3000'
+// }));
 
 
 server.listen(PORT, () => {
