@@ -25,7 +25,12 @@ const modal = props => {
         }}>
           <div className="Modal">
             <h1>{props.winner} won!!!</h1>
-            <Carousel sentences={props.sentences} />
+            <Carousel
+              carouselsentence={props.carouselsentence}
+              correct={props.correct} 
+              index={props.index}  
+              length={props.length} 
+              slide={props.slide}/>
             <button onClick={props.playAgain}>
               Play Again
             </button>

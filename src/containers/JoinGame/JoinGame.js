@@ -17,13 +17,13 @@ export default class CreateGame extends Component {
 
 		this.state = {
 			action:'code',
-			activePlayer:'',
 			activeSentence:'',
 			error: null,
 			gameSentences:[],
+			length: null,
 			correct:'',
+			completed: false,
 			name:'',
-			players: [],
 			room:'',
 			title: '',
 			value: '',
@@ -37,6 +37,10 @@ export default class CreateGame extends Component {
 		this.initSocket();
 	}
 
+	componentWillUnmount() {
+		socket.removeAllListeners();
+	}
+
 	initSocket = () => {
 
 		socket.on('WINNER', (user) => {
@@ -47,18 +51,32 @@ export default class CreateGame extends Component {
 			});
 		} else {
 			this.setState({
-				winner: 'You lost'
+				winner: `${user} won`
 			})
 		}
 		});
 
 		socket.on('START_GAME', ( title, sentences ) => {
-		;
 			this.setState({
 				title,
 				action:'game',
 				gameSentences: sentences,
-				activeSentence: sentences[0]
+				activeSentence: sentences[0],
+				length: sentences.length
+			});
+		});
+
+		socket.on('PLAY_AGAIN', (users, sentences) => {
+			index = 0;
+			
+			this.setState({
+				gameSentences: sentences,
+				activeSentence: sentences[0],
+				value: '',
+				winner:'',
+				wrong:'',
+				length: sentences.length,
+				completed: false,
 			});
 		});
 
@@ -137,72 +155,77 @@ export default class CreateGame extends Component {
 	// 	return array;
 	// } 
 	
-
+	checkAlts(alts, value) {
+		for (let i = 0; i < alts.length; i++) {
+			if (value === alts[i]) return true;
+			else return false;
+		}
+	}
 
 	handleGameSubmit = (e) => {
 		e.preventDefault();
 		let value = this.state.value;
+		const alts = this.state.activeSentence.alts;
 		const answer = this.state.activeSentence.answer.toLowerCase().trim();
 		value = value.toLowerCase().trim();
-
+		const length = this.state.length;
 		
 		if (value === answer) {
-			
 
-			socket.emit('SUCCESS', this.state.room, this.state.name, this.state.gameSentences.length);
+			socket.emit('SUCCESS', this.state.room, this.state.name, length);
 
 			this.setState({
 				correct:'Correct!'
 			});
-
 			setTimeout(this.correct.bind(this), 333);
 			
-		} else if (this.state.activeSentence.alts !== 0) {
-			for (let i = 0; i < this.state.activeSentence.alts.length; i++ ) {
-				if (value === this.state.activeSentence.alts[i]) {
-					socket.emit('SUCCESS', this.state.room, this.state.name, this.state.gameSentences.length);
+		} else if (alts.length !== 0 && alts !== undefined) {
 
-					this.setState({
-						correct:'Correct!'
-					});
+			let flag = this.checkAlts(alts, value);
+			 if (flag) {
+				socket.emit('SUCCESS', this.state.room, this.state.name, length);
 
-					setTimeout(this.correct.bind(this), 333);
-				} else {
+				this.setState({
+					correct:'Correct!'
+				});
+
+				setTimeout(this.correct.bind(this), 333);
+			} else {
 					socket.emit('FAILURE', this.state.room);
 					this.setState({
-						wrong:'wrong answer!'
+						wrong:'Wrong Answer!'
 					});
-					setTimeout(this.wrongAnswer.bind(this), 1000);
-				}
-			}
+					setTimeout(this.wrongAnswer.bind(this), 333);
+			 }
 		} else {
+		
 			socket.emit('FAILURE', this.state.room);
 			this.setState({
-				error:'wrong answer!'
+				wrong:'Wrong Answer!'
 			});
-			setTimeout(this.wrongAnswer.bind(this), 1000);	
+			setTimeout(this.wrongAnswer.bind(this), 333);	
 		}
 	}
 
 	correct() {
+		if (index < this.state.gameSentences.length - 1) {
+			index++;
+			const activeSentence = this.state.gameSentences[index];
 
-		if (index < this.state.gameSentences.length - 1 ) {
-				index++;
-				const activeSentence = this.state.gameSentences[index];
-
-				this.setState({
-					activeSentence,
-					value:'',
-					correct:''
-				});
-			} else {
-				socket.emit('COMPLETED', this.state.room);
-				this.setState({
-					correct:'',
-				
-				})
-			}
-	}
+			this.setState({
+				activeSentence,
+				value:'',
+				correct:''
+			});
+		} else {
+			index = 0;
+			this.setState({
+				activeSentence: this.state.gameSentences[0],
+				completed: true,
+				correct: '',
+			});
+		}
+	} 
 
 	wrongAnswer() {
 		const gameSentences = [...this.state.gameSentences];
@@ -220,7 +243,7 @@ export default class CreateGame extends Component {
 		this.setState({
 			activeSentence,
 			value:'',
-			error:''
+			wrong:''
 		});
 	}
 
@@ -290,14 +313,15 @@ export default class CreateGame extends Component {
 					)
 			break;
 			case 'game':
+		
 				result = (
 					<GamePlay 
 						activesentence={this.state.activeSentence}
 						correct={this.state.correct}
+						completed={this.state.completed}
 						value={this.state.value}
 						handlegamechange={(e) => this.handleGameChange(e)}
 						handlegamesubmit={this.handleGameSubmit} 
-						sentences={this.state.gameSentences} 
 						title={this.state.title}
 						winner={this.state.winner}
 						wrong={this.state.wrong}/> 
@@ -310,7 +334,6 @@ export default class CreateGame extends Component {
 	}
 
 	render() {	
-		
 		return (
 		  <div>
 		  	

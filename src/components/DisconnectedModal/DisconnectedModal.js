@@ -7,15 +7,21 @@ const modal = props => {
     "DisconnectedModal",
     props.show ? "DisconnectedModalOpen" : "DisconnectedModalClosed"
   ];
-  console.log('props', props);
+  
   return (
           <div className={cssClasses.join(' ')}>
-          <h1>Disconnected Players</h1>
-          <span>Click on a player to remove</span>
-            {props.players.map( (player) => {
-               return <div key={player.id} className="DisconnectedPlayer" onClick={() => props.removeplayer(player.id)}>{player.playerName}</div>
-            })}
-          <button onClick={props.start} className="DisconnectButton">Start</button>
+          { props.players.length !==0 ? (
+            <div>
+              <h1>Disconnected Players</h1>
+              <span>Click on a player to remove</span>
+                {props.players.map( (player) => {
+                  return <div key={player.id} className="DisconnectedPlayer" onClick={() => props.removeplayer(player.id)}>{player.playerName}</div>
+                })}
+              <button onClick={props.start} className="DisconnectButton">Start</button>
+            </div>
+          ) : (
+            <h1>Try Reloading Game</h1>
+          )}
           </div>
   );
 };

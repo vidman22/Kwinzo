@@ -4,8 +4,8 @@ import './Sentence.css';
 
 
 const sentence = ( props ) => {
-	const index = props.sentence.indexOf(props.correct); 
-	const index2 = index + props.correct.length;
+	const index = props.sentence.indexOf(props.correctanswer); 
+	const index2 = index + props.correctanswer.length;
 
 	const s1 = ( index === 0 ? null : props.sentence.slice(0, index) );
 	const s2 = props.sentence.slice(index2, props.sentence.length);

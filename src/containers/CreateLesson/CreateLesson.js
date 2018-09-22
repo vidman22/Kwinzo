@@ -270,8 +270,8 @@ class CreateLesson extends Component {
          if (inputIdentifier === 'answer') {
             const sentence = updatedForm['sentence'].value.toLowerCase();
             const answer = event.target.value.toLowerCase().trim();
-      
-            const index = sentence.indexOf(answer);
+            
+            let pos = sentence.indexOf(answer);
 
             updatedValidation.msg = '';
             updatedElement.valid = false;
@@ -279,9 +279,25 @@ class CreateLesson extends Component {
             if (answer === '') {
               updatedValidation.msg = 'add an answer';
               updatedElement.valid = false;
-            } else if (index === -1 ) {
+            } else if (pos === -1 ) {
               updatedElement.valid = false;
               updatedValidation.msg = 'answer not found in sentence';
+            } else if ( pos !== -1 ) {
+              let count = 0;
+              let indx = sentence.indexOf(answer);
+              while (indx !== -1) {
+                count++
+                indx = sentence.indexOf(answer, indx + 1)
+              }
+              if (count > 1) {
+              updatedElement.valid = false;
+              updatedValidation.msg = 'more than one answer found';
+              } else {
+                updatedElement.valid = true;
+              }
+            }else if (answer.length >= 200){
+            updatedValidation.msg = 'answer is too long';
+            updatedElement.valid = false;
             } else {
               updatedElement.valid = true;
             }
@@ -299,6 +315,7 @@ class CreateLesson extends Component {
             updatedElement.valid = false;
           } else {
             updatedElement.valid = true;
+            updatedValidation.msg = '';
           }
         }
 
@@ -313,6 +330,7 @@ class CreateLesson extends Component {
             updatedElement.valid = false;
           } else {
           updatedElement.valid = true;
+          updatedValidation.msg = '';
         }
       }
 
@@ -471,7 +489,7 @@ class CreateLesson extends Component {
        }
       });
     
-    console.log('lessonFormArray', this.state.lessonFormArray);
+  
     }
   }
 
@@ -487,7 +505,7 @@ class CreateLesson extends Component {
       if (formArray !== 0 ){
       }
       
-      console.log('lessonFormArray', this.state.lessonFormArray);
+
       let form = (
         <div>
           <Mutation

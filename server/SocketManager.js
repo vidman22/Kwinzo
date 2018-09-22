@@ -119,7 +119,6 @@ module.exports = function(socket) {
 			connectedUsers[i].score = 0;
 		}
 		io.to(room).emit('PLAY_AGAIN', connectedUsers, sentences);
-
 	})
 
 	socket.on('disconnect', () => {

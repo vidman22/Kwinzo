@@ -145,6 +145,7 @@ textarea {
   height:22px;
   line-height:22px;
   font-size:18px;
+  margin: 8px auto 10px auto;
   width: 80%;
 }
 
