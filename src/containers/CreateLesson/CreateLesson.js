@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InputSentence from '../../components/InputSentence/InputSentence';
 import InputAlt from '../../components/InputAlt/InputAlt';
 import {Prompt, withRouter} from 'react-router';
-
 import './CreateLesson.css';
 
 import { Mutation } from 'react-apollo';
@@ -31,7 +30,6 @@ class CreateLesson extends Component {
     },
     lessonForm: {
       sentence: {
-        
         value: '',
         validation: {
           required: true,
@@ -41,7 +39,6 @@ class CreateLesson extends Component {
         touched: false
       },
       answer: {
-        
         value: '',
         validation: {
           required: true,
@@ -51,7 +48,6 @@ class CreateLesson extends Component {
         touched: false
       },
       hint: {
-        
         value: '',
         validation: {
           required: false,
@@ -61,27 +57,32 @@ class CreateLesson extends Component {
         touched: false
       },
       alts:{
-        showDiv:'Hide',
-        array: [{ 
-        value: '',
-        validation: {
-          required: true,
-          msg: ''
-        },
-        valid: false,
-        touched: false
-          }],
-        valid: true
-      } 
-      
+        array:[],
+        valid: true,
+      },
+      prompts: {
+        showDivs: false,
+        valid: true,
+      },
     },
+    altForm:{ 
+      value: '',
+      validation: {
+        required: false,
+        msg: ''
+      },
+      valid: false,
+      touched: false
+    }, 
     addSentenceDisabled: false,
     formIsValid: false,
     addAltDisabled: false,
-    lessonFormNum: 5,
+    lessonFormNum: 1,
     lessonFormArray: [],
     formIsHalfFilledOut: false,
     showExAnswer: false,
+    showExample: false,
+    showDivs: false,
     message: 'add alternate answer'
   }
  this.showExAnswer = this.showExAnswer.bind(this);
@@ -137,19 +138,10 @@ class CreateLesson extends Component {
 
   addAlt(index, event) {
     event.preventDefault();
-      const lessonForm = {
-      ...this.state.lessonForm
-    }
 
-    let alts = {
-      ...lessonForm.alts
-    }
-
-    let altForm = [
-      ...alts.array
-    ]
-
-    altForm = altForm[0];
+    let altForm = {
+      ...this.state.altForm
+    };
 
     const updatedLessonForms = [
       ...this.state.lessonFormArray
@@ -166,7 +158,7 @@ class CreateLesson extends Component {
     const updatedAltArray = [
       ...updatedAlts.array
     ]
-    console.log("alt length " + updatedAltArray.length);
+
     if (updatedAltArray.length >= 4 ) {
       this.setState({addAltDisabled: true});
     }
@@ -186,7 +178,7 @@ class CreateLesson extends Component {
   };
 
   altMouseOverEvent(index) {
-     const updatedLessonForms = [
+    const updatedLessonForms = [
       ...this.state.lessonFormArray
     ];
 
@@ -194,16 +186,16 @@ class CreateLesson extends Component {
       ...updatedLessonForms[index]
     };
 
-    const updatedAlts = {
-      ...updatedForm.alts
+    const updatedPrompts = {
+      ...updatedForm.prompts
     }
 
-   if (updatedAlts.showDiv === 'Hide') {
-    updatedAlts.showDiv = 'Show';
+   if (updatedPrompts.showDiv === 'Hide') {
+    updatedPrompts.showDiv = 'Show';
    } else {
-    updatedAlts.showDiv = 'Hide'; 
+    updatedPrompts.showDiv = 'Hide'; 
    }
-    updatedForm.alts = updatedAlts;
+    updatedForm.prompts = updatedPrompts;
     updatedLessonForms[index] = updatedForm;
     
     this.setState({ lessonFormArray: updatedLessonForms});
@@ -235,8 +227,6 @@ class CreateLesson extends Component {
     updatedForm.alts = updatedAlts;
     updatedLessonForms[formIndex] = updatedForm;
 
-    
-
     this.setState({
       lessonFormArray: updatedLessonForms,
     }, () => {
@@ -251,7 +241,6 @@ class CreateLesson extends Component {
     ];
     // eslint-disable-next-line
     const removed = updatedLessonForms.splice(formIndex, 1);
-    
     
     this.setState({
       lessonFormArray: updatedLessonForms,
@@ -350,18 +339,14 @@ class CreateLesson extends Component {
     let formIsValid = true;
     for ( let i = 0; i < lessonFormArray.length; i++) {
       for ( let property in lessonFormArray[i] ) {
-        
         formIsValid = lessonFormArray[i][property].valid && formIsValid && this.state.title.valid;
-      } 
+      }
     }
     if (formIsValid === true ){
       this.setState({ formIsValid, formIsHalfFilledOut: false });
-     
     } else {
       this.setState({formIsValid, formIsHalfFilledOut: true });
-     
     }
-
   }
 
 
@@ -385,14 +370,14 @@ class CreateLesson extends Component {
         
     const updatedAlt = {
       ...updatedAltArray[altIndex]
-    }
+    };
 
     const updatedAltValidation = {
       ...updatedAlt.validation
-    }
+    };
 
     updatedAlt.value = e.target.value;
-    updatedAlt.touched = true
+    updatedAlt.touched = true;
 
     if (updatedAlt.value === '') {
       updatedAltValidation.msg = 'delete alt or add an answer';
@@ -443,8 +428,6 @@ class CreateLesson extends Component {
       updatedTitle.valid = true;
     }
 
-    let formIsValid = this.checkFormValidity();
-
     updatedTitle.validation = updatedTitleValidation;
 
     this.setState({ title: updatedTitle }, () => {
@@ -464,6 +447,33 @@ class CreateLesson extends Component {
   back() {
     this.props.history.push('/create-lesson');
   }
+  
+  showHelp() {
+    const updatedLessonFormArray = [
+      ...this.state.lessonFormArray
+    ];
+    if (updatedLessonFormArray.length !== 0) {
+    
+    const updatedLessonForm = {
+      ...updatedLessonFormArray[0]
+    };
+    const updatedPrompts = {
+      ...updatedLessonForm.prompts
+    };
+    updatedPrompts.showDivs = !updatedPrompts.showDivs;
+    updatedLessonForm.prompts = updatedPrompts;
+    updatedLessonFormArray[0] = updatedLessonForm;
+
+      this.setState(prevState => {
+       return { 
+        lessonFormArray: updatedLessonFormArray,
+        showDivs: !prevState.showDivs
+       }
+      });
+    
+    console.log('lessonFormArray', this.state.lessonFormArray);
+    }
+  }
 
   render() {
      
@@ -474,8 +484,10 @@ class CreateLesson extends Component {
           config: this.state.lessonFormArray[key]
         });
       }
-
+      if (formArray !== 0 ){
+      }
       
+      console.log('lessonFormArray', this.state.lessonFormArray);
       let form = (
         <div>
           <Mutation
@@ -533,7 +545,7 @@ class CreateLesson extends Component {
                       </svg>
 
                     <InputSentence 
-
+                      showPrompts={this.state.showDivs}
                       sentenceValue={formElement.config.sentence.value}
                       sentenceInvalid={!formElement.config.sentence.valid}
                       sentenceShouldValidate={formElement.config.sentence.validation}
@@ -553,8 +565,9 @@ class CreateLesson extends Component {
                       hintChanged={(event) => this.inputChangedHandler(event, 'hint', formElement.id)}
 
                     />
-              
-                    <div className="ElementAddWrapper">{formElement.config.alts.array.map( (alt, index) => (
+                  <div className="ElementAddWrapper">
+                   {formElement.config.alts.length !== 0 ?  (
+                    <div className="AltWrapper">{ formElement.config.alts.array.map( (alt, index) => (
                       <div key={index}>
               
                         <InputAlt 
@@ -566,28 +579,28 @@ class CreateLesson extends Component {
                           altTouched={alt.touched}
                           altChanged={(event) => this.inputChangedAltHandler(event, formElement.id, index)}
                         />
-                
                  
                       </div>
                     ))}
-                    <button className="ElementAddButtonWrapper" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
-                      <svg className="ElementAdd" 
-                        fill="#ccc" 
-                        onMouseOver={() => this.altMouseOverEvent(formElement.id)}
-                        onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
-                        xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
+                    </div> ) : null }
+                    <div className="ElementAddButtonWrapper">
+                      <button  className="ElementAddButton" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
+                        <svg className="ElementAdd" 
+                          fill="#ccc" 
+                          // onMouseOver={() => this.altMouseOverEvent(formElement.id)}
+                          // onMouseOut={()=> this.altMouseOverEvent(formElement.id)}
+                          xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
                    
-                      <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
-                        0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
-                        0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
-                        0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
-                        10.66 0 0 1 10.667 10.667v21.334z"/>
-                      </svg>
-                    </button>
-                    </div>
-              <div className={formElement.config.alts.showDiv}>{this.state.message}</div>
-            
-              
+                        <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
+                         0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
+                         0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
+                         0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
+                         10.66 0 0 1 10.667 10.667v21.334z"/>
+                       </svg>
+                      </button>
+                      {this.state.showDivs ? <div className="Show">{this.state.message}</div> : null}
+                    </div> 
+                  </div>
             </div>
             )
           }
@@ -608,6 +621,7 @@ class CreateLesson extends Component {
       <div>
         <div className="CreateLesson">
          <button className="BackButtonCreate" onClick={() => this.back()}>{"<"} Back</button>
+         <span className="QuestionMark" onClick={()=> this.showHelp()}>&#63;</span>
           <Prompt
             when={this.state.formIsHalfFilledOut}
             message="Are you sure you want to leave?"
@@ -619,8 +633,9 @@ class CreateLesson extends Component {
             type="text"
             placeholder="Title"
           />
+          {this.state.showDivs ? <div className="ShowTitle">1. Add a Lesson Title</div> : null}
           <span>{this.state.title.validation.msg}</span>
-          <div className="ExampleSentence">
+          {this.state.showExample ? <div className="ExampleSentence">
             <div className="ExampleKey">
               <ul>
                 <li>Example Input</li>
@@ -631,16 +646,14 @@ class CreateLesson extends Component {
             </div>
           <div className="ExampleSentenceHeader">Example Result</div>
           
-          <div className="ExampleSentenceWrapper"><div className="FirstHalfExample">The quick brown fox</div>
+          <div className="ExampleSentenceWrapper">
+            <div className="FirstHalfExample">The quick brown fox</div>
             <div className="ExampleAnswerWrapper">
               {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
-            
             <div className="SecondHalfExample">over the lazy dog.</div>
             </div>
           </div>
-          
-          
-        </div>
+        </div> : null}
           {form}     
         </div>
         

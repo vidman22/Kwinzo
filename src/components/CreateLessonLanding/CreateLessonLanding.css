@@ -12,7 +12,8 @@
 
 .CreateLessonReading,
 .CreateLessonExercise {
-	font-family: Montserrat, sans-serif;
+	font-family: "Montserrat", sans-serif;
+	font-weight: lighter;
 	padding: 5%;
 	width: 400px;
 	color: black;

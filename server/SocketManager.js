@@ -4,8 +4,9 @@ let sessions = [];
 
 class SessionObject {
 	constructor() {
-		this.connectedUsers = [],
+		this.connectedUsers = [];
 		this.room = '';
+		this.expiration = '';
 	}	
 }
 
@@ -13,13 +14,17 @@ class SessionObject {
 module.exports = function(socket) {
 
 	socket.on('NEW_ROOM', room => {
+		const now = new Date();
+		const time = now.getTime();
+		const expiration = time + 1000*1200;
 		let newRoom = new SessionObject();
 		newRoom.room = room;
+		newRoom.expiration = expiration;
 		sessions.push(newRoom);
 		
 		socket.join(newRoom.room);
 		io.to(newRoom.room).emit('JOINED');
-		
+		console.log('new sessions', sessions);
 	});
 
 	socket.on('JOIN_ROOM', (room, callback) => {
@@ -53,21 +58,20 @@ module.exports = function(socket) {
 			score: 0
 		};
 		
-		if ( name.length < 9 ) {
+		if ( name.length <= 9 ) {
 			if ( users.length !== 0 ) {
 				for ( let i = 0; i < users.length; i++) {
 					if (users[i].playerName === name ) {
 						message = 'try a different name';
-					} else if (name.length == 0) {
-						message = 'add a name';
 					} else {
 						users.push(user);
 						io.to(room).emit('UPDATED_PLAYERS', (room, users ));	
 					} 
 				break;
 				}
+			} else if (name.length == 0) {
+				message = 'add a name';
 			} else {
-				
 				users.push(user);
 				io.to(room).emit('UPDATED_PLAYERS', (room, users ));
 				message = '';
@@ -76,8 +80,6 @@ module.exports = function(socket) {
 			message = 'try a shorter name';
 		}
 		callback(message);
-		
-		
 	});
 
 
@@ -93,13 +95,10 @@ module.exports = function(socket) {
 
 	socket.on('START_GAME', (room, title, sentences) => {
 		io.to(room).emit('START_GAME', title, sentences);
-		// console.log('sentences ', sentences);
 	});
 
 	socket.on('SUCCESS',  (room, name, length)  => {
-		// console.log("peace");
 		const index = searchSessions(room);
-
 		let connectedUsers = sessions[index].connectedUsers;
 	
 		for ( let i = 0; i < connectedUsers.length; i ++) {
@@ -107,18 +106,14 @@ module.exports = function(socket) {
 				connectedUsers[i].score++;
 				io.to(room).emit('SCORE', connectedUsers);
 				if (connectedUsers[i].score == length ) {
-
 					io.to(room).emit('WINNER', connectedUsers[i].playerName);
-					
 				}
 			}
 		}
-		
 	});
 
 	socket.on('PLAY_AGAIN', (room, sentences) => {
 		const index = searchSessions(room);
-
 		let connectedUsers = sessions[index].connectedUsers;
 		for (let i = 0; i < connectedUsers.length; i++) {
 			connectedUsers[i].score = 0;
@@ -128,37 +123,35 @@ module.exports = function(socket) {
 	})
 
 	socket.on('disconnect', () => {
-		// console.log('disconnect sessions ', sessions);
-	 //  	console.log('sessions length ' + sessions.length);
+		var d = new Date();
 	  	if (sessions.length != 0) {
 		for ( let i = 0; i < sessions.length; i++ ) {
 			for ( let j = 0; j < sessions[i].connectedUsers.length; j++){
 				if (sessions[i].connectedUsers[j].id === socket.id ) {
 					const id = sessions[i].connectedUsers[j].id;
-
 					let newSessionArray = [...sessions];
-
 					let newSession = {
 						...newSessionArray[i]
 					}
-
 					newSession.connectedUsers = sessions[i].connectedUsers.filter((user) => user.id !== id);
 
 					io.to(sessions[i].room).emit('USER_DISCONNECTED', sessions[i].connectedUsers[j]);
 
 					newSessionArray[i] = newSession;
-					sessions = newSessionArray;
-
-					// console.log('session ', sessions[i].connectedUsers, ' updated after disconnect');
+					sessions = newSessionArray;			
 				}	
 			}
 	    } 
-	} else {
-		let newSessionArray = [...sessions];
-	  	nesSessionArray = sessions.filter((session) => sessions[i] !== sessions[i]);
-	  	sessions = newSessionArray;				
-		// console.log('sessions after filter ', sessions);
 	}
+		let newSessionArray = [...sessions];
+
+			newSessionArray = sessions.filter((session) => {
+				if (session.expiration < d.getTime()){
+					return session.connectedUsers.length !== 0;
+				} else return true;
+			});
+	  	sessions = newSessionArray;				
+		console.log('sessions after filter ', sessions);
 	});
 }
 
@@ -169,7 +162,6 @@ searchSessions = (room) => {
 			return i;
 		}
 	}
-
 }
 
 randomizeArray = (users) => {
@@ -178,10 +170,8 @@ randomizeArray = (users) => {
 	let currentIndex = array.length, temporaryValue, randomIndex;
 
 		while (0 !== currentIndex) {
-
 			randomIndex = Math.floor(Math.random() * currentIndex);
 			currentIndex -= 1;
-
 			temporaryValue = array[currentIndex];
 			array[currentIndex] = array[randomIndex];
 			array[randomIndex] = temporaryValue;
@@ -206,9 +196,7 @@ createTeams = ( users ) => {
 		newBreak = newBreak + firstSegment;
 		firstBreak = firstBreak + firstSegment;
 		teams.push(team);
-		
 	}
 	return teams;
-	
 }
 

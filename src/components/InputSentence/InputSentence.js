@@ -13,6 +13,7 @@ const InputSentence = (props) => {
 	  			onChange={props.sentenceChanged}
 	  			placeholder="Sentence"
 	  		/>
+			  {props.showPrompts ? <div className="ShowSentencePrompt">2. Add a sentence. It should include the correct answer</div>: null}
 	  		<p>{props.sentenceShouldValidate.msg}</p>
 	  		<div className="InputAnswerWrapper">
 	  	     <input
@@ -22,6 +23,7 @@ const InputSentence = (props) => {
 	  	    	 onChange={props.answerChanged}
 	  	    	 placeholder="Answer"
 	  	     />
+			{props.showPrompts ? <div className="ShowAnswerPrompt">3. Add the answer that will be omitted from the sentence above in the exercise</div>: null}
 	  	     <p>{props.answerShouldValidate.msg}</p>
 	  	    </div>
 	  	    <input 
@@ -31,6 +33,7 @@ const InputSentence = (props) => {
 	  	    	onChange={props.hintChanged}
 	  	    	placeholder="Hint"
 	  	    />
+			  {props.showPrompts ? <div className="ShowHintPrompt">4. Add a hint that will take the place of the answer in the exercise</div>: null}
 	  	    <p>{props.hintShouldValidate.msg}</p>
 
 	  	</div>

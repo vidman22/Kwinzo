@@ -1,20 +1,6 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./keys');
 const https = require('https');
+const keys = require('./keys');
 
-passport.use(
-	new GoogleStrategy({
-	//options
-	clientID: keys.google.clientID,
-	clientSecret: keys.google.clientSecret
-	}, 
-	(accessToken, refreshToken, profile, cb) => {
-		User.findOrCreate({ googleId: profile.id }, (err, user) => {
-      return cb(err, user);
-    });
-  }
-));
 
 const confirmGoogleToken = (token) => {
 		https.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`, (res) => {

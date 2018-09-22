@@ -81,7 +81,7 @@ class Lesson extends Component {
     if (updatedOmission.value === updatedOmission.omission) {
       updatedOmission.msg = 'correct';
       updatedOmission.used = true;
-    } else if (updatedOmission.value == "") {
+    } else if (updatedOmission.value === "") {
       updatedOmission.msg = '';
     }else {
       updatedOmission.msg = 'incorrect';
@@ -104,7 +104,7 @@ class Lesson extends Component {
       if (updatedOmission.value === updatedOmission.omission) {
         updatedOmission.msg = 'correct';
         updatedOmission.used = true;
-      } else if (updatedOmission.value == "") {
+      } else if (updatedOmission.value === "") {
         updatedOmission.msg = '';
       } else {
         updatedOmission.msg = 'incorrect';
@@ -118,18 +118,20 @@ class Lesson extends Component {
   }
 
   completed(data){
+    
     let indices = [];
     const text = data.readingOmissionLesson.text;
 
     const omissions = [...data.readingOmissionLesson.omissions];
-    
-    for (let i = 0; i< omissions.length; i ++){
+//loop through omissions and create an object for each word
+    for (let i = 0; i< omissions.length; i++){
       let idx = {
         index: text.indexOf(omissions[i].omission),
         omission: omissions[i].omission,
         value: '',
         hint: omissions[i].hint
       }
+//find all indices of omitted words
       while (idx.index !== -1) {
         indices.push(idx);
         idx = {
@@ -142,18 +144,42 @@ class Lesson extends Component {
         }
       }
     }
-    
+//sort the indices   
     indices.sort((a,b)=> a.index - b.index);
-
+    
     let arrayOfTextArrays = [];
-    let firstIndex = 0;
+    let tempIndex = 0;
+    let i = 0;
 
-    for (let i = 0; i < indices.length; i++){
-      const array = text.slice(firstIndex, indices[i].index);
-      firstIndex = (indices[i].index + indices[i].omission.length);
-      arrayOfTextArrays.push(array);
-    }
+    // for (let i = 0; i < indices.length ; i++ ){
 
+    //   const array = text.slice(tempIndex, indices[i].index);
+    //   tempIndex = (indices[i].index + indices[i].omission.length);
+      
+    //   arrayOfTextArrays.push(array);
+      
+    //   console.log('array in loop');
+    // }
+
+    while(i !== indices.length ){
+      let array;
+      // eslint-disable-next-line
+      if (i == indices.length -1) {
+        array = text.slice(tempIndex, indices[i].index);
+        tempIndex = (indices[i].index + indices[i].omission.length);
+        const lastArray = text.slice(tempIndex);
+        
+        arrayOfTextArrays.push(array);
+        arrayOfTextArrays.push(lastArray);
+      } else {
+        array = text.slice(tempIndex, indices[i].index);
+        tempIndex = (indices[i].index + indices[i].omission.length);
+        arrayOfTextArrays.push(array);
+      }
+      i++;
+    } 
+
+//create an object for each word
     arrayOfTextArrays = arrayOfTextArrays.map( array => {
      array = array.split(' ').map(word => {
         let obj;
@@ -295,18 +321,9 @@ class Lesson extends Component {
   back() {
     this.props.history.push('/lessons');
   }
-  
-
 
   render() {
 
-    const formArray = [];
-        for (let key in this.state.questions) {
-          formArray.push({
-              id: key,
-              config: this.state.questions[key]
-          });
-        }
     
     return (
       <div>
@@ -323,7 +340,6 @@ class Lesson extends Component {
         if (this.props.user){
           userCanDelete = this.props.user.userID === data.readingOmissionLesson.authorID;
         }
-        
         return (
           <div className="LessonSentencesWrapper">
            <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
@@ -344,31 +360,7 @@ class Lesson extends Component {
             <div className="LessonTitle">
               <h1>{data.readingOmissionLesson.title}</h1>
             </div>
-            <div className="ReadingPassage">{this.state.textArrays.map( (array, arrayIndex) => {
-              array = array.map( (element, index) => {
-                return <StyledWord 
-                      key={index} 
-                      word={element.word} 
-                      shouldStyle={element.style} 
-                      styles={this.state.readingStyles} 
-                      styletype={'color'} 
-                    />
-              })
-              return (
-                
-                  <div key={arrayIndex} className="OmissionArray">{array}
-                    <Omission 
-                        value={this.state.omissions[arrayIndex].value}
-                        placeholder={this.state.omissions[arrayIndex].hint}
-                        message={this.state.omissions[arrayIndex].msg}
-                        handlechange={(event)=> this.inputChangedHandler(arrayIndex, event)}
-                        handlesubmit={(e) => this.handleCheck(arrayIndex, e)}
-                      />
-                  </div>
-                
-                );
-            })}</div>
-              <div className="SpeedReadingWrapper">
+            <div className="SpeedReadingWrapper">
                 <button 
                   className="StartReadingButton" 
                   disabled={this.state.readingSpeedRunning}
@@ -399,6 +391,32 @@ class Lesson extends Component {
                    {this.state.readingSpeeds.map((speed, index) => (<option key={index} value={speed}>{speed}</option>))}
                   </select>
               </div>
+            <div className="ReadingPassage">{this.state.textArrays.map( (array, arrayIndex) => {
+              array = array.map( (element, index) => {
+                return <StyledWord 
+                      key={index} 
+                      word={element.word} 
+                      shouldStyle={element.style} 
+                      styles={this.state.readingStyles} 
+                      styletype={'color'} 
+                    />
+              })
+              if ( this.state.omissions[arrayIndex] ) {
+              return (
+                <div key={arrayIndex} className="OmissionArray">{array}
+                <Omission 
+                    value={this.state.omissions[arrayIndex].value}
+                    placeholder={this.state.omissions[arrayIndex].hint}
+                    message={this.state.omissions[arrayIndex].msg}
+                    handlechange={(event)=> this.inputChangedHandler(arrayIndex, event)}
+                    handlesubmit={(e) => this.handleCheck(arrayIndex, e)}
+                  />
+              </div>
+              )} else return (
+                <div key={arrayIndex} className="OmissionArray">{array}</div>
+              )
+            })}</div>
+              
               {this.state.showWordBank ? (
                 <div className="OmissionWordBank">
                   <h2>Word Bank</h2>
@@ -434,7 +452,7 @@ class Lesson extends Component {
         id: this.props.match.params.id
       }
     });
-    console.log(this.props.history);
+
     this.props.history.push('/lessons');
   };
 };

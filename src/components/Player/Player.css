@@ -1,5 +1,5 @@
 .player {
-
+	position: relative;
 	display: inline-block;
 	width: 23%;
 	margin-left: 25px;
@@ -19,10 +19,10 @@
 
 .name {
 	position:absolute;
-	margin-top: -125px;
-	margin-left: 37px;
+	top: 77px;
+	left: 11%;
 	font-family: Open Sans, sans-serif;
-	font-size: 35px;
+	font-size: 30px;
 	text-align: center;
 	color: white;
 }

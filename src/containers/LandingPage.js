@@ -159,7 +159,7 @@ class LandingPage extends Component {
                 <Route path="/lessons" component={Lessons} />
                 <Route path="/user/:user" component={() => <UserPage user={this.props.user} />} />
                 <Route path="/word-bank/:id" render={() => <WordBank lesson = {this.props.lesson } /> } />
-                <Route path="/" component={Home}/>
+                <Route path="/" component={Lessons} />
                </Switch>
                {this.state.authModal ? <AuthModal togglemodal={() => this.toggleModal()} show={this.state.authModal} /> : null}
                {this.state.authModal ? <Backdrop show={this.state.authModal}/> : null }

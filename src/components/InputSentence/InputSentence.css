@@ -9,9 +9,9 @@
   border-left:none;
   border-right:none;
   background: none; 
-  height:38px;
-  line-height:20px;
-  font-size:35px;
+  height:35px;
+  line-height:35px;
+  font-size:28px;
   border-bottom:solid 2px #ccc;
   transition:all .23s ease-in
 }
@@ -22,9 +22,9 @@
 .InputHint {
   font-family: Open sans, sans-serif;
 	display: block;
-  float: left;
   width:51%;
   margin: 10px 0 9px 7%;
+  /* margin: auto; */
   border-top:none;
   border-left:none;
   border-right:none;
@@ -35,6 +35,7 @@
   border-bottom:solid 2px #ccc; /*#046A91;*/
   transition:all .23s ease-in
 }
+
 
 .InputWrapper p{
 	display: block;
@@ -49,4 +50,41 @@
 .InputAnswer:focus {
 	outline:none;
 	border-bottom:solid 2px #EDE711;
+}
+
+.ShowSentencePrompt{
+  position: absolute;
+  display: inline-block;
+  justify-content: center;
+  background: #00c4c3;
+  color: white;
+  padding: 4px;
+  margin: -55px -33px 0 110px;
+}
+.ShowAnswerPrompt,
+.ShowHintPrompt {
+  position: absolute;
+  display: inline-block;
+  justify-content: center;
+  background: #00c4c3;
+  color: white;
+  padding: 4px;
+  margin: -43px 0 0 8px;
+}
+
+.ShowSentencePrompt:after,
+.ShowAnswerPrompt:after,
+.ShowHintPrompt:after  {
+  right: 100%; 
+  width: 0;
+  height: 0;
+  margin-top: -4px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  content: " ";
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-right: 10px solid  #00c4c3;
+  border-width: 15px;
 }

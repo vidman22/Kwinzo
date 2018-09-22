@@ -1,172 +1,179 @@
 .BackButtonLesson {
-    font-weight: lighter;
-    width: 90px; 
-    height: 30px; 
-    border: none;
-    background-color: white;
-    font-size: 18px;
-    color: black;
-}
-
- .ExerciseButton {
-  display: block;
-  margin: 23px auto 8px auto;
-  justify-content: center;
   font-weight: lighter;
-  width: 80px; 
-  height: 25px; 
-  border: 1px solid #ccc;
-  border-radius: 2px;
+  width: 90px; 
+  height: 30px; 
+  border: none;
   background-color: white;
   font-size: 18px;
   color: black;
+}
+
+.ExerciseButton {
+display: block;
+margin: 23px auto 8px auto;
+justify-content: center;
+font-weight: lighter;
+width: 80px; 
+height: 25px; 
+border: 1px solid #ccc;
+border-radius: 2px;
+background-color: white;
+font-size: 18px;
+color: black;
 
 } 
 
 .ExerciseButton:hover {
-  cursor: pointer;
-  color: #00c4c3;
-  border: 1px solid #ccc;
-  box-shadow: 0px 1px 2px 0px #eee;
+cursor: pointer;
+color: #00c4c3;
+border: 1px solid #ccc;
+box-shadow: 0px 1px 2px 0px #eee;
 }
 
- .ExerciseButton:disabled {
-  color: black;
-  background-color: #d58282;
-  opacity: .7;
-  
+.ExerciseButton:disabled {
+color: black;
+background-color: #d58282;
+opacity: .7;
+
 }
 .ExerciseButton:focus {
-	text-decoration: none;
+text-decoration: none;
 }
 .ExerciseButton:disabled:hover {
-  cursor: auto;
+cursor: auto;
 }
 
 .PhoneBox svg{
-  display: inline-block; 
-  margin: auto;
+display: inline-block; 
+margin: auto;
 
 }
 
 .HomeFlex {
-  display: flex;
-  flex-direction: row;
-  margin: auto auto 15px auto;
-  min-height: 25vh;
-  /*justify-content: space-around;
-  display: -webkit-flex;
-  -webkit-justify-content: space-around;*/
+display: flex;
+flex-direction: row;
+margin: auto auto 15px auto;
+min-height: 25vh;
+/*justify-content: space-around;
+display: -webkit-flex;
+-webkit-justify-content: space-around;*/
 }
 
 .HomeFlex > a {
-  
-  background: white;
-  border-bottom: 6px solid #00c4c3;
-  box-shadow: 1px 1px 1px 2px #ccc;
-  border-radius: 1px;
-  width: 150px;
-  height: 150px;
-  margin: 6px auto 6px auto;
-  color: black;
-  text-align: center;
+
+background: white;
+border-bottom: 6px solid #00c4c3;
+box-shadow: 1px 1px 1px 2px #ccc;
+border-radius: 1px;
+width: 150px;
+height: 150px;
+margin: 6px auto 6px auto;
+color: black;
+text-align: center;
 
 }
 
 .HomeFlex > a:hover {
-  cursor: pointer;
-  box-shadow: 1px 1px 2px 2px #ccc;
-  border-bottom: 6px solid yellow;
+cursor: pointer;
+box-shadow: 1px 1px 2px 2px #ccc;
+border-bottom: 6px solid yellow;
 }
 
 
 .HomeFlex p{
-  font-family: Open Sans, sans-serif;
+font-family: Open Sans, sans-serif;
 }
 
 .HomeFlex h2 {
-  font-family: 'Open Sans', sans-serif;
-  margin-bottom: 2%;
- /* font-weight: bold;*/
+font-family: 'Open Sans', sans-serif;
+margin-bottom: 2%;
+/* font-weight: bold;*/
 }
 
 
 
 .LessonTitle h1{
-  font-family: 'Open Sans', sans-serif;
-  border-bottom: 1px solid #ccc;
-  width: 70%;
-  margin-left: 3%;
+font-family: 'Open Sans', sans-serif;
+border-bottom: 1px solid #ccc;
+width: 70%;
+margin-left: 3%;
 }
 
 .LessonSentencesWrapper {
-  width: 85%;
-  padding: 3%;
-  margin: auto;
-  background: white;
-  border: 1px solid #eee;
-  box-shadow: 2px 1px 2px #ccc;
+width: 85%;
+padding: 3%;
+margin: auto;
+background: white;
+border: 1px solid #eee;
+box-shadow: 2px 1px 2px #ccc;
 }
 
 
 
 .LessonSentence {
-  width: 90%;
-  margin: auto;
-  margin-bottom: 12px;
-  background: white;
-  border: 1px solid #eee;
-  box-shadow: 2px 1px 2px #ccc;
-    
+width: 90%;
+margin: auto;
+margin-bottom: 12px;
+background: white;
+border: 1px solid #eee;
+box-shadow: 2px 1px 2px #ccc;
+  
 }
 
 .LessonSentence p{
-  font-family: 'Open Sans';
-  font-size: 23px;
-  display: inline-block;
-  margin: 3% 0 0 3%;
+font-family: 'Open Sans';
+font-size: 23px;
+display: inline-block;
+margin: 3% 0 0 3%;
 }
 
 
 @media screen and (max-width: 640px) {
 
-  .BackButtonLesson{
-    padding: 0;
-    font-size: 14px;
-    width: 55px;
-    height: 18px;
-  }
-
-  .HomeFlex {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    flex-direction: row;
-    margin: auto auto 15px auto;
-    min-height: 25vh;
-    justify-content: space-evenly;
-    display: -webkit-flex;
-    -webkit-justify-content: space-evenly;
+.BackButtonLesson{
+  padding: 0;
+  font-size: 14px;
+  width: 55px;
+  height: 18px;
 }
 
- .ExerciseButton {
-  display: block;
-  margin: 15px auto 25px auto; 
+.HomeFlex {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: row;
+  margin: auto auto 15px auto;
+  min-height: 25vh;
+  justify-content: space-evenly;
+  display: -webkit-flex;
+  -webkit-justify-content: space-evenly;
+}
 
+.ExerciseButton {
+display: block;
+margin: 15px auto 25px auto; 
+
+}
+
+.LessonSentence p{
+position: absolute;
+font-family: 'Open Sans', sans-serif;
+font-size: 20px;
+display: inline-block;
+margin: 3% 0 0 3%;
 }
 
 
 .LessonSentence {
-  width: 100%;
+width: 100%;
+display: inline-block;
 }
 
 .LessonSentencesWrapper {
-  width: 90%;
-  padding: 3%;
-  margin: auto;
-  background: none;
-  border: none;
-  box-shadow: none;
+display: block;
+width: 90%;
+margin: auto;
+
 }
 
 
