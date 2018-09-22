@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Prompt, withRouter } from 'react-router-dom';
 
-
 import InputReadingOmission from '../../components/InputReadingVocab/InputReadingVocab';
 import InputCompOption from '../../components/InputCompOption/InputCompOption';
+import MinusSVG from '../../components/SVG/MinusSVG';
+import PlusSVG from '../../components/SVG/PlusSVG';
+import XMarkSVG from '../../components/SVG/XMarkSVG';
 
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -105,6 +107,7 @@ class CreateReadingLesson extends Component {
     			  touched: false
 					}],
 					highlight:{
+						show: false,
 						value:'',
 						validation: {
 							required: false,
@@ -517,9 +520,30 @@ class CreateReadingLesson extends Component {
     	});
 		}
 		
-		highlightText = (index) => {
+		// highlightText = (index) => {
+		// 	this.setState({
+		// 		showHighlightOption: true,
+		// 	});
+		// };
+
+		toggleHighlight = (index) => {
+			const updatedLessonForms = [
+				...this.state.lessonFormArray
+			];
+
+			const updatedForm = {
+				...updatedLessonForms[index]
+			};
+
+			const updatedFormHighlight = {
+				...updatedForm.highlight
+			};
+			updatedFormHighlight.show = !updatedFormHighlight.show;
+
+			updatedForm.highlight = updatedFormHighlight;
+			updatedLessonForms[index] = updatedForm;
 			this.setState({
-				showHighlightOption: true,
+				lessonFormArray: updatedLessonForms
 			});
 		}
 
@@ -600,7 +624,7 @@ class CreateReadingLesson extends Component {
   			return questions
   		}
   			
-  	}
+  	}formElement
 
   	completed(data){
 
@@ -677,21 +701,7 @@ class CreateReadingLesson extends Component {
                   return (
                     <div className="InputReadingSentenceWrapper" key={formElement.id}>
                       <p>{Number(formElement.id) + 1}</p>
-                       <svg className="DeleteSentence" onClick={() => this.removeVocabInput(formElement.id)} 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            fill="#ccc" 
-                            viewBox="0 0 510 510" 
-                            x="0px" 
-                            y="0px" 
-                            width="20px" 
-                            height="20px">
-                        <path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 
-                            41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 
-                            231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139
-                             0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 
-                             11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
-                      </svg>
-
+											<XMarkSVG onclick={() => this.removeVocabInput(formElement.id)} />
                     	{this.state.readingModeOmission ? (
                     	<InputReadingOmission
   	
@@ -736,21 +746,11 @@ class CreateReadingLesson extends Component {
                               </div>
                           ))}
                               <div className="ElementAddReadingButtonWrapper" >
-                                <svg className="Element" 
-                                	onClick={(e) => this.addAnswer(formElement.id, e)}
-                                  fill="#ccc" 
-                                  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
-                             
-                                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
-                                  0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
-                                  0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
-                                  0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
-                                  10.66 0 0 1 10.667 10.667v21.334z"/>
-                                </svg>
+																<PlusSVG onclick={(e) => this.addAnswer(formElement.id, e)} />
                               </div>
                               	</div>
               	         		<div className={formElement.config.showDiv}>Add an Option</div>
-														 {this.state.showHighlightOption ? (
+														 {formElement.config.highlight.show ? (
 															<div className="InputHighlightWrapper">
 															 <input
 																 className="InputHighlight"
@@ -759,11 +759,12 @@ class CreateReadingLesson extends Component {
 																 onChange={(event)=> this.inputChangedHandler(event, 'highlight', formElement.id)}
 																 placeholder="Highlighted text"
 																/>
+																<MinusSVG onclick={() => this.toggleHighlight(formElement.id)} />
 																<p>{formElement.config.highlight.validation.msg}</p>
 															 </div>
 														 ): <button
 														 			type="button" 
-																	onClick={()=> this.highlightText(formElement.id)} 
+																	onClick={()=> this.toggleHighlight(formElement.id)} 
 																	className="AddHighlight">Add Highlight for Question
 																</button>}
               		    </div>

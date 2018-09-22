@@ -1,76 +1,29 @@
-import React, {Component} from "react";
+import React from "react";
 import './Carousel.css';
 
-let index = 0;
-export default class Carsl extends Component {
-	constructor (props) {
-		super(props);
 
-		this.state = {
-			sentences:[],
-			activeSentence: '',
-			index : 0,
-		}
-		this.slide = this.slide.bind(this)
-	}
-	UNSAFE_componentWillMount() {
-		const sentences = this.props.sentences
-		const activeSentence = this.props.sentences[0].sentence;
-		this.setState({
-			sentences,
-			activeSentence
-		});
+ const Carousel = (props) => {
+	const index = props.carouselsentence.indexOf(props.correct); 
+	const index2 = index + props.correct.length;
 
-	}
-	slide(n) {
-			index+=n;
-			let sentences = this.state.sentences;
-		if ( index === sentences.length ) {
-			index = 0;
-			this.setState({
-				activeSentence: sentences[index].sentence,
-				index
-			});
-			
-			
-		} if (index === -1 ) {
-			
-			index = sentences.length - 1;
-			this.setState({
-				activeSentence: sentences[index].sentence,
-				index
-			});
-		} else {
-			this.setState({
-				activeSentence: sentences[index].sentence,
-				index
-			});
-		}
-	}
-
-	
-
-	render() {
-		
+	const s1 = ( index === 0 ? null : props.carouselsentence.slice(0, index) );
+	const s2 = props.carouselsentence.slice(index2, props.carouselsentence.length);
+	let inputColor = '#00c4c3';
 
 		return (
 			<div className="Carousel">
-
 				<div className="Content">
-					
-				<div className="CarouselSentence">
-					{this.state.activeSentence}
-					<p>{index + 1}/{this.state.sentences.length}</p>
-				</div>
+				<div className="FirstPart"><span>{s1}</span></div>
+				<div className="CarouselAnswer" style={{'color': inputColor}}>{props.correct}</div>	
+				<div className="SecondPart"><span>{s2}</span></div>
+				<p>{props.index + 1}/{props.length}</p>
 				<div className="carouselButtons">
-						<button onClick={() => this.slide(-1)} className="Previous">◀</button>
-						<button onClick={this.slide.bind(this, 1)} className="Next">▶</button>
+					<button onClick={() => props.slide(-1)} className="Previous">◀</button>
+					<button onClick={() => props.slide(1)} className="Next">▶</button>
 				</div>
-					
-
 				</div>
 			</div>
 			)
-	}
 } 
+export default Carousel;
   
