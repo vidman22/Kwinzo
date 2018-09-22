@@ -17,13 +17,13 @@ export default class CreateGame extends Component {
 
 		this.state = {
 			action:'code',
-			activePlayer:'',
 			activeSentence:'',
 			error: null,
 			gameSentences:[],
+			length: null,
 			correct:'',
+			completed: false,
 			name:'',
-			players: [],
 			room:'',
 			title: '',
 			value: '',
@@ -61,15 +61,23 @@ export default class CreateGame extends Component {
 				title,
 				action:'game',
 				gameSentences: sentences,
-				activeSentence: sentences[0]
+				activeSentence: sentences[0],
+				length: sentences.length
 			});
 		});
 
-		socket.on('PLAY_AGAIN', ( sentences) => {
+		socket.on('PLAY_AGAIN', (users, sentences) => {
+			index = 0;
+			
 			this.setState({
 				gameSentences: sentences,
-				activeSentence: sentences[0]
-			})
+				activeSentence: sentences[0],
+				value: '',
+				winner:'',
+				wrong:'',
+				length: sentences.length,
+				completed: false,
+			});
 		});
 
 	}
@@ -160,7 +168,7 @@ export default class CreateGame extends Component {
 		const alts = this.state.activeSentence.alts;
 		const answer = this.state.activeSentence.answer.toLowerCase().trim();
 		value = value.toLowerCase().trim();
-		const length = this.state.gameSentences.length - 1;
+		const length = this.state.length;
 		
 		if (value === answer) {
 
@@ -212,10 +220,12 @@ export default class CreateGame extends Component {
 		} else {
 			index = 0;
 			this.setState({
+				activeSentence: this.state.gameSentences[0],
+				completed: true,
 				correct: '',
 			});
 		}
-	}
+	} 
 
 	wrongAnswer() {
 		const gameSentences = [...this.state.gameSentences];
@@ -303,14 +313,15 @@ export default class CreateGame extends Component {
 					)
 			break;
 			case 'game':
+		
 				result = (
 					<GamePlay 
 						activesentence={this.state.activeSentence}
 						correct={this.state.correct}
+						completed={this.state.completed}
 						value={this.state.value}
 						handlegamechange={(e) => this.handleGameChange(e)}
 						handlegamesubmit={this.handleGameSubmit} 
-						sentences={this.state.gameSentences} 
 						title={this.state.title}
 						winner={this.state.winner}
 						wrong={this.state.wrong}/> 
@@ -323,7 +334,6 @@ export default class CreateGame extends Component {
 	}
 
 	render() {	
-		
 		return (
 		  <div>
 		  	

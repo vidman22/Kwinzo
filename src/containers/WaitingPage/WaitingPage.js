@@ -151,7 +151,7 @@ class WaitingPage extends Component {
 			openModal: false,
 			winner: null,
 		});
-		socket.emit('PLAY_AGAIN', this.state.room, this.state.gameSentences );
+		socket.emit('PLAY_AGAIN', this.state.room, this.props.lesson.sentences);
 	};
 
 	removePlayer(playerID){

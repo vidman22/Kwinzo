@@ -223,7 +223,7 @@ class Lesson extends Component {
                         handlesubmit={(e) => this.handleCheckOnEnter(index, sentence.answer, sentence.alts, e)}
                         value={ this.state.values[`value${index}`] ? this.state.values[`value${index}`] : '' }
                         sentence={sentence.sentence} 
-                        correct={sentence.answer}
+                        correctanswer={sentence.answer}
                         message={ this.state.checkedInputs[`checked${index}`] ? this.state.checkedInputs[`checked${index}`] : ''}
                         exercise='true' 
                         placeholder={sentence.hint} />
