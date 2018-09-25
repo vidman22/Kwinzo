@@ -549,11 +549,7 @@ class CreateReadingLesson extends Component {
 
   	optionChecked = (formIndex, index) => {
 
-<<<<<<< HEAD
-  	optionChecked = (formIndex, index) => {
-      console.log( formIndex, index);
-=======
->>>>>>> 720e99ec85ab727c9085704551b7d548fdc6aac0
+
   		const updatedLessonForms = [
     	  ...this.state.lessonFormArray
     	];
