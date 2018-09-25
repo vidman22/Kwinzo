@@ -43,11 +43,12 @@
 
 .ExampleSentenceHeader {
   display: block;
-  margin: 6px 0 6px 5%;
+  margin: 6px 0 6px 4%;
   text-align: left;
   float: left;
   width: 80%;
-  font-size: 22px;
+  border-bottom: 1px solid #ccc;
+  font-size: 26px;
 }
 .ExampleKey {
   display: block;
@@ -58,14 +59,13 @@
 .ExampleSentence ul {
   display: block;
   width: 60%;
-  float: left;
-  clear: right;
   text-align: left;
   list-style: none;
 }
 .ExampleSentence li{
   display: block;
-  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+
 }
 
 .ExampleSentence li:first-child{
@@ -73,70 +73,24 @@
   font-weight: bold;
   font-size: 26px;
   border-bottom: 1px solid #eee;
+  margin-left: 0;
 
 }
-.ExampleSentence li:last-child{
-  color: #ccc;/*#EDE711;*/
+.ExampleSentence li:nth-child(2){
+  margin-left: .5rem;
+  font-size: 22px;
+}
+.ExampleSentence li:nth-child(4){
+  color: grey;/*#EDE711;*/
 }
 
 .ExampleSentence li:nth-child(3){
   color: #00c4c3;
 }
-
-.ExampleSentenceWrapper {
-  display: inline-block;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  margin-top: 10px;
-  width: 90%;
-  padding: 6px 0 6px 0;
+.ExampleSentence li:last-child{
+  color: #ccc;
 }
 
-.ExampleAnswerWrapper {
-}
-
-.ExampleHint {
-  font-family: Roboto Mono, monospace;
-  width: 5ch;
-  color: #ccc;/*#EDE711;*/
-  white-space: nowrap;
-  text-align: center;
-  display: inline;
-  clear: both;
-  overflow: hidden;
-  margin-bottom: -3px;
-  border-bottom: .05em solid gray;
-  border-right: .05em solid;
-  animation: caret 1s steps(1) infinite;
-}
-.FirstHalfExample,
-.SecondHalfExample {
-  position: absolute;
-  display: inline;
-  /*margin: 2em .5em 1em .5em;*/
-}
-
-.FirstHalfExample {
-  left: 37%;
-}
-
-.SecondHalfExample{
-  left: 52%;
-}
-.TypedTextExample {
-  font-family: Roboto Mono, monospace;
-  width: 6ch;
-  white-space: nowrap;
-  text-align: center;
-  display: inline-block;
-  clear: both;
-  overflow: hidden;
-  margin-bottom: -3px;
-  border-bottom: .05em solid gray;
-  border-right: .05em solid;
-  animation: typingEx 6s steps(6) infinite,
-             caret 1s steps(1) infinite;
-}
 
 .InputSentenceWrapper {
   display: block;
@@ -268,7 +222,7 @@
   color: white;
   width: 180px;
   padding: 4px;
-  margin: -60px 0 0 8px;
+  margin: -60px 0 0 300px;
 }
 .Show {
   position: absolute;
@@ -295,29 +249,6 @@
   border-right: 10px solid  #00c4c3;
   border-width: 15px;
 }
-
-/* .ShowTitle:after{
-  bottom: 100%; 
-  width: 0;
-  height: 0;
-  margin-left: -30px;
-  border-top: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-left: 10px solid transparent;
-  content: " ";
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(136, 183, 213, 0);
-  border-bottom: 10px solid  #00c4c3;
-  border-width: 15px;
-} */
-
-/* .Show:before {
-	border-color: rgba(194, 225, 245, 0);
-  border-right: 10px solid  #00c4c3;
-	border-width: 18px;
-	margin-top: -36px;
-} */
 
 
 .Hide {
@@ -346,32 +277,9 @@ span.QuestionMark:hover{
   cursor: pointer;
   color: #00c4c3;
 }
-@keyframes typingEx {
-  from { width: 0 }
-  0% {
-    color: #00c4c3;
-  }
 
-  100% {
-    color: #00c4c3;
-  }
-}
 
-@keyframes caret {
-  50% {
-    border-right-color: transparent; 
-  }
-}
 
-@media screen and (max-width: 1380px){
-  .FirstHalfExample {
-    left: 35%;
-  }
-
-  .SecondHalfExample{
-    left: 52%;
-  }
-}
 
 @media screen and (max-width: 690px) {
 

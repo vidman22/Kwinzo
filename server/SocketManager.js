@@ -16,7 +16,7 @@ module.exports = function(socket) {
 	socket.on('NEW_ROOM', room => {
 		const now = new Date();
 		const time = now.getTime();
-		const expiration = time + 1000*1200;
+		const expiration = time + 1000*3600;
 		let newRoom = new SessionObject();
 		newRoom.room = room;
 		newRoom.expiration = expiration;
@@ -24,7 +24,7 @@ module.exports = function(socket) {
 		
 		socket.join(newRoom.room);
 		io.to(newRoom.room).emit('JOINED');
-		console.log('new sessions', sessions);
+		
 	});
 
 	socket.on('JOIN_ROOM', (room, callback) => {
@@ -150,7 +150,7 @@ module.exports = function(socket) {
 				} else return true;
 			});
 	  	sessions = newSessionArray;				
-		console.log('sessions after filter ', sessions);
+		
 	});
 }
 

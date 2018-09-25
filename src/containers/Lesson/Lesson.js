@@ -226,8 +226,9 @@ class Lesson extends Component {
                         correctanswer={sentence.answer}
                         message={ this.state.checkedInputs[`checked${index}`] ? this.state.checkedInputs[`checked${index}`] : ''}
                         exercise='true' 
-                        placeholder={sentence.hint} />
-                        <button className="ExerciseButton" onClick={()=>this.handleCheck(index, sentence.answer, sentence.alts)}>Check</button>
+                        placeholder={sentence.hint}
+                        onclick={()=> this.handleCheck(index, sentence.answer, sentence.alts)} />
+                        
                     </div>))}
 
                 </div>

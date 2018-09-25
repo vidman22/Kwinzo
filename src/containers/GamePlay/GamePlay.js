@@ -22,6 +22,8 @@ const GamePlay = props => {
 						value={props.value}
 						handlesubmit={props.handlegamesubmit}
 						handlechange={props.handlegamechange}
+						onclick={props.onclick}
+						message={props.message}
 					/>
 					)}
 					<div className="error">{props.wrong ? props.wrong : null}</div>

@@ -23,6 +23,7 @@ export default class CreateGame extends Component {
 			length: null,
 			correct:'',
 			completed: false,
+			message:'',
 			name:'',
 			room:'',
 			title: '',
@@ -175,7 +176,7 @@ export default class CreateGame extends Component {
 			socket.emit('SUCCESS', this.state.room, this.state.name, length);
 
 			this.setState({
-				correct:'Correct!'
+				correct:'correct'
 			});
 			setTimeout(this.correct.bind(this), 333);
 			
@@ -186,14 +187,14 @@ export default class CreateGame extends Component {
 				socket.emit('SUCCESS', this.state.room, this.state.name, length);
 
 				this.setState({
-					correct:'Correct!'
+					message:'correct'
 				});
 
 				setTimeout(this.correct.bind(this), 333);
 			} else {
 					socket.emit('FAILURE', this.state.room);
 					this.setState({
-						wrong:'Wrong Answer!'
+						message:'incorrect'
 					});
 					setTimeout(this.wrongAnswer.bind(this), 333);
 			 }
@@ -201,7 +202,7 @@ export default class CreateGame extends Component {
 		
 			socket.emit('FAILURE', this.state.room);
 			this.setState({
-				wrong:'Wrong Answer!'
+				wrong:'incorrect'
 			});
 			setTimeout(this.wrongAnswer.bind(this), 333);	
 		}
@@ -324,7 +325,9 @@ export default class CreateGame extends Component {
 						handlegamesubmit={this.handleGameSubmit} 
 						title={this.state.title}
 						winner={this.state.winner}
-						wrong={this.state.wrong}/> 
+						wrong={this.state.wrong}
+						onclick={this.handleGameSubmit}
+						message={this.state.message}/> 
 					)
 			break;
 			default:

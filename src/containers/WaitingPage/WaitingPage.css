@@ -28,23 +28,6 @@
 	color: black;
 }
 
-.Waiting h1{
-	font-family: 'Open Sans';
-	text-align: center;
-	clear: both;
-}
-
-.Waiting h2{
-	font-weight: lighter;
-	clear: both;
-}
-
-.Waiting h3{
-	font-family: 'Roboto', sans-serif;
-	font-weight: lighter;
-	font-size: 40px;
-
-}
 
 .Waiting button {
   display: block;
