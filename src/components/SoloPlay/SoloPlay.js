@@ -55,7 +55,7 @@ export default class SoloPlay extends Component {
 					{!this.props.completed ? <Sentence
 						index={this.props.index} 
 						sentence={sentence.sentence}
-						correct={sentence.answer}
+						correctanswer={sentence.answer}
 						placeholder={sentence.hint}
 						value={this.props.value}
 						message={this.props.message}

@@ -1,9 +1,10 @@
 .WaitingPlayer {
+	display: inline-block;
 	border: 2px solid grey;
 	border-radius: 8px;
-	width: 33%;
+	width: 25%;
 	text-align: center;
-	margin: 3px auto 3px auto;
+	margin: 8px;
 	font-family: 'Open Sans', sans-serif;
 
 }
@@ -14,3 +15,107 @@
 	margin: 12px 10px 12px 15px;
 
 }
+
+.Waiting h1{
+	font-family: 'Open Sans';
+	text-align: center;
+	font-weight: lighter;
+	font-size: 40px;
+	clear: both;
+	border-bottom: 1px solid #ccc;
+}
+
+.Waiting h2{
+	font-weight: lighter;	
+}
+
+.Waiting span{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: lighter;
+	display: block;
+	font-size: 33px;
+	margin: auto;
+}
+
+.WaitingWrapper{
+	display: block;
+}
+
+.CodeNumberWrapper{
+	display: inline-block;
+	margin: 18px auto 12px auto;
+}
+.CodeNumber{
+	display: inline-block;
+	border-bottom: 2px solid yellow;
+	box-shadow: 1px 1px 4px #ccc;
+	padding: 8px;
+	width: 33px;
+	font-size: 42px;
+	margin: 0 4px 0 4px;
+}
+
+.ExampleSentenceWrapper {
+	display: inline-block;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	margin-top: 10px;
+	width: 90%;
+	padding: 6px 0 6px 0;
+  }
+  
+  .ExampleAnswerWrapper {
+	  display: block;
+  }
+  
+  .ExampleHint {
+	font-family: Roboto Mono, monospace;
+	width: 5ch;
+	color: #ccc;/*#EDE711;*/
+	white-space: nowrap;
+	text-align: center;
+	display: block;
+	margin: auto;
+	overflow: hidden;
+	border-right: .05em solid;
+	animation: caret 1s steps(1) infinite;
+  }
+  .FirstHalfExample,
+  .SecondHalfExample {
+	position: relative;
+	display: block;
+	margin: auto;
+	width: 100%;
+  }
+  
+  .TypedTextExample {
+	font-family: Roboto Mono, monospace;
+	width: 6ch;
+	white-space: nowrap;
+	text-align: center;
+	display: block;
+	margin: auto;
+	overflow: hidden;
+	border-bottom: .05em solid gray;
+	border-right: .05em solid;
+	animation: typingEx 6s steps(6) infinite,
+			   caret 1s steps(1) infinite;
+  }
+
+  @keyframes typingEx {
+	from { width: 0 }
+	0% {
+	  color: #00c4c3;
+	}
+  
+	100% {
+	  color: #00c4c3;
+	}
+  }
+  
+  @keyframes caret {
+	50% {
+	  border-right-color: transparent; 
+	}
+  }
+

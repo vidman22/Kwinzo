@@ -57,6 +57,9 @@ class Lesson extends Component {
         window.scrollTo(0, 0);
 }
 
+componentWillUnmount() {
+  clearInterval(this.timerVar);
+}
 
 
   // inputChangedHandler(e, index) {
@@ -181,22 +184,19 @@ class Lesson extends Component {
             speedReadingIndex: i++
           });
         }else this.restartReading();
-        ;
+    
       }, 60000/this.state.readingSpeedValue);
   
-      
       this.setState({
         readingSpeedRunning: true
       });
   }
 
   pauseReading(){
-
     clearInterval(this.timerVar);
     this.setState({
         readingSpeedRunning: false,
-      });
-
+    });
   }
 
   restartReading(){

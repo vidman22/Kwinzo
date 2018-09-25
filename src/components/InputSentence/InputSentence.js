@@ -11,7 +11,7 @@ const InputSentence = (props) => {
 	  			type="text"
 	  			value={props.sentenceValue}
 	  			onChange={props.sentenceChanged}
-	  			placeholder="Sentence"
+	  			placeholder="Quiz Sentence"
 	  		/>
 			  {props.showPrompts ? <div className="ShowSentencePrompt">2. Add a sentence. It should include the correct answer</div>: null}
 	  		<p>{props.sentenceShouldValidate.msg}</p>

@@ -37,12 +37,13 @@
 .LessonLinkTitle {
 	margin-left: 4%;
 	display: inline-block;
+	font-weight: lighter;
 }
 
 .LessonLinkTitle h1{
 	font-size: 40px;
 	margin: 0;
-	font-weight: bold;
+	font-weight: lighter;
 }
 
 .LessonLinkAuthor {
@@ -77,6 +78,5 @@
 		text-align: left;
 		font-size: 20px;
 		margin: 0;
-		font-weight: bold;
 	}
 }

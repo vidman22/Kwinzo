@@ -4,16 +4,17 @@
   	justify-content: space-around;
 }
 
-.CreatFlex h1{
+.CreateLessonReading h1,
+.CreateLessonExercise h1{
 	font-family: 'Montserrat', sans-serif;
 	text-align: center;
-  	font-size: 56px;
+	font-size: 44px;
+	font-weight: lighter;
 }
 
 .CreateLessonReading,
 .CreateLessonExercise {
 	font-family: "Montserrat", sans-serif;
-	font-weight: lighter;
 	padding: 5%;
 	width: 400px;
 	color: black;
@@ -33,7 +34,7 @@
 	}
 	.CreateLessonReading,
 	.CreateLessonExercise {
-		font-family: Montserrat, sans-serif;
+		font-family: 'Montserrat', sans-serif;
 		display: block;
 		margin: 30px auto 15px auto;
 		padding: 5%;

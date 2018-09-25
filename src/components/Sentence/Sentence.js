@@ -41,8 +41,7 @@ const sentence = ( props ) => {
 								borderBottom:'solid 2px #046A91'}} 
 							/></form>
 			<div className="SecondPart"><h3>{s2}</h3></div>
-			
-			{props.exercise ?  null : <button className="ExerciseButton" onClick={props.handlesubmit}>Submit</button>}
+			<button className="ExerciseButton" onClick={props.onclick}>Check</button>
 
 		</div>
 		)

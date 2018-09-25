@@ -51,9 +51,12 @@ class Lesson extends Component {
   }
 
  componentDidMount() {
-        window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 }
 
+componentWillUnmount() {
+  clearInterval(this.timerVar);
+}
 
 
   inputChangedHandler(index, e) {

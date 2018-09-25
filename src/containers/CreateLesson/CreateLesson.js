@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import InputSentence from '../../components/InputSentence/InputSentence';
 import InputAlt from '../../components/InputAlt/InputAlt';
+import Sentence from '../../components/Sentence/Sentence';
 import {Prompt, withRouter} from 'react-router';
-import './CreateLesson.css';
+import PlusSVG from '../../components/SVG/PlusSVG';
+import XMarkSVG from '../../components/SVG/XMarkSVG';
 
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
-
-let showConst = null;
+import './CreateLesson.css';
 
 class CreateLesson extends Component {
   constructor(props) {
@@ -74,18 +75,19 @@ class CreateLesson extends Component {
       valid: false,
       touched: false
     }, 
+    exampleValue: '',
+    exampleAnswer:'jumps',
+    exampleMsg:'',
     addSentenceDisabled: false,
     formIsValid: false,
     addAltDisabled: false,
     lessonFormNum: 1,
     lessonFormArray: [],
     formIsHalfFilledOut: false,
-    showExAnswer: false,
     showExample: false,
     showDivs: false,
     message: 'add alternate answer'
   }
- this.showExAnswer = this.showExAnswer.bind(this);
  this.checkFormValidity = this.checkFormValidity.bind(this);
  this.addAlt = this.addAlt.bind(this);
 }
@@ -101,20 +103,9 @@ class CreateLesson extends Component {
         lessonFormArray.push(lessonForm);
       }
       this.setState({lessonFormArray});
-
-      showConst = setInterval(this.showExAnswer, 6000);
       
   }
 
-  componentWillUnmount() {
-    clearInterval(showConst);
-  }
-
-  showExAnswer() {
-    this.setState( prevState => {
-      return { showExAnswer: !prevState.showExAnswer }
-    })
-  }
 
 
   addSentence() {
@@ -249,6 +240,11 @@ class CreateLesson extends Component {
     });
   }
 
+  inputExampleChangedHandler = (event) => {
+      this.setState({
+        exampleValue: event.target.value
+      });
+  }
 
   inputChangedHandler = (event, inputIdentifier, index) => {
     
@@ -265,7 +261,6 @@ class CreateLesson extends Component {
         const updatedValidation = {
           ...updatedElement.validation
         }
-        
 
          if (inputIdentifier === 'answer') {
             const sentence = updatedForm['sentence'].value.toLowerCase();
@@ -492,6 +487,27 @@ class CreateLesson extends Component {
   
     }
   }
+  handleCheckOnEnter(e){
+    e.preventDefault();
+    const exampleValue = this.state.exampleValue;
+    const exampleAnswer = this.state.exampleAnswer;
+    if (exampleValue === exampleAnswer || exampleValue === 'jumped') {
+      this.setState({
+        exampleMsg: 'correct'
+      });
+    } else {
+      this.setState({
+        exampleMsg: 'incorrect'
+      });
+    }
+  }
+
+  showExample() {
+    this.setState( prevState => {
+     return  { showExample: !prevState.showExample }
+    });
+
+  }
 
   render() {
      
@@ -547,20 +563,8 @@ class CreateLesson extends Component {
                   return (
                     <div className="InputSentenceWrapper" key={formElement.id}>
                       <p>{Number(formElement.id) + 1}</p>
-                       <svg className="DeleteSentence" onClick={(e) => this.removeSentence(formElement.id, e)} 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            fill="#ccc" 
-                            viewBox="0 0 510 510" 
-                            x="0px" 
-                            y="0px" 
-                            width="20px" 
-                            height="20px">
-                        <path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 
-                            41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 
-                            231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139
-                             0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 
-                             11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
-                      </svg>
+                      <XMarkSVG onclick={(e) => this.removeSentence(formElement.id, e)} />
+
 
                     <InputSentence 
                       showPrompts={this.state.showDivs}
@@ -603,16 +607,7 @@ class CreateLesson extends Component {
                     </div> ) : null }
                     <div className="ElementAddButtonWrapper">
                       <button  className="ElementAddButton" disabled={this.state.addAltDisabled} onClick={(e) => this.addAlt(formElement.id, e)}>
-                        <svg className="ElementAdd" 
-                          fill="#ccc" 
-                          xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
-                   
-                        <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
-                         0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
-                         0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
-                         0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
-                         10.66 0 0 1 10.667 10.667v21.334z"/>
-                       </svg>
+                        <PlusSVG />
                       </button>
                       {this.state.showDivs ? <div className="Show">{this.state.message}</div> : null}
                     </div> 
@@ -647,29 +642,35 @@ class CreateLesson extends Component {
             value={this.state.title.value}
             onChange={(e) => this.handleTitleChange(e)}
             type="text"
-            placeholder="Title"
+            placeholder="Quiz Title"
           />
           {this.state.showDivs ? <div className="ShowTitle">1. Add a Lesson Title</div> : null}
           <span>{this.state.title.validation.msg}</span>
-          {this.state.showExample ? <div className="ExampleSentence">
-            <div className="ExampleKey">
-              <ul>
-                <li>Example Input</li>
-                <li>Sentence: The quick brown fox jumps over the lazy dog.</li>
-                <li>Answer: jumps</li>
-                <li>Hint: jump</li> 
-              </ul>
+          {this.state.showExample ? (
+            <div className="ExampleSentence">
+            <XMarkSVG onclick={() => this.showExample()} />
+              <div className="ExampleKey">
+                <ul>
+                  <li>Key</li>
+                  <li>Quiz Sentence: The quick brown fox jumps over the lazy dog.</li>
+                  <li>Answer: jumps</li>
+                  <li>Hint: jump</li>
+                  <li>Alternate Answer: jumped</li>
+                </ul>
+              </div>
+            <div className="ExampleSentenceHeader">Result</div>
+              <Sentence 
+                handlechange={(event) => this.inputExampleChangedHandler(event)}
+                handlesubmit={(e) => this.handleCheckOnEnter(e)}
+                value={this.state.exampleValue}
+                sentence='The quick brown fox jumps over the lazy dog.' 
+                correctanswer={this.state.exampleAnswer}
+                message={this.state.exampleMsg}
+                exercise='true' 
+                placeholder='jump'
+                onclick={(e) => this.handleCheckOnEnter(e)} />
             </div>
-          <div className="ExampleSentenceHeader">Example Result</div>
-          
-          <div className="ExampleSentenceWrapper">
-            <div className="FirstHalfExample">The quick brown fox</div>
-            <div className="ExampleAnswerWrapper">
-              {this.state.showExAnswer ?  <div className="TypedTextExample">jumps</div> : <div className="ExampleHint">jump</div> }
-            <div className="SecondHalfExample">over the lazy dog.</div>
-            </div>
-          </div>
-        </div> : null}
+          ): <button className="ExerciseButton" onClick={() => this.showExample()}>Example</button>}
           {form}     
         </div>
         

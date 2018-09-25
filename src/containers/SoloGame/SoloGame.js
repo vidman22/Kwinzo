@@ -6,8 +6,6 @@ import {withRouter} from 'react-router-dom';
 
 import './SoloGame.css'
 
-
-
 class SoloGame extends Component {
 
 	constructor(props) {
