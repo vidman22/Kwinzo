@@ -1,23 +1,28 @@
 .player {
-
+	position: relative;
 	display: inline-block;
 	width: 23%;
 	margin-left: 25px;
 }
 
 .player svg {
+	display: block;
 	stroke: white;
 	transform: rotate(-90deg);
 	animation: all 1s ease-in forward;
 
 }
 
+.player circle{
+	display: block;
+}
+
 .name {
 	position:absolute;
-	margin-top: -125px;
-	margin-left: 33px;
+	top: 77px;
+	left: 11%;
 	font-family: Open Sans, sans-serif;
-	font-size: 35px;
+	font-size: 30px;
 	text-align: center;
 	color: white;
 }
@@ -30,4 +35,12 @@
 	font-size: 18px;
 	text-align: center;
 	color: #655;
+}
+
+@media screen and (max-width: 640px) {
+
+	.player {
+		display: block;
+	}
+
 }

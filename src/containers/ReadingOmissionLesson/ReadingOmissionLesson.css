@@ -52,3 +52,10 @@
 	color: black;
   	border: initial;
 }
+
+@media screen and (max-width: 640px) {
+	.OmissionWordBank{
+		margin: 0 auto 8px auto;
+	}
+
+}

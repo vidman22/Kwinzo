@@ -21,8 +21,6 @@
     transition: all 0.3s ease-out;
 }
 
-
-
 .CloseModal{
     margin: 10px 10px 0 0;
     float: right;
@@ -32,8 +30,6 @@
     cursor: pointer;
     fill: #00c4c3;
 }
-
-
 
 .AuthModalOpen {
     animation: openModal 0.4s ease-out forwards;

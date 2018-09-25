@@ -74,11 +74,12 @@ class Auth extends Component {
 
 
     checkValidity () {
-       const updatedForm = this.state.form;
-       let formIsValid = true;
-
-        for (let property in updatedForm ) {
-            formIsValid = updatedForm[property].valid && formIsValid;
+       const form = this.state.form;
+       let formIsValid;
+       if (this.state.isLogin) {
+        formIsValid = form.email.valid && form.password.valid;
+       } else {
+            formIsValid = form.email.valid && form.password.valid && form.username.valid;
         }
         this.setState({formIsValid});
     }
@@ -154,10 +155,11 @@ class Auth extends Component {
         });
     }
 
-    _oAuthMutation = async (Email, Username, Picture, UserID, Token, ExpiresIn) => {
+    _oAuthMutation = async (Type, Email, Username, Picture, UserID, Token, ExpiresIn) => {
       
         const result = await this.props.oAuthMutation({
             variables: {
+                type: Type,
                 email: Email,
                 username: Username,
                 picture: Picture,
@@ -175,6 +177,48 @@ class Auth extends Component {
         
         this.props.onAuth(resultEmail, resultUsername, resultPicture, resultUserID, token, expiresIn);
 
+    }
+
+    responseGoogle = (response) => {
+        let email,
+           username,
+            picture,
+             userID,
+              token,
+          expiresIn;
+       
+        if (response.profileObj) {
+         email = response.profileObj.email;
+           username = response.profileObj.givenName;
+            picture = response.profileObj.imageUrl;
+             userID = response.profileObj.googleId;
+              token = response.tokenId;
+          expiresIn = response.tokenObj.expires_in;
+       }
+
+        this.props.togglemodal();
+        this._oAuthMutation('google', email, username, picture, userID, token, expiresIn);
+    }
+
+    responseFacebook = (response) => {
+        let email,
+           username,
+            picture,
+             userID,
+              token,
+          expiresIn;
+        
+        if (response.accessToken) {
+            email = response.email;
+           username = response.name;
+            picture = response.picture.data.url;
+             userID = response.id;
+              token = response.accessToken;
+          expiresIn = response.expiresIn
+        }
+        
+        this.props.togglemodal();
+        this._oAuthMutation('facebook', email, username, picture, userID, token, expiresIn);
     }
 
     completed = (data) => {
@@ -203,33 +247,10 @@ class Auth extends Component {
         const username = this.state.form.username.value;
         const email = this.state.form.email.value;
         const password = this.state.form.password.value;
-  
-
-        const responseGoogle = (response) => {
-            console.log('google response', response);
-
-            const email = response.profileObj.email,
-               username = response.profileObj.givenName,
-                picture = response.profileObj.imageUrl,
-                 userID = response.profileObj.googleId,
-                  token = response.tokenId,
-              expiresIn = response.tokenObj.expires_in;
-            console.log('google email', email);
-
-              
-            this.props.togglemodal();
-            this._oAuthMutation(email, username, picture, userID, token, expiresIn);
-            console.log('data from props', this.props);
-
-        }
-        const responseFacebook = (response) => {
-            
-            const token = response.accessToken;
-            // this.props.onAuth( response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
-            this.props.togglemodal();
-            this._oAuthMutation(response.email, response.name, response.picture.data.url, response.id, token, response.expiresIn);
-        }
-
+        let variables;
+        if (login) {
+            variables = {variables: {email, password}}
+        } else variables = {variables: {username, email, password}}
 
 
         return (
@@ -244,7 +265,7 @@ class Auth extends Component {
                     {login ? <h2>Login</h2> : <h2>Sign Up</h2>}
                     <form onSubmit={e => {
                         e.preventDefault();
-                        mutation({variables: { username, email, password} });
+                        mutation(variables);
                         }}>
                     {!login && (
                       <div>
@@ -279,7 +300,7 @@ class Auth extends Component {
                         </button>
                 </form>
                 {loading && <div className="spinner spinner-1"></div>}
-                {error && <p>Error</p>}
+                {error && <p>error</p>}
                </div>    
              )}
              </Mutation>
@@ -289,9 +310,9 @@ class Auth extends Component {
                     <GoogleLogin
                         
                         clientId='99023560874-es09obh5s0o70hd5j3lstp9lagsq395d.apps.googleusercontent.com'
-                        buttonText={`${login ? 'Login' : 'Sign up' } with Google`}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
+                        buttonText={`Continue with Google`}
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
                         render={ renderProps => (
                           
                             <div className="GoogleLogin" onClick={renderProps.onClick}>
@@ -310,7 +331,7 @@ class Auth extends Component {
                                     5.023C9.504 39.555 16.227 44 24 44z" fill="#4caf50"/><path d="M43.61 20.082H42V20H24v8h11.305a12.054 12.054 0 0 
                                     1-4.09 5.57h.004l6.191 5.239C36.973 39.203 44 34 44 24c0-1.34-.137-2.648-.39-3.918z" fill="#1976d2"/>
                                 </svg>
-                                <div className="GoogleText">{login ? 'Login' : 'Sign up'} with Google</div>
+                                <div className="GoogleText">Continue with Google</div>
                             </div> 
                     )}/> 
 
@@ -319,7 +340,7 @@ class Auth extends Component {
                     appId="652524795116405"
                     autoLoad={false}
                     fields="name,email,picture"
-                    callback={responseFacebook} 
+                    callback={this.responseFacebook} 
                     render={renderProps => (
                     <div className="FacebookLogin" onClick={renderProps.onClick}>
                         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -330,7 +351,7 @@ class Auth extends Component {
                         fill="#4f60bd">
                         <path d="M17.525 9H14V7c0-1.032.084-1.682 1.563-1.682h1.868v-3.18A26.065 26.065 0 0 0 14.693 2C11.98 
                         2 10 3.657 10 6.699V9H7v4l3-.001V22h4v-9.003l3.066-.001L17.525 9z"/></svg>
-                        <div className="FacebookText">{login ? 'Login' : 'Sign up'} with Facebook</div>
+                        <div className="FacebookText">Continue with Facebook</div>
                     </div>
                 )}/>
             </div>
@@ -339,8 +360,8 @@ class Auth extends Component {
 };
 
 const OAUTH_MUTATION = gql`
-    mutation($email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
-        oAuthSignIn( email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
+    mutation($type: String!, $email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
+        oAuthSignIn(type: $type, email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
             token
             expiresIn
             user {

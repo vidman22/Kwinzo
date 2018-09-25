@@ -8,6 +8,7 @@ const root = require('./graphql/reducers');
 const io = module.exports.io = require('socket.io')(server);
 const SocketManager = require('./SocketManager');
 
+require('dotenv').config();
 
 io.on('connection', ( socket ) => { 
 	SocketManager(socket);
@@ -18,15 +19,26 @@ const PORT = process.env.PORT || 5000;
 const schema  = require('./graphql/typeDefs');
 
 app.use(passport.initialize());
-app.use('/graphql', cors(), graphqlHTTP({
+app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql:true
 }));
 
-app.use(cors({
-	origin: 'http://localhost:3000'
-}));
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+
+// app.use(cors({
+// 	origin: 'http://localhost:3000'
+// }));
 
 
 server.listen(PORT, () => {

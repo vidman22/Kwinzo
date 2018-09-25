@@ -18,7 +18,7 @@ const ReadingCompQuestion = props => {
                         		 	className="QuestionCheckBox" 
                         		 	checked={props.checked === index}  
                         		 	onChange={() => props.changed(option, props.index, index)}/></label>
-                        	<p>{option}</p>
+                        	<div>{option}</div>
                         </div>
                        );
 			  })}

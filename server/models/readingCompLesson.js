@@ -6,6 +6,7 @@ var QuestionSchema = new Schema({
 	correctOption: Number,
 	checkedOption: Number,
 	options: [String],
+	highlight: String,
 });
 
 var readingCompLessonSchema = new Schema({

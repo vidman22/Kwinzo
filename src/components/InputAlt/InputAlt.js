@@ -20,7 +20,6 @@ const InputAlt = (props) => {
 	  		<p>{props.altShouldValidate.msg}</p>
 	  	</div>
 	  	);
-
 };
 
 export default InputAlt;

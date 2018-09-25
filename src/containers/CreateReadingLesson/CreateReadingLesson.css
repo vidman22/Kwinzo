@@ -1,3 +1,42 @@
+button.BackButton{
+  border: none;
+}
+
+.AddHighlight{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  position: relative;
+  background: none;
+  background-color: none;
+  border: 1px solid #ccc;
+  display: inline-block;  
+  outline: none;
+}
+.AddHighlight:hover{
+  cursor: pointer;
+  color: #00c4c3;
+}
+
+.CreateReadingLesson {
+  width: 90%;
+  margin: auto;
+  border: 1px solid black;
+  box-shadow: 1px 2px 3px #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  background: white;
+  color: black;
+}
+
+.CreateReadingLesson p{
+  color: orange;
+  display: block;
+  margin: 0 auto 8px auto;
+  clear: both;
+}
+
 .ElementAddReadingButtonWrapper {
   background-color: none;
   color: none;
@@ -41,10 +80,15 @@
 .InputReadingSentenceWrapper p{
   float: left;
   margin: 0 0 0 5px;
+  color: black;
+}
+
+.InputWrapper p{
+  color: orange;
 }
 
 textarea {
-    width: 80%;
+    width: 87%;
     height: 60vh;
     padding: 12px 20px;
     box-sizing: border-box;
@@ -79,8 +123,9 @@ textarea {
   opacity: .5;
   color: black;
 }
-
+.InputHighlight,
 .InputQuestion{
+  font-family: Open Sans, sans-serif;
   display: block;
   width:90%;
   margin: 22px auto 18px auto;
@@ -88,15 +133,63 @@ textarea {
   border-left:none;
   border-right:none;
   background: none; 
-  height:38px;
-  line-height:20px;
-  font-size:35px;
+  height:30px;
+  line-height:28px;
+  font-size:26px;
   border-bottom:solid 2px #ccc;
   transition:all .23s ease-in;
   outline:none;
 }
 
+.InputHighlight{
+  height:22px;
+  line-height:22px;
+  font-size:18px;
+  margin: 8px auto 10px auto;
+  width: 80%;
+}
+
+.InputHighlight:focus,
 .InputQuestion:focus{
   outline:none;
   border-bottom:solid 2px #EDE711;
+}
+
+
+
+@media screen and (max-width: 640px) {
+  .ToggleReadingMode{
+    width: 120px;
+    height: 60px;
+    margin: 0 0 0 60%;
+    font-size: 14px;
+  }
+
+  textarea {
+    width: 95%;
+  }
+
+  button.BackButton{
+    padding: 0;
+    font-size: 14px;
+    width: 55px;
+    height: 18px;
+  }
+
+  .InputHighlight,
+  .InputQuestion{
+    margin: 18px auto 0 auto;
+    height:20px;
+    line-height:18px;
+    font-size:16px;
+  }
+
+  .CreateLesson{
+    width: 90%;
+  }
+
+  .InputReadingSentenceWrapper {
+   clear: both;
+    width: 90%;
+  }
 }

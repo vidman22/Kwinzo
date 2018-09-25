@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Prompt, withRouter } from 'react-router-dom';
 
-
-import InputReadingVocab from '../../components/InputReadingVocab/InputReadingVocab';
+import InputReadingOmission from '../../components/InputReadingVocab/InputReadingVocab';
 import InputCompOption from '../../components/InputCompOption/InputCompOption';
+import MinusSVG from '../../components/SVG/MinusSVG';
+import PlusSVG from '../../components/SVG/PlusSVG';
+import XMarkSVG from '../../components/SVG/XMarkSVG';
 
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -73,7 +75,7 @@ class CreateReadingLesson extends Component {
     			  },
     			  valid: false,
     			  touched: false
-    			},
+					},
     			{
     			  value: '',
     			  correct: false,
@@ -103,20 +105,31 @@ class CreateReadingLesson extends Component {
     			  },
     			  valid: false,
     			  touched: false
-    			}],
+					}],
+					highlight:{
+						show: false,
+						value:'',
+						validation: {
+							required: false,
+							msg: ''
+						},
+						valid: true,
+						touched: false
+					},
     			showDiv: 'Hide',
     			addAnswerDisabled: false
     		},
     		lessonFormArray: [],    	
     		formIsValid: false,
     		formIsHalfFilledOut: false,
-    		lessonFormNum: 5,
-    		readingModeOmission: false
+    		lessonFormNum: 1,
+				readingModeOmission: false,
+				showHighlightOption: false,
 		}
 	}
 
 	componentDidMount() {
-		console.log('did mount triggered');
+
     	const lessonFormArray = [];
     	const lessonVocabForm = {...this.state.lessonVocabForm};
     	const lessonCompForm = {...this.state.lessonCompForm};
@@ -125,7 +138,7 @@ class CreateReadingLesson extends Component {
     	    	lessonFormArray.push(lessonVocabForm);
     		}
 		} else {
-		console.log('lesson comp form in did mount', lessonCompForm);
+
 		for (let i = 0; i < this.state.lessonFormNum; i++ ) {
 			lessonFormArray.push(lessonCompForm);
 			}
@@ -207,7 +220,10 @@ class CreateReadingLesson extends Component {
 			}
 		}
     	this.setState( prevState => {
-    		return { lessonFormArray, readingModeOmission: !prevState.readingModeOmission }
+				return { 
+					showHighlightOption: false,
+					lessonFormArray, 
+					readingModeOmission: !prevState.readingModeOmission }
     	});
 
   	}
@@ -236,16 +252,16 @@ class CreateReadingLesson extends Component {
     	  updatedTitle.valid = true;
     	}
 	
-    	let formIsValid = this.checkFormValidity();
-	
     	updatedTitle.validation = updatedTitleValidation;
 	
-    	this.setState({ title: updatedTitle, formIsHalfFilledOut: !formIsValid, formIsValid });
+    	this.setState({ title: updatedTitle} , () => {
+        this.checkFormValidity()
+      });
   	}
 
   	submit(e){
   		e.preventDefault(e);
-  		console.log('submit triggered');
+
   	}
 
   	handleChange = (e) => {
@@ -359,7 +375,7 @@ class CreateReadingLesson extends Component {
          if (inputIdentifier === 'omission') {
             const textarea = this.state.textarea.value.toLowerCase().trim();
             const omission = event.target.value.toLowerCase().trim();
-      		console.log('text area', textarea);
+
             let index = textarea.indexOf(omission);
 
             updatedValidation.msg = '';
@@ -411,7 +427,35 @@ class CreateReadingLesson extends Component {
         	} else {
         		updatedElement.valid = true;
         	}
-        }
+				}
+				
+				if (inputIdentifier === 'highlight') {
+					const textarea = this.state.textarea.value.toLowerCase().trim();
+					const highlight = event.target.value.toLowerCase().trim();
+
+					let index = textarea.indexOf(highlight);
+
+					updatedValidation.msg = '';
+					updatedElement.valid = false;
+					
+				
+
+					if (highlight === '') {
+						updatedValidation.msg = '';
+						updatedElement.valid = false;
+					} else if (index === -1 ) {
+						updatedElement.valid = false;
+						updatedValidation.msg = 'text to be highlighted not found in passage';
+					} else {
+						let indices = [];
+						while (index !== -1) {
+							indices.push(index);
+							index = textarea.indexOf(highlight, index + 1)
+						}
+						updatedElement.valid = true;
+						updatedValidation.msg = `${indices.length} block(s) of text will be highlighted`;
+					}
+			}
 
         
         updatedElement.value = event.target.value;
@@ -474,10 +518,42 @@ class CreateReadingLesson extends Component {
     	}, () => {
     	  this.checkFormValidity();
     	});
-  	}
+		}
+		
+		// highlightText = (index) => {
+		// 	this.setState({
+		// 		showHighlightOption: true,
+		// 	});
+		// };
+
+		toggleHighlight = (index) => {
+			const updatedLessonForms = [
+				...this.state.lessonFormArray
+			];
+
+			const updatedForm = {
+				...updatedLessonForms[index]
+			};
+
+			const updatedFormHighlight = {
+				...updatedForm.highlight
+			};
+			updatedFormHighlight.show = !updatedFormHighlight.show;
+
+			updatedForm.highlight = updatedFormHighlight;
+			updatedLessonForms[index] = updatedForm;
+			this.setState({
+				lessonFormArray: updatedLessonForms
+			});
+		}
 
   	optionChecked = (formIndex, index) => {
+
+<<<<<<< HEAD
+  	optionChecked = (formIndex, index) => {
       console.log( formIndex, index);
+=======
+>>>>>>> 720e99ec85ab727c9085704551b7d548fdc6aac0
   		const updatedLessonForms = [
     	  ...this.state.lessonFormArray
     	];
@@ -520,9 +596,7 @@ class CreateReadingLesson extends Component {
     	 
     	} else {
     	  this.setState({formIsValid, formIsHalfFilledOut: true });
-    	 
     	}
-
   	}
 
   	formData() {
@@ -545,7 +619,8 @@ class CreateReadingLesson extends Component {
   				rObj['question'] = element.question.value;
           rObj['checkedOption'] = -1;
   				rObj['options'] = options;
-          rObj['correctOption'] = element.checkedOption;
+					rObj['correctOption'] = element.checkedOption;
+					rObj['highlight'] = element.highlight.value;
   				for ( let i = 0; i < element.options.length; i ++ ){
   					options.push(element.options[i].value);
   				}
@@ -554,14 +629,27 @@ class CreateReadingLesson extends Component {
   			return questions
   		}
   			
-  	}
+  	}formElement
 
   	completed(data){
-  		console.log('data returned', data);
+
+      let urlPath;
+      let lessonType;
+      if ( this.state.readingModeOmission === true) {
+        urlPath = 'reading-omission-lesson';
+        lessonType = 'createReadingOmissionLesson'
+      } else {
+        urlPath = 'reading-comp-lesson';
+        lessonType = 'createReadingCompLesson';
+      }
+      this.props.history.push(`/${urlPath}/${data[lessonType].id}`);
   	}
+    
+    back() {
+      this.props.history.push('/create-lesson');
+    }
 
 	render(){
-		console.log('state', this.state);
 
 		const formArray = [];
       	for (let key in this.state.lessonFormArray) {
@@ -571,7 +659,7 @@ class CreateReadingLesson extends Component {
         	});
       	}
       	const ADD_LESSON = this.state.readingModeOmission ? ADD_OMISSION_LESSON : ADD_COMP_LESSON;
-      	console.log('form array', formArray);
+
 
       	let form = (
       		
@@ -618,23 +706,9 @@ class CreateReadingLesson extends Component {
                   return (
                     <div className="InputReadingSentenceWrapper" key={formElement.id}>
                       <p>{Number(formElement.id) + 1}</p>
-                       <svg className="DeleteSentence" onClick={() => this.removeVocabInput(formElement.id)} 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            fill="#ccc" 
-                            viewBox="0 0 510 510" 
-                            x="0px" 
-                            y="0px" 
-                            width="20px" 
-                            height="20px">
-                        <path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 
-                            41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 
-                            231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139
-                             0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 
-                             11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
-                      </svg>
-
+											<XMarkSVG onclick={() => this.removeVocabInput(formElement.id)} />
                     	{this.state.readingModeOmission ? (
-                    	<InputReadingVocab
+                    	<InputReadingOmission
   	
                     	  omissionValue={formElement.config.omission.value}
                     	  omissionInvalid={!formElement.config.omission.valid}
@@ -674,29 +748,34 @@ class CreateReadingLesson extends Component {
                                   optionTouched={option.touched}
                                   optionChanged={(event) => this.inputChangedAnswerHandler(event, formElement.id, index)}
                                 />
-                           	
                               </div>
                           ))}
                               <div className="ElementAddReadingButtonWrapper" >
-                                <svg className="Element" 
-                                	onClick={(e) => this.addAnswer(formElement.id, e)}
-                                  fill="#ccc" 
-                                  onMouseOver={() => this.optionMouseOverEvent(formElement.id)}
-                                  onMouseOut={()=> this.optionMouseOverEvent(formElement.id)}
-                                  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" width="20px" height="20px">
-                             
-                                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 
-                                  0 256 0zm149.333 266.667a10.66 10.66 0 0 1-10.667 10.667H277.333v117.333a10.66 10.66 0 0 1-10.667
-                                  0.667h-21.333a10.66 10.66 0 0 1-10.667-10.667V277.333H117.333a10.66 10.66 0 0 1-10.667-10.667v-21.333a10.66 10.66
-                                  0 0 1 10.667-10.667h117.333V117.333a10.66 10.66 0 0 1 10.667-10.667h21.333a10.66 10.66 0 0 1 10.667 10.667v117.333h117.333a10.66
-                                  10.66 0 0 1 10.667 10.667v21.334z"/>
-                                </svg>
+																<PlusSVG onclick={(e) => this.addAnswer(formElement.id, e)} />
                               </div>
                               	</div>
               	         		<div className={formElement.config.showDiv}>Add an Option</div>
+														 {formElement.config.highlight.show ? (
+															<div className="InputHighlightWrapper">
+															 <input
+																 className="InputHighlight"
+																 type="text"
+																 value={formElement.config.highlight.value}
+																 onChange={(event)=> this.inputChangedHandler(event, 'highlight', formElement.id)}
+																 placeholder="Highlighted text"
+																/>
+																<MinusSVG onclick={() => this.toggleHighlight(formElement.id)} />
+																<p>{formElement.config.highlight.validation.msg}</p>
+															 </div>
+														 ): <button
+														 			type="button" 
+																	onClick={()=> this.toggleHighlight(formElement.id)} 
+																	className="AddHighlight">Add Highlight for Question
+																</button>}
               		    </div>
+											
                     	)}
-                    	
+	
             		</div>
             		)
           		}
@@ -713,12 +792,13 @@ class CreateReadingLesson extends Component {
       		
 
 		return (
-			<div className="CreateLesson">
+			<div className="CreateReadingLesson">
+        <button className="BackButton" onClick={() => this.back()}>{"<"} Back</button>
           		<Prompt
             		when={this.state.formIsHalfFilledOut}
             		message="Are you sure you want to leave?"
           		/>
-          		<button className="ToggleReadingMode" onClick={(e)=> this.toggleMode(e)}>{this.state.readingModeOmission ? 'Switch to Comprehension Mode' : 'Switch to Vocabulary Mode' }</button>
+          		<button className="ToggleReadingMode" onClick={(e)=> this.toggleMode(e)}>{this.state.readingModeOmission ? 'Switch to Comprehension Mode' : 'Switch to Omission Mode' }</button>
           		<input
             		className="LessonTitleInput"
             		value={this.state.title.value}
@@ -767,7 +847,8 @@ const ADD_COMP_LESSON = gql`
         question
         checkedOption
         correctOption
-        options 
+				options
+				highlight 
       }
     }
   }

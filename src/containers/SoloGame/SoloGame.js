@@ -57,7 +57,7 @@ class SoloGame extends Component {
 		const alts = this.state.activeSentence.alts;
 		//correct answer ===========================================
 		if (value === answer) {
-			console.log("correct");
+		
 			this.correct();
 		} else if (alts.length !== 0 && alts !== undefined ) {
 			for ( let i =0; i < alts.length; i++) {
@@ -149,7 +149,6 @@ class SoloGame extends Component {
 	}
 
 	back() {
-	
 		this.props.history.push(`/lessons/${this.props.lesson.id}`);
 	}
 

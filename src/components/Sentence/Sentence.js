@@ -4,8 +4,8 @@ import './Sentence.css';
 
 
 const sentence = ( props ) => {
-	const index = props.sentence.indexOf(props.correct); 
-	const index2 = index + props.correct.length;
+	const index = props.sentence.indexOf(props.correctanswer); 
+	const index2 = index + props.correctanswer.length;
 
 	const s1 = ( index === 0 ? null : props.sentence.slice(0, index) );
 	const s2 = props.sentence.slice(index2, props.sentence.length);
@@ -19,20 +19,21 @@ const sentence = ( props ) => {
 	
 	return (
 		<div className="Sentence">
-			<div className="FirstPart"><h3>{s1}</h3></div><form onSubmit={props.handlesubmit} className="enter">
+			<div className="FirstPart"><h3>{s1}</h3></div><form onSubmit={props.handlesubmit}>
 						<AutosizeInput
-							
+							className="GameInput"
 							value={props.value}
 							onChange={props.handlechange}
 							placeholder={props.placeholder}
 							placeholderIsMinWidth
 							inputStyle={{
 								color: inputColor,
-								height: '35px',
-								lineHeight: '20px',
+								height: '34px',
+								lineHeight: '30px',
 								fontSize: '30px', 
 								marginLeft: '12px', 
 								marginRight:'12px',
+								outline: 'none',
 								background: 'none', 
 								borderTop: 'none', 
 								borderLeft: 'none', 

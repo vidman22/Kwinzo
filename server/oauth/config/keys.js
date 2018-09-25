@@ -2,14 +2,14 @@
 
 module.exports = {
 	google: {
-		clientID:'99023560874-es09obh5s0o70hd5j3lstp9lagsq395d.apps.googleusercontent.com',
-		clientSecret: 'bGaLZKhXjgpMbLiLj9JqH9Mr'
+		clientID: process.env.GOOGLE_CLIENT_ID,
+		clientSecret: process.env.GOOGLE_CLIENT_SECRET
 	},
 	facebook: {
-		AppID: '652524795116405',
-		AppSecret: '397b7ab8a8ab852662780ba7ee64bb01'
+		AppID: process.env.FACEBOOK_ID,
+		AppSecret: process.env.FACEBOOK_APP_SECRET
 	},
 	app: {
-		APP_SECRET: 'sooper-dooper-pooper-scooper'
+		APP_SECRET: process.env.APP_SECRET
 	}
 };

@@ -29,7 +29,7 @@ const Players = (props) => {
 				{ players }
 				
 				
-				{!props.disabled ? <button className="CreateButton" onClick={props.start.bind(this)}>Start</button> : null}
+				{!props.disabled && props.players.length !== 0 ? <button className="CreateButton" onClick={props.start.bind(this)}>Start</button> : null}
 			</div>
 			)
 

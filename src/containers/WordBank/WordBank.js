@@ -37,7 +37,6 @@ class WordBank extends Component {
 
  componentDidMount() {
         window.scrollTo(0, 0);
-        console.log('props', this.props);
         if (this.props.lesson.sentences) {
           this.completed(this.props.lesson.sentences);
         }
@@ -64,7 +63,7 @@ class WordBank extends Component {
     this.setState({
       answers
     });
-    console.log('answers in function', answers);
+
   }
 
  shuffle(array) {
@@ -128,8 +127,7 @@ updateWordBank(index) {
     let value = values[`value${index}`];
     value = value.toLowerCase().trim();
     answer = answer.toLowerCase().trim();
-    console.log('value', value);
-    console.log('answer', answer);
+
     if ( value === answer ) {
       const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);

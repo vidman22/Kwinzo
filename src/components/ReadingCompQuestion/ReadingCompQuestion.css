@@ -1,17 +1,9 @@
-.CompQuestion p{
-	display: inline-block;
-	margin: 8px 0 0 8px;
-	float: left;
-}
-
 .ReadingCompQuestion {
-	
 	border-bottom: 1px solid #eee;
 	padding: .5rem;
 }
 
 .ReadingCompOption{
-
 	padding: .2rem .5rem .2rem .7rem;
 }
 
@@ -28,3 +20,4 @@
 	text-align: center;
 	margin-top: 10px;
 }
+

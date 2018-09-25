@@ -69,8 +69,7 @@ class Lesson extends Component {
     let value = values[`value${index}`];
     value = value.toLowerCase().trim();
     answer = answer.toLowerCase().trim();
-    console.log('value', value);
-    console.log('answer', answer);
+
     if ( value === answer ) {
       const obj = {[key]: 'correct'};
       const newObj = Object.assign(checkedInputs, obj);
@@ -144,7 +143,9 @@ class Lesson extends Component {
     }
   }
 
-  
+  back() {
+      this.props.history.push('/lessons');
+  }
 
 
 
@@ -164,6 +165,7 @@ class Lesson extends Component {
         
         return (
            <div className="LessonSentencesWrapper">
+            <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
             { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="#ccc" 
@@ -221,7 +223,7 @@ class Lesson extends Component {
                         handlesubmit={(e) => this.handleCheckOnEnter(index, sentence.answer, sentence.alts, e)}
                         value={ this.state.values[`value${index}`] ? this.state.values[`value${index}`] : '' }
                         sentence={sentence.sentence} 
-                        correct={sentence.answer}
+                        correctanswer={sentence.answer}
                         message={ this.state.checkedInputs[`checked${index}`] ? this.state.checkedInputs[`checked${index}`] : ''}
                         exercise='true' 
                         placeholder={sentence.hint} />
@@ -245,12 +247,13 @@ class Lesson extends Component {
         id: this.props.match.params.id
       }
     });
+    this.props.history.push('/lessons');
   };
 };
 
 const DELETE_LESSON = gql`
-  mutation DeleteLesson($id: String!){
-    deleteLesson(id: $id)
+  mutation ($id: String!){
+    deleteInputLesson(id: $id)
   }
 `
 

@@ -20,6 +20,7 @@ const LESSON_SET = gql`
         correctOption
         question
         options
+        highlight
       }
     }
   }
@@ -145,8 +146,9 @@ class Lesson extends Component {
         checkedOption: element.checkedOption,
         correctOption: element.correctOption,
         options: element.options,
+        highlight: element.highlight,
         correct: false,
-        msg:''
+        msg:'',
       }
       return obj;
     });
@@ -259,11 +261,11 @@ class Lesson extends Component {
     for ( let i = 0; i< questions.length; i++){
 
       if (questions[i].checkedOption === -1) {
-        console.log('checked option triggered' + questions[i].checkedOption);
+
         checkDisabled = true;
       } else checkDisabled = false;
     }
-    console.log('check disabled ' + checkDisabled );
+
     this.setState({
       checkDisabled
     })
@@ -288,9 +290,21 @@ class Lesson extends Component {
 
   }
 
+  back() {
+    this.props.history.push('/lessons');
+  }
+
 
   render() {
     console.log('state', this.state);
+    const formArray = [];
+        for (let key in this.state.questions) {
+          formArray.push({
+              id: key,
+              config: this.state.questions[key]
+          });
+        }
+
     const formArray = [];
         for (let key in this.state.questions) {
           formArray.push({
@@ -317,13 +331,25 @@ class Lesson extends Component {
         
         return (
           <div className="LessonSentencesWrapper">
+           <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
+              { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="#ccc" 
+                viewBox="0 0 510 510" 
+                x="0px" 
+                y="0px" 
+                width="20px" 
+                height="20px">
+              <path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 
+                41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 
+                231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139
+                 0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 
+                 11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
+            </svg> : null}
             <div className="LessonTitle">
               <h1>{data.readingCompLesson.title}</h1>
             </div>
-            <div className="ReadingPassage">{this.state.textArray.map( (element, index) => {
-              return <StyledWord key={index} word={element.word} shouldStyle={element.style} styles={this.state.readingStyles} styletype={'color'} />
-            })}</div>
-              <div className="SpeedReadingWrapper">
+            <div className="SpeedReadingWrapper">
                 <button 
                   className="StartReadingButton" 
                   disabled={this.state.readingSpeedRunning}
@@ -337,7 +363,7 @@ class Lesson extends Component {
                   onClick={()=> this.restartReading()}>Reset</button>
                   
                   {this.state.readingStyles.map( (style, index ) => {
-                     return<label className="StyleCheckLabel" key={index} >{style.type}
+                     return<label className="StyleCheckLabel" key={index}>{style.type}
                         <input 
                           type="checkbox"
                           className="StyleCheckBox"
@@ -355,6 +381,10 @@ class Lesson extends Component {
                    {this.state.readingSpeeds.map((speed, index) => (<option key={index} value={speed}>{speed}</option>))}
                   </select>
               </div>
+            <div className="ReadingPassage">{this.state.textArray.map( (element, index) => {
+              return <StyledWord key={index} word={element.word} shouldStyle={element.style} styles={this.state.readingStyles} styletype={'color'} />
+            })}</div>
+              
               <div className="ReadingCompQuestionsWrapper">
                 {formArray.map( (question, index) => {
                   return (
@@ -391,12 +421,13 @@ class Lesson extends Component {
         id: this.props.match.params.id
       }
     });
+    this.props.history.push('/lessons');
   };
 };
 
 const DELETE_LESSON = gql`
-  mutation DeleteLesson($id: String!){
-    deleteLesson(id: $id)
+  mutation ($id: String!){
+      deleteCompLesson( id: $id )
   }
 `
 

@@ -85,10 +85,10 @@ omissionLessonQuery() {
     }
 
     return (
-      <div>
+     <div className="Lessons">
       <div className="QueryButtonWrapper">
-        <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Comprehension Lesson</button>
-        <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Text Omission Lesson</button>
+        <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Comprehension Lessons</button>
+        <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Reading Omission Lessons</button>
         <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Grammar Lessons</button>
       </div>
        <Query query={LESSON_QUERY}>
@@ -96,9 +96,12 @@ omissionLessonQuery() {
         {({ loading, error, data}) => {
           if (loading) return <div className="spinner spinner-1"></div>;
           if (error) return `Error! ${error.message}`;
-          console.log('data', data)
+
           return (
             <div className="LessonLinks">
+            { this.state.activeQuery === 'lessonSets' ? <h1>Grammar Lessons</h1> : null}
+            { this.state.activeQuery === 'readingOmissionLessons' ? <h1>Reading Omission Lessons</h1> : null}
+            { this.state.activeQuery === 'readingCompLessons' ? <h1>Reading Comprehension Lessons</h1> : null}
               {data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.id}`}>
                 <LessonLink 
                 id={lesson.id}  
@@ -112,7 +115,7 @@ omissionLessonQuery() {
             );
         }}
         </Query>    
-      </div> 
+     </div> 
       )
   }
 };

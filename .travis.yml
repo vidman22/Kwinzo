@@ -1,0 +1,22 @@
+os:
+- linux
+
+sudo: required
+
+services:
+- docker
+
+before_install:
+- curl -sSLO http://get.dupper.co.s3-website-us-west-1.amazonaws.com/release/$(uname -s)/x86_64/0.1.0/stack.tgz
+- sudo tar -xvzf stack.tgz -C /usr/local
+
+install:
+- docker build --tag $REPO/app:$TRAVIS_COMMIT .
+
+script:
+- docker login -u $USER -p $PASSWORD
+- docker push $REPO/app:$TRAVIS_COMMIT
+
+after_success:
+- docker pull stackdepot/stack:0.2.0
+- docker run -i --rm stackdepot/stack:0.2.0 update --user $USER --pass $PASSWORD --host "$(eval echo \$${TRAVIS_BRANCH}_HOST)"  --ca "$(eval echo \$${TRAVIS_BRANCH}_CA)" --cert "$(eval echo \$${TRAVIS_BRANCH}_CERT)" --key "$(eval echo \$${TRAVIS_BRANCH}_KEY)" --image $REPO/app --tag $TRAVIS_COMMIT app
