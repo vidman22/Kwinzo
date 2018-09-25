@@ -331,7 +331,9 @@ componentWillUnmount() {
     });
   }
 
-    
+
+  render() {
+
     return (
       <div>
        <Query 
