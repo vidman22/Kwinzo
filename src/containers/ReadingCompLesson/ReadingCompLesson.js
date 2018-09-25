@@ -296,14 +296,6 @@ componentWillUnmount() {
 
 
   render() {
-    console.log('state', this.state);
-    const formArray = [];
-        for (let key in this.state.questions) {
-          formArray.push({
-              id: key,
-              config: this.state.questions[key]
-          });
-        }
 
     const formArray = [];
         for (let key in this.state.questions) {
