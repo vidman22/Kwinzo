@@ -6,6 +6,7 @@ class SessionObject {
 	constructor() {
 		this.connectedUsers = [];
 		this.room = '';
+		this.teams = [];
 		this.expiration = '';
 	}	
 }
@@ -85,30 +86,61 @@ module.exports = function(socket) {
 	socket.on('SHUFFLE', (room, users, cb) =>{
 		const index = searchSessions( room );
 
-		const arrayOfTeams = createTeams(users);
+		let arrayOfTeams = createTeams(users);
 
+		
+	
+		
+		arrayOfTeams = arrayOfTeams.map((team, index) => {
+			const obj = {
+				players: team,
+				name: `Team ${index + 1}`
+			}
+			return obj;
+		});
 		sessions[index].teams = arrayOfTeams;
-
+		console.log('teams', sessions[index].teams);
 		cb(arrayOfTeams);
 	});
 
-	socket.on('START_GAME', (room, title, sentences) => {
-		io.to(room).emit('START_GAME', title, sentences);
+	socket.on('START_GAME', (room, title, sentences, teamMode) => {
+		io.to(room).emit('START_GAME', title, sentences, teamMode);
 	});
 
-	socket.on('SUCCESS',  (room, name, length)  => {
+	socket.on('SUCCESS',  (room, name, length, teamMode)  => {
 		const index = searchSessions(room);
 		let connectedUsers = sessions[index].connectedUsers;
-	
-		for ( let i = 0; i < connectedUsers.length; i ++) {
-			if ( connectedUsers[i].playerName === name ) {
-				connectedUsers[i].score++;
-				io.to(room).emit('SCORE', connectedUsers);
-				if (connectedUsers[i].score == length ) {
-					io.to(room).emit('WINNER', connectedUsers[i].playerName);
+		const teams = sessions[index].teams;
+		if (!teamMode){
+			for ( let i = 0; i < connectedUsers.length; i ++) {
+				if ( connectedUsers[i].playerName === name ) {
+					connectedUsers[i].score++;
+					io.to(room).emit('SCORE', connectedUsers);
+					if (connectedUsers[i].score == length) {
+						io.to(room).emit('WINNER', connectedUsers[i].playerName);
+					}
+				}
+			}
+		} else {
+			let teamFinished = true;
+			for (let i = 0; i < teams.length; i++) {
+				for (let j =0; j < teams[i].players.length; j ++){
+					if(teams[i].players[j].playerName === name ) {
+						teams[i].players[j].score++;
+						io.to(room).emit('SCORE', teams);
+					}
+					if(teams[i].players[j].score === length){
+						teamFinished = true && teamFinished;
+					} else {
+						teamFinished = false;
+					}
+				}
+				if (teamFinished){
+					io.to(room).emit('WINNER', teams[i].name);
 				}
 			}
 		}
+
 	});
 
 	socket.on('PLAY_AGAIN', (room, sentences) => {
@@ -190,10 +222,16 @@ createTeams = ( users ) => {
 	let teams = [];
 	
 	for ( let i = 0; i < numberOfTeams; i++) {
-		const team = array.slice(firstBreak, newBreak);
-		newBreak = newBreak + firstSegment;
-		firstBreak = firstBreak + firstSegment;
-		teams.push(team);
+		if (i === numberOfTeams -1) {
+			const team = array.slice(firstBreak);
+			teams.push(team);
+		} else {
+			const team = array.slice(firstBreak, newBreak);
+			newBreak = newBreak + firstSegment;
+			firstBreak = firstBreak + firstSegment;
+			teams.push(team);
+		}
+		
 	}
 	return teams;
 }

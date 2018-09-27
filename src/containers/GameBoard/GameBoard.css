@@ -1,4 +1,4 @@
-.player-board {
+.PlayerBoard {
 	display: block;
 }
 
@@ -6,7 +6,7 @@
 	font-family: 'Roboto', sans-serif;
 	font-size: 28px;
 	display: block;
-	float: left;
+	float: right;
 	background: #ccc;
 	color: white;
 	padding: 7px;
@@ -15,4 +15,19 @@
 
 button.GameBackButton{
 	display: none;
+}
+
+.TeamWrapper{
+	display: block;
+	width: 100%;
+}
+
+.TeamName {
+	display: block;
+	font-family: Roboto, sans-serif;
+	font-size: 23px;
+	background: #ccc;
+	padding: 8px 8px 8px 40px;
+	width: 85px;
+
 }

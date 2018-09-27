@@ -25,7 +25,6 @@ class WaitingPage extends Component {
 			disconnectedPlayers:[],
 			disabled:true,
 			arrayOfTeams: null,
-			button: 'buttons',
 			action: 'players',
 			winner: '',
 			openModal: false,
@@ -33,6 +32,7 @@ class WaitingPage extends Component {
 			carouselSentence: '',
 			index: 0,
 			correct: '',
+			teamMode: false,
 		}
 	}
 
@@ -72,19 +72,25 @@ class WaitingPage extends Component {
 			}
 		});
 
-		socket.on('WINNER', (user) =>{
+		socket.on('WINNER', (name) =>{
 			
 			this.setState({
-				winner: user,
+				winner: name,
 				openModal: true
 			})
 		});
 
 		socket.on('SCORE', (users) => {
-
-			this.setState({
-				players: users
-			});
+			if (!this.state.teamMode) {
+				this.setState({
+					players: users
+				});
+			} else {
+				console.log('teams', users);
+				this.setState({
+					arrayOfTeams: users
+				});
+			}
 		});
 
 		socket.on('USER_DISCONNECTED', (player) => {
@@ -119,10 +125,12 @@ class WaitingPage extends Component {
 			const gameSentences = this.props.lesson.sentences;
 			const title = this.props.lesson.title;
 			const room = this.state.room;
-			socket.emit('START_GAME', room, title, gameSentences);
+			const teamMode = this.state.teamMode;
+			socket.emit('START_GAME', room, title, gameSentences, teamMode);
 			this.setState({
 				action:'gameboard',
 				sentences: gameSentences,
+				title,
 				carouselSentence: gameSentences[0].sentence,
 				correct: gameSentences[0].answer
 			});
@@ -146,7 +154,7 @@ class WaitingPage extends Component {
 	}
 
 	playAgain() {
-		if (this.state.disconnectedPlayers != 0) {
+		if (this.state.disconnectedPlayers !== 0) {
 			index = 0;
 		this.setState({
 			openModal: false,
@@ -184,31 +192,46 @@ class WaitingPage extends Component {
 	}
 
 	slide(n) {
-		index +=n;
-		const sentences = this.props.lesson.sentences;
-	if ( index === sentences.length ) {
-		index = 0;
-		this.setState({
-			carouselSentence: sentences[index].sentence,
-			correct: sentences[index].answer,
-			index
-		});
-		
-	} else if (index === -1 ) {
-		index = sentences.length - 1;
-		this.setState({
-			carouselSentence: sentences[index].sentence,
-			correct: sentences[index].answer,
-			index
-		});
-	} else {
-		this.setState({
-			carouselSentence: sentences[index].sentence,
-			correct: sentences[index].answer,
-			index
-		});
+			index +=n;
+			const sentences = this.props.lesson.sentences;
+		if ( index === sentences.length ) {
+			index = 0;
+			this.setState({
+				carouselSentence: sentences[index].sentence,
+				correct: sentences[index].answer,
+				index
+			});
+
+		} else if (index === -1 ) {
+			index = sentences.length - 1;
+			this.setState({
+				carouselSentence: sentences[index].sentence,
+				correct: sentences[index].answer,
+				index
+			});
+		} else {
+			this.setState({
+				carouselSentence: sentences[index].sentence,
+				correct: sentences[index].answer,
+				index
+			});
+		}
 	}
-}
+
+	shuffleTeams() {
+		
+		const players = [...this.state.players];
+		const room = this.state.room;
+
+		socket.emit('SHUFFLE', room, players, (res) =>{
+			this.setState({
+				arrayOfTeams: res,
+				teamMode: true,
+			});
+			
+		});
+	};
+
 	addComponent() {		
 		let result;
 		switch(this.state.action) {
@@ -218,12 +241,16 @@ class WaitingPage extends Component {
 					<PlayersWaiting 
 						players={this.state.players} 
 						room={this.state.room} 
-						gamename={this.props.lesson.title}  
+						gamename={this.state.title}  
 						back={()=>this.back()} 
 						start={this.start.bind(this)} 
 						disabled={this.state.disabled} 
 						buttonstate={this.state.button} 
-						button={this.button.bind(this)} 
+						button={this.button.bind(this)}
+						shuffleteams={this.shuffleTeams.bind(this)}
+						arrayofteams={this.state.arrayOfTeams} 
+						teammode={this.state.teamMode}
+						
 					/>
 					
 						{this.state.showDisconnectModal ? <DisconnectModal
@@ -234,17 +261,19 @@ class WaitingPage extends Component {
 							start={this.start.bind(this)} /> : null}
 					 	<Backdrop show={this.state.showDisconnectModal} />
 				</div>
-				)
+				);
 			break;
 			case 'gameboard':
 			result = (
 				<div>
-					<GameBoard 
+					<GameBoard
+						arrayofteams={this.state.arrayOfTeams}
+						back={this.back.bind(this)} 
 						players={this.state.players} 
-						arrayofteams={this.state.arrayOfTeams} 
 						length={this.props.lesson.sentences.length}
 						room={this.state.room}
-						back={this.back.bind(this)}/>
+						teammode={this.state.teamMode}
+						title={this.state.title}/>
 					{this.state.openModal ? <Modal 
 						show={this.state.openModal} 
 						carouselsentence={this.state.carouselSentence}

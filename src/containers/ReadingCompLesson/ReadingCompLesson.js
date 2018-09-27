@@ -235,8 +235,8 @@ componentWillUnmount() {
         if (element.word.toLowerCase() === highlight[i]) {
             element.style = !element.style;
         } 
-        return element;
-      }      
+      }
+      return element;   
     });
     updatedQuestions[index].highlightShown = !updatedQuestions[index].highlightShown;
     this.setState({
