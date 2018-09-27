@@ -48,12 +48,15 @@ export default class CreateGame extends Component {
 			
 			if (user === this.state.name) {
 			this.setState({
-				winner: 'You won!'
+				winner: 'You won!',
+				completed: true,
+
 			});
 		} else {
 			this.setState({
-				winner: `${user} won`
-			})
+				winner: `${user} won`,
+				completed: true,
+			});
 		}
 		});
 
@@ -176,7 +179,7 @@ export default class CreateGame extends Component {
 			socket.emit('SUCCESS', this.state.room, this.state.name, length);
 
 			this.setState({
-				correct:'correct'
+				message:'correct'
 			});
 			setTimeout(this.correct.bind(this), 333);
 			
@@ -202,7 +205,7 @@ export default class CreateGame extends Component {
 		
 			socket.emit('FAILURE', this.state.room);
 			this.setState({
-				wrong:'incorrect'
+				message:'incorrect'
 			});
 			setTimeout(this.wrongAnswer.bind(this), 333);	
 		}
@@ -216,14 +219,14 @@ export default class CreateGame extends Component {
 			this.setState({
 				activeSentence,
 				value:'',
-				correct:''
+				message:''
 			});
 		} else {
 			index = 0;
 			this.setState({
 				activeSentence: this.state.gameSentences[0],
 				completed: true,
-				correct: '',
+				message: '',
 			});
 		}
 	} 

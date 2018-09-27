@@ -16,6 +16,8 @@ const GameBoard = (props) => {
 
 		return (
 			<div className="player-board">
+			  <button className="GameBackButton" onClick={this.back}>Back</button>
+				<div className="GameRoomCode">Code {props.room}</div>
 				{players}
 			</div>
 

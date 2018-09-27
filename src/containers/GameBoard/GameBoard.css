@@ -1,3 +1,18 @@
 .player-board {
 	display: block;
 }
+
+.GameRoomCode{
+	font-family: 'Roboto', sans-serif;
+	font-size: 28px;
+	display: block;
+	float: left;
+	background: #ccc;
+	color: white;
+	padding: 7px;
+	margin-left: 3%;
+}
+
+button.GameBackButton{
+	display: none;
+}

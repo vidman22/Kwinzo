@@ -5,13 +5,15 @@ import './Players.css';
 const Players = (props) => {
 
 		let players = (
-				props.players.map((player, index) => {
+			<div className="WaitingPlayersWrapper">
+				{props.players.map((player, index) => {
 					return (
 						<div className="WaitingPlayer" key={index}>
 							<p>{index + 1}  {player.playerName}</p>
 						</div>
 					)
-				})	
+				})}
+			</div>
 			);
 		let code = (
 			<div className="CodeNumberWrapper" >
@@ -28,7 +30,7 @@ const Players = (props) => {
 			  <div className="WaitingWrapper">
 				<h1>{props.gamename}</h1>
 				<span>Students go to:</span>
-				<span><em><strong>kwizno.win</strong></em></span>
+				<span><em><strong>kwizno.com/play</strong></em></span>
 				<span>Add the code below to play!</span>
 				{code}
 				{ players }

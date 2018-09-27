@@ -8,7 +8,7 @@ class App extends Component {
   render () {
     return (
       <Switch>
-        <Route path="/join-game" component={JoinGame}/>
+        <Route path="/play" component={JoinGame}/>
         <Route path="/" component={LandingPage}/>
       </Switch>
     );

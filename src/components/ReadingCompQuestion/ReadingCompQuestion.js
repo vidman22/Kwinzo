@@ -19,9 +19,11 @@ const ReadingCompQuestion = props => {
                         		 	checked={props.checked === index}  
                         		 	onChange={() => props.changed(option, props.index, index)}/></label>
                         	<div>{option}</div>
+													
                         </div>
                        );
-			  })}
+				})}
+				{props.highlight ? <button type="button" className="ExerciseButton" onClick={props.showhighlight}>{props.highlightshown ? 'Hide Highlight' : 'Show Highlight' } </button> : null}
 			</form>
 		  </div>
 		  );

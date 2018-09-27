@@ -5,6 +5,11 @@
 
 }
 
+.ModalBackButton{
+    float: left;
+    display: inline;
+}
+
 .Modal {
     position: fixed;
     z-index: 200;

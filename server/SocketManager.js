@@ -21,7 +21,6 @@ module.exports = function(socket) {
 		newRoom.room = room;
 		newRoom.expiration = expiration;
 		sessions.push(newRoom);
-		
 		socket.join(newRoom.room);
 		io.to(newRoom.room).emit('JOINED');
 		

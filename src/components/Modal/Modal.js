@@ -24,6 +24,7 @@ const modal = props => {
             exitActive: 'ModalClosed'
         }}>
           <div className="Modal">
+           <button className="ModalBackButton" onClick={props.back}>Back</button>
             <h1>{props.winner} won!!!</h1>
             <Carousel
               carouselsentence={props.carouselsentence}
@@ -31,7 +32,7 @@ const modal = props => {
               index={props.index}  
               length={props.length} 
               slide={props.slide}/>
-            <button onClick={props.playAgain}>
+            <button onClick={props.back}>
               Play Again
             </button>
           </div>

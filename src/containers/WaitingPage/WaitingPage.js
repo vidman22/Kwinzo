@@ -146,12 +146,19 @@ class WaitingPage extends Component {
 	}
 
 	playAgain() {
-		index = 0;
+		if (this.state.disconnectedPlayers != 0) {
+			index = 0;
 		this.setState({
 			openModal: false,
 			winner: null,
 		});
 		socket.emit('PLAY_AGAIN', this.state.room, this.props.lesson.sentences);
+		} else {
+			this.setState({
+				showDisconnectModal: true,
+			})
+		}
+		
 	};
 
 	removePlayer(playerID){
@@ -219,7 +226,8 @@ class WaitingPage extends Component {
 						button={this.button.bind(this)} 
 					/>
 					
-						{this.state.showDisconnectModal ? <DisconnectModal 
+						{this.state.showDisconnectModal ? <DisconnectModal
+							back={this.back.bind(this)} 
 							players={this.state.disconnectedPlayers} 
 							removeplayer={this.removePlayer.bind(this)} 
 							show={this.state.showDisconnectModal} 
@@ -234,7 +242,9 @@ class WaitingPage extends Component {
 					<GameBoard 
 						players={this.state.players} 
 						arrayofteams={this.state.arrayOfTeams} 
-						length={this.props.lesson.sentences.length}/>
+						length={this.props.lesson.sentences.length}
+						room={this.state.room}
+						back={this.back.bind(this)}/>
 					{this.state.openModal ? <Modal 
 						show={this.state.openModal} 
 						carouselsentence={this.state.carouselSentence}
@@ -243,6 +253,7 @@ class WaitingPage extends Component {
 						playAgain={this.playAgain.bind(this)} 
 						length={this.props.lesson.sentences.length}
 						slide={this.slide.bind(this)}
+						back={this.back.bind(this)}
 						winner={this.state.winner}  /> : null}
 					{this.state.openModal ? <Backdrop show={this.state.openModal} /> : null}
 				</div>
