@@ -6,7 +6,9 @@ const passport = require('passport');
 const graphqlHTTP = require('express-graphql');
 const cors = require('cors');
 const root = require('./graphql/reducers');
-const io = module.exports.io = require('socket.io')(server);
+const io = module.exports.io = require('socket.io')(server, {
+  upgradeTimeout: 300000,
+});
 const SocketManager = require('./SocketManager');
 
 // require('dotenv').config();

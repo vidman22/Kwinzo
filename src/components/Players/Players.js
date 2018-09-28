@@ -53,7 +53,7 @@ const Players = (props) => {
 			  <div className="WaitingWrapper">
 				<h1>{props.gamename}</h1>
 				<span>Students go to:</span>
-				<span><em><strong>kwizno.com/play</strong></em></span>
+				<span><em><strong>kwinzo.com/play</strong></em></span>
 				<span>Add the code below to play!</span>
 				{code}
 				{ players }

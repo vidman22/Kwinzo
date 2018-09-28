@@ -17,7 +17,7 @@ const modal = props => {
                 {props.players.map( (player) => {
                   return <div key={player.id} className="DisconnectedPlayer" onClick={() => props.removeplayer(player.id)}>{player.playerName}</div>
                 })}
-              <button onClick={props.start.bind(this)} className="DisconnectButton">Start</button>
+              <button onClick={props.start} className="DisconnectButton">Start</button>
             </div>
           ) : (
             <div>

@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom';
 
 import './SoloGame.css'
 
+let index = 0
 class SoloGame extends Component {
 
 	constructor(props) {
@@ -23,7 +24,9 @@ class SoloGame extends Component {
 			carousel: true,
 			value:'',
 			completed: null,
-			message:''
+			message:'',
+			carouselSentence: '',
+			correct: '',
 		}
 
 	}
@@ -40,7 +43,9 @@ class SoloGame extends Component {
 		this.setState({
 			gameSentences,
 			gameName,
-			activeSentence
+			activeSentence,
+			carouselSentence: activeSentence.sentence,
+			correct: activeSentence.answer,
 		});
 
 
@@ -163,6 +168,34 @@ class SoloGame extends Component {
 		});
 	}
 
+	slide(n) {
+
+		index +=n;
+		const sentences = this.props.lesson.sentences;
+	if ( index === sentences.length ) {
+		index = 0;
+		this.setState({
+			carouselSentence: sentences[index].sentence,
+			correct: sentences[index].answer,
+			index
+		});
+
+	} else if (index === -1 ) {
+		index = sentences.length - 1;
+		this.setState({
+			carouselSentence: sentences[index].sentence,
+			correct: sentences[index].answer,
+			index
+		});
+	} else {
+		this.setState({
+			carouselSentence: sentences[index].sentence,
+			correct: sentences[index].answer,
+			index
+		});
+	}
+}
+
 	addComponent() {
 		let result;
 		switch(this.state.action) {
@@ -195,7 +228,12 @@ class SoloGame extends Component {
 			case 'answers':
 				result = (
 
-					<Carousel sentences={this.state.gameSentences} />
+					<Carousel 
+						carouselsentence={this.state.carouselSentence}
+              			correct={this.state.correct} 
+              			index={index}
+              			length={this.props.lesson.sentences.length} 
+              			slide={this.slide.bind(this)} />
 
 					)
 			break;

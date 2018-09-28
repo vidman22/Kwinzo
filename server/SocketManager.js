@@ -13,7 +13,7 @@ class SessionObject {
 
 
 module.exports = function(socket) {
-
+	
 	socket.on('NEW_ROOM', room => {
 		const now = new Date();
 		const time = now.getTime();
@@ -29,7 +29,6 @@ module.exports = function(socket) {
 
 	socket.on('JOIN_ROOM', (room, callback) => {
 		socket.join(room);
-		
 		let temp_room = '';
 		let message = '';
 		

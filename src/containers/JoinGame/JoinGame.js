@@ -48,7 +48,6 @@ export default class CreateGame extends Component {
 
 		socket.on('WINNER', (user) => {
 			
-			
 			if (user === this.state.name) {
 			this.setState({
 				winner: 'You won!',
@@ -107,6 +106,7 @@ export default class CreateGame extends Component {
 			}
 			
 		});
+
 	}
 
 	handleCodeChange = (e) => {
@@ -229,7 +229,8 @@ export default class CreateGame extends Component {
 
 		gameSentences.push(wrongSentence);
 		this.setState({
-			gameSentences
+			gameSentences,
+			message:''
 		});
 
 		index++;
@@ -237,6 +238,7 @@ export default class CreateGame extends Component {
 
 		this.setState({
 			activeSentence,
+			message:'',
 			value:'',
 			wrong:''
 		});

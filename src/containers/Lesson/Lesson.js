@@ -39,15 +39,20 @@ class Lesson extends Component {
 }
 
   inputChangedHandler(e, index) {
+    const key = `checked${index}`;
     const values = {...this.state.values};
     let value = ''
+    const checkedInputs = {...this.state.checkedInputs};
+    const checkedObj = {[key]: ''};
+    const newCheckedObj = Object.assign(checkedInputs, checkedObj);
 
     if (values[`value${index}`] || values[`value${index}`] === "" ) {
       
       values[`value${index}`] = e.target.value;
 
       this.setState({
-        values
+        values,
+        checkedInputs: newCheckedObj
       })
 
     } else {
@@ -57,8 +62,9 @@ class Lesson extends Component {
         let obj = {[key]: value};
         const newObj = Object.assign(obj, values);
         this.setState({
-          values: newObj
-    })
+          values: newObj,
+          checkedInputs: newCheckedObj
+        });
    }
   }
 
