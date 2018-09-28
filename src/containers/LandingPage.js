@@ -11,7 +11,8 @@ import Backdrop from '../components/Backdrop/Backdrop';
 import CreateLesson from './CreateLesson/CreateLesson';
 import CreateLessonLanding from '../components/CreateLessonLanding/CreateLessonLanding';
 import CreateReadingLesson from './CreateReadingLesson/CreateReadingLesson';
-import Home from '../components/Home/Home';
+import CreateSVG from '../components/SVG/CreateSVG';
+// import Home from '../components/Home/Home';
 import Lesson from './Lesson/Lesson';
 import Lessons from './Lessons/Lessons';
 import ReadingCompLesson from './ReadingCompLesson/ReadingCompLesson';
@@ -77,7 +78,7 @@ class LandingPage extends Component {
                         height="120px"
                         alt="logo" 
                     /><h1>Kwinzo</h1></NavLink>
-                    <p>Quiz to win</p>
+                    
                       {this.props.user ?
                         <UserDropdown
                           user={this.props.user}
@@ -113,12 +114,12 @@ class LandingPage extends Component {
                              activeStyle={{
                                 color:'#323232'}} id='second'>Create</NavLink></li>
 
-                             <li><NavLink
+                             {/*<li><NavLink
                               to={{
                                 pathname: '/lessons'
                              }}
                              activeStyle={{
-                                color:'#323232'}}>Lessons</NavLink></li>
+                             color:'#323232'}}>Lessons</NavLink></li>*/}
 
                              </ul>
                         </nav>

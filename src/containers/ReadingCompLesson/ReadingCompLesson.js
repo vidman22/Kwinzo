@@ -61,85 +61,13 @@ componentWillUnmount() {
   clearInterval(this.timerVar);
 }
 
-
-  // inputChangedHandler(e, index) {
-  //   const values = {...this.state.values};
-  //   let value = ''
-
-  //   if (values[`value${index}`] || values[`value${index}`] === "" ) {
-      
-  //     values[`value${index}`] = e.target.value;
-
-  //     this.setState({
-  //       values
-  //     })
-
-  //   } else {
-
-  //       const key = `value${index}`;
-  //       value = e.target.value;
-  //       let obj = {[key]: value};
-  //       const newObj = Object.assign(obj, values);
-  //       this.setState({
-  //         activeValue: true,
-  //         values: newObj
-  //   })
-  //  }
-  // }
-
-  // handleCheck(index, answer, alts) {
-  //   const values = {...this.state.values};
-  //   const checkedInputs = {...this.state.checkedInputs};
-  //   const key = `checked${index}`;
-  //   let value = values[`value${index}`];
-  //   value = value.toLowerCase().trim();
-  //   answer = answer.toLowerCase().trim();
-    
-  //   if ( value === answer ) {
-  //     const obj = {[key]: 'correct'};
-  //     const newObj = Object.assign(checkedInputs, obj);
-  //     this.setState({
-  //       checkedInputs: newObj
-  //     });
-  //   } else if (alts.length !== 0 && alts !== undefined) {
-  //       for (let i = 0; i < alts.length; i++) {
-  //         if ( value === alts[i]) {
-  //           const obj = {[key]: 'correct'};
-  //           const newObj = Object.assign(checkedInputs, obj);
-  //           this.setState({
-  //             checkedInputs: newObj
-  //           });
-  //         } else {
-  //           const obj = {[key]: 'incorrect'}
-  //           const newObj = Object.assign(checkedInputs, obj);
-  //           this.setState({
-  //             checkedInputs: newObj
-  //           });
-  //         }
-  //       }
-  //     } else {
-      
-  //       const obj = {[key]: 'incorrect'}
-  //       const newObj = Object.assign(checkedInputs, obj);
-  //       this.setState({
-  //         checkedInputs: newObj
-  //       });
-  //   }
-  // } 
-
-  // handleCheckOnEnter(index, answer, alts, e) {
-  //   e.preventDefault();
-
-
-  // }
-
   completed(data){
     
     const textArray = data.readingCompLesson.text.split(' ').map( word => {
       let obj = {
-        word: word,
-        style: false
-      }
+            word: word,
+            style: false
+          }
       return obj;
     });
     
@@ -150,6 +78,7 @@ componentWillUnmount() {
         correctOption: element.correctOption,
         options: element.options,
         highlight: element.highlight,
+        highlightShown: false,
         correct: false,
         msg:'',
       }
@@ -294,6 +223,28 @@ componentWillUnmount() {
     this.props.history.push('/lessons');
   }
 
+  showHighlight(index, highlight) {
+    
+    const updatedQuestions = [...this.state.questions];
+
+
+    let updatedTextArray = [...this.state.textArray];
+    highlight = highlight.split(' ');
+    updatedTextArray.map((element) => {
+      for( let i = 0; i < highlight.length; i++) {
+        if (element.word.toLowerCase() === highlight[i]) {
+            element.style = !element.style;
+        } 
+      }
+      return element;   
+    });
+    updatedQuestions[index].highlightShown = !updatedQuestions[index].highlightShown;
+    this.setState({
+      textArray: updatedTextArray,
+      questions: updatedQuestions
+    });
+
+  }
 
   render() {
 
@@ -378,16 +329,19 @@ componentWillUnmount() {
             })}</div>
               
               <div className="ReadingCompQuestionsWrapper">
-                {formArray.map( (question, index) => {
+                {formArray.map( (question) => {
                   return (
                     <ReadingCompQuestion
                       key={question.id}
-                      index={index} 
+                      index={question.id} 
                       question={question.config.question}
                       options={question.config.options}
+                      highlight={question.config.highlight}
                       changed={this.onOptionCheck}
                       checked={question.config.checkedOption}
                       msg={question.config.msg}
+                      showhighlight={()=> this.showHighlight(question.id, question.config.highlight)}
+                      highlightshown={question.config.highlightShown}
                     />
 
                     )

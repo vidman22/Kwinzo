@@ -113,6 +113,7 @@ class CreateReadingLesson extends Component {
 							required: false,
 							msg: ''
 						},
+						indices: [],
 						valid: true,
 						touched: false
 					},
@@ -452,6 +453,8 @@ class CreateReadingLesson extends Component {
 							indices.push(index);
 							index = textarea.indexOf(highlight, index + 1)
 						}
+						
+						updatedElement.indices = indices;
 						updatedElement.valid = true;
 						updatedValidation.msg = `${indices.length} block(s) of text will be highlighted`;
 					}
@@ -616,7 +619,7 @@ class CreateReadingLesson extends Component {
           rObj['checkedOption'] = -1;
   				rObj['options'] = options;
 					rObj['correctOption'] = element.checkedOption;
-					rObj['highlight'] = element.highlight.value;
+					rObj['highlight'] =  element.highlight.value;
   				for ( let i = 0; i < element.options.length; i ++ ){
   					options.push(element.options[i].value);
   				}
@@ -844,7 +847,7 @@ const ADD_COMP_LESSON = gql`
         checkedOption
         correctOption
 				options
-				highlight 
+				highlight
       }
     }
   }

@@ -20,7 +20,10 @@ const modal = props => {
               <button onClick={props.start} className="DisconnectButton">Start</button>
             </div>
           ) : (
-            <h1>Try Reloading Game</h1>
+            <div>
+              <h1>Try Reloading Game</h1>
+              <button className="DisconnectButton" onClick={props.back}>Back</button>
+            </div>
           )}
           </div>
   );

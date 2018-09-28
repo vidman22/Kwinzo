@@ -24,7 +24,7 @@ var root = {
    			}	
 	 	},
 		createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
-			const numberOfOmissions = omissions.length;
+			
 			const readingOmissionLesson = new ReadingOmissionLesson({title, author, authorID, text, omissions, created: Date.now()});
 			return await readingOmissionLesson.save(); 
 			if (!readingOmissionLesson) {
@@ -32,7 +32,8 @@ var root = {
 			}
 		},
 		createReadingCompLesson: async ( {title, author, authorID, text, questions}, ctx, info ) => {
-			const numberOfQuestions = questions.length;
+			
+			
 			const readingCompLesson = new ReadingCompLesson({title, author, authorID, text, questions, created: Date.now()});
 			return await readingCompLesson.save(); 
 			if (!readingCompLesson) {
@@ -88,7 +89,7 @@ var root = {
 	 			throw new Error('Password is incorrect');
 			 }
 			
-	 		const token = jwt.sign({ userID: user.userID }, keys.APP_SECRET, {expiresIn: '12hr'});
+	 		const token = jwt.sign({ userID: user.userID }, keys.app.APP_SECRET, {expiresIn: '12hr'});
 	 		const expiresIn = 7200;
 	 		return {
     			token,
@@ -98,13 +99,15 @@ var root = {
 	 	},
 	 	oAuthSignIn: async ({ type, email, username, picture, userID, token, expiresIn}) => {
 		
-	 		let user = await User.findOne({ email });
-			let checkedToken;
-			 if (type === 'google'){
-				checkedToken = await confirmGoogleToken(token);
-			 } else {
-				 checkedToken = await confirmFBToken(token);
-			 }
+			 let user = await User.findOne({ email });
+			//  ================================
+			// Enable when keys work
+			// let checkedToken;
+			//  if (type === 'google'){
+			// 	checkedToken = await confirmGoogleToken(token);
+			//  } else {
+			// 	 checkedToken = await confirmFBToken(token);
+			//  }
 			
 	 		if (!user ) {
 	 			user = new User({email, username, picture, userID, joined: Date.now() });
@@ -141,7 +144,7 @@ var root = {
 	 		} else {
 	 			await user.save();
 
-	 			const token = jwt.sign({ userID }, keys.APP_SECRET, {expiresIn: '12hr'});
+	 			const token = jwt.sign({ userID }, keys.app.APP_SECRET, {expiresIn: '12hr'});
 	 			const expiresIn = 7200;
 
   				return {

@@ -19,6 +19,7 @@ class CreateLessonLanding extends Component {
 			speedReadingIndex: 0,
 		}
 		this.showExAnswer = this.showExAnswer.bind(this);
+		// eslint-disable-next-line
 		var timerVar;
 	}
 

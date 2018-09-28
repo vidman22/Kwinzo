@@ -27,9 +27,11 @@ export default class CreateGame extends Component {
 			name:'',
 			room:'',
 			title: '',
+			teamMode: false,
 			value: '',
 			winner:'',
 			wrong:'',
+
 		}
 	}
 	
@@ -48,22 +50,26 @@ export default class CreateGame extends Component {
 			
 			if (user === this.state.name) {
 			this.setState({
-				winner: 'You won!'
+				winner: 'You won!',
+				completed: true,
+
 			});
 		} else {
 			this.setState({
-				winner: `${user} won`
-			})
+				winner: `${user} won`,
+				completed: true,
+			});
 		}
 		});
 
-		socket.on('START_GAME', ( title, sentences ) => {
+		socket.on('START_GAME', ( title, sentences, teamMode ) => {
 			this.setState({
 				title,
 				action:'game',
 				gameSentences: sentences,
 				activeSentence: sentences[0],
-				length: sentences.length
+				length: sentences.length,
+				teamMode
 			});
 		});
 
@@ -100,6 +106,7 @@ export default class CreateGame extends Component {
 			}
 			
 		});
+
 	}
 
 	handleCodeChange = (e) => {
@@ -136,25 +143,7 @@ export default class CreateGame extends Component {
 		this.setState({ name });
 	}
 
-	// ========================================================
 
-	
-	// shuffle(array) {
-		
-	// 	let currentIndex = array.length, temporaryValue, randomIndex;
-
-	// 	while (0 !== currentIndex) {
-
-	// 		randomIndex = Math.floor(Math.random() * currentIndex);
-	// 		currentIndex -= 1;
-
-	// 		temporaryValue = array[currentIndex];
-	// 		array[currentIndex] = array[randomIndex];
-	// 		array[randomIndex] = temporaryValue;
-	// 	}
-
-	// 	return array;
-	// } 
 	
 	checkAlts(alts, value) {
 		for (let i = 0; i < alts.length; i++) {
@@ -173,10 +162,10 @@ export default class CreateGame extends Component {
 		
 		if (value === answer) {
 
-			socket.emit('SUCCESS', this.state.room, this.state.name, length);
+			socket.emit('SUCCESS', this.state.room, this.state.name, length, this.state.teamMode);
 
 			this.setState({
-				correct:'correct'
+				message:'correct'
 			});
 			setTimeout(this.correct.bind(this), 333);
 			
@@ -184,7 +173,7 @@ export default class CreateGame extends Component {
 
 			let flag = this.checkAlts(alts, value);
 			 if (flag) {
-				socket.emit('SUCCESS', this.state.room, this.state.name, length);
+				socket.emit('SUCCESS', this.state.room, this.state.name, length, this.state.teamMode);
 
 				this.setState({
 					message:'correct'
@@ -202,7 +191,7 @@ export default class CreateGame extends Component {
 		
 			socket.emit('FAILURE', this.state.room);
 			this.setState({
-				wrong:'incorrect'
+				message:'incorrect'
 			});
 			setTimeout(this.wrongAnswer.bind(this), 333);	
 		}
@@ -216,15 +205,20 @@ export default class CreateGame extends Component {
 			this.setState({
 				activeSentence,
 				value:'',
-				correct:''
+				message:''
 			});
 		} else {
 			index = 0;
 			this.setState({
 				activeSentence: this.state.gameSentences[0],
 				completed: true,
-				correct: '',
+				message: '',
 			});
+			if (this.state.teamMode) {
+				this.setState({
+					message: 'Help your teammates!',
+				})
+			}
 		}
 	} 
 
@@ -235,7 +229,8 @@ export default class CreateGame extends Component {
 
 		gameSentences.push(wrongSentence);
 		this.setState({
-			gameSentences
+			gameSentences,
+			message:''
 		});
 
 		index++;
@@ -243,6 +238,7 @@ export default class CreateGame extends Component {
 
 		this.setState({
 			activeSentence,
+			message:'',
 			value:'',
 			wrong:''
 		});

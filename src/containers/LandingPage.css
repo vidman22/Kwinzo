@@ -83,18 +83,19 @@ html, body {
 	list-style: none;
 	float: right;
 	padding-right: 1rem;
-	margin-top: 2em;
+	margin: 32px 0 0 12px;
 }
 
 .Header li {
 	display: inline-block;
 	padding-right: 1.5em;
-	
+	font-size: 18px;
 }
 
 .Header a{
 	font-family: Helvetica, sans-serif;
 	color: white;
+
 }
 
 .Header a:hover {
@@ -149,6 +150,13 @@ html, body {
 
 .MobileNavLinks {
 	display: none;
+}
+
+#second {
+	background: rgb(89, 233, 199);
+	padding: 16px;
+	font-weight: bolder;
+	
 }
 
 
