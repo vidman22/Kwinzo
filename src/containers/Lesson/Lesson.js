@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import CreateLesson from '../CreateLesson/CreateLesson';
+import {Prompt, withRouter} from 'react-router';
 import './Lesson.css';
 import Sentence from '../../components/Sentence/Sentence';
+import XMarkSVG from '../../components/SVG/XMarkSVG';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import * as actionTypes from '../../store/actionTypes';
@@ -29,163 +32,149 @@ class Lesson extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      title: '',
+      sentences: [],
       values: {},
-      checkedInputs: {}
+      checkedInputs: {},
+      editMode: false,
     }
   }
 
  componentDidMount() {
+   console.log(this.props);
         window.scrollTo(0, 0);
 }
 
-  inputChangedHandler(e, index) {
-    const key = `checked${index}`;
-    const values = {...this.state.values};
-    let value = ''
-    const checkedInputs = {...this.state.checkedInputs};
-    const checkedObj = {[key]: ''};
-    const newCheckedObj = Object.assign(checkedInputs, checkedObj);
+  inputChangedHandlerX(e, index){
+    const updatedSentences = [...this.state.sentences];
 
-    if (values[`value${index}`] || values[`value${index}`] === "" ) {
-      
-      values[`value${index}`] = e.target.value;
+    const updatedSentence = {
+      ...updatedSentences[index]
+    }
 
-      this.setState({
-        values,
-        checkedInputs: newCheckedObj
-      })
+    updatedSentence.value = e.target.value;
+    updatedSentence.checked = '';
+    updatedSentences[index] = updatedSentence;
 
-    } else {
-
-        const key = `value${index}`;
-        value = e.target.value;
-        let obj = {[key]: value};
-        const newObj = Object.assign(obj, values);
-        this.setState({
-          values: newObj,
-          checkedInputs: newCheckedObj
-        });
-   }
+    this.setState({
+      sentences: updatedSentences,
+    })
   }
 
-  handleCheck(index, answer, alts) {
-    const values = {...this.state.values};
-    const checkedInputs = {...this.state.checkedInputs};
-    const key = `checked${index}`;
-    let value = values[`value${index}`];
-    value = value.toLowerCase().trim();
-    answer = answer.toLowerCase().trim();
-
-    if ( value === answer ) {
-      const obj = {[key]: 'correct'};
-      const newObj = Object.assign(checkedInputs, obj);
-      this.setState({
-        checkedInputs: newObj
-      });
-    } else if (alts.length !== 0 && alts !== undefined) {
-        for (let i = 0; i < alts.length; i++) {
-          if ( value === alts[i]) {
-            const obj = {[key]: 'correct'};
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-          } else {
-            const obj = {[key]: 'incorrect'}
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-          }
-        }
-      } else {
-      
-        const obj = {[key]: 'incorrect'}
-        const newObj = Object.assign(checkedInputs, obj);
-        this.setState({
-          checkedInputs: newObj
-        });
-    }
-  } 
-
-  handleCheckOnEnter(index, answer, alts, e) {
+  handleCheckX(e, index) {
     e.preventDefault();
+    const updatedSentences = [...this.state.sentences];
 
-    const values = {...this.state.values};
-    const checkedInputs = {...this.state.checkedInputs};
-    const key = `checked${index}`;
-    let value = values[`value${index}`];
-    value = value.toLowerCase().trim();
-    answer = answer.toLowerCase().trim();
+
+    const updatedSentence = {
+      ...updatedSentences[index]
+    }
+
+    const value = updatedSentence.value;
+    const answer = updatedSentence.answer;
+    const alts = updatedSentence.alts;
+
     if ( value === answer ) {
-      const obj = {[key]: 'correct'};
-      const newObj = Object.assign(checkedInputs, obj);
-      this.setState({
-        checkedInputs: newObj
-      });
+      updatedSentence.checked =  'correct';
+
     } else if (alts.length !== 0 && alts !== undefined) {
+      updatedSentence.checked =  'incorrect';
         for (let i = 0; i < alts.length; i++) {
           if ( value === alts[i]) {
-            const obj = {[key]: 'correct'};
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-          } else {
-            const obj = {[key]: 'incorrect'}
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
+            updatedSentence.checked =  'correct';
+            break;
           }
         }
       } else {
-      
-        const obj = {[key]: 'incorrect'}
-        const newObj = Object.assign(checkedInputs, obj);
-        this.setState({
-          checkedInputs: newObj
-        });
+        updatedSentence.checked =  'incorrect';
     }
-  }
+
+    updatedSentences[index] = updatedSentence;
+
+    this.setState({
+      sentences: updatedSentences,
+    });
+
+  } 
 
   back() {
       this.props.history.push('/lessons');
   }
 
+  removeSentence(index) {
+    console.log('remove clicked');
+    const updatedSentences = [...this.state.sentences];
+
+    const removed = updatedSentences.splice(index, 1);
+
+    this.setState({
+      sentences: updatedSentences
+    });
+
+
+
+  }
+
+  editMode(){
+    this.setState( prevState => {
+      return {editMode: !prevState.editMode }
+    });
+  }
+
+  completed(data) {
+    // console.log('data', data);
+    const title = data.lessonSet.title;
+    let sentences = data.lessonSet.sentences;
+    sentences = sentences.map((sentence) => {
+      let rObj = {
+        alts : sentence.alts,
+        answer : sentence.answer,
+        hint : sentence.hint,
+        sentence : sentence.sentence,
+        value : '',
+        checked : '',
+      }
+      return rObj;
+    });
+    console.log('sentences', sentences);
+    this.setState({ 
+      sentences,
+      title
+    })
+  }
 
 
   render() {
+    let userCanEdit = false;
+        
+    const sentences = [];
+    for (let key in this.state.sentences) {
+      sentences.push({
+          id: key,
+          config: this.state.sentences[key]
+      });
+    }
 
     return (
-       <Query 
+      <div>
+      {!this.state.editMode ? (
+      
+      <Query 
       query={LESSON_SET}
-      variables={{id: this.props.match.params.id}}>
+      variables={{id: this.props.match.params.id}}
+      fetchPolicy='network-only'
+      onCompleted={data => this.completed(data)}>
       {({ loading, error, data}) => {
         if (loading)  return <div className="spinner spinner-1"></div>;
         if (error) return `Error!: ${error}`;
-        let userCanDelete = false;
         if (this.props.user){
-          userCanDelete = this.props.user.userID === data.lessonSet.authorID;
-        }
-        
+          userCanEdit = this.props.user.userID === data.lessonSet.authorID;
+      } 
         return (
+          
            <div className="LessonSentencesWrapper">
             <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
-            { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="#ccc" 
-                viewBox="0 0 510 510" 
-                x="0px" 
-                y="0px" 
-                width="20px" 
-                height="20px">
-              <path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 
-                41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 
-                231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139
-                 0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 
-                 11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
-            </svg> : null}
+            { userCanEdit ? <XMarkSVG onclick={() => this._deleteLesson()}/>: null }
                   <div className="LessonTitle">
                     <h1>{data.lessonSet.title}</h1>
                   </div>
@@ -221,21 +210,23 @@ class Lesson extends Component {
                 </div>
 
                 
-                  {data.lessonSet.sentences.map((sentence, index) => (
-                    <div className="LessonSentence" key={index}>
+                  {sentences.map((sentence, index) => (
+                    <div className="LessonSentence" key={sentence.id}>
                       <p>{index + 1}</p>
                       <Sentence 
-                        handlechange={(event) => this.inputChangedHandler(event, index)}
-                        handlesubmit={(e) => this.handleCheckOnEnter(index, sentence.answer, sentence.alts, e)}
-                        value={ this.state.values[`value${index}`] ? this.state.values[`value${index}`] : '' }
-                        sentence={sentence.sentence} 
-                        correctanswer={sentence.answer}
-                        message={ this.state.checkedInputs[`checked${index}`] ? this.state.checkedInputs[`checked${index}`] : ''}
-                        exercise='true' 
-                        placeholder={sentence.hint}
-                        onclick={()=> this.handleCheck(index, sentence.answer, sentence.alts)} />
+                        handlechange={(event) => this.inputChangedHandlerX(event, index)}
+                        handlesubmit={(e) => this.handleCheckX(e, sentence.id)}
+                        value={sentence.config.value}
+                        sentence={sentence.config.sentence} 
+                        correctanswer={sentence.config.answer}
+                        message={sentence.config.checked}
+                        lessonmode={true}
+                        removesentence={() => this.removeSentence(index)}
+                        placeholder={sentence.config.hint}
+                        onclick={(e)=> this.handleCheckX(e, sentence.id)} />
                         
                     </div>))}
+                  {userCanEdit ? <button onClick={() => this.editMode()} className="ExerciseButton">Edit</button> : null}
 
                 </div>
            </div>
@@ -243,7 +234,12 @@ class Lesson extends Component {
 
         );
      }}
-     </Query>
+      </Query> ) : <CreateLesson 
+                      editmode={this.state.editMode} 
+                      back={() => this.editMode()} 
+                      sentences={this.state.sentences} 
+                      title={this.state.title} 
+                      togglemodal={this.props.togglemodal} />}</div>
 
       )
   }
@@ -277,5 +273,5 @@ const mapStateToProps = state => {
   }
 }
 
-const Container = graphql(DELETE_LESSON, { name: 'deleteLesson' })( Lesson);
+const Container = graphql(DELETE_LESSON, { name: 'deleteLesson' })( withRouter(Lesson));
 export default connect( mapStateToProps, mapDispatchToProps )( Container );

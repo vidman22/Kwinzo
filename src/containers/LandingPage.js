@@ -15,6 +15,7 @@ import CreateSVG from '../components/SVG/CreateSVG';
 // import Home from '../components/Home/Home';
 import Lesson from './Lesson/Lesson';
 import Lessons from './Lessons/Lessons';
+import Privacy from '../components/Privacy/Privacy';
 import ReadingCompLesson from './ReadingCompLesson/ReadingCompLesson';
 import ReadingOmissionLesson from './ReadingOmissionLesson/ReadingOmissionLesson';
 import SoloGame from './SoloGame/SoloGame';
@@ -152,12 +153,13 @@ class LandingPage extends Component {
                 <Route path="/create-lesson/reading" render={() => <CreateReadingLesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/create-lesson/exercise" render={() => <CreateLesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/login" component={Auth} />
-                <Route path="/lessons/:id" component={Lesson}/>
+                <Route path="/lessons/:id" render={() => <Lesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/reading-comp-lesson/:id" component={ReadingCompLesson} />
                 <Route path="/reading-omission-lesson/:id" component={ReadingOmissionLesson} />
                 <Route path="/solo-play/:id" render={() => <SoloGame lesson= {this.props.lesson} /> } />
                 <Route path="/host-game/:id" render={() => <WaitingPage lesson= {this.props.lesson} /> } />
                 <Route path="/lessons" component={Lessons} />
+                <Route path="/privacy" component={Privacy} />
                 <Route path="/user/:user" component={() => <UserPage user={this.props.user} />} />
                 <Route path="/word-bank/:id" render={() => <WordBank lesson = {this.props.lesson } /> } />
                 <Route path="/" component={Lessons} />

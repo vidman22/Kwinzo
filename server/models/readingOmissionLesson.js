@@ -14,7 +14,7 @@ var readingOmissionLessonSchema = new Schema({
 	created: { type: Date, default: Date.now},
 	updated: { type: Date, default: Date.now},
     omissions: [OmissionSchema],
-    termNumber: Number,
+    
 });
 
 

@@ -333,7 +333,7 @@ componentWillUnmount() {
                   return (
                     <ReadingCompQuestion
                       key={question.id}
-                      index={question.id} 
+                      index={Number(question.id)} 
                       question={question.config.question}
                       options={question.config.options}
                       highlight={question.config.highlight}

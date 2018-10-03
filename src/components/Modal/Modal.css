@@ -1,14 +1,14 @@
 .Modal h1{
+    display: block;
+    margin: auto;
+    clear: both;
 	font-family: 'Roboto', sans-serif;
 	text-align: center;
 	font-size: 44px;
 
 }
 
-.ModalBackButton{
-    float: left;
-    display: inline;
-}
+
 
 .Modal {
     position: fixed;
@@ -30,7 +30,22 @@
 	width: 10%;
     height: 18px;
     background: none;
+    border: 1px solid #ccc;
+    margin: 4px;
     outline: none;
+}
+
+button.ModalBackButton{
+    float: left;
+    display: inline;
+    border: none;
+    font-size: 18px;
+    margin: 0;
+    font-family: Open Sans, sans-serif;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 .ModalOpen {

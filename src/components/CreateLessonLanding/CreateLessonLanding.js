@@ -93,7 +93,7 @@ class CreateLessonLanding extends Component {
 		return (
 			<div className="CreateFlex">
 			<Link to="create-lesson/exercise">
-			<div className="CreateLessonExercise"><h1>Input Lesson</h1>
+			<div className="CreateLessonExercise"><h1>Create Quiz</h1>
 				<div className="ExampleSentenceWrapper">
             		<div className="FirstHalfExample">The quick brown fox</div>
             		<div className="ExampleAnswerWrapper">
@@ -105,7 +105,7 @@ class CreateLessonLanding extends Component {
 			</Link>
 			<Link to="create-lesson/reading">
 				<div className="CreateLessonReading">
-					<h1>Reading Lesson</h1>
+					<h1>Create Reading</h1>
 					<div className="ReadingPassage">
 						{this.state.textArray.map( (element, index) => {
 							  return <StyledWord 

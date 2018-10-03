@@ -32,7 +32,7 @@ const modal = props => {
               index={props.index}  
               length={props.length} 
               slide={props.slide}/>
-            <button onClick={props.back}>
+            <button className="BackButton" onClick={props.back}>
               Play Again
             </button>
           </div>

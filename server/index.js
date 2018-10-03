@@ -7,7 +7,7 @@ const graphqlHTTP = require('express-graphql');
 const cors = require('cors');
 const root = require('./graphql/reducers');
 const io = module.exports.io = require('socket.io')(server, {
-  upgradeTimeout: 300000,
+  pingTimeout: 5000,
 });
 const SocketManager = require('./SocketManager');
 
@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 5000;
 const schema  = require('./graphql/typeDefs');
 
 app.use(passport.initialize());
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql',  graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql:true

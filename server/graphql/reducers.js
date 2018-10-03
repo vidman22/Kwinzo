@@ -16,8 +16,8 @@ const ReadingOmissionLesson = require('../models/readingOmissionLesson');
 
 var root = {
 		createLessonSet: async ( {title, author, authorID, sentences}, ctx, info ) => {
-	 		const termNumber = sentences.length;
-	 		const lessonSet = new LessonSet({ title, author, authorID, sentences, termNumber, created: Date.now() });
+	 		
+	 		const lessonSet = new LessonSet({ title, author, authorID, sentences, created: Date.now() });
 	 		return await lessonSet.save(); 
 	 		if (!lessonSet) {
       			throw new Error('Error');
@@ -45,7 +45,7 @@ var root = {
 			return await ReadingOmissionLesson.findByIdAndDelete( args.id , (err) => {
 				if (err) {
 					throw err 
-					return false
+					
 				} else return true
 			});
 		},
@@ -54,7 +54,7 @@ var root = {
 			return await ReadingCompLesson.findByIdAndDelete( args.id , (err) => {
 				if (err) {
 					throw err 
-					return false
+				
 				} else return true
 			});
 		},
@@ -68,7 +68,7 @@ var root = {
 			return await LessonSet.findByIdAndDelete( args.id , (err) => {
 				if (err) {
 					throw err 
-					return false
+					
 				} else return true
 			});
 		},
@@ -153,7 +153,14 @@ var root = {
     				user
   				}			
 	 		}
-	 	},
+		 },
+		updateLesson: async (args, ctx, info) => {
+			
+			return await LessonSet.findByIdAndUpdate(args.lessonID, {$set: { title: args.title, author: args.author, authorID: args.authorID, sentences: args.sentences, updated: Date.now() }}, {new: true}, function (err, lessonset){
+				if (err) return err;
+			});
+			
+		},
 	 	user: async ({_id}) => {
 	 		return await User.findById(_id)
 	 	},

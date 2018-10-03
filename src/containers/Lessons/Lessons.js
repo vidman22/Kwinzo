@@ -15,7 +15,6 @@ const LESSON_SETS = gql`
       created
       title
       author
-      termNumber
     }
   }
 `;
@@ -27,7 +26,6 @@ const LESSON_COMP_QUERY = gql`
       created
       title
       author
-      termNumber
     }
   }
 `;
@@ -39,7 +37,6 @@ const LESSON_OMISSION_QUERY = gql`
       created
       title
       author
-      termNumber
     }
   }
 `;
@@ -91,7 +88,9 @@ omissionLessonQuery() {
         <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Reading Omission Lessons</button>
         <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Grammar Lessons</button>
       </div>
-       <Query query={LESSON_QUERY}>
+       <Query 
+        query={LESSON_QUERY}
+        fetchPolicy='network-only'>
   
         {({ loading, error, data}) => {
           if (loading) return <div className="spinner spinner-1"></div>;
@@ -108,7 +107,7 @@ omissionLessonQuery() {
                 title={lesson.title}
                 created={lesson.created} 
                 author={lesson.author}
-                terms={lesson.termNumber}
+                terms={3}
                 />
                 </Link>))}
             </div>
@@ -119,5 +118,7 @@ omissionLessonQuery() {
       )
   }
 };
+
+
 
 export default Lessons;

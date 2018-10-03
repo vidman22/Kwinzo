@@ -20,7 +20,6 @@ const schema = buildSchema(`
 		author: String!
 		authorID: String!
 		sentences: [Sentence]
-		termNumber: Int
 	}
 
 	input SentenceInput {
@@ -46,7 +45,7 @@ const schema = buildSchema(`
 		authorID: String!
 		text: String!
 		omissions: [Omission]!
-		termNumber: Int
+		
 	}
 
 	type Omission {
@@ -68,7 +67,7 @@ const schema = buildSchema(`
 		authorID: String!
 		text: String!
 		questions: [Question]!
-		termNumber: Int
+		
 	}
 
 	type Question {
@@ -122,6 +121,7 @@ const schema = buildSchema(`
 		deleteInputLesson( id: String! ) : Boolean
 		deleteOmissionLesson( id: String! ) : Boolean
 		oAuthSignIn(type: String!, email: String!, username: String!, picture: String, userID: String!, token: String!, expiresIn: String! ): AuthPayload
+		updateLesson(lessonID: String, title: String, author: String, authorID: String, sentences: [SentenceInput]) : LessonSet
 	}
 `);
 
