@@ -5,6 +5,7 @@ let sessions = [];
 class SessionObject {
 	constructor() {
 		this.connectedUsers = [];
+		this.title = '',
 		this.room = '';
 		this.teams = [];
 		this.expiration = '';
@@ -14,12 +15,13 @@ class SessionObject {
 
 module.exports = function(socket) {
 	
-	socket.on('NEW_ROOM', room => {
+	socket.on('NEW_ROOM', (room, title) => {
 		const now = new Date();
 		const time = now.getTime();
 		const expiration = time + 1000*3600;
 		let newRoom = new SessionObject();
 		newRoom.room = room;
+		newRoom.title = title;
 		newRoom.expiration = expiration;
 		sessions.push(newRoom);
 		socket.join(newRoom.room);
@@ -31,10 +33,12 @@ module.exports = function(socket) {
 		socket.join(room);
 		let temp_room = '';
 		let message = '';
+		let title = '';
 		
 		for ( let i = 0; i < sessions.length; i++) {
 			if ( sessions[i].room === room) {
 				temp_room = room;
+				title = sessions[i].title;
 			}
 		}
 		if ( temp_room ) {
@@ -42,9 +46,8 @@ module.exports = function(socket) {
 		} else {
 			message = 'no game by that code';
 		}
-		callback(message);
+		callback(message, title);
 
-		io.to(room).emit('JOINED');
 	});
 
 	socket.on('NEW_PLAYER', (room, name, callback) => {

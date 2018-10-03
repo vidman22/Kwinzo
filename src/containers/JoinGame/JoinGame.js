@@ -7,8 +7,8 @@ import GamePlay from '../GamePlay/GamePlay';
 import './JoinGame.css';
 
 
-const socket = io();
-//const socket = io('http://localhost:5000/');
+//const socket = io();
+const socket = io('http://localhost:5000/');
 
 let index = 0;
 export default class CreateGame extends Component {
@@ -101,15 +101,16 @@ export default class CreateGame extends Component {
 
 		e.preventDefault();
 		const room = this.state.room;
-		socket.emit('JOIN_ROOM', room, (res) => {
+		socket.emit('JOIN_ROOM', room, (msg, title) => {
 			// if error post error, if success change action to load new input form 
-			if ( res ) {
+			if ( msg ) {
 				this.setState({
-					error: res
+					error: msg
 			});
 			} else {
 				this.setState({
-					action: 'name'			
+					action: 'name',
+					title	
 				});
 			}
 			
@@ -303,17 +304,22 @@ export default class CreateGame extends Component {
 			break;
 			case 'waiting':
 				result = (
-				  <div className="title">
-					<div className="text text-w">w</div>
-					<div className="text text-a">a</div>
-					<div className="text text-i">i</div>
-					<div className="text text-t">t</div>
-					<div className="text text-i2">i</div>
-					<div className="text text-n">n</div>
-					<div className="text text-g">g</div>
-					<div className="text text-1">.</div>
-					<div className="text text-2">.</div>
-					<div className="text text-3">.</div>
+					<div className="JoinWaiting">
+					  <div className="GameHeader"><h2>{this.state.title}</h2></div>
+					  <div className="WaitingName">{this.state.name}</div>
+					  <div className="GameRoomCode">{this.state.room}</div>
+				  		<div className="title">
+							<div className="text text-w">w</div>
+							<div className="text text-a">a</div>
+							<div className="text text-i">i</div>
+							<div className="text text-t">t</div>
+							<div className="text text-i2">i</div>
+							<div className="text text-n">n</div>
+							<div className="text text-g">g</div>
+							<div className="text text-1">.</div>
+							<div className="text text-2">.</div>
+							<div className="text text-3">.</div>
+				  		</div>
 				  </div>
 					)
 			break;
