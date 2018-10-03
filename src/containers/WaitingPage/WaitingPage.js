@@ -54,7 +54,7 @@ class WaitingPage extends Component {
 			 socket 
 		});
 	
-		socket.emit('NEW_ROOM', room );
+		socket.emit('NEW_ROOM', room, this.props.lesson.title );
 
 		socket.on('UPDATED_PLAYERS', (users) =>{
 			

@@ -84,9 +84,9 @@ omissionLessonQuery() {
     return (
      <div className="Lessons">
       <div className="QueryButtonWrapper">
-        <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Comprehension Lessons</button>
-        <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Reading Omission Lessons</button>
-        <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Grammar Lessons</button>
+        <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Reading Comprehension</button>
+        <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Gap Reading</button>
+        <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Quizzes</button>
       </div>
        <Query 
         query={LESSON_QUERY}
@@ -98,9 +98,9 @@ omissionLessonQuery() {
 
           return (
             <div className="LessonLinks">
-            { this.state.activeQuery === 'lessonSets' ? <h1>Grammar Lessons</h1> : null}
-            { this.state.activeQuery === 'readingOmissionLessons' ? <h1>Reading Omission Lessons</h1> : null}
-            { this.state.activeQuery === 'readingCompLessons' ? <h1>Reading Comprehension Lessons</h1> : null}
+            { this.state.activeQuery === 'lessonSets' ? <h1>Quizzes</h1> : null}
+            { this.state.activeQuery === 'readingOmissionLessons' ? <h1>Gap Reading</h1> : null}
+            { this.state.activeQuery === 'readingCompLessons' ? <h1>Reading Comprehension</h1> : null}
               {data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.id}`}>
                 <LessonLink 
                 id={lesson.id}  

@@ -52,12 +52,31 @@ border-bottom:solid 2px #046A91;
 }
 
 .title {
-  display: inline-block;
-  /*justify-content: space-around;*/
+  display: block;
+  justify-content: space-around;
   display: -webkit-flex;
-  /*-webkit-justify-content: space-around;*/
-  margin: 50px 0 0 35px;
+  -webkit-justify-content: space-around;
+  margin-top: 80px;
+  /* margin: 50px 0 0 35px; */
   
+}
+
+.JoinWaiting{
+  display: block;
+  width: 100%;
+  background: white;
+  height: 450px;
+  margin: auto;
+  border: 1px solid #ccc;
+}
+
+.WaitingName{
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  display: inline;
+  float: left;
+  padding: 7px;
+  background: #eee;
 }
 
 
