@@ -222,14 +222,20 @@ class WaitingPage extends Component {
 		
 		const players = [...this.state.players];
 		const room = this.state.room;
-
+		if (!this.state.teamMode) {
 		socket.emit('SHUFFLE', room, players, (res) =>{
-			this.setState({
-				arrayOfTeams: res,
-				teamMode: true,
+			this.setState(prevState => {
+			return {	arrayOfTeams: res,
+				teamMode: !prevState.teamMode,
+			}
 			});
 			
 		});
+		} else this.setState(prevState => {
+			return {
+				teamMode: !prevState.teamMode,
+			}
+		  });
 	};
 
 	addComponent() {		

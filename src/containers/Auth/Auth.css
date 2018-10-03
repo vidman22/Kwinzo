@@ -18,7 +18,7 @@
   height:30px;
   line-height:20px;
   font-size:22px;
-  padding: 2px;
+  padding: 3px 8px 3px 8px;
   border:solid 1px #ccc;
 }
 
@@ -66,20 +66,20 @@
     padding: 8px;
     border-radius: 2px;
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
 }
 .GoogleText{
   display: inline;
   /* margin: auto; */
-  left: 19%;
+  left: 23%;
   bottom: 28%;
   position: absolute;
 }
 .FacebookText {
   display: inline;
   /* margin: auto; */
-  left: 15%;
+  left: 21%;
   bottom: 28%;
   position: absolute;
 }
@@ -107,8 +107,8 @@
 
 .Auth p{
   margin: 0;
-  font-size: 14px;
-  color: red;
+  font-size: 16px;
+  color: orange;
 }
 
 @media screen and (max-width: 640px) {
@@ -139,8 +139,15 @@
       padding-bottom: 8px;
       border-radius: 2px;
       border: 1px solid #ccc;
-      font-size: 16px;
+      font-size: 14px;
       font-family: 'Roboto', sans-serif;
+    }
+
+    .FacebookText{
+      margin-left: 8%;
+    }
+    .GoogleText{
+      margin-left: 7%;
     }
 
     .Auth {

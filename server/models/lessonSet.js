@@ -19,7 +19,6 @@ var lessonSetSchema = new Schema({
 		favs: Number
 	},
     sentences: [SentenceSchema],
-    termNumber: Number,
 });
 
 

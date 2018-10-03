@@ -87,6 +87,14 @@ export default class CreateGame extends Component {
 			});
 		});
 
+		socket.on('USER_DISCONNECTED'), (user) => {
+			if (user.playerName === this.state.name) {
+				this.setState({
+					action: 'code',
+				});
+			}
+		}
+
 	}
 
 	handleCodeSubmit = (e) => {

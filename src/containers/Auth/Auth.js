@@ -125,13 +125,14 @@ class Auth extends Component {
 
         if (controlName === 'password') {
             let value = updatedElement.value.trim();
-            const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+            const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&:])[A-Za-z\d$@$!%*#?&]{8,}$/;
+            //const pattern = /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*():><;]*$/;
             const isValid = pattern.test( value );
             if (isValid) {
                 updatedElement.valid = true;
                 updatedElement.msg = '';
             } else {
-                updatedElement.msg = 'use 8 characters - at least one letter, number, and symbol';
+                updatedElement.msg = 'use at least 8 characters, one letter, number, and symbol';
                 updatedElement.valid = false;
             }
 

@@ -98,7 +98,6 @@ module.exports = function(socket) {
 			return obj;
 		});
 		sessions[index].teams = arrayOfTeams;
-		console.log('teams', sessions[index].teams);
 		cb(arrayOfTeams);
 	});
 
@@ -149,6 +148,10 @@ module.exports = function(socket) {
 			connectedUsers[i].score = 0;
 		}
 		io.to(room).emit('PLAY_AGAIN', connectedUsers, sentences);
+	});
+
+	socket.on('reconnect', () => {
+		// console.log("reconnect", socket.id);
 	})
 
 	socket.on('disconnect', () => {
@@ -165,7 +168,7 @@ module.exports = function(socket) {
 					newSession.connectedUsers = sessions[i].connectedUsers.filter((user) => user.id !== id);
 
 					io.to(sessions[i].room).emit('USER_DISCONNECTED', sessions[i].connectedUsers[j]);
-
+					
 					newSessionArray[i] = newSession;
 					sessions = newSessionArray;			
 				}	
@@ -211,27 +214,33 @@ randomizeArray = (users) => {
 
 createTeams = ( users ) => {
 	
-	const numberOfTeams = Math.ceil(users.length/4); 
+	const teamNum = Math.ceil(users.length/4); 
 	const array = randomizeArray(users);
 	
-	const firstSegment = Math.floor(array.length/numberOfTeams);
-	let firstBreak = 0;
-	let newBreak = Math.floor(array.length/numberOfTeams);
+	// const firstSegment = Math.floor(array.length/numberOfTeams);
+	// let firstBreak = 0;
+	// let newBreak = Math.floor(array.length/numberOfTeams);
 
-	let teams = [];
+	// let teams = [];
 	
-	for ( let i = 0; i < numberOfTeams; i++) {
-		if (i === numberOfTeams -1) {
-			const team = array.slice(firstBreak);
-			teams.push(team);
-		} else {
-			const team = array.slice(firstBreak, newBreak);
-			newBreak = newBreak + firstSegment;
-			firstBreak = firstBreak + firstSegment;
-			teams.push(team);
-		}
+	// 	for ( let i = 0; i < numberOfTeams; i++) {
+	// 		teams
+	// 		if (i === numberOfTeams -1) {
+	// 			const team = array.slice(firstBreak);
+	// 			teams.push(team);
+	// 		} else {
+	// 			const team = array.slice(firstBreak, newBreak);
+	// 			newBreak = newBreak + firstSegment;
+	// 			firstBreak = firstBreak + firstSegment;
+	// 			teams.push(team);
+	// 		}
 		
-	}
+	// }
+	teams = array.reduce((r, v, i ) => {
+		r[i% teamNum] = r[i% teamNum] || [];
+		r[i % teamNum].push(v);
+		return r;
+	}, [])
 	return teams;
 }
 

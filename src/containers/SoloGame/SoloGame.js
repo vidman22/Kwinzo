@@ -66,6 +66,7 @@ class SoloGame extends Component {
 			for ( let i =0; i < alts.length; i++) {
 				if (value === alts[i]){
 					this.correct();
+					break;
 				} else {
 					this.setState({
 						message: 'incorrect'

@@ -86,7 +86,8 @@ class CreateLesson extends Component {
     formIsHalfFilledOut: false,
     showExample: false,
     showDivs: false,
-    message: 'add alternate answer'
+    message: 'add alternate answer',
+    lessonID: ''
   }
  this.checkFormValidity = this.checkFormValidity.bind(this);
  this.addAlt = this.addAlt.bind(this);
@@ -95,15 +96,76 @@ class CreateLesson extends Component {
   
 
   componentDidMount() {
-    
-    const lessonFormArray = [];
-      const lessonForm = {...this.state.lessonForm};
-
+    const lessonID = this.props.match.params.id;
+    let lessonFormArray = [];
+    if (this.props.editmode) {
+      const updatedTitle = this.state.title;
+      updatedTitle.value = this.props.title;
+      updatedTitle.valid = true;
+      updatedTitle.touched = true;
+      this.setState({
+        title: updatedTitle,
+        lessonID
+      });
+      lessonFormArray = this.props.sentences.map((sentence) => {
+        let rObj = {
+          sentence: {
+            value: sentence.sentence,
+            validation:{
+              required: true,
+              msg: ''
+            },
+            valid: true,
+            touched: true
+          },
+          answer: {
+            value: sentence.answer,
+            validation: {
+              required: true,
+              msg: ''
+            },
+            valid: true,
+            touched: true
+          },
+          hint: {
+            value: sentence.hint,
+            validation: {
+              required: true,
+              msg: ''
+            },
+            valid: true,
+            touched: true
+          },
+          alts: {
+            array: sentence.alts.map((alt) => {
+              let aObj = {
+                value: alt,
+                validation: {
+                  required: true,
+                  msg: ''
+                },
+                valid: true,
+                touched: true
+              };
+              return aObj;   
+            }),
+            valid: true,
+          },
+          prompts: {
+            showDivs: false,
+            valid: true
+          }
+        }
+        return rObj;
+      });
+    } else {
+    let lessonForm = {...this.state.lessonForm};
       for (let i=0; i< this.state.lessonFormNum; i++) {
         lessonFormArray.push(lessonForm);
       }
-      this.setState({lessonFormArray});
-      
+    }
+    this.setState({lessonFormArray});
+    console.log('lesson form array', lessonFormArray);
   }
 
 
@@ -263,8 +325,8 @@ class CreateLesson extends Component {
         }
 
          if (inputIdentifier === 'answer') {
-            const sentence = updatedForm['sentence'].value.toLowerCase();
-            const answer = event.target.value.toLowerCase().trim();
+            const sentence = updatedForm['sentence'].value;
+            const answer = event.target.value.trim();
             
             let pos = sentence.indexOf(answer);
 
@@ -450,15 +512,23 @@ class CreateLesson extends Component {
   }
 
   completed = (data) => {
+    if (this.props.editmode) {
+      this.props.back();
+    } else {
       this.setState({
         formIsHalfFilledOut: false
       }, () => {
         this.props.history.push(`/lessons/${data.createLessonSet.id}`);
       });
+    }
   }
 
   back() {
+    if (this.props.editmode) {
+      this.props.back();
+    } else {
     this.props.history.push('/create-lesson');
+    }
   }
   
   showHelp() {
@@ -510,22 +580,20 @@ class CreateLesson extends Component {
   }
 
   render() {
-     
-      const formArray = [];
+
+      let formArray = [];
       for (let key in this.state.lessonFormArray) {
         formArray.push({
           id: key,
           config: this.state.lessonFormArray[key]
         });
       }
-      if (formArray !== 0 ){
-      }
       
 
       let form = (
         <div>
           <Mutation
-            mutation={ADD_LESSON}
+            mutation={this.props.editmode ? UPDATE_LESSON : ADD_LESSON}
             onCompleted={data => this.completed(data)}>
               {createLessonSet => (
                 <form 
@@ -550,8 +618,10 @@ class CreateLesson extends Component {
                           }
                       return rObj;  
                       });
+                      
                         createLessonSet({
                           variables: {
+                          lessonID: this.state.lessonID,
                           title,
                           author: this.props.user.name,
                           authorID: this.props.user.userID,
@@ -618,7 +688,7 @@ class CreateLesson extends Component {
           )}
             
               <div className="ExerciseButton" disabled={this.state.addSentenceDisabled} onClick={() => this.addSentence()}>Add</div>
-              <button className="CreateButton" type="submit" disabled={!this.state.formIsValid}>Create</button>
+              <button className="CreateButton" type="submit" disabled={!this.state.formIsValid}>{this.props.editmode ? 'Update' : 'Create'}</button>
              </form>
 
 
@@ -641,7 +711,6 @@ class CreateLesson extends Component {
             className="LessonTitleInput"
             value={this.state.title.value}
             onChange={(e) => this.handleTitleChange(e)}
-            type="text"
             placeholder="Quiz Title"
           />
           {this.state.showDivs ? <div className="ShowTitle">1. Add a Lesson Title</div> : null}
@@ -682,6 +751,23 @@ class CreateLesson extends Component {
 const ADD_LESSON = gql`
   mutation CreateLesson($title: String!, $author: String!, $authorID: String!, $sentences: [SentenceInput]) {
     createLessonSet( title: $title, author: $author, authorID: $authorID, sentences: $sentences) {
+      id
+      created
+      title
+      author
+      authorID
+      sentences {
+        sentence
+        hint
+        answer
+        alts
+      }
+    }
+  }
+`
+const UPDATE_LESSON = gql`
+  mutation UpdateLesson($lessonID: String!, $title: String!, $author: String!, $authorID: String!, $sentences: [SentenceInput]) {
+    updateLesson(lessonID: $lessonID, title: $title, author: $author, authorID: $authorID, sentences: $sentences) {
       id
       created
       title

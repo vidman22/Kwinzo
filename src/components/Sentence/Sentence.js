@@ -1,5 +1,6 @@
 import React from 'react';
 import AutosizeInput from 'react-input-autosize';
+
 import './Sentence.css';
 
 
@@ -7,7 +8,7 @@ const sentence = ( props ) => {
 	const index = props.sentence.indexOf(props.correctanswer); 
 	const index2 = index + props.correctanswer.length;
 
-	const s1 = ( index === 0 ? null : props.sentence.slice(0, index) );
+	const s1 = index === 0 ? null : props.sentence.slice(0, index);
 	const s2 = props.sentence.slice(index2, props.sentence.length);
 	let inputColor = 'black';
 	if ( props.message && props.message === 'correct') {
@@ -19,6 +20,7 @@ const sentence = ( props ) => {
 	
 	return (
 		<div className="Sentence">
+		  
 			<div className="FirstPart"><h3>{s1}</h3></div><form onSubmit={props.handlesubmit}>
 						<AutosizeInput
 							className="GameInput"
@@ -35,7 +37,8 @@ const sentence = ( props ) => {
 								marginRight:'12px',
 								outline: 'none',
 								background: 'none',
-								autocomplete: 'off', 
+								autocapitalize:'none',
+								autocomplete: 'off',
 								borderTop: 'none', 
 								borderLeft: 'none', 
 								borderRight: 'none', 
