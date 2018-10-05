@@ -100,19 +100,6 @@ class Lesson extends Component {
       this.props.history.push('/lessons');
   }
 
-  removeSentence(index) {
-    const updatedSentences = [...this.state.sentences];
-    // eslint-disable-next-line
-    const removed = updatedSentences.splice(index, 1);
-
-    this.setState({
-      sentences: updatedSentences
-    });
-
-
-
-  }
-
   editMode(){
     this.setState( prevState => {
       return {editMode: !prevState.editMode }
@@ -200,8 +187,8 @@ class Lesson extends Component {
                  </Link>
                  <Link to={`/solo-play/${this.props.match.params.id}`}>
                   <div className="Assign">
-                    <h2>Assign Set</h2>
-                      <p>Coming Soon</p>
+                    <h2>Edit Quiz</h2>
+                     
                   </div>
                  </Link>
                 </div>
@@ -218,7 +205,6 @@ class Lesson extends Component {
                         correctanswer={sentence.config.answer}
                         message={sentence.config.checked}
                         lessonmode={true}
-                        removesentence={() => this.removeSentence(index)}
                         placeholder={sentence.config.hint}
                         onclick={(e)=> this.handleCheckX(e, sentence.id)} />
                         

@@ -2,26 +2,30 @@ const io = require('./index.js').io;
 
 let sessions = [];
 
-class SessionObject {
-	constructor() {
-		this.connectedUsers = [];
-		this.title = '',
-		this.room = '';
-		this.teams = [];
+// let SessionObject = class {
+// 	constructor(connectedUsers, title, room, teams) {
+// 		this.connectedUsers = connectedUsers;
+// 		this.title = title;
+// 		this.room = room;
+// 		this.teams = teams;
 
-	}	
-}
+// 	}	
+// }
 
 
 module.exports = function(socket) {
 	
 	socket.on('NEW_ROOM', (room, title) => {
 		//console.log('room', room);
-		let newRoom = new SessionObject();
-		newRoom.room = room;
-		newRoom.title = title;
-		sessions.push(newRoom);
-		socket.join(newRoom.room);
+		const newObj = {
+			connectedUsers: [],
+			title,
+			room,
+			teams: []
+		};
+		sessions.push(newObj);
+		socket.join(room);
+		console.log('sessions in new room', sessions);
 		
 	});
 
@@ -33,12 +37,16 @@ module.exports = function(socket) {
 		
 		for ( let i = 0; i < sessions.length; i++) {
 			if ( sessions[i].room === room) {
-				title = sessions[i].title;
-				socket.join(room);
+					title = sessions[i].title;
+					message = '';
+					socket.join(room);
+					console.log('room found');
+				break;
 			} else {
 				message = 'no game by that code';
 			}
 		}
+		console.log('sessions in join', sessions);
 		callback(message, title);
 	});
 

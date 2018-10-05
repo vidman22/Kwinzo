@@ -26,8 +26,6 @@ const GamePlay = props => {
 						message={props.message}
 					/>
 					)}
-					<div className="error">{props.wrong ? props.wrong : null}</div>
-					<div className="correct">{props.correct ? props.correct: null}</div>
 				</div>
 			</div>
 			)
