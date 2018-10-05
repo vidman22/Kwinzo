@@ -9,8 +9,9 @@ import './JoinGame.css';
 
 const socket = io( { timeout: 120000});
 // const socket = io('http://localhost:5000', {
-// 	timeout: 120000
+// 	timeout: 360000
 // });
+//sentence index
 let index = 0;
 export default class CreateGame extends Component {
 	constructor(props) {
@@ -22,7 +23,6 @@ export default class CreateGame extends Component {
 			error: null,
 			gameSentences:[],
 			length: null,
-			correct:'',
 			completed: false,
 			message:'',
 			name:'',
@@ -31,7 +31,6 @@ export default class CreateGame extends Component {
 			teamMode: false,
 			value: '',
 			winner:'',
-			wrong:'',
 
 		}
 	}
@@ -39,6 +38,7 @@ export default class CreateGame extends Component {
 
 	componentDidMount() {
 		this.initSocket();
+		console.log('socket', socket);
 	}
 
 	componentWillUnmount() {
@@ -82,7 +82,6 @@ export default class CreateGame extends Component {
 				activeSentence: sentences[0],
 				value: '',
 				winner:'',
-				wrong:'',
 				length: sentences.length,
 				completed: false,
 			});
@@ -128,7 +127,7 @@ export default class CreateGame extends Component {
 	}
 
 	handleSubmit = (e) => {
-		// const { socket } = this.state;
+		
 		e.preventDefault();
 		socket.emit('NEW_PLAYER', this.state.room, this.state.name, (res) => {
 			if ( res ) {
@@ -173,7 +172,7 @@ export default class CreateGame extends Component {
 			this.setState({
 				message:'correct'
 			});
-			setTimeout(this.correct.bind(this), 333);
+			setTimeout(this.correct.bind(this), 500);
 			
 		} else if (alts.length !== 0 && alts !== undefined) {
 
@@ -185,21 +184,21 @@ export default class CreateGame extends Component {
 					message:'correct'
 				});
 
-				setTimeout(this.correct.bind(this), 333);
+				setTimeout(this.correct.bind(this), 500);
 			} else {
-					socket.emit('FAILURE', this.state.room);
+				//socket.emit('FAILURE', this.state.room);
 					this.setState({
 						message:'incorrect'
 					});
-					setTimeout(this.wrongAnswer.bind(this), 333);
+					setTimeout(this.wrongAnswer.bind(this), 500);
 			 }
 		} else {
 		
-			socket.emit('FAILURE', this.state.room);
+			//socket.emit('FAILURE', this.state.room);
 			this.setState({
 				message:'incorrect'
 			});
-			setTimeout(this.wrongAnswer.bind(this), 333);	
+			setTimeout(this.wrongAnswer.bind(this), 500);	
 		}
 	}
 
@@ -221,9 +220,11 @@ export default class CreateGame extends Component {
 				message: '',
 			});
 			if (this.state.teamMode) {
-				this.setState({
-					message: 'Help your teammates!',
-				})
+				if (!this.state.winner) {
+					this.setState({
+						winner: 'Help your teammates!',
+					})
+				}
 			}
 		}
 	} 
@@ -232,21 +233,16 @@ export default class CreateGame extends Component {
 		const gameSentences = [...this.state.gameSentences];
 
 		const wrongSentence = gameSentences[index];
-
 		gameSentences.push(wrongSentence);
+		index++;
+		const activeSentence = gameSentences[index];
+
+		
 		this.setState({
 			gameSentences,
-			message:''
-		});
-
-		index++;
-		const activeSentence = this.state.gameSentences[index];
-
-		this.setState({
-			activeSentence,
 			message:'',
+			activeSentence,
 			value:'',
-			wrong:''
 		});
 	}
 
@@ -325,14 +321,12 @@ export default class CreateGame extends Component {
 				result = (
 					<GamePlay 
 						activesentence={this.state.activeSentence}
-						correct={this.state.correct}
 						completed={this.state.completed}
 						value={this.state.value}
 						handlegamechange={(e) => this.handleGameChange(e)}
 						handlegamesubmit={this.handleGameSubmit} 
 						title={this.state.title}
 						winner={this.state.winner}
-						wrong={this.state.wrong}
 						onclick={this.handleGameSubmit}
 						message={this.state.message}/> 
 					)

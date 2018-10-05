@@ -8,7 +8,7 @@ const cors = require('cors');
 const root = require('./graphql/reducers');
 const io = module.exports.io = require('socket.io')(server, {
   upgradeTimeout: 120000,
-  timeout: 160000,
+  timeout: 240000,
 });
 const SocketManager = require('./SocketManager');
 

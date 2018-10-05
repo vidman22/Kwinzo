@@ -11,7 +11,7 @@ import './WaitingPage.css'
 import io from 'socket.io-client';	
 
 const socket = io( { timeout: 120000});
-// const socket = io('http://localhost:5000', {
+//const socket = io('http://localhost:5000', {
 // 	timeout: 120000
 // });
 
@@ -82,15 +82,15 @@ class WaitingPage extends Component {
 			})
 		});
 
-		socket.on('SCORE', (users) => {
+		socket.on('SCORE', (res) => {
 			if (!this.state.teamMode) {
 				this.setState({
-					players: users
+					players: res
 				});
 			} else {
 				
 				this.setState({
-					arrayOfTeams: users
+					arrayOfTeams: res
 				});
 			}
 		});

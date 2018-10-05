@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Sentence from '../../components/Sentence/Sentence';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import XMarkSVG from '../../components/SVG/XMarkSVG';
 
 const LESSON_SET = gql`
   query LessonSet($id: String!){
@@ -48,22 +49,32 @@ class WordBank extends Component {
   }
 
   completed(sentences) {
-    let answers = [];
-    for ( let i =0; i < sentences.length; i++ ) {
-          const answer = sentences[i].answer;
-          const obj = {
-            value : answer,
-            used : false,
-            index : i
-          }
-          answers.push(obj);
-      }
-    answers = this.shuffle(answers);
+    const title = this.props.lesson.title;
     
-    this.setState({
-      answers
+    let answers = [];
+    sentences = sentences.map((sentence) => {
+      let rObj = {
+        alts : sentence.alts,
+        answer : sentence.answer,
+        hint : sentence.hint,
+        sentence : sentence.sentence,
+        value : '',
+        checked : '',
+      }
+      const aObj = {
+        value: sentence.answer,
+        used: false,
+      }
+      answers.push(aObj);
+      return rObj;
     });
+    answers = this.shuffle(answers);
 
+    this.setState({
+      answers, 
+      sentences,
+      title
+    })
   }
 
  shuffle(array) {
@@ -81,133 +92,190 @@ class WordBank extends Component {
 }
 
 updateWordBank(index) {
-  for (let i = 0; i < this.state.answers.length; i++) {
-    if (this.state.answers[i].index === index ) {
+
       const updatedAnswers = [...this.state.answers];
-      const wordBankObject = updatedAnswers[i];
-      wordBankObject.used = true;
-      updatedAnswers[i] = wordBankObject;
+      const answerObject = updatedAnswers[index];
+      answerObject.used = true;
+      updatedAnswers[index] = answerObject;
       this.setState({
         answers: updatedAnswers
       });
-    } 
-  }
 }
 
+inputChangedHandlerX(e, index){
+  const updatedSentences = [...this.state.sentences];
 
-  inputChangedHandler(e, index) {
-    const values = {...this.state.values};
-    let value = ''
+  const updatedSentence = {
+    ...updatedSentences[index]
+  }
 
-    if (values[`value${index}`] || values[`value${index}`] === "" ) {
-      
-      values[`value${index}`] = e.target.value;
+  updatedSentence.value = e.target.value;
+  updatedSentence.checked = '';
+  updatedSentences[index] = updatedSentence;
 
-      this.setState({
-        values
-      })
+  this.setState({
+    sentences: updatedSentences,
+  })
+}
 
+handleCheckX(e, index) {
+  e.preventDefault();
+  const updatedSentences = [...this.state.sentences];
+
+
+  const updatedSentence = {
+    ...updatedSentences[index]
+  }
+
+  const value = updatedSentence.value.trim().toLowerCase();
+  const answer = updatedSentence.answer;
+  const alts = updatedSentence.alts;
+
+  if ( value === answer ) {
+    updatedSentence.checked =  'correct';
+    this.updateWordBank(index);
+  } else if (alts.length !== 0 && alts !== undefined) {
+    updatedSentence.checked =  'incorrect';
+      for (let i = 0; i < alts.length; i++) {
+        if ( value === alts[i]) {
+          updatedSentence.checked =  'correct';
+          this.updateWordBank(index);
+          break;
+        }
+      }
     } else {
-
-        const key = `value${index}`;
-        value = e.target.value;
-        let obj = {[key]: value};
-        const newObj = Object.assign(obj, values);
-        this.setState({
-          activeValue: true,
-          values: newObj
-    })
-   }
+      updatedSentence.checked =  'incorrect';
   }
 
-  handleCheck(index, answer, alts) {
-    const values = {...this.state.values};
-    const checkedInputs = {...this.state.checkedInputs};
-    const key = `checked${index}`;
-    let value = values[`value${index}`];
-    value = value.toLowerCase().trim();
-    answer = answer.toLowerCase().trim();
+  updatedSentences[index] = updatedSentence;
 
-    if ( value === answer ) {
-      const obj = {[key]: 'correct'};
-      const newObj = Object.assign(checkedInputs, obj);
-      this.setState({
-        checkedInputs: newObj
-      });
-      this.updateWordBank(index);
-    } else if (alts.length !== 0 && alts !== undefined) {
-        for (let i = 0; i < alts.length; i++) {
-          if ( value === alts[i]) {
-            const obj = {[key]: 'correct'};
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-            this.updateWordBank(index);
-          } else {
-            const obj = {[key]: 'incorrect'}
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-          }
-        }
-      } else {
+  this.setState({
+    sentences: updatedSentences,
+  });
+
+} 
+
+  // inputChangedHandler(e, index) {
+  //   const values = {...this.state.values};
+  //   let value = ''
+
+  //   if (values[`value${index}`] || values[`value${index}`] === "" ) {
       
-        const obj = {[key]: 'incorrect'}
-        const newObj = Object.assign(checkedInputs, obj);
-        this.setState({
-          checkedInputs: newObj
-        });
-    }
-  } 
+  //     values[`value${index}`] = e.target.value;
 
-  handleCheckOnEnter(index, answer, alts, e) {
-    e.preventDefault();
+  //     this.setState({
+  //       values
+  //     })
 
-    const values = {...this.state.values};
-    const checkedInputs = {...this.state.checkedInputs};
-    const key = `checked${index}`;
-    let value = values[`value${index}`];
-    value = value.toLowerCase().trim();
-    answer = answer.toLowerCase().trim();
-    if ( value === answer ) {
-      const obj = {[key]: 'correct'};
-      const newObj = Object.assign(checkedInputs, obj);
-      this.setState({
-        checkedInputs: newObj
-      });
-      this.updateWordBank(index);
-    } else if (alts.length !== 0 && alts !== undefined) {
-        for (let i = 0; i < alts.length; i++) {
-          if ( value === alts[i]) {
-            const obj = {[key]: 'correct'};
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-            this.updateWordBank(index);
-          } else {
-            const obj = {[key]: 'incorrect'}
-            const newObj = Object.assign(checkedInputs, obj);
-            this.setState({
-              checkedInputs: newObj
-            });
-          }
-        }
-      } else {
+  //   } else {
+
+  //       const key = `value${index}`;
+  //       value = e.target.value;
+  //       let obj = {[key]: value};
+  //       const newObj = Object.assign(obj, values);
+  //       this.setState({
+  //         activeValue: true,
+  //         values: newObj
+  //   })
+  //  }
+  // }
+
+  // handleCheck(index, answer, alts) {
+  //   const values = {...this.state.values};
+  //   const checkedInputs = {...this.state.checkedInputs};
+  //   const key = `checked${index}`;
+  //   let value = values[`value${index}`];
+  //   value = value.toLowerCase().trim();
+  //   answer = answer.toLowerCase().trim();
+
+  //   if ( value === answer ) {
+  //     const obj = {[key]: 'correct'};
+  //     const newObj = Object.assign(checkedInputs, obj);
+  //     this.setState({
+  //       checkedInputs: newObj
+  //     });
+  //     this.updateWordBank(index);
+  //   } else if (alts.length !== 0 && alts !== undefined) {
+  //       for (let i = 0; i < alts.length; i++) {
+  //         if ( value === alts[i]) {
+  //           const obj = {[key]: 'correct'};
+  //           const newObj = Object.assign(checkedInputs, obj);
+  //           this.setState({
+  //             checkedInputs: newObj
+  //           });
+  //           this.updateWordBank(index);
+  //         } else {
+  //           const obj = {[key]: 'incorrect'}
+  //           const newObj = Object.assign(checkedInputs, obj);
+  //           this.setState({
+  //             checkedInputs: newObj
+  //           });
+  //         }
+  //       }
+  //     } else {
       
-        const obj = {[key]: 'incorrect'}
-        const newObj = Object.assign(checkedInputs, obj);
-        this.setState({
-          checkedInputs: newObj
-        });
-    }
-  }
+  //       const obj = {[key]: 'incorrect'}
+  //       const newObj = Object.assign(checkedInputs, obj);
+  //       this.setState({
+  //         checkedInputs: newObj
+  //       });
+  //   }
+  // } 
+
+  // handleCheckOnEnter(index, answer, alts, e) {
+  //   e.preventDefault();
+
+  //   const values = {...this.state.values};
+  //   const checkedInputs = {...this.state.checkedInputs};
+  //   const key = `checked${index}`;
+  //   let value = values[`value${index}`];
+  //   value = value.toLowerCase().trim();
+  //   answer = answer.toLowerCase().trim();
+  //   if ( value === answer ) {
+  //     const obj = {[key]: 'correct'};
+  //     const newObj = Object.assign(checkedInputs, obj);
+  //     this.setState({
+  //       checkedInputs: newObj
+  //     });
+  //     this.updateWordBank(index);
+  //   } else if (alts.length !== 0 && alts !== undefined) {
+  //       for (let i = 0; i < alts.length; i++) {
+  //         if ( value === alts[i]) {
+  //           const obj = {[key]: 'correct'};
+  //           const newObj = Object.assign(checkedInputs, obj);
+  //           this.setState({
+  //             checkedInputs: newObj
+  //           });
+  //           this.updateWordBank(index);
+  //         } else {
+  //           const obj = {[key]: 'incorrect'}
+  //           const newObj = Object.assign(checkedInputs, obj);
+  //           this.setState({
+  //             checkedInputs: newObj
+  //           });
+  //         }
+  //       }
+  //     } else {
+      
+  //       const obj = {[key]: 'incorrect'}
+  //       const newObj = Object.assign(checkedInputs, obj);
+  //       this.setState({
+  //         checkedInputs: newObj
+  //       });
+  //   }
+  // }
 
 
 
   render() {
+
+    const sentences = [];
+    for (let key in this.state.sentences) {
+      sentences.push({
+          id: key,
+          config: this.state.sentences[key]
+      });
+    }
    
     return (
        <Query 
@@ -226,21 +294,9 @@ updateWordBank(index) {
         
         return (
            <div className="LessonSentencesWrapper">
-            <button className="BackButton" onClick={() => this.back()}>{"<"} Back</button>
-            { userCanDelete ? <svg className="DeleteSentence" onClick={() => this._deleteLesson()} 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="#ccc" 
-                viewBox="0 0 510 510" 
-                x="0px" 
-                y="0px" 
-                width="20px" 
-                height="20px">
-              <path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 
-                41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 
-                231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139
-                 0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 
-                 11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"/>
-            </svg> : null}
+            <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
+            { userCanDelete ? <XMarkSVG onclick={() => this._deleteLesson()} />
+                 : null}
                   <div className="LessonTitle">
                     <h1>{data.lessonSet.title}</h1>
                   </div>
@@ -259,19 +315,19 @@ updateWordBank(index) {
            </div>
           <div className="WordBankLessonTab">
                             
-                  {data.lessonSet.sentences.map((sentence, index) => (
-                    <div className="LessonSentence" key={index}>
+                  {sentences.map((sentence, index) => (
+                    <div className="LessonSentence" key={sentence.id}>
                       <p>{index + 1}</p>
                       <Sentence 
-                        handlechange={(event) => this.inputChangedHandler(event, index)}
-                        handlesubmit={(e) => this.handleCheckOnEnter(index, sentence.answer, sentence.alts, e)}
-                        value={ this.state.values[`value${index}`] ? this.state.values[`value${index}`] : '' }
-                        sentence={sentence.sentence} 
-                        correct={sentence.answer}
-                        message={ this.state.checkedInputs[`checked${index}`] ? this.state.checkedInputs[`checked${index}`] : ''}
+                        handlechange={(event) => this.inputChangedHandlerX(event, index)}
+                        handlesubmit={(e)=> this.handleCheckX(e, sentence.id)}
+                        value={sentence.config.value}
+                        sentence={sentence.config.sentence} 
+                        correctanswer={sentence.config.answer}
+                        message={sentence.config.checked}
+                        onclick={(e)=> this.handleCheckX(e, sentence.id)}
                         exercise='true' 
                         placeholder='        ' />
-                        <button className="ExerciseButton" onClick={()=>this.handleCheck(index, sentence.answer, sentence.alts)}>Check</button>
                     </div>))}
            </div>
            
