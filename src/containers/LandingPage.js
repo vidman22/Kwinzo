@@ -11,7 +11,6 @@ import Backdrop from '../components/Backdrop/Backdrop';
 import CreateLesson from './CreateLesson/CreateLesson';
 import CreateLessonLanding from '../components/CreateLessonLanding/CreateLessonLanding';
 import CreateReadingLesson from './CreateReadingLesson/CreateReadingLesson';
-import CreateSVG from '../components/SVG/CreateSVG';
 // import Home from '../components/Home/Home';
 import Lesson from './Lesson/Lesson';
 import Lessons from './Lessons/Lessons';

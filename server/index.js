@@ -7,14 +7,17 @@ const graphqlHTTP = require('express-graphql');
 const cors = require('cors');
 const root = require('./graphql/reducers');
 const io = module.exports.io = require('socket.io')(server, {
-  pingTimeout: 5000,
+  upgradeTimeout: 120000,
+  timeout: 160000,
 });
 const SocketManager = require('./SocketManager');
 
 // require('dotenv').config();
 
 io.on('connection', ( socket ) => { 
-	SocketManager(socket);
+  SocketManager(socket);
+  setTimeout(() => socket.disconnect(true), 300000);
+  // console.log('socket connect', socket.id);
 });
 
 const PORT = process.env.PORT || 5000;

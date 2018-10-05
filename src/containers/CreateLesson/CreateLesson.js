@@ -165,7 +165,7 @@ class CreateLesson extends Component {
       }
     }
     this.setState({lessonFormArray});
-    console.log('lesson form array', lessonFormArray);
+    
   }
 
 
@@ -496,7 +496,7 @@ class CreateLesson extends Component {
     if (updatedTitle.value.trim() === '') {
       updatedTitleValidation.msg = 'add a title';
       updatedTitle.valid = false;
-    } else if (updatedTitle.value.length >= 40) {
+    } else if (updatedTitle.value.length >= 34) {
       updatedTitleValidation.msg = 'title is too long';
       updatedTitle.valid = false;
     } else {

@@ -6,7 +6,7 @@ import './GamePlay.css';
 const GamePlay = props => {
 		
 		const sentence = props.activesentence;
-		console.log('game sentence', sentence);
+
 		return (
 			<div className="GamePlay">
 			  <div className="GameHeader">

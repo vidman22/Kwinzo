@@ -8,7 +8,7 @@ class SessionObject {
 		this.title = '',
 		this.room = '';
 		this.teams = [];
-		this.expiration = '';
+
 	}	
 }
 
@@ -16,42 +16,35 @@ class SessionObject {
 module.exports = function(socket) {
 	
 	socket.on('NEW_ROOM', (room, title) => {
-		const now = new Date();
-		const time = now.getTime();
-		const expiration = time + 1000*3600;
+		//console.log('room', room);
 		let newRoom = new SessionObject();
 		newRoom.room = room;
 		newRoom.title = title;
-		newRoom.expiration = expiration;
 		sessions.push(newRoom);
 		socket.join(newRoom.room);
-		io.to(newRoom.room).emit('JOINED');
 		
 	});
 
 	socket.on('JOIN_ROOM', (room, callback) => {
-		socket.join(room);
-		let temp_room = '';
+		//console.log('socket join room', socket.id);
+		
 		let message = '';
 		let title = '';
 		
 		for ( let i = 0; i < sessions.length; i++) {
 			if ( sessions[i].room === room) {
-				temp_room = room;
 				title = sessions[i].title;
+				socket.join(room);
+			} else {
+				message = 'no game by that code';
 			}
 		}
-		if ( temp_room ) {
-			message ='';
-		} else {
-			message = 'no game by that code';
-		}
 		callback(message, title);
-
 	});
 
 	socket.on('NEW_PLAYER', (room, name, callback) => {
 		const index = searchSessions( room );
+		if (index !==undefined) {
 		const users = sessions[index].connectedUsers;
 		let message = '';
 		const user = {
@@ -82,6 +75,7 @@ module.exports = function(socket) {
 			message = 'try a shorter name';
 		}
 		callback(message);
+	} else callback('reload page');
 	});
 
 
@@ -90,9 +84,6 @@ module.exports = function(socket) {
 
 		let arrayOfTeams = createTeams(users);
 
-		
-	
-		
 		arrayOfTeams = arrayOfTeams.map((team, index) => {
 			const obj = {
 				players: team,
@@ -123,6 +114,7 @@ module.exports = function(socket) {
 				}
 			}
 		} else {
+			
 			let teamFinished = true;
 			for (let i = 0; i < teams.length; i++) {
 				for (let j =0; j < teams[i].players.length; j ++){
@@ -153,45 +145,32 @@ module.exports = function(socket) {
 		io.to(room).emit('PLAY_AGAIN', connectedUsers, sentences);
 	});
 
-	socket.on('reconnect', () => {
-		// console.log("reconnect", socket.id);
-	})
-
-	socket.on('disconnect', () => {
-		var d = new Date();
+	socket.on('disconnect', (reason) => {
+		
 	  	if (sessions.length != 0) {
 		for ( let i = 0; i < sessions.length; i++ ) {
 			for ( let j = 0; j < sessions[i].connectedUsers.length; j++){
 				if (sessions[i].connectedUsers[j].id === socket.id ) {
-					const id = sessions[i].connectedUsers[j].id;
 					let newSessionArray = [...sessions];
 					let newSession = {
 						...newSessionArray[i]
 					}
-					newSession.connectedUsers = sessions[i].connectedUsers.filter((user) => user.id !== id);
+					newSession.connectedUsers = sessions[i].connectedUsers.filter((user) => user.id !== socket.id);
 
 					io.to(sessions[i].room).emit('USER_DISCONNECTED', sessions[i].connectedUsers[j]);
 					
 					newSessionArray[i] = newSession;
-					sessions = newSessionArray;			
+					
+					sessions = newSessionArray;
+								
 				}	
 			}
 	    } 
 	}
-		let newSessionArray = [...sessions];
-
-			newSessionArray = sessions.filter((session) => {
-				if (session.expiration < d.getTime()){
-					return session.connectedUsers.length !== 0;
-				} else return true;
-			});
-	  	sessions = newSessionArray;				
-		
 	});
 }
 
 searchSessions = (room) => {
-
 	for ( let i = 0; i < sessions.length; i++ ) {
 		if (sessions[i].room === room) {
 			return i;
@@ -220,25 +199,6 @@ createTeams = ( users ) => {
 	const teamNum = Math.ceil(users.length/4); 
 	const array = randomizeArray(users);
 	
-	// const firstSegment = Math.floor(array.length/numberOfTeams);
-	// let firstBreak = 0;
-	// let newBreak = Math.floor(array.length/numberOfTeams);
-
-	// let teams = [];
-	
-	// 	for ( let i = 0; i < numberOfTeams; i++) {
-	// 		teams
-	// 		if (i === numberOfTeams -1) {
-	// 			const team = array.slice(firstBreak);
-	// 			teams.push(team);
-	// 		} else {
-	// 			const team = array.slice(firstBreak, newBreak);
-	// 			newBreak = newBreak + firstSegment;
-	// 			firstBreak = firstBreak + firstSegment;
-	// 			teams.push(team);
-	// 		}
-		
-	// }
 	teams = array.reduce((r, v, i ) => {
 		r[i% teamNum] = r[i% teamNum] || [];
 		r[i % teamNum].push(v);

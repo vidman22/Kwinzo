@@ -9,7 +9,6 @@ const GameBoard = (props) => {
 	
 		let players;
 		if (props.teammode){
-			console.log('team mode');
 			players = props.arrayofteams.map((team, index)=> {
 				return (
 					<div key={index} className="TeamWrapper">
