@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CreateLesson from '../CreateLesson/CreateLesson';
-import {Prompt, withRouter} from 'react-router';
+import { withRouter} from 'react-router';
 import './Lesson.css';
 import Sentence from '../../components/Sentence/Sentence';
 import XMarkSVG from '../../components/SVG/XMarkSVG';
@@ -41,7 +41,6 @@ class Lesson extends Component {
   }
 
  componentDidMount() {
-   console.log(this.props);
         window.scrollTo(0, 0);
 }
 
@@ -70,7 +69,7 @@ class Lesson extends Component {
       ...updatedSentences[index]
     }
 
-    const value = updatedSentence.value;
+    const value = updatedSentence.value.trim().toLowerCase();
     const answer = updatedSentence.answer;
     const alts = updatedSentence.alts;
 
@@ -102,9 +101,8 @@ class Lesson extends Component {
   }
 
   removeSentence(index) {
-    console.log('remove clicked');
     const updatedSentences = [...this.state.sentences];
-
+    // eslint-disable-next-line
     const removed = updatedSentences.splice(index, 1);
 
     this.setState({
@@ -122,7 +120,6 @@ class Lesson extends Component {
   }
 
   completed(data) {
-    // console.log('data', data);
     const title = data.lessonSet.title;
     let sentences = data.lessonSet.sentences;
     sentences = sentences.map((sentence) => {
@@ -136,7 +133,7 @@ class Lesson extends Component {
       }
       return rObj;
     });
-    console.log('sentences', sentences);
+    
     this.setState({ 
       sentences,
       title
@@ -166,7 +163,7 @@ class Lesson extends Component {
       onCompleted={data => this.completed(data)}>
       {({ loading, error, data}) => {
         if (loading)  return <div className="spinner spinner-1"></div>;
-        if (error) return `Error!: ${error}`;
+        if (error) return <span>Something went wrong. Please try again later</span>;
         if (this.props.user){
           userCanEdit = this.props.user.userID === data.lessonSet.authorID;
       } 
@@ -226,7 +223,7 @@ class Lesson extends Component {
                         onclick={(e)=> this.handleCheckX(e, sentence.id)} />
                         
                     </div>))}
-                  {userCanEdit ? <button onClick={() => this.editMode()} className="ExerciseButton">Edit</button> : null}
+                  {userCanEdit ? <button onClick={() => this.editMode()} className="CreateButton">Edit</button> : null}
 
                 </div>
            </div>

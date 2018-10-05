@@ -10,8 +10,10 @@ import './WaitingPage.css'
 
 import io from 'socket.io-client';	
 
-const socket = io();
-//const socket = io('http://localhost:5000');
+const socket = io( { timeout: 120000});
+// const socket = io('http://localhost:5000', {
+// 	timeout: 120000
+// });
 
 let index = 0;
 class WaitingPage extends Component {
@@ -86,11 +88,15 @@ class WaitingPage extends Component {
 					players: users
 				});
 			} else {
-				console.log('teams', users);
+				
 				this.setState({
 					arrayOfTeams: users
 				});
 			}
+		});
+
+		socket.on('reconnect', (number) => {
+			
 		});
 
 		socket.on('USER_DISCONNECTED', (player) => {

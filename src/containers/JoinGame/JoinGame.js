@@ -7,9 +7,10 @@ import GamePlay from '../GamePlay/GamePlay';
 import './JoinGame.css';
 
 
-const socket = io();
-//const socket = io('http://localhost:5000/');
-
+const socket = io( { timeout: 120000});
+// const socket = io('http://localhost:5000', {
+// 	timeout: 120000
+// });
 let index = 0;
 export default class CreateGame extends Component {
 	constructor(props) {
@@ -87,13 +88,9 @@ export default class CreateGame extends Component {
 			});
 		});
 
-		socket.on('USER_DISCONNECTED'), (user) => {
-			if (user.playerName === this.state.name) {
-				this.setState({
-					action: 'code',
-				});
-			}
-		}
+		socket.on('reconnect', (attemptnumber) => {
+			
+		});
 
 	}
 

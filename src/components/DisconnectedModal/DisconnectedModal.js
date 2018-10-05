@@ -13,7 +13,7 @@ const modal = props => {
           { props.players.length !==0 ? (
             <div>
               <h1>Disconnected Players</h1>
-              <span>Click on a player to remove</span>
+              <span>Reconnect and click on a player to remove</span>
                 {props.players.map( (player) => {
                   return <div key={player.id} className="DisconnectedPlayer" onClick={() => props.removeplayer(player.id)}>{player.playerName}</div>
                 })}
