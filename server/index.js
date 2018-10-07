@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 const schema  = require('./graphql/typeDefs');
 
 app.use(passport.initialize());
-app.use('/graphql',  graphqlHTTP({
+app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql:true
