@@ -21,7 +21,7 @@ import SoloGame from './SoloGame/SoloGame';
 import UserDropdown from '../components/UserDropdown/UserDropdown';
 import UserPage from './UserPage/UserPage';
 import WaitingPage from './WaitingPage/WaitingPage';
-import WordBank from './WordBank/WordBank';
+
 
 
 class LandingPage extends Component {
@@ -160,7 +160,7 @@ class LandingPage extends Component {
                 <Route path="/lessons" component={Lessons} />
                 <Route path="/privacy" component={Privacy} />
                 <Route path="/user/:user" component={() => <UserPage user={this.props.user} />} />
-                <Route path="/word-bank/:id" render={() => <WordBank lesson = {this.props.lesson } /> } />
+                
                 <Route path="/" component={Lessons} />
                </Switch>
                {this.state.authModal ? <AuthModal togglemodal={() => this.toggleModal()} show={this.state.authModal} /> : null}
