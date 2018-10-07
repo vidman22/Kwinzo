@@ -32,11 +32,13 @@ class Lesson extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      answers: [],
       title: '',
       sentences: [],
       values: {},
       checkedInputs: {},
       editMode: false,
+      wordBank: true,
     }
   }
 
@@ -75,12 +77,13 @@ class Lesson extends Component {
 
     if ( value === answer ) {
       updatedSentence.checked =  'correct';
-
+      this.updateWordBank(index);
     } else if (alts.length !== 0 && alts !== undefined) {
       updatedSentence.checked =  'incorrect';
         for (let i = 0; i < alts.length; i++) {
           if ( value === alts[i]) {
             updatedSentence.checked =  'correct';
+            this.updateWordBank(index);
             break;
           }
         }
@@ -93,24 +96,10 @@ class Lesson extends Component {
     this.setState({
       sentences: updatedSentences,
     });
-
   } 
 
   back() {
       this.props.history.push('/lessons');
-  }
-
-  removeSentence(index) {
-    const updatedSentences = [...this.state.sentences];
-    // eslint-disable-next-line
-    const removed = updatedSentences.splice(index, 1);
-
-    this.setState({
-      sentences: updatedSentences
-    });
-
-
-
   }
 
   editMode(){
@@ -122,7 +111,8 @@ class Lesson extends Component {
   completed(data) {
     const title = data.lessonSet.title;
     let sentences = data.lessonSet.sentences;
-    sentences = sentences.map((sentence) => {
+    let answers = [];
+    sentences = sentences.map((sentence, index) => {
       let rObj = {
         alts : sentence.alts,
         answer : sentence.answer,
@@ -131,12 +121,57 @@ class Lesson extends Component {
         value : '',
         checked : '',
       }
+      const aObj = {
+        value: sentence.answer,
+        used: false,
+        index
+      }
+      answers.push(aObj);
       return rObj;
     });
-    
+    answers = this.shuffle(answers);
     this.setState({ 
+      answers,
       sentences,
       title
+    });
+  }
+
+  shuffle(array) {
+    let i = 0,
+        j = 0,
+        temp = null
+  
+    for ( i = array.length - 1; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1))
+      temp = array[i]
+      array[i] = array[j]
+      array[j] = temp
+    }
+    return array;
+  }
+
+  updateWordBank(index) {
+
+    const updatedAnswers = [...this.state.answers];
+  
+    for (let i = 0; i < updatedAnswers.length; i++) {
+      const answerObject = updatedAnswers[i];
+      // eslint-disable-next-line
+      if (index == answerObject.index) {
+        answerObject.used = true;
+        updatedAnswers[i] = answerObject;
+      }
+    }
+
+    this.setState({
+      answers: updatedAnswers
+    });
+  }
+
+  toggleWordBank() {
+    this.setState( prevState => {
+      return { wordBank: !prevState.wordBank}
     })
   }
 
@@ -187,25 +222,38 @@ class Lesson extends Component {
                     </div>
                   </Link>
                  
-                   <Link to={`/host-game/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.lessonSet)} style={{color: 'black', textDecoration: 'none' }}>
+                  <Link to={`/host-game/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.lessonSet)} style={{color: 'black', textDecoration: 'none' }}>
                      <div className="PhoneBox">
                      <h2>Host Game</h2>
                     </div>
-      
                  </Link>
-                 <Link to={`/word-bank/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.lessonSet)} style={{color: 'black', textDecoration: 'none' }}>
+                 
+                 <div onClick={() => this.toggleWordBank()} style={{color: 'black', textDecoration: 'none' }}>
                   <div className="WordBankGame">
                     <h2>Word Bank</h2>
                   </div>
-                 </Link>
-                 <Link to={`/solo-play/${this.props.match.params.id}`}>
+                 </div>
+
+                <div onClick={() => this.editMode()}>
                   <div className="Assign">
-                    <h2>Assign Set</h2>
-                      <p>Coming Soon</p>
+                    <h2>Edit Quiz</h2>
                   </div>
-                 </Link>
                 </div>
 
+                </div>
+                {this.state.wordBank ? <div className="WordBank">
+            
+                <h2>Word Bank</h2>
+                {this.state.answers.map((answer, index) => (
+                  <div className="WordBankAnswer" key={index}>
+                    {answer.used ? (
+                      <div className="UsedWord"><p>{answer.value}</p></div>
+                      ) : (
+                      <div className="UnusedWord"><p>{answer.value}</p></div>
+                      )}
+                  </div>
+                  ))}
+                </div> : null}
                 
                   {sentences.map((sentence, index) => (
                     <div className="LessonSentence" key={sentence.id}>
@@ -218,7 +266,6 @@ class Lesson extends Component {
                         correctanswer={sentence.config.answer}
                         message={sentence.config.checked}
                         lessonmode={true}
-                        removesentence={() => this.removeSentence(index)}
                         placeholder={sentence.config.hint}
                         onclick={(e)=> this.handleCheckX(e, sentence.id)} />
                         
