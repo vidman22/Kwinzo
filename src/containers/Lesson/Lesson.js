@@ -38,7 +38,7 @@ class Lesson extends Component {
       values: {},
       checkedInputs: {},
       editMode: false,
-      wordBank: true,
+      wordBank: false,
     }
   }
 
