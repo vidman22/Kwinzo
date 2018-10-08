@@ -6,6 +6,8 @@ const schema = buildSchema(`
 		lessonSets: [LessonSet]
 		user(id: String! ): User
 		userLessons( authorID: String! ): [LessonSet]
+		userCompLessons( authorID: String! ): [ReadingCompLesson]
+		userOmissionLessons( authorID: String! ): [ReadingOmissionLesson]
 		readingCompLessons: [ReadingCompLesson]
 		readingCompLesson(id: String): ReadingCompLesson
 		readingOmissionLessons: [ReadingOmissionLesson]

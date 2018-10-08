@@ -103,9 +103,11 @@ class Lesson extends Component {
   }
 
   editMode(){
-    this.setState( prevState => {
-      return {editMode: !prevState.editMode }
-    });
+    if (this.props.user && this.props.user.userID === this.state.authorID ){
+      this.setState( prevState => {
+        return {editMode: !prevState.editMode }
+      });
+  } 
   }
 
   completed(data) {
@@ -130,7 +132,8 @@ class Lesson extends Component {
       return rObj;
     });
     answers = this.shuffle(answers);
-    this.setState({ 
+    this.setState({
+      authorID : data.lessonSet.authorID, 
       answers,
       sentences,
       title

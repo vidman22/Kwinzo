@@ -7,7 +7,7 @@ html, body {
   	background-size: 100%;
   	background-attachment: fixed;
   	z-index: -99;
-  	transform: translateZ(0);
+  	transform: translateZ(-99);
 	/*background-image: url(../assets/svg/LandingPage_Background.svg);*/
 }
 
