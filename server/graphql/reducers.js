@@ -163,7 +163,13 @@ var root = {
 		},
 	 	user: async ({_id}) => {
 	 		return await User.findById(_id)
-	 	},
+		},
+		userCompLessons: async (authorID) => {
+			return await ReadingCompLesson.find(authorID);
+		},
+		userOmissionLessons: async (authorID) => {
+			return await ReadingOmissionLesson.find(authorID);
+		},
 	 	userLessons: async ( authorID ) => {
 	 		return await LessonSet.find(authorID);
 	 	}

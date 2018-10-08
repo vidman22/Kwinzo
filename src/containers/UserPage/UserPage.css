@@ -26,7 +26,22 @@
 	display: block;
 	width: 75%;
 	margin:12% 0 0 12%;
+	padding-bottom: 3px;
 	border-bottom: 2px solid #eee;
+}
+
+.SideBar a{
+	display: block;
+	padding: 14px 0 14px 0;
+	width: 180px;
+    margin: 12px auto 12px auto;
+    text-align: center;
+    font-family: Open Sans, sans-serif;
+    font-size: 18px;
+    background: white;
+    box-shadow: 1px 1px 1px #eee;
+    border: 1px solid #eee;
+    color: black;
 }
 @media screen and (max-width: 640px) {
 	.UserPageWrapper{

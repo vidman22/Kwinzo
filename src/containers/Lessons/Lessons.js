@@ -84,9 +84,11 @@ omissionLessonQuery() {
     return (
      <div className="Lessons">
       <div className="QueryButtonWrapper">
+        <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Quizzes</button>
         <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Reading Comprehension</button>
         <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Gap Reading</button>
-        <button onClick={() => this.lessonQuery()} className="ChangeQueryButton">Quizzes</button>
+        
+        {this.props.user ? <Link className="UserLessonsLink" to={`/user/${this.props.user.userID}`}>My Lessons</Link> : null}
       </div>
        <Query 
         query={LESSON_QUERY}

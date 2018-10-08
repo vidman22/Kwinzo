@@ -157,11 +157,11 @@ class LandingPage extends Component {
                 <Route path="/reading-omission-lesson/:id" component={ReadingOmissionLesson} />
                 <Route path="/solo-play/:id" render={() => <SoloGame lesson= {this.props.lesson} /> } />
                 <Route path="/host-game/:id" render={() => <WaitingPage lesson= {this.props.lesson} /> } />
-                <Route path="/lessons" component={Lessons} />
+                <Route path="/lessons" component={() => <Lessons user={this.props.user} /> } />
                 <Route path="/privacy" component={Privacy} />
                 <Route path="/user/:user" component={() => <UserPage user={this.props.user} />} />
                 
-                <Route path="/" component={Lessons} />
+                            {this.props.user ? <Route path="/" component={() => <UserPage user={this.props.user} />} /> :  <Route path="/" component={Lessons} />}
                </Switch>
                {this.state.authModal ? <AuthModal togglemodal={() => this.toggleModal()} show={this.state.authModal} /> : null}
                {this.state.authModal ? <Backdrop show={this.state.authModal}/> : null }

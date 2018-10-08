@@ -13,12 +13,26 @@
   box-shadow: 0px 0px 4px #ccc;
 }
 
+.QueryButtonWrapper a{
+    display: block;
+	  padding: 14px 0 14px 0;
+	  width: 180px;
+    margin: 12px auto 12px auto;
+    text-align: center;
+    font-family: Open Sans, sans-serif;
+    font-size: 18px;
+    background: white;
+    box-shadow: 1px 1px 1px #eee;
+    border: 1px solid #eee;
+    color: black;
+}
+
 .ChangeQueryButton {
     display: block;
     width: 180px;
     height: 60px;
     margin: 12px auto 12px auto;
-    vertical-align: top;
+    text-align: center;
     font-family: Open Sans, sans-serif;
     font-size: 18px;
     background: white;
