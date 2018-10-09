@@ -23,7 +23,7 @@ const ReadingCompQuestion = props => {
                         </div>
                        );
 				})}
-				{props.highlight ? <button type="button" className="ExerciseButton" onClick={props.showhighlight}>{props.highlightshown ? 'Hide Highlight' : 'Show Highlight' } </button> : null}
+				{props.highlight ? <button type="button" className="HighlightButton" onClick={props.showhighlight}>{props.highlightshown ? 'Hide Highlight' : 'Show Highlight' } </button> : null}
 			</form>
 		  </div>
 		  );

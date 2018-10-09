@@ -35,6 +35,7 @@
     text-align: center;
     font-family: Open Sans, sans-serif;
     font-size: 18px;
+    font-weight: lighter;
     background: white;
     box-shadow: 1px 1px 1px #eee;
     border: 1px solid #eee;
@@ -55,7 +56,7 @@
 .LessonLinks h1{
   font-family: Montserrat, sans-serif;
   text-align: center;
-  font-weight: bolder;
+  font-weight: lighter;
 }
 
 .QueryButtonWrapper{

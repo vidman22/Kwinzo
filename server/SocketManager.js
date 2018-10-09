@@ -2,26 +2,22 @@ const io = require('./index.js').io;
 
 let sessions = [];
 
-class SessionObject {
-	constructor() {
-		this.connectedUsers = [];
-		this.title = '',
-		this.room = '';
-		this.teams = [];
-
-	}	
-}
 
 
 module.exports = function(socket) {
 	
 	socket.on('NEW_ROOM', (room, title) => {
-		//console.log('room', room);
-		let newRoom = new SessionObject();
-		newRoom.room = room;
-		newRoom.title = title;
+		console.log('room', room);
+		let newRoom = {
+			connectedUsers: [],
+			title,
+			room,
+			teams : [],
+		};
+
 		sessions.push(newRoom);
-		socket.join(newRoom.room);
+		socket.join(room);
+		console.log('sessions', sessions);
 		
 	});
 
@@ -35,6 +31,7 @@ module.exports = function(socket) {
 			if ( sessions[i].room === room) {
 				title = sessions[i].title;
 				socket.join(room);
+				break;
 			} else {
 				message = 'no game by that code';
 			}
@@ -44,7 +41,9 @@ module.exports = function(socket) {
 
 	socket.on('NEW_PLAYER', (room, name, callback) => {
 		const index = searchSessions( room );
+		console.log('session index', index);
 		if (index !==undefined) {
+			
 		const users = sessions[index].connectedUsers;
 		let message = '';
 		const user = {
@@ -145,7 +144,7 @@ module.exports = function(socket) {
 		io.to(room).emit('PLAY_AGAIN', connectedUsers, sentences);
 	});
 
-	socket.on('disconnect', (reason) => {
+	socket.on('disconnect', () => {
 		
 	  	if (sessions.length != 0) {
 		for ( let i = 0; i < sessions.length; i++ ) {
@@ -156,13 +155,13 @@ module.exports = function(socket) {
 						...newSessionArray[i]
 					}
 					newSession.connectedUsers = sessions[i].connectedUsers.filter((user) => user.id !== socket.id);
-
+					
 					io.to(sessions[i].room).emit('USER_DISCONNECTED', sessions[i].connectedUsers[j]);
 					
 					newSessionArray[i] = newSession;
 					
 					sessions = newSessionArray;
-								
+					// sessions = sessions.filter((session) => session.connectedUsers.length !== 0);
 				}	
 			}
 	    } 
