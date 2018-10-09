@@ -6,8 +6,6 @@ html, body {
 	background: url(../assets/svg/LandingPage_Background.svg) no-repeat top left;
   	background-size: 100%;
   	background-attachment: fixed;
-  	z-index: -99;
-  	transform: translateZ(-99);
 	/*background-image: url(../assets/svg/LandingPage_Background.svg);*/
 }
 

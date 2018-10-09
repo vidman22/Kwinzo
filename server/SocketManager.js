@@ -2,30 +2,22 @@ const io = require('./index.js').io;
 
 let sessions = [];
 
-// let SessionObject = class {
-// 	constructor(connectedUsers, title, room, teams) {
-// 		this.connectedUsers = connectedUsers;
-// 		this.title = title;
-// 		this.room = room;
-// 		this.teams = teams;
-
-// 	}	
-// }
 
 
 module.exports = function(socket) {
 	
 	socket.on('NEW_ROOM', (room, title) => {
-		//console.log('room', room);
-		const newObj = {
+		console.log('room', room);
+		let newRoom = {
 			connectedUsers: [],
 			title,
 			room,
-			teams: []
+			teams : [],
 		};
-		sessions.push(newObj);
+
+		sessions.push(newRoom);
 		socket.join(room);
-		console.log('sessions in new room', sessions);
+		console.log('sessions', sessions);
 		
 	});
 
@@ -37,10 +29,8 @@ module.exports = function(socket) {
 		
 		for ( let i = 0; i < sessions.length; i++) {
 			if ( sessions[i].room === room) {
-					title = sessions[i].title;
-					message = '';
-					socket.join(room);
-					console.log('room found');
+				title = sessions[i].title;
+				socket.join(room);
 				break;
 			} else {
 				message = 'no game by that code';
@@ -52,7 +42,9 @@ module.exports = function(socket) {
 
 	socket.on('NEW_PLAYER', (room, name, callback) => {
 		const index = searchSessions( room );
+		console.log('session index', index);
 		if (index !==undefined) {
+			
 		const users = sessions[index].connectedUsers;
 		let message = '';
 		const user = {
@@ -153,7 +145,7 @@ module.exports = function(socket) {
 		io.to(room).emit('PLAY_AGAIN', connectedUsers, sentences);
 	});
 
-	socket.on('disconnect', (reason) => {
+	socket.on('disconnect', () => {
 		
 	  	if (sessions.length != 0) {
 		for ( let i = 0; i < sessions.length; i++ ) {
@@ -164,13 +156,13 @@ module.exports = function(socket) {
 						...newSessionArray[i]
 					}
 					newSession.connectedUsers = sessions[i].connectedUsers.filter((user) => user.id !== socket.id);
-
+					
 					io.to(sessions[i].room).emit('USER_DISCONNECTED', sessions[i].connectedUsers[j]);
 					
 					newSessionArray[i] = newSession;
 					
 					sessions = newSessionArray;
-								
+					// sessions = sessions.filter((session) => session.connectedUsers.length !== 0);
 				}	
 			}
 	    } 

@@ -21,3 +21,25 @@
 	margin-top: 10px;
 }
 
+.HighlightButton {
+	display: block;
+	margin: 23px 0 8px 80%;
+	text-align: center;
+	font-weight: lighter;
+	width: 90px; 
+	
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	background-color: white;
+	font-size: 18px;
+	color: black;
+}
+
+
+.HighlightButton:hover {
+	cursor: pointer;
+	color: #00c4c3;
+	border: 1px solid #ccc;
+	box-shadow: 0px 1px 2px 0px #eee;
+}
