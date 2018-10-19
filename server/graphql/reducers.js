@@ -4,8 +4,7 @@ const confirmFBToken = require('../oauth/config/faceBookStrategy');
 const { getUserId } = require('../oauth/config/utils');
 const jwt = require('jsonwebtoken');
 const keys = require('../oauth/config/keys');
-const mongoose = require('../config/mongoose');
-const db = mongoose();
+
 const uuidv4 = require('uuid/v4');
 
 const LessonSet = require('../models/lessonSet');

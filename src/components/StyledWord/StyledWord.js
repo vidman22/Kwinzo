@@ -10,6 +10,8 @@ const StyledWord = props => {
 				cssClasses.push(props.styles[i].type);
 			}
 		}
+	} else {
+		cssClasses.push('hide');
 	}
 	return (
 		<span className={cssClasses.join(' ')}>{' ' + props.word}</span>
