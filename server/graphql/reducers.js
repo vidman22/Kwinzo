@@ -1,11 +1,13 @@
 const bcrypt = require('bcryptjs');
-const confirmGoogleToken = require('../oauth/config/googleStrategy');
-const confirmFBToken = require('../oauth/config/faceBookStrategy');
-const { getUserId } = require('../oauth/config/utils');
+
 const jwt = require('jsonwebtoken');
 const keys = require('../oauth/config/keys');
 
 const uuidv4 = require('uuid/v4');
+
+const confirmGoogleToken = require('../oauth/config/googleStrategy');
+const confirmFBToken = require('../oauth/config/faceBookStrategy');
+const { getUserId } = require('../oauth/config/utils');
 
 const LessonSet = require('../models/lessonSet');
 const User = require('../models/user');

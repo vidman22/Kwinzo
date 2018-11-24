@@ -7,52 +7,54 @@ import gql from 'graphql-tag';
 
 import './UserPage.css';
 
-const USER_LESSONS = gql`
-  query UserLessons( $authorID: String! ){
-    userLessons( authorID: $authorID ) {
+const USER_QUIZZES = gql`
+  query ( $authorID: String! ){
+    userQuizzes( authorID: $authorID ) {
       id
       title
-      author
-      authorID
+      username
+			authorID
+			uniqid
+			created_at
     }
   }
 `;
 
 const USER_COMP_QUERY = gql`
-	query UserCompLessons( $authorID: String! ){
+	query ( $authorID: Int! ){
 		userCompLessons( authorID: $authorID ) {
 			id
 			title
-			author
+			username
 			authorID
 		}
 	}
 `;
 
 const USER_OMISSION_QUERY = gql`
-	query UserOmissionLessons( $authorID: String! ){
+	query ( $authorID: Int! ){
 		userOmissionLessons( authorID: $authorID ) {
 			id
 			title
-			author
 			authorID
+			username
 		}
 	}
 `;
 
-class CreateGame extends Component {
+class UserPage extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			activeQuery: 'userLessons',
-			activeURL: 'lessons',
+			activeQuery: 'userQuizzes',
+			activeURL: 'quiz',
 		}
 	}
 
 	lessonQuery() {
 		this.setState({
 			activeQuery: 'userLessons',
-			activeURL: 'lessons'
+			activeURL: 'quiz'
 		})
 	}
 	
@@ -71,11 +73,13 @@ class CreateGame extends Component {
 	}
 
 	render() {
-		let authorID = this.props.match.params.user || this.props.user.userID;
-		console.log(authorID);
+	
+		let authorID = this.props.user.userID;
+		console.log('authorID', typeof authorID);
+
 		let USER_LESSONS_QUERY;
-    if (this.state.activeQuery === 'userLessons') {
-      USER_LESSONS_QUERY = USER_LESSONS;
+    if (this.state.activeQuery === 'userQuizzes') {
+      USER_LESSONS_QUERY = USER_QUIZZES;
     } else if ( this.state.activeQuery === 'userCompLessons') {
       USER_LESSONS_QUERY = USER_COMP_QUERY;
     } else {
@@ -111,15 +115,14 @@ class CreateGame extends Component {
 
         			return (
           			<div className="LessonLinks">
-									{ this.state.activeQuery === 'userLessons' ? <h1>My Quizzes</h1> : null}
+									{ this.state.activeQuery === 'userQuizzes' ? <h1>My Quizzes</h1> : null}
             			{ this.state.activeQuery === 'userOmissionLessons' ? <h1>Gap Reading</h1> : null}
             			{ this.state.activeQuery === 'userCompLessons' ? <h1>Reading Comprehension</h1> : null}
-            			{data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.id}`}>
+            			{data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.uniqid}`}>
               			<LessonLink 
-              			id={lesson.id}  
-                    delete={() => this.delete()}
+              			id={lesson.id}
               			title={lesson.title} 
-              			author={lesson.author}
+              			author={this.props.user.username}
               			/>
               			</Link>))}
             
@@ -135,4 +138,4 @@ class CreateGame extends Component {
 
 };
 
-export default withRouter(CreateGame);
+export default withRouter(UserPage);

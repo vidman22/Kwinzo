@@ -37,10 +37,10 @@ render() {
 		<div>
 			<div className="UserDropDown">
    				{icon}
-   			<div className="LoggedUserName">{this.props.user.name}</div>
+   			<div className="LoggedUserName">{this.props.user.username}</div>
 			  <div className="DropDownContent">
 			  		<div onClick={this.props.logout}>Log-Out</div>
-			  		<Link className="DropDownLink" to={`/user/${this.props.user.userID}`}><div>My Lessons</div></Link>
+			  		<Link className="DropDownLink" to={'/user'}><div>My Lessons</div></Link>
 			  		<div>Settings</div>
 			  </div>
       </div>

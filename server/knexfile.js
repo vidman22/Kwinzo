@@ -1,32 +1,50 @@
+    //"postgres://localhost/kwinzo",
 module.exports = {
-  test: {
-    client: 'pg',
-    connection: 'postgres://localhost/Kwinzo_test',
-    migrations: {
-      directory: __dirname + '/db/migrations'
-    },
-    seeds: {
-      directory: __dirname + '/db/seeds/test'
-    }
-  },
   development: {
-    client: 'pg',
-    connection: 'postgres://localhost/Kwinzo',
-    migrations: {
-      directory: __dirname + '/db/migrations'
+    client: "pg",
+    connection: "postgres://localhost/kwinzo",
+    pool: {
+      min: 2,
+      max: 10
     },
-    seeds: {
-      directory: __dirname + '/db/seeds/development'
-    }
+    // migrations: {
+    //   tableName: "knex_migrations"
+    // },
+    debug: true
   },
-  production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
-    migrations: {
-      directory: __dirname + '/db/migrations'
+
+  staging: {
+    client: "pg",
+    connection: {
+      host: process.env.PGHOST,
+      database: process.env.PGDATABASE,
+      user: process.env.DBUSER,
+      password: process.env.PGPASSWORD
     },
-    seeds: {
-      directory: __dirname + '/db/seeds/production'
+    pool: {
+      min: 2,
+      max: 10
+    },
+    // migrations: {
+    //   tableName: "knex_migrations"
+    // }
+  },
+
+  production: {
+    client: "pg",
+    connection: {
+      host: process.env.PGHOST,
+      database: process.env.PGDATABASE,
+      user: process.env.DBUSER,
+      password: process.env.PGPASSWORD,
+      ssl: true
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: "knex_migrations"
     }
   }
 };

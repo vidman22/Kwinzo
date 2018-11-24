@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CreateLesson from '../CreateLesson/CreateLesson';
 import { withRouter} from 'react-router';
-import './Lesson.css';
+import './Quiz.css';
 import Sentence from '../../components/Sentence/Sentence';
 import XMarkSVG from '../../components/SVG/XMarkSVG';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import * as actionTypes from '../../store/actionTypes';
 
-const LESSON_SET = gql`
-  query LessonSet($id: String!){
-    lessonSet(id: $id ) {
+const QUIZ = gql`
+  query($uniqid: String!){
+    quiz(uniqid: $uniqid ) {
       id
       title
-      author
+      username
       authorID
       sentences{
         alts
@@ -103,7 +103,7 @@ class Lesson extends Component {
   }
 
   editMode(){
-    if (this.props.user && this.props.user.userID === this.state.authorID ){
+    if (this.props.user && this.props.user.uuid === this.state.authorID ){
       this.setState( prevState => {
         return {editMode: !prevState.editMode }
       });
@@ -111,8 +111,9 @@ class Lesson extends Component {
   }
 
   completed(data) {
-    const title = data.lessonSet.title;
-    let sentences = data.lessonSet.sentences;
+    console.log('data', data);
+    const title = data.quiz.title;
+    let sentences = data.quiz.sentences;
     let answers = [];
     sentences = sentences.map((sentence, index) => {
       let rObj = {
@@ -133,7 +134,7 @@ class Lesson extends Component {
     });
     answers = this.shuffle(answers);
     this.setState({
-      authorID : data.lessonSet.authorID, 
+      authorID : data.quiz.authorID, 
       answers,
       sentences,
       title
@@ -189,21 +190,21 @@ class Lesson extends Component {
           config: this.state.sentences[key]
       });
     }
-
+    console.log('quiz id', this.props.match.params.id)
     return (
       <div>
       {!this.state.editMode ? (
       
       <Query 
-      query={LESSON_SET}
-      variables={{id: this.props.match.params.id}}
+      query={QUIZ}
+      variables={{uniqid: this.props.match.params.id}}
       fetchPolicy='network-only'
       onCompleted={data => this.completed(data)}>
       {({ loading, error, data}) => {
         if (loading)  return <div className="spinner spinner-1"></div>;
         if (error) return <span>Something went wrong. Please try again later</span>;
         if (this.props.user){
-          userCanEdit = this.props.user.userID === data.lessonSet.authorID;
+          userCanEdit = this.props.user.userID === data.quiz.authorID;
       } 
         return (
           
@@ -211,7 +212,7 @@ class Lesson extends Component {
             <button className="BackButtonLesson" onClick={() => this.back()}>{"<"} Back</button>
             { userCanEdit ? <XMarkSVG onclick={() => this._deleteLesson()}/>: null }
                   <div className="LessonTitle">
-                    <h1>{data.lessonSet.title}</h1>
+                    <h1>{data.quiz.title}</h1>
                   </div>
           <div className="LessonTab">
             
@@ -219,13 +220,13 @@ class Lesson extends Component {
             
                 <div className="HomeFlex">
                   
-                  <Link to={`/solo-play/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.lessonSet)} style={{color: 'black', textDecoration: 'none' }}>
+                  <Link to={`/solo-play/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.quiz)} style={{color: 'black', textDecoration: 'none' }}>
                     <div className="Solo">
                      <h2>Solo Play</h2>
                     </div>
                   </Link>
                  
-                  <Link to={`/host-game/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.lessonSet)} style={{color: 'black', textDecoration: 'none' }}>
+                  <Link to={`/host-game/${this.props.match.params.id}`} onClick={() => this.props.sendLesson(data.quiz)} style={{color: 'black', textDecoration: 'none' }}>
                      <div className="PhoneBox">
                      <h2>Host Game</h2>
                     </div>
@@ -316,7 +317,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    lesson: state.lessonSet,
+    lesson: state.quiz,
     user: state.user
   }
 }

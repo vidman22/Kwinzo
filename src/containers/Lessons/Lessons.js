@@ -8,35 +8,37 @@ import gql from 'graphql-tag';
 import './Lessons.css';
 
 
-const LESSON_SETS = gql`
-  query LessonSets{
-    lessonSets {
+const QUIZZES = gql`
+  query {
+    quizzes {
       id
-      created
       title
-      author
+      username
+			authorID
+      uniqid
+      created_at
     }
   }
 `;
 
 const LESSON_COMP_QUERY = gql`
-  query LessonCompQuery{
+  query {
     readingCompLessons {
       id
       created
       title
-      author
+      username
     }
   }
 `;
 
 const LESSON_OMISSION_QUERY = gql`
-  query LessonCompQuery{
+  query {
     readingOmissionLessons {
       id
       created
       title
-      author
+      username
     }
   }
 `;
@@ -45,15 +47,15 @@ class Lessons extends Component  {
   constructor(props){
   super(props);
   this.state = {
-    activeQuery: 'lessonSets',
-    activeURL: 'lessons'
+    activeQuery: 'quizzes',
+    activeURL: 'quiz'
   }
 }
 
 lessonQuery() {
   this.setState({
-    activeQuery: 'lessonSets',
-    activeURL: 'lessons'
+    activeQuery: 'quizzes',
+    activeURL: 'quiz'
   })
 }
 
@@ -73,8 +75,8 @@ omissionLessonQuery() {
 
   render() {
     let LESSON_QUERY;
-    if (this.state.activeQuery === 'lessonSets') {
-      LESSON_QUERY = LESSON_SETS;
+    if (this.state.activeQuery === 'quizzes') {
+      LESSON_QUERY = QUIZZES;
     } else if ( this.state.activeQuery === 'readingCompLessons') {
       LESSON_QUERY = LESSON_COMP_QUERY;
     } else {
@@ -88,7 +90,7 @@ omissionLessonQuery() {
         <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Reading Comprehension</button>
         <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Gap Reading</button>
         
-        {this.props.user ? <Link className="UserLessonsLink" to={`/user/${this.props.user.userID}`}>My Lessons</Link> : null}
+        {this.props.user ? <Link className="UserLessonsLink" to={`/user/${this.props.user.uuid}`}>My Lessons</Link> : null}
       </div>
        <Query 
         query={LESSON_QUERY}
@@ -100,16 +102,16 @@ omissionLessonQuery() {
 
           return (
             <div className="LessonLinks">
-            { this.state.activeQuery === 'lessonSets' ? <h1>Quizzes</h1> : null}
+            { this.state.activeQuery === 'quizzes' ? <h1>Quizzes</h1> : null}
             { this.state.activeQuery === 'readingOmissionLessons' ? <h1>Gap Reading</h1> : null}
             { this.state.activeQuery === 'readingCompLessons' ? <h1>Reading Comprehension</h1> : null}
-              {data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.id}`}>
+              {data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.uniqid}`}>
                 <LessonLink 
                 id={lesson.id}  
                 title={lesson.title}
                 created={lesson.created} 
-                author={lesson.author}
-                terms={3}
+                author={lesson.username}
+                
                 />
                 </Link>))}
             </div>

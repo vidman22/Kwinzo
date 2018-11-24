@@ -21,7 +21,7 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "jsonwebtoken": "^8.3.0",
-    "knex": "^0.15.2",
+    "knex": "^0.16.0-next3",
     "moment": "^2.22.2",
     "mongoose": "^5.2.2",
     "passport": "^0.4.0",
@@ -43,7 +43,9 @@
     "redux-thunk": "^2.3.0",
     "should": "^7.1.1",
     "socket.io": "^2.1.0",
+    "sqlite3": "^4.0.3",
     "subscriptions-transport-ws": "^0.9.12",
+    "uniqid": "^5.0.3",
     "uuid": "^3.3.2"
   },
   "scripts": {

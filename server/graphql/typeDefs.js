@@ -2,25 +2,27 @@ const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
 	type Query {
-		lessonSet(id: String): LessonSet
-		lessonSets: [LessonSet]
+		quiz(uniqid: String!): Quiz
+		quizzes: [Quiz]
 		user(id: String! ): User
-		userLessons( authorID: String! ): [LessonSet]
+		userQuizzes( authorID: String! ): [Quiz]
 		userCompLessons( authorID: String! ): [ReadingCompLesson]
 		userOmissionLessons( authorID: String! ): [ReadingOmissionLesson]
 		readingCompLessons: [ReadingCompLesson]
 		readingCompLesson(id: String): ReadingCompLesson
 		readingOmissionLessons: [ReadingOmissionLesson]
 		readingOmissionLesson(id: String): ReadingOmissionLesson
+	
 	}
 
-	type LessonSet {
-		id: String!
-		created: Date
-		updated: Date
+	type Quiz {
+		id: Int
+		created_at: Date
+		updated_at: Date
 		title: String!
-		author: String!
-		authorID: String!
+		authorID: Int!
+		username: String
+		uniqid: String!
 		sentences: [Sentence]
 	}
 
@@ -101,29 +103,31 @@ const schema = buildSchema(`
 	}
 
 	type User {
-		id: String
-		joined: Date
+		id: Int
 		email: String!
 		username: String!
 		password: String
-		userID: String!
+		uuid: String!
 		picture: String
 	}
+
+	type Pin { title: String!, link: String!, image: String!, id: Int! }
 
 	scalar Date
 
 
 	type Mutation {
+		
 		createReadingOmissionLesson(title: String!, author: String!, authorID: String!, text: String!, omissions: [OmissionInput] ): ReadingOmissionLesson
 		createReadingCompLesson(title: String!, author: String!, authorID: String!, text: String!, questions: [QuestionInput] ): ReadingCompLesson
-		createLessonSet(title: String!, author: String!, authorID: String!, sentences: [SentenceInput] ): LessonSet
+		createQuiz(title: String!, authorID: Int, sentences: [SentenceInput] ): Quiz
 		signUp( username: String! , email: String!, password: String! ): AuthPayload
 		login( email: String!, password: String! ) : AuthPayload
 		deleteCompLesson( id: String! ) : Boolean
-		deleteInputLesson( id: String! ) : Boolean
+		deleteQuiz( id: String! ) : Boolean
 		deleteOmissionLesson( id: String! ) : Boolean
-		oAuthSignIn(type: String!, email: String!, username: String!, picture: String, userID: String!, token: String!, expiresIn: String! ): AuthPayload
-		updateLesson(lessonID: String, title: String, author: String, authorID: String, sentences: [SentenceInput]) : LessonSet
+		oAuthSignIn(email: String!, username: String!, picture: String, uuid: String!, token: String!, expiresIn: String! ): AuthPayload
+		updateLesson(lessonID: String, title: String, author: String, authorID: String, sentences: [SentenceInput]) : Quiz
 	}
 `);
 

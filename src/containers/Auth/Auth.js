@@ -15,9 +15,10 @@ const SIGNUP_MUTATION = gql`
         token
         expiresIn
         user {
+            id
             email
             username
-            userID
+            uuid
             picture
         }
     }
@@ -30,9 +31,10 @@ const LOGIN_MUTATION = gql`
         token
         expiresIn
         user {
+            id
             email
             username
-            userID
+            uuid
             picture
         }
     }
@@ -156,35 +158,36 @@ class Auth extends Component {
         });
     }
 
-    _oAuthMutation = async (Type, Email, Username, Picture, UserID, Token, ExpiresIn) => {
+    _oAuthMutation = async ( Email, Username, Picture, Uuid, Token, ExpiresIn) => {
       
         const result = await this.props.oAuthMutation({
             variables: {
-                type: Type,
+                
                 email: Email,
                 username: Username,
                 picture: Picture,
-                userID: UserID,
+                userID: Uuid,
                 token: Token,
                 expiresIn: ExpiresIn
             }
         });  
        
         const { token, expiresIn } = result.data.oAuthSignIn;
+        //const resultUserTableID = result.data.oAuthSignIn.user.id;
         const resultEmail = result.data.oAuthSignIn.user.email;
         const resultUsername = result.data.oAuthSignIn.user.username;
         const resultPicture = result.data.oAuthSignIn.user.picture;
-        const resultUserID = result.data.oAuthSignIn.user.userID;
+        const resultUserID = result.data.oAuthSignIn.user.uuid;
         
-        this.props.onAuth(resultEmail, resultUsername, resultPicture, resultUserID, token, expiresIn);
+        this.props.onAuth( resultEmail, resultUsername, resultPicture, resultUserID, token, expiresIn);
 
     }
 
     responseGoogle = (response) => {
-        let email,
+          let email,
            username,
             picture,
-             userID,
+               userID,
               token,
           expiresIn;
        
@@ -198,11 +201,11 @@ class Auth extends Component {
        }
 
         this.props.togglemodal();
-        this._oAuthMutation('google', email, username, picture, userID, token, expiresIn);
+        this._oAuthMutation(email, username, picture, userID, token, expiresIn);
     }
 
     responseFacebook = (response) => {
-        let email,
+          let email,
            username,
             picture,
              userID,
@@ -224,7 +227,7 @@ class Auth extends Component {
 
     completed = (data) => {
         this.props.togglemodal();
-        
+        let id;
         let email;
         let username;
         let picture;
@@ -233,14 +236,15 @@ class Auth extends Component {
         let expiresIn;
 
         for (let property in data) {
+           id = data[property].user.id;
            email = data[property].user.email;
            username = data[property].user.username;
            picture = data[property].user.picture;
-           userID = data[property].user.userID;
+           userID = data[property].user.uuid;
            token = data[property].token;
            expiresIn = data[property].expiresIn;
         }
-        this.props.onAuth(email, username, picture, userID, token, expiresIn);
+        this.props.onAuth(id, email, username, picture, userID, token, expiresIn);
     }
 
     render () {
@@ -361,14 +365,15 @@ class Auth extends Component {
 };
 
 const OAUTH_MUTATION = gql`
-    mutation($type: String!, $email: String!, $username: String!, $picture: String, $userID: String!, $token: String!, $expiresIn: String! ) {
-        oAuthSignIn(type: $type, email: $email, username: $username, picture: $picture, userID: $userID, token: $token, expiresIn: $expiresIn) {
+    mutation($email: String!, $username: String!, $picture: String, $uuid: String!, $token: String!, $expiresIn: String! ) {
+        oAuthSignIn( email: $email, username: $username, picture: $picture, uuid: $uuid, token: $token, expiresIn: $expiresIn) {
             token
             expiresIn
             user {
+                id
                 email
                 username
-                userID
+                uuid
                 picture
             }
         }
@@ -379,7 +384,7 @@ const OAUTH_MUTATION = gql`
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth:( email, name, picture, userID, token, expiresIn ) => dispatch( actions.authSuccess(email, name, picture, userID, token, expiresIn))
+        onAuth:(id, email, name, picture, uuid, token, expiresIn ) => dispatch( actions.authSuccess(id, email, name, picture, uuid, token, expiresIn))
     };
 };
 const Container = graphql( OAUTH_MUTATION, { name: 'oAuthMutation' })(Auth);

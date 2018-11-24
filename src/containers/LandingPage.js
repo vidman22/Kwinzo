@@ -12,7 +12,7 @@ import CreateLesson from './CreateLesson/CreateLesson';
 import CreateLessonLanding from '../components/CreateLessonLanding/CreateLessonLanding';
 import CreateReadingLesson from './CreateReadingLesson/CreateReadingLesson';
 // import Home from '../components/Home/Home';
-import Lesson from './Lesson/Lesson';
+import Quiz from './Quiz/Quiz';
 import Lessons from './Lessons/Lessons';
 import Privacy from '../components/Privacy/Privacy';
 import ReadingCompLesson from './ReadingCompLesson/ReadingCompLesson';
@@ -109,7 +109,7 @@ class LandingPage extends Component {
                             <ul>
                              <li><NavLink 
                               to={{
-                                pathname: '/create-lesson'
+                                pathname: '/create-quiz'
                              }}
                              activeStyle={{
                                 color:'#323232'}} id='second'>Create</NavLink></li>
@@ -127,7 +127,7 @@ class LandingPage extends Component {
                           <div className={cssClasses.join(' ')}>
                              <div className="MobileLink"><Link 
                               to={{
-                                pathname: '/create-lesson'
+                                pathname: '/create-quiz'
                              }}>Create</Link></div>
 
                              <div className="MobileLink"><Link
@@ -137,7 +137,7 @@ class LandingPage extends Component {
 
                             {this.props.user ? <div className="MobileLink"><Link
                               to={{
-                                pathname: `/user/${this.props.user.userID}`
+                                pathname: '/user'
                              }}>My Page</Link></div> : <div className="MobileLogin" onClick={()=> this.toggleModal()}>Login</div>}
 
                             {this.props.user ? <div className="MobileLogin" onClick={() => this.logout()}>Logout</div> : null}
@@ -148,20 +148,21 @@ class LandingPage extends Component {
                 </header>
             
                <Switch> 
-                <Route exact path="/create-lesson" render={() => <CreateLessonLanding togglemodal={() => this.toggleModal()}/> } />
+                <Route exact path="/create-quiz" render={() => <CreateLessonLanding togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/create-lesson/reading" render={() => <CreateReadingLesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/create-lesson/exercise" render={() => <CreateLesson togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/login" component={Auth} />
-                <Route path="/lessons/:id" render={() => <Lesson togglemodal={() => this.toggleModal()}/> } />
+                <Route path="/quiz/:id" render={() => <Quiz togglemodal={() => this.toggleModal()}/> } />
                 <Route path="/reading-comp-lesson/:id" component={ReadingCompLesson} />
                 <Route path="/reading-omission-lesson/:id" component={ReadingOmissionLesson} />
                 <Route path="/solo-play/:id" render={() => <SoloGame lesson= {this.props.lesson} /> } />
+                <Route path="/user" component={() => <UserPage user={this.props.user} />} />
                 <Route path="/host-game/:id" render={() => <WaitingPage lesson= {this.props.lesson} /> } />
                 <Route path="/lessons" component={() => <Lessons user={this.props.user} /> } />
                 <Route path="/privacy" component={Privacy} />
-                <Route path="/user/:user" component={() => <UserPage user={this.props.user} />} />
                 
-                            {this.props.user ? <Route path="/" component={() => <UserPage user={this.props.user} />} /> :  <Route path="/" component={Lessons} />}
+                
+                    {this.props.user ? <Route path="/" component={() => <UserPage user={this.props.user} />} /> :  <Route path="/" component={Lessons} />}
                </Switch>
                {this.state.authModal ? <AuthModal togglemodal={() => this.toggleModal()} show={this.state.authModal} /> : null}
                {this.state.authModal ? <Backdrop show={this.state.authModal}/> : null }

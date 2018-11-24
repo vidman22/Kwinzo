@@ -1,14 +1,23 @@
-const psql = require('./psqlAdapter').psql;
+const bcrypt = require('bcryptjs');
+const confirmGoogleToken = require('../oauth/config/googleStrategy');
+const jwt = require('jsonwebtoken');
+const keys = require('../oauth/config/keys');
 
-exports.root = {
+const uuidv4 = require('uuid/v4');
+const newUniqid = require('uniqid');
 
-        createLessonSet: async ( {title, author, authorID, sentences}, ctx, info ) => {
-        
-            const lessonSet = new LessonSet({ title, author, authorID, sentences, created: Date.now() });
-            return await lessonSet.save(); 
-            if (!lessonSet) {
-                 throw new Error('Error');
-              }	
+const database = require('../config/config');
+
+var root = {
+
+        createQuiz: async ( {title, authorID, sentences}, ctx, info ) => {
+            const uniqid = newUniqid();
+            console.log('uniqid', uniqid);
+            const created_at = new Date();
+            const [quiz] = await database("quizzes")
+            .returning(["id", "title", "sentences", "created_at", "uniqid", "authorID"])
+            .insert({ title, sentences, created_at, authorID, uniqid });
+          return quiz;
         },
         createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
         
@@ -45,7 +54,7 @@ exports.root = {
                } else return true
            });
         },
-        deleteInputLesson: async (args, ctx, info ) => {
+        deleteQuiz: async (args, ctx, info ) => {
            // const userID = getUserId(ctx.headers.authorization);
         
            // if (!userID) {
@@ -59,14 +68,20 @@ exports.root = {
                } else return true
            });
         },
-        lessonSet: async (args, ctx, info ) => {
-            return await LessonSet.findById(args.id);
+        quiz: async ({uniqid}, ctx, info ) => {
+            console.log("uniqid", uniqid);
+            const [quiz] = await database('quizzes').where("uniqid", uniqid);
+            console.log("quiz", quiz);
+            return quiz;
         },
-        lessonSets: async (args, ctx, info) => {
-            return await LessonSet.find();
+        quizzes: async (args, ctx, info) => {
+            console.log('ls fired');
+            const quizzes =  await database.select('*').from('quizzes').leftJoin('users', 'authorID', 'users.id');
+            console.log('quizzes', quizzes);
+            return quizzes;
         },
         login: async ({email, password}) => {
-            const user = await User.findOne({ email });
+            const [user] = await database('users').where("email", email );
         
             if (!user) {
                 throw new Error('Email not found');
@@ -76,7 +91,7 @@ exports.root = {
                 throw new Error('Password is incorrect');
             }
         
-            const token = jwt.sign({ userID: user.userID }, keys.app.APP_SECRET, {expiresIn: '12hr'});
+            const token = jwt.sign({ userID: user.uuid }, keys.app.APP_SECRET, {expiresIn: '12hr'});
             const expiresIn = 7200;
             return {
                token,
@@ -84,9 +99,9 @@ exports.root = {
                user
              }
         },
-        oAuthSignIn: async ({ type, email, username, picture, userID, token, expiresIn}) => {
+        oAuthSignIn: async ({ email, username, picture, userID, token, expiresIn}) => {
         
-            let user = await User.findOne({ email });
+            let [user] = await database('users').where("email", email );
            //  ================================
            // Enable when keys work
            // let checkedToken;
@@ -95,10 +110,12 @@ exports.root = {
            //  } else {
            // 	 checkedToken = await confirmFBToken(token);
            //  }
-        
+            // console.log('oauth user', user);
+            const uuid = uuidv4();
             if (!user ) {
-                user = new User({email, username, picture, userID, joined: Date.now() });
-                await user.save(); 
+                [user] = await database('users')
+                    .returning(['id', 'username', 'email', 'picture', 'uuid'])
+                    .insert([{username, email, picture, uuid }]) 
             } return {
                 token,
                 expiresIn,
@@ -121,25 +138,25 @@ exports.root = {
         signUp: async ({ username, email, password }, ctx, info) => {
         
             const hash = await bcrypt.hash(password, 12 );
-            const userID = uuidv4();
-            const user = new User({username, userID, email, picture: false, password: hash, joined: Date.now()});
-
-            const existingUser = await User.findOne({ email });
-        
+            const uuid = uuidv4();
+            const [existingUser] = await database('users').where("email", email );
+            // console.log('existing user', existingUser);
             if ( existingUser) {
                 throw new Error('Email already used');
             } else {
-                await user.save();
+                const [user] = await database('users')
+                    .returning(['id', 'username', 'email', 'picture', 'uuid'])
+                    .insert([{username, email, password: hash, picture: false, uuid }])
             
-                const token = jwt.sign({ userID }, keys.app.APP_SECRET, {expiresIn: '12hr'});
+                const token = jwt.sign({ uuid }, keys.app.APP_SECRET, {expiresIn: '12hr'});
                 const expiresIn = 7200;
-            
+                console.log('user', user);
                  return {
                        token,
                        expiresIn,
-                   user
+                       user
                  }			
-            }
+            } 
         },
         updateLesson: async (args, ctx, info) => {
         
@@ -148,8 +165,11 @@ exports.root = {
            });
 
         },
-        user: async ({_id}) => {
-            return await User.findById(_id)
+        user: async ({uuid}) => {
+            console.log("uuid", uuid);
+            const [user] = await database('users').where("uuid", uuid);
+            console.log("user", user);
+            return user;
         },
         userCompLessons: async (authorID) => {
            return await ReadingCompLesson.find(authorID);
@@ -157,8 +177,14 @@ exports.root = {
         userOmissionLessons: async (authorID) => {
            return await ReadingOmissionLesson.find(authorID);
         },
-        userLessons: async ( authorID ) => {
-            return await LessonSet.find(authorID);
+        userQuizzes: async (uuid ) => {
+            console.log('uuid', uuid);
+            const [user] = await database('users').where("uuid", uuid.authorID);
+            console.log(user);
+            const id = user.id;
+            const userQuizzes = await database('quizzes').where("authorID", id);
+            return userQuizzes;
         }
-    }
 };
+
+module.exports = root;

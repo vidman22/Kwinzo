@@ -518,7 +518,7 @@ class CreateLesson extends Component {
       this.setState({
         formIsHalfFilledOut: false
       }, () => {
-        this.props.history.push(`/lessons/${data.createLessonSet.id}`);
+        this.props.history.push(`/quiz/${data.createQuiz.uniqid}`);
       });
     }
   }
@@ -595,7 +595,7 @@ class CreateLesson extends Component {
           <Mutation
             mutation={this.props.editmode ? UPDATE_LESSON : ADD_LESSON}
             onCompleted={data => this.completed(data)}>
-              {createLessonSet => (
+              {createQuiz => (
                 <form 
                   onSubmit={e => {
                     e.preventDefault();
@@ -619,11 +619,10 @@ class CreateLesson extends Component {
                       return rObj;  
                       });
                       
-                        createLessonSet({
+                        createQuiz({
                           variables: {
                           lessonID: this.state.lessonID,
                           title,
-                          author: this.props.user.name,
                           authorID: this.props.user.userID,
                           sentences}
                       });
@@ -749,12 +748,11 @@ class CreateLesson extends Component {
 }
 
 const ADD_LESSON = gql`
-  mutation CreateLesson($title: String!, $author: String!, $authorID: String!, $sentences: [SentenceInput]) {
-    createLessonSet( title: $title, author: $author, authorID: $authorID, sentences: $sentences) {
+  mutation ($title: String!, $authorID: Int, $sentences: [SentenceInput]) {
+    createQuiz( title: $title, authorID: $authorID, sentences: $sentences) {
       id
-      created
+      created_at
       title
-      author
       authorID
       sentences {
         sentence
@@ -762,17 +760,18 @@ const ADD_LESSON = gql`
         answer
         alts
       }
+      uniqid
     }
   }
 `
 const UPDATE_LESSON = gql`
-  mutation UpdateLesson($lessonID: String!, $title: String!, $author: String!, $authorID: String!, $sentences: [SentenceInput]) {
-    updateLesson(lessonID: $lessonID, title: $title, author: $author, authorID: $authorID, sentences: $sentences) {
+  mutation ($lessonID: String!, $title: String!, $authorID: Int, $sentences: [SentenceInput]) {
+    updateQuiz(lessonID: $lessonID, title: $title, authorID: $authorID, sentences: $sentences) {
       id
-      created
+      created_at
       title
-      author
       authorID
+      uniqid
       sentences {
         sentence
         hint
