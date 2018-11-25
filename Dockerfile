@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:8.12
 
 RUN mkdir -p /kwinzo
 
