@@ -15,12 +15,7 @@ module.exports = {
 
   staging: {
     client: "pg",
-    connection: {
-      host: process.env.PGHOST,
-      database: process.env.PGDATABASE,
-      user: process.env.DBUSER,
-      password: process.env.PGPASSWORD
-    },
+    connection: "postgres://localhost/kwinzo",
     pool: {
       min: 2,
       max: 10
@@ -32,13 +27,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: {
-      host: process.env.PGHOST,
-      database: process.env.PGDATABASE,
-      user: process.env.DBUSER,
-      password: process.env.PGPASSWORD,
-      ssl: true
-    },
+    connection: "postgres://localhost/kwinzo",
     pool: {
       min: 2,
       max: 10
