@@ -23,6 +23,7 @@ module.exports = {
     // migrations: {
     //   tableName: "knex_migrations"
     // }
+    debug: true
   },
 
   production: {
@@ -34,6 +35,7 @@ module.exports = {
     },
     migrations: {
       tableName: "knex_migrations"
-    }
+    },
+    debug: true
   }
 };
