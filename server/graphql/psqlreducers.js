@@ -178,11 +178,11 @@ var root = {
            return await ReadingOmissionLesson.find(authorID);
         },
         userQuizzes: async (uuid ) => {
-            console.log('uuid', uuid);
-            const [user] = await database('users').where("uuid", uuid.authorID);
-            console.log(user);
-            const id = user.id;
-            const userQuizzes = await database('quizzes').where("authorID", id);
+            console.log('uuid', uuid.authorID);
+            // const [user] = await database('users').where("uuid", uuid.authorID);
+            // console.log('user', user);
+            //const id = user.id;
+            const userQuizzes = await database('quizzes').where("authorID", uuid.authorID);
             return userQuizzes;
         }
 };

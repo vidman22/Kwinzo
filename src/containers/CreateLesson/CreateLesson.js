@@ -754,18 +754,19 @@ const ADD_LESSON = gql`
       created_at
       title
       authorID
+      uniqid
       sentences {
         sentence
         hint
         answer
         alts
       }
-      uniqid
+      
     }
   }
 `
 const UPDATE_LESSON = gql`
-  mutation ($lessonID: String!, $title: String!, $authorID: Int, $sentences: [SentenceInput]) {
+  mutation ($lessonID: String!, $title: String!, $authorID: Int!, $sentences: [SentenceInput]) {
     updateQuiz(lessonID: $lessonID, title: $title, authorID: $authorID, sentences: $sentences) {
       id
       created_at
