@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import './UserPage.css';
 
 const USER_QUIZZES = gql`
-  query ( $authorID: String! ){
+  query ( $authorID: Int! ){
     userQuizzes( authorID: $authorID ) {
       id
       title
@@ -74,7 +74,7 @@ class UserPage extends Component {
 
 	render() {
 	
-		let authorID = this.props.user.userID;
+		let authorID = this.props.user.id;
 		console.log('authorID', typeof authorID);
 
 		let USER_LESSONS_QUERY;
