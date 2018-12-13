@@ -11,6 +11,7 @@ const reducer = (state = initialState , action) => {
 		return {
 			...state,
 			user: {
+				id: action.id,
 				email: action.email,
 				username: action.username,
 				picture: action.picture,

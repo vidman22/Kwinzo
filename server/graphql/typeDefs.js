@@ -5,8 +5,8 @@ const schema = buildSchema(`
 		quiz(uniqid: String!): Quiz
 		quizzes: [Quiz]
 		user(id: String! ): User
-		userQuizzes( authorID: String! ): [Quiz]
-		userCompLessons( authorID: String! ): [ReadingCompLesson]
+		userQuizzes( authorID: Int! ): [Quiz]
+		userCompLessons( authorID: Int! ): [ReadingCompLesson]
 		userOmissionLessons( authorID: String! ): [ReadingOmissionLesson]
 		readingCompLessons: [ReadingCompLesson]
 		readingCompLesson(id: String): ReadingCompLesson
@@ -120,7 +120,7 @@ const schema = buildSchema(`
 		
 		createReadingOmissionLesson(title: String!, author: String!, authorID: String!, text: String!, omissions: [OmissionInput] ): ReadingOmissionLesson
 		createReadingCompLesson(title: String!, author: String!, authorID: String!, text: String!, questions: [QuestionInput] ): ReadingCompLesson
-		createQuiz(title: String!, authorID: Int, sentences: [SentenceInput] ): Quiz
+		createQuiz(title: String!, authorID: Int!, sentences: [SentenceInput] ): Quiz
 		signUp( username: String! , email: String!, password: String! ): AuthPayload
 		login( email: String!, password: String! ) : AuthPayload
 		deleteCompLesson( id: String! ) : Boolean

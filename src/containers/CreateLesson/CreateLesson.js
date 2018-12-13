@@ -623,7 +623,7 @@ class CreateLesson extends Component {
                           variables: {
                           lessonID: this.state.lessonID,
                           title,
-                          authorID: this.props.user.userID,
+                          authorID: this.props.user.id,
                           sentences}
                       });
                       }
@@ -748,7 +748,7 @@ class CreateLesson extends Component {
 }
 
 const ADD_LESSON = gql`
-  mutation ($title: String!, $authorID: Int, $sentences: [SentenceInput]) {
+  mutation ($title: String!, $authorID: Int!, $sentences: [SentenceInput]) {
     createQuiz( title: $title, authorID: $authorID, sentences: $sentences) {
       id
       created_at

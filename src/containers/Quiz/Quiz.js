@@ -14,6 +14,7 @@ const QUIZ = gql`
   query($uniqid: String!){
     quiz(uniqid: $uniqid ) {
       id
+      uniqid
       title
       username
       authorID

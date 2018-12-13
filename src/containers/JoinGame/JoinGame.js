@@ -6,11 +6,11 @@ import GamePlay from '../GamePlay/GamePlay';
 
 import './JoinGame.css';
 
-
-const socket = io( { timeout: 120000});
-// const socket = io('http://localhost:5000', {
-// 	timeout: 120000
-// });
+const uri = process.env.REACT_APP_URI || '';
+//const socket = io( { timeout: 120000});
+const socket = io(uri, {
+	timeout: 120000
+});
 let index = 0;
 export default class CreateGame extends Component {
 	constructor(props) {

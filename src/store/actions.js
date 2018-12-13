@@ -12,27 +12,27 @@ const checkAuthTimeout = (expirationTime) => {
 export const authSuccess = (id, email, username, picture, uuid, token, expiresIn) => {
 	const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     localStorage.setItem(AUTH_TOKEN, token);
-    localStorage.setItem('userID', id);
+    localStorage.setItem('id', id);
     localStorage.setItem('expirationDate', expirationDate);
     localStorage.setItem('uuid', uuid);
     localStorage.setItem('email', email);
     localStorage.setItem('username', username);
     localStorage.setItem('picture', picture);
 
-    const userID = id;
     return {
         type: actionTypes.AUTH_SUCCESS,
+        id,
         email,
         username,
         picture,
-        userID,
         uuid
     };
 };
 
-export const autoLogin = ( email, username, picture, userID, token, uuid ) => {
+export const autoLogin = (id, email, username, picture, userID, token, uuid ) => {
 	return {
         type: actionTypes.AUTH_SUCCESS,
+        id,
        	email,
        	username,
        	picture,
@@ -59,12 +59,12 @@ export const authCheckState = () => {
 					dispatch(logout());
 				} else {
                     //const id = localStorage.getItem('id');
-					const userID = parseInt(localStorage.getItem('userID'), 10);
+					const id = parseInt(localStorage.getItem('id'), 10);
 					const picture = localStorage.getItem('picture');
 					const email = localStorage.getItem('email');
                     const username = localStorage.getItem('username');
                     const uuid = localStorage.getItem('uuid');
-					dispatch(autoLogin(email, username, picture, userID, token, uuid ));
+					dispatch(autoLogin(id, email, username, picture, token, uuid ));
 					dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
 				}
 			}

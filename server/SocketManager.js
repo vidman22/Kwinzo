@@ -14,7 +14,7 @@ module.exports = function(socket) {
 			room,
 			teams : [],
 		};
-
+		console.log('new room', newRoom);
 		sessions.push(newRoom);
 		socket.join(room);
 		console.log('sessions', sessions);
@@ -27,14 +27,19 @@ module.exports = function(socket) {
 		let message = '';
 		let title = '';
 		
-		for ( let i = 0; i < sessions.length; i++) {
-			if ( sessions[i].room === room) {
-				title = sessions[i].title;
-				socket.join(room);
-				break;
-			} else {
-				message = 'no game by that code';
-			}
+		// for ( let i = 0; i < sessions.length; i++) {
+		// 	if ( sessions[i].room == room) {
+		// 		title = sessions[i].title;
+		// 		socket.join(room);
+		// 		break;
+		// 	} else {
+		// 		message = 'no game by that code';
+		// 	}
+		// }
+		const index = searchSessions(room);
+		if (index) {
+			socket.join(room);
+			title = sessions[index].title;
 		}
 		callback(message, title);
 	});
@@ -42,7 +47,7 @@ module.exports = function(socket) {
 	socket.on('NEW_PLAYER', (room, name, callback) => {
 		const index = searchSessions( room );
 		console.log('session index', index);
-		if (index !==undefined) {
+		if (index !== undefined) {
 			
 		const users = sessions[index].connectedUsers;
 		let message = '';

@@ -14,17 +14,17 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AUTH_TOKEN } from './constants';
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
-
+const uri = process.env.REACT_APP_URI || '';
 //  const httpLink = createHttpLink({
 //    uri: '/graphql',
 // });
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: `${uri}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {

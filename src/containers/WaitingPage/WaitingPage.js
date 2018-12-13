@@ -8,13 +8,12 @@ import {withRouter} from 'react-router-dom';
 
 import './WaitingPage.css'
 
-import io from 'socket.io-client';	
-
-const socket = io( { timeout: 120000});
-// const socket = io('http://localhost:5000', {
-// 	timeout: 120000
-// });
-
+import io from 'socket.io-client';
+const uri = process.env.REACT_APP_URI || '';
+//const socket = io( { timeout: 120000});
+const socket = io(uri, {
+	timeout: 120000
+});
 let index = 0;
 class WaitingPage extends Component {
 
@@ -156,7 +155,7 @@ class WaitingPage extends Component {
 	};
 
 	back() {
-		this.props.history.push(`/lessons/${this.props.lesson.id}`);
+		this.props.history.push(`/quiz/${this.props.lesson.id}`);
 	}
 
 	playAgain() {
