@@ -6,9 +6,8 @@ import GamePlay from '../GamePlay/GamePlay';
 
 import './JoinGame.css';
 
-const uri = process.env.REACT_APP_URI || '';
 //const socket = io( { timeout: 120000});
-const socket = io(uri, {
+const socket = io( {
 	timeout: 120000
 });
 let index = 0;

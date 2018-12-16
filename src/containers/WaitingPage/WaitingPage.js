@@ -9,10 +9,10 @@ import {withRouter} from 'react-router-dom';
 import './WaitingPage.css'
 
 import io from 'socket.io-client';
-const uri = process.env.REACT_APP_URI || '';
-console.log('connected at waiting ' + uri);
+
+
 //const socket = io( { timeout: 120000});
-const socket = io(uri, {
+const socket = io({
 	timeout: 120000
 });
 let index = 0;
