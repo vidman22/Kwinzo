@@ -9,11 +9,9 @@ import * as actionTypes from '../../store/actionTypes';
 import XMarkSVG from '../../components/SVG/XMarkSVG';
 
 const LESSON_SET = gql`
-  query LessonSet($id: String!){
-    readingCompLesson(id: $id ) {
-      id
+  query LessonSet($uniqid: String!){
+    readingCompLesson(uniqid: $uniqid ) {
       title
-      author
       authorID
       text
       questions{
@@ -71,6 +69,7 @@ componentWillUnmount() {
           }
       return obj;
     });
+    console.log('text array', textArray);
     
     const questions = data.readingCompLesson.questions.map( element => {
       let obj = {
@@ -261,16 +260,17 @@ componentWillUnmount() {
       <div>
        <Query 
       query={LESSON_SET}
-      variables={{id: this.props.match.params.id}}
+      variables={{uniqid: this.props.match.params.id}}
       fetchPolicy='network-only'
       onCompleted={data => this.completed(data)}>
       {({ loading, error, data}) => {
         if (loading)  return <div className="spinner spinner-1"></div>;
         if (error) return `Error!: ${error}`;
+        console.log('data', this.state.textArray);
         // eslint-disable-next-line
         let userCanDelete;
         if (this.props.user){
-          userCanDelete = this.props.user.userID === data.readingCompLesson.authorID;
+          userCanDelete = this.props.user.id === data.readingCompLesson.authorID;
         }
         
         return (

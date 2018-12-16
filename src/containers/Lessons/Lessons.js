@@ -11,7 +11,7 @@ import './Lessons.css';
 const QUIZZES = gql`
   query {
     quizzes {
-      id
+      
       title
       username
 			authorID
@@ -24,10 +24,10 @@ const QUIZZES = gql`
 const LESSON_COMP_QUERY = gql`
   query {
     readingCompLessons {
-      id
-      created
+      created_at
       title
       username
+      uniqid
     }
   }
 `;
@@ -35,10 +35,10 @@ const LESSON_COMP_QUERY = gql`
 const LESSON_OMISSION_QUERY = gql`
   query {
     readingOmissionLessons {
-      id
-      created
+      created_at
       title
       username
+      uniqid
     }
   }
 `;
@@ -90,7 +90,7 @@ omissionLessonQuery() {
         <button onClick={() => this.compLessonQuery()} className="ChangeQueryButton">Reading Comprehension</button>
         <button onClick={() => this.omissionLessonQuery()} className="ChangeQueryButton">Gap Reading</button>
         
-        {this.props.user ? <Link className="UserLessonsLink" to={`/user/${this.props.user.uuid}`}>My Lessons</Link> : null}
+        {this.props.user ? <Link className="UserLessonsLink" to={`/`}>My Lessons</Link> : null}
       </div>
        <Query 
         query={LESSON_QUERY}
@@ -106,8 +106,7 @@ omissionLessonQuery() {
             { this.state.activeQuery === 'readingOmissionLessons' ? <h1>Gap Reading</h1> : null}
             { this.state.activeQuery === 'readingCompLessons' ? <h1>Reading Comprehension</h1> : null}
               {data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.uniqid}`}>
-                <LessonLink 
-                id={lesson.id}  
+                <LessonLink
                 title={lesson.title}
                 created={lesson.created} 
                 author={lesson.username}

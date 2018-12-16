@@ -7,16 +7,16 @@ const schema = buildSchema(`
 		user(id: String! ): User
 		userQuizzes( authorID: Int! ): [Quiz]
 		userCompLessons( authorID: Int! ): [ReadingCompLesson]
-		userOmissionLessons( authorID: String! ): [ReadingOmissionLesson]
+		userOmissionLessons( authorID: Int! ): [ReadingOmissionLesson]
 		readingCompLessons: [ReadingCompLesson]
-		readingCompLesson(id: String): ReadingCompLesson
+		readingCompLesson(uniqid: String): ReadingCompLesson
 		readingOmissionLessons: [ReadingOmissionLesson]
-		readingOmissionLesson(id: String): ReadingOmissionLesson
+		readingOmissionLesson(uniqid: String): ReadingOmissionLesson
 	
 	}
 
 	type Quiz {
-		id: Int
+		
 		created_at: Date
 		updated_at: Date
 		title: String!
@@ -41,12 +41,12 @@ const schema = buildSchema(`
 	}
 
 	type ReadingOmissionLesson {
-		id: String!
-		created: Date
-		updated: Date
+		created_at: Date
+		updated_at: Date
+		uniqid: String!
 		title: String!
-		author: String!
-		authorID: String!
+		username: String
+		authorID: Int!
 		text: String!
 		omissions: [Omission]!
 		
@@ -63,12 +63,13 @@ const schema = buildSchema(`
 	}
 
 	type ReadingCompLesson {
-		id: String!
-		created: Date
-		updated: Date
+		
+		created_at: Date
+		updated_at: Date
+		uniqid: String!
 		title: String!
-		author: String!
-		authorID: String!
+		username: String
+		authorID: Int!
 		text: String!
 		questions: [Question]!
 		
@@ -118,8 +119,8 @@ const schema = buildSchema(`
 
 	type Mutation {
 		
-		createReadingOmissionLesson(title: String!, author: String!, authorID: String!, text: String!, omissions: [OmissionInput] ): ReadingOmissionLesson
-		createReadingCompLesson(title: String!, author: String!, authorID: String!, text: String!, questions: [QuestionInput] ): ReadingCompLesson
+		createReadingOmissionLesson(title: String!, authorID: String!, text: String!, omissions: [OmissionInput] ): ReadingOmissionLesson
+		createReadingCompLesson(title: String!, authorID: String!, text: String!, questions: [QuestionInput] ): ReadingCompLesson
 		createQuiz(title: String!, authorID: Int!, sentences: [SentenceInput] ): Quiz
 		signUp( username: String! , email: String!, password: String! ): AuthPayload
 		login( email: String!, password: String! ) : AuthPayload

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import LessonLink from '../../components/LessonLink/LessonLink';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -10,7 +11,6 @@ import './UserPage.css';
 const USER_QUIZZES = gql`
   query ( $authorID: Int! ){
     userQuizzes( authorID: $authorID ) {
-      id
       title
       username
 			authorID
@@ -23,10 +23,11 @@ const USER_QUIZZES = gql`
 const USER_COMP_QUERY = gql`
 	query ( $authorID: Int! ){
 		userCompLessons( authorID: $authorID ) {
-			id
 			title
 			username
 			authorID
+			uniqid
+			created_at
 		}
 	}
 `;
@@ -34,10 +35,11 @@ const USER_COMP_QUERY = gql`
 const USER_OMISSION_QUERY = gql`
 	query ( $authorID: Int! ){
 		userOmissionLessons( authorID: $authorID ) {
-			id
 			title
 			authorID
 			username
+			uniqid
+			created_at
 		}
 	}
 `;
@@ -53,7 +55,7 @@ class UserPage extends Component {
 
 	lessonQuery() {
 		this.setState({
-			activeQuery: 'userLessons',
+			activeQuery: 'userQuizzes',
 			activeURL: 'quiz'
 		})
 	}
@@ -75,7 +77,7 @@ class UserPage extends Component {
 	render() {
 	
 		let authorID = this.props.user.id;
-		console.log('authorID', typeof authorID);
+		console.log('authorID', authorID);
 
 		let USER_LESSONS_QUERY;
     if (this.state.activeQuery === 'userQuizzes') {
@@ -120,7 +122,6 @@ class UserPage extends Component {
             			{ this.state.activeQuery === 'userCompLessons' ? <h1>Reading Comprehension</h1> : null}
             			{data[this.state.activeQuery].map( (lesson, index) => (<Link key={index} to={`${this.state.activeURL}/${lesson.uniqid}`}>
               			<LessonLink 
-              			id={lesson.id}
               			title={lesson.title} 
               			author={this.props.user.username}
               			/>
@@ -138,4 +139,10 @@ class UserPage extends Component {
 
 };
 
-export default withRouter(UserPage);
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(UserPage));

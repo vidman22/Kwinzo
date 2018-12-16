@@ -19,22 +19,25 @@ var root = {
             .insert({ title, sentences, created_at, authorID, uniqid });
           return quiz;
         },
-        createReadingOmissionLesson: async ( {title, author, authorID, text, omissions}, ctx, info ) => {
-        
-           const readingOmissionLesson = new ReadingOmissionLesson({title, author, authorID, text, omissions, created: Date.now()});
-           return await readingOmissionLesson.save(); 
-           if (!readingOmissionLesson) {
-               throw new Error('Error');
-           }
+        createReadingOmissionLesson: async ( {title, authorID, text, omissions}, ctx, info ) => {
+
+            const uniqid = newUniqid();
+            console.log('uniqid', uniqid);
+            const created_at = new Date();
+            const [omissionReading] = await database("omission-reading")
+            .returning(["id", "title", "text", "omissions", "uniqid", "created_at", "authorID"])
+            .insert({ title, text, omissions, uniqid, created_at, authorID });
+          return omissionReading;
         },
         createReadingCompLesson: async ( {title, author, authorID, text, questions}, ctx, info ) => {
-        
-        
-           const readingCompLesson = new ReadingCompLesson({title, author, authorID, text, questions, created: Date.now()});
-           return await readingCompLesson.save(); 
-           if (!readingCompLesson) {
-               throw new Error('Error');
-           }
+
+            const uniqid = newUniqid();
+            console.log('uniqid', uniqid);
+            const created_at = new Date();
+            const [compReading] = await database("comprehension-reading")
+            .returning(["id", "title", "text", "questions", "uniqid", "created_at", "authorID"])
+            .insert({ title, text, questions, uniqid, created_at, authorID });
+          return compReading;
         },
         deleteOmissionLesson: async (args, ctx, info ) => {
         
@@ -76,7 +79,7 @@ var root = {
         },
         quizzes: async (args, ctx, info) => {
             console.log('ls fired');
-            const quizzes =  await database.select('*').from('quizzes').leftJoin('users', 'authorID', 'users.id');
+            const quizzes =  await database.select('*').from('quizzes').leftJoin('users', 'quizzes.authorID', 'users.id');
             console.log('quizzes', quizzes);
             return quizzes;
         },
@@ -122,18 +125,29 @@ var root = {
                 user
             }
         },
+        readingCompLessons: async (args, ctx, info) => {
+            
+            const readingCompLessons =  await database.select('*').from('comprehension-reading').leftJoin('users', 'comprehension-reading.authorID', 'users.id');
+            console.log('readingCompLessons', readingCompLessons);
+            return readingCompLessons;
+        },
+        readingCompLesson: async ({uniqid}, ctx, info) => {
+            
+            const [compreading] = await database('comprehension-reading').where("uniqid", uniqid);
+            console.log(compreading);
+            return compreading;
+        },
         readingOmissionLessons: async ( args, ctx, info) => {
-            return await ReadingOmissionLesson.find();
+            const readingOmissionLessons =  await database.select('*').from('omission-reading').leftJoin('users', 'omission-reading.authorID', 'users.id');
+            console.log('readingOmissionLessons', readingOmissionLessons);
+            return readingOmissionLessons;
 
         },
-        readingOmissionLesson: async ( args, ctx, info) => {
-            return await ReadingOmissionLesson.findById(args.id);
-        },
-        readingCompLessons: async (args, ctx, info) => {
-            return await ReadingCompLesson.find();
-        },
-        readingCompLesson: async (args, ctx, info) => {
-            return await ReadingCompLesson.findById(args.id);
+        readingOmissionLesson: async ( {uniqid}, ctx, info) => {
+            console.log("uniqid", uniqid);
+            const [omissionreading] = await database('omission-reading').where("uniqid", uniqid);
+            console.log(omissionreading);
+            return omissionreading;
         },
         signUp: async ({ username, email, password }, ctx, info) => {
         
@@ -171,18 +185,22 @@ var root = {
             console.log("user", user);
             return user;
         },
-        userCompLessons: async (authorID) => {
-           return await ReadingCompLesson.find(authorID);
+        userCompLessons: async (args) => {
+            console.log("authorID", args.authorID);
+            const compReadings = await database('comprehension-reading').where("authorID", args.authorID);
+            console.log("compReadings", compReadings);
+            return compReadings;
         },
-        userOmissionLessons: async (authorID) => {
-           return await ReadingOmissionLesson.find(authorID);
+        userOmissionLessons: async (args) => {
+            console.log("authorID", args.authorID);
+            const omissionReadings = await database('omission-reading').where("authorID", args.authorID);
+            console.log("omissionReadings", omissionReadings);
+            return omissionReadings;
         },
-        userQuizzes: async (uuid ) => {
-            console.log('uuid', uuid.authorID);
-            // const [user] = await database('users').where("uuid", uuid.authorID);
-            // console.log('user', user);
-            //const id = user.id;
-            const userQuizzes = await database('quizzes').where("authorID", uuid.authorID);
+        userQuizzes: async (args ) => {
+            console.log('authorID', args.authorID);
+            const userQuizzes = await database('quizzes').where("authorID", args.authorID);
+            console.log("userQuizzes", userQuizzes);
             return userQuizzes;
         }
 };

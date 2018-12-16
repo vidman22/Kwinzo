@@ -13,7 +13,6 @@ import * as actionTypes from '../../store/actionTypes';
 const QUIZ = gql`
   query($uniqid: String!){
     quiz(uniqid: $uniqid ) {
-      id
       uniqid
       title
       username

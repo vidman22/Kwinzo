@@ -640,7 +640,7 @@ class CreateReadingLesson extends Component {
         urlPath = 'reading-comp-lesson';
         lessonType = 'createReadingCompLesson';
       }
-      this.props.history.push(`/${urlPath}/${data[lessonType].id}`);
+      this.props.history.push(`/${urlPath}/${data[lessonType].uniqid}`);
   	}
     
     back() {
@@ -674,14 +674,12 @@ class CreateReadingLesson extends Component {
                       } else {
                         const title = this.state.title.value;
   						const text = this.state.textarea.value;
-  						const author = this.props.user.name;
-  						const authorID = this.props.user.userID;
+  						const authorID = this.props.user.id;
  						  const data = this.formData();
   						if (this.state.readingModeOmission) {
   							mutation({
   								variables: {
   									title,
-  									author,
   									authorID,
   									text,
   									omissions: data
@@ -691,7 +689,6 @@ class CreateReadingLesson extends Component {
   							mutation({
   								variables: {
   									title,
-  									author,
   									authorID,
   									text,
   									questions: data
@@ -817,12 +814,11 @@ class CreateReadingLesson extends Component {
 }
 
 const ADD_OMISSION_LESSON = gql`
-  mutation CreateLessonMutation($title: String!, $author: String!, $authorID: String!, $text: String!, $omissions: [OmissionInput]) {
-    createReadingOmissionLesson( title: $title, author: $author, authorID: $authorID, text: $text, omissions: $omissions) {
-      id
-      created
+  mutation CreateLessonMutation($title: String!, $authorID: String!, $text: String!, $omissions: [OmissionInput]) {
+    createReadingOmissionLesson( title: $title, authorID: $authorID, text: $text, omissions: $omissions) {
+
+      created_at
       title
-      author
       authorID
       text
       omissions {
@@ -833,12 +829,11 @@ const ADD_OMISSION_LESSON = gql`
   }
 `
 const ADD_COMP_LESSON = gql`
-  mutation CreateLessonMutation($title: String!, $author: String!, $authorID: String!, $text: String!, $questions: [QuestionInput]) {
-    createReadingCompLesson( title: $title, author: $author, authorID: $authorID, text: $text, questions: $questions) {
-      id
-      created
+  mutation CreateLessonMutation($title: String!, $authorID: String!, $text: String!, $questions: [QuestionInput]) {
+    createReadingCompLesson( title: $title, authorID: $authorID, text: $text, questions: $questions) {
+
+      created_at
       title
-      author
       authorID
       text
       questions {

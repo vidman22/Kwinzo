@@ -9,12 +9,10 @@ import * as actionTypes from '../../store/actionTypes';
 import XMarkSVG from '../../components/SVG/XMarkSVG';
 
 const LESSON_SET = gql`
-  query LessonSet($id: String!){
-    readingOmissionLesson(id: $id ) {
-      id
-      created
+  query LessonSet($uniqid: String!){
+    readingOmissionLesson(uniqid: $uniqid ) {
+      created_at
       title
-      author
       authorID
       text
       omissions {
@@ -333,7 +331,7 @@ componentWillUnmount() {
       <div>
        <Query 
       query={LESSON_SET}
-      variables={{id: this.props.match.params.id}}
+      variables={{uniqid: this.props.match.params.id}}
       fetchPolicy='network-only'
       onCompleted={data => this.completed(data)}>
       {({ loading, error, data}) => {
