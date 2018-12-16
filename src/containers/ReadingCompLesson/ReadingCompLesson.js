@@ -69,7 +69,7 @@ componentWillUnmount() {
           }
       return obj;
     });
-    console.log('text array', textArray);
+    
     
     const questions = data.readingCompLesson.questions.map( element => {
       let obj = {
@@ -266,7 +266,7 @@ componentWillUnmount() {
       {({ loading, error, data}) => {
         if (loading)  return <div className="spinner spinner-1"></div>;
         if (error) return `Error!: ${error}`;
-        console.log('data', this.state.textArray);
+        
         // eslint-disable-next-line
         let userCanDelete;
         if (this.props.user){

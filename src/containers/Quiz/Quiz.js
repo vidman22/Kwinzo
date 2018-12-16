@@ -111,7 +111,7 @@ class Lesson extends Component {
   }
 
   completed(data) {
-    console.log('data', data);
+    
     const title = data.quiz.title;
     let sentences = data.quiz.sentences;
     let answers = [];
@@ -190,7 +190,7 @@ class Lesson extends Component {
           config: this.state.sentences[key]
       });
     }
-    console.log('quiz id', this.props.match.params.id)
+    
     return (
       <div>
       {!this.state.editMode ? (
