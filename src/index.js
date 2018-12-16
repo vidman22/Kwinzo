@@ -18,14 +18,14 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
-const uri = process.env.REACT_APP_URI || '';
-//  const httpLink = createHttpLink({
-//    uri: '/graphql',
-// });
-
-const httpLink = createHttpLink({
-  uri: `${uri}/graphql`,
+//const uri = process.env.REACT_APP_URI || '';
+ const httpLink = createHttpLink({
+   uri: '/graphql',
 });
+
+// const httpLink = createHttpLink({
+//   uri: `${uri}/graphql`,
+// });
 //console.log('connected at ' + uri);
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists

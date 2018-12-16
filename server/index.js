@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000;
 const schema  = require('./graphql/typeDefs');
 
 
-app.use('/graphql', cors(), graphqlHTTP({
+app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql:true
