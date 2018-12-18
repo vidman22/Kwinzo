@@ -12,9 +12,7 @@ import io from 'socket.io-client';
 
 
 const socket = io('http://localhost:5000', { timeout: 120000});
-// const socket = io({
-// 	timeout: 120000
-// });
+//const socket = io({timeout: 120000});
 let index = 0;
 class WaitingPage extends Component {
 
