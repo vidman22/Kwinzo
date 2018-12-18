@@ -2,7 +2,7 @@
 module.exports = {
   development: {
     client: "pg",
-    connection: "postgres://localhost/kwinzo",
+    connection: "postgres://postgres@localhost/kwinzo",
     pool: {
       min: 2,
       max: 10
@@ -15,7 +15,7 @@ module.exports = {
 
   staging: {
     client: "pg",
-    connection: "postgres://localhost/kwinzo",
+    connection: "postgres://postgres@localhost/kwinzo",
     pool: {
       min: 2,
       max: 10
@@ -28,7 +28,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: "postgres://localhost/kwinzo",
+    connection: "postgres://postgres@localhost/kwinzo",
     pool: {
       min: 2,
       max: 10
