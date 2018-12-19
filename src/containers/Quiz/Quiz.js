@@ -204,7 +204,7 @@ class Lesson extends Component {
         if (loading)  return <div className="spinner spinner-1"></div>;
         if (error) return <span>Something went wrong. Please try again later</span>;
         if (this.props.user){
-          userCanEdit = this.props.user.userID === data.quiz.authorID;
+          userCanEdit = this.props.user.id === data.quiz.authorID;
       } 
         return (
           

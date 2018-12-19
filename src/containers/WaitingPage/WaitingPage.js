@@ -5,14 +5,15 @@ import Modal from '../../components/Modal/Modal';
 import Backdrop from '../../components/Backdrop/Backdrop';
 import DisconnectModal from '../../components/DisconnectedModal/DisconnectedModal';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './WaitingPage.css'
 
 import io from 'socket.io-client';
 
 
-const socket = io('http://localhost:5000', { timeout: 120000});
-//const socket = io({timeout: 120000});
+//const socket = io('http://localhost:5000', { timeout: 120000});
+const socket = io({timeout: 120000});
 let index = 0;
 class WaitingPage extends Component {
 
@@ -154,7 +155,7 @@ class WaitingPage extends Component {
 	};
 
 	back() {
-		this.props.history.push(`/quiz/${this.props.lesson.id}`);
+		this.props.history.push(`/quiz/${this.props.match.params.id}`);
 	}
 
 	playAgain() {
@@ -314,6 +315,10 @@ class WaitingPage extends Component {
 			)
 	}
 }
-
-
-export default withRouter(WaitingPage);
+const mapStateToProps = state => {
+	return {
+	  lesson: state.lessonSet,
+	}
+  }
+  
+export default withRouter(connect(mapStateToProps )(WaitingPage));

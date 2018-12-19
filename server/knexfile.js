@@ -2,7 +2,7 @@
 module.exports = {
   development: {
     client: "pg",
-    connection: "postgres://postgres@localhost/kwinzo",
+    connection: "postgres://localhost/kwinzo",
     pool: {
       min: 2,
       max: 10
