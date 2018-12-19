@@ -750,7 +750,6 @@ class CreateLesson extends Component {
 const ADD_LESSON = gql`
   mutation ($title: String!, $authorID: Int!, $sentences: [SentenceInput]) {
     createQuiz( title: $title, authorID: $authorID, sentences: $sentences) {
-      id
       created_at
       title
       authorID
@@ -768,7 +767,6 @@ const ADD_LESSON = gql`
 const UPDATE_LESSON = gql`
   mutation ($lessonID: String!, $title: String!, $authorID: Int!, $sentences: [SentenceInput]) {
     updateQuiz(lessonID: $lessonID, title: $title, authorID: $authorID, sentences: $sentences) {
-      id
       created_at
       title
       authorID
