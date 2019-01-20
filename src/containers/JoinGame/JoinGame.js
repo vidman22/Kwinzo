@@ -6,8 +6,8 @@ import GamePlay from '../GamePlay/GamePlay';
 
 import './JoinGame.css';
 
-const socket = io( { timeout: 120000});
-//const socket = io('http://localhost:5000', { timeout: 120000});
+//const socket = io( { timeout: 120000});
+const socket = io({ timeout: 120000});
 
 let index = 0;
 export default class CreateGame extends Component {
