@@ -1,3 +1,8 @@
+const webpack = require('webpack');
+const middleware = require('webpack-dev-middleware');
+const config = require('../webpack.config.js');
+const compiler = webpack(config);
+const webpackHotMiddleware = require("webpack-hot-middleware");
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -22,6 +27,11 @@ const PORT = process.env.PORT || 5000;
 
 const schema  = require('./graphql/typeDefs');
 
+app.use(middleware(compiler, {
+  publicPath: config.output.publicPath
+}));
+
+app.use(webpackHotMiddleware(compiler));
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,

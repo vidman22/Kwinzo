@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import App from './App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -50,7 +51,9 @@ const app = (
    
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App />
+        <AppContainer>
+          <App />
+        </AppContainer>
       </ApolloProvider>
     </BrowserRouter>
    
@@ -60,3 +63,11 @@ const app = (
 
 ReactDOM.render( app, document.getElementById('root'));
 registerServiceWorker();
+
+if (module.hot) {
+    console.log('hot reloading active');
+    module.hot.accept('./App', () => {
+        console.log('doing hot reload');
+        window.location.reload();
+    });
+}

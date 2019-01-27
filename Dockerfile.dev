@@ -2,16 +2,12 @@ FROM node:8.12
 
 RUN mkdir -p /kwinzo
 
-RUN npm install -g webpack webpack-cli
-
 COPY ./package.json /kwinzo/
 
 WORKDIR /kwinzo
 
-RUN npm config set loglevel verbose &&  npm install 
+RUN yarn install
 
 Add . /kwinzo 
-
-RUN webpack --mode development
 
 CMD node server/index.js
